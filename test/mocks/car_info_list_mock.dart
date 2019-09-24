@@ -80,7 +80,7 @@ final Part mockPart_2 = Part(
 
 // CarInfoSet
 
-final mockCarInfoSet = [
+final mockCarInfoList = [
   CarInfo(
     car: mockCar_1,
     maintenanciesList: [mockMaint_1, mockMaint_2],

@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:equatable/equatable.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry.dart';
