@@ -4,4 +4,5 @@ class GetCarInfoSet {
   final CarInfoRepository repository;
 
   GetCarInfoSet(this.repository);
+  
 }

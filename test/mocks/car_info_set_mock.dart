@@ -1,4 +1,5 @@
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_info.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part.dart';
@@ -76,3 +77,20 @@ final Part mockPart_2 = Part(
   partName: 'Filter oil34D',
   partPrice: 50.99,
 );
+
+// CarInfoSet
+
+final mockCarInfoSet = [
+  CarInfo(
+    car: mockCar_1,
+    maintenanciesList: [mockMaint_1, mockMaint_2],
+    entriesList: [mockEntry_1, mockEntry_2],
+    partsList: [mockPart_1, mockPart_2],
+  ),
+  CarInfo(
+    car: mockCar_2,
+    maintenanciesList: [mockMaint_1, mockMaint_2],
+    entriesList: [mockEntry_1, mockEntry_2],
+    partsList: [mockPart_1, mockPart_2],
+  ),
+];
