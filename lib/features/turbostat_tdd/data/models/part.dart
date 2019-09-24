@@ -5,7 +5,7 @@ class Part extends Equatable {
   final String partId;
   final String partName;
   final String partCode;
-  final int partPrice;
+  final double partPrice;
 
   Part({
     @required this.partId,
