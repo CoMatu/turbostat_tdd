@@ -1,10 +1,11 @@
-import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_info.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part.dart';
 
 // Cars
+
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car_info.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/entry.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/maintenance.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/part.dart';
 
 final Car mockCar_1 = Car(
   carId: '1',

@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_info.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car_info.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/car_info_repository.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_car_info_list.dart';
 
-import '../../../mocks/car_info_list_mock.dart';
+import '../../../fixtures/mocks/car_info_list_mock.dart';
 
 class MockCarInfoRepository extends Mock implements CarInfoRepository {}
 

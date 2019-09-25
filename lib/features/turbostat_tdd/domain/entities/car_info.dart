@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part.dart';
 import 'package:meta/meta.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/entry.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/maintenance.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/part.dart';
 
 class CarInfo extends Equatable {
   final Car car;
