@@ -1,0 +1,63 @@
+{
+    "car": {
+        "carId" : "1",
+        "carName" : "car 1",
+        "carMark" : "nissan",
+        "carModel" : "note",
+        "carYear" : 2012,
+        "carMileage" : 83300,
+        "carVin" : "VIN123"
+    },
+    "maintenanciesList" : [
+        {
+            "mockMaint_1" : {
+                "maintenanceId" : "1",
+                "maintenanceName" : "Cabin filter",
+                "maintenanceMonthLimit" : 12,
+                "maintenanceMileageLimit" : 15000
+            },
+            "mockMaint_2" : {
+                "maintenanceId" : "2",
+                "maintenanceName" : "Oil filter",
+                "maintenanceMonthLimit" : 12,
+                "maintenanceMileageLimit" : 15000
+            }
+        }
+    ],
+    "entriesList" : [
+        {
+            "mockEntry_1" : {
+                "entryId" : "1",
+                "maintenanceId" : "1",
+                "entryDateTime" : "22.07.2019",
+                "entryMileage" : 80000,
+                "entryWorkPrice" : 200.00,
+                "entryNote" : "entry note"              
+            },
+            "mockEntry_2" : {
+                "entryId" : "2",
+                "maintenanceId" : "2",
+                "entryDateTime" : "20.08.2018",
+                "entryMileage" : 7700,
+                "entryWorkPrice" : 150.00,
+                "entryNote" : "entry note"
+            }
+        }
+    ],
+    "partsList" : [
+        {
+            "mockPart_1" : {
+                "partId" : "part1",
+                "partCode" : "F1",
+                "partName" : "Filter 200AF",
+                "partPrice" : 100.0              
+            },
+            "mockPart_2" : {
+                "partId" : "part2",
+                "partCode" : "FO12",
+                "partName" : "Filter oil34D",
+                "partPrice" : 50.99             
+            }
+        }
+    ]
+}
