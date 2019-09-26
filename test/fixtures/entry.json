@@ -1,0 +1,8 @@
+{
+    "entryId": "1",
+    "maintenanceId": "1",
+    "entryDateTime": "2019-07-22 00:00:00",
+    "entryMileage": 80000,
+    "entryWorkPrice": 200.00,
+    "entryNote": "entry note"
+}
