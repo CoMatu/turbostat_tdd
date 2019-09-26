@@ -1,25 +1,25 @@
-import 'package:equatable/equatable.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car_info.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/entry.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/maintenance.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/part.dart';
 import 'package:meta/meta.dart';
 
-class CarInfo extends Equatable {
-  final Car car;
-  final List<Maintenance> maintenanciesList;
-  final List<Entry> entriesList;
-  final List<Part> partsList;
+class CarInfoModel extends CarInfo {
+  
+  CarInfoModel({
+    @required Car car,
+    @required List<Maintenance> maintenanciesList,
+    @required List<Entry> entriesList,
+    @required List<Part> partsList,
+  }) : super(
+          car: car,
+          maintenanciesList: maintenanciesList,
+          entriesList: entriesList,
+          partsList: partsList
+        );
 
-  CarInfo({
-    @required this.car,
-    @required this.maintenanciesList,
-    @required this.entriesList,
-    @required this.partsList
-    }) : super([
-      car,
-      maintenanciesList,
-      entriesList,
-      partsList,
-    ]);
+  factory CarInfoModel.fromJson(Map<String, dynamic> json) {
+    return null;
+  }
 }
