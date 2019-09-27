@@ -1,10 +1,15 @@
-import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car_info.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/entry.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/maintenance.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/part.dart';
+
 import 'package:meta/meta.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'carinfomodel.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 
 class CarInfoModel extends CarInfo {
   
@@ -20,9 +25,8 @@ class CarInfoModel extends CarInfo {
           partsList: partsList
         );
 
-  factory CarInfoModel.fromJson(Map<String, dynamic> json) {
-    return CarInfoModel(
-      car: CarModel.fromJson(json)
-    );
-  }
+  factory CarInfoModel.fromJson(Map<String, dynamic> json) => _$CarInfoModelFromJson(json);
+  
+  Map<String, dynamic> toJson() => _$CarInfoModelToJson(this);
+
 }
