@@ -20,7 +20,7 @@ void main() {
 
   group('fromJson', () {
     test('should be return a valid model', () async {
-      final Map<String, dynamic> jsonMap = jsonDecode(fixture('maintenance.json'));
+      final Map<String, dynamic> jsonMap = jsonDecode(fixture('part.json'));
 
       final result = PartModel.fromJson(jsonMap);
 

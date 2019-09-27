@@ -1,3 +1,4 @@
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car_info.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/entry.dart';
@@ -20,6 +21,8 @@ class CarInfoModel extends CarInfo {
         );
 
   factory CarInfoModel.fromJson(Map<String, dynamic> json) {
-    return null;
+    return CarInfoModel(
+      car: CarModel.fromJson(json)
+    );
   }
 }
