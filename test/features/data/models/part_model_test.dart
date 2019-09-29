@@ -27,4 +27,22 @@ void main() {
       expect(result, tPartModel);
     });
   });
+
+  group('toJson', () {
+    test(
+      'should return a JSON map containing the proper data',
+      () async {
+        // act
+        final result = tPartModel.toJson();
+        // assert
+        final expectedJsonMap = {
+          "partId": 'part1',
+          "partCode": 'F1',
+          "partName": 'Filter 200AF',
+          "partPrice": 100.0,
+        };
+        expect(result, expectedJsonMap);
+      },
+    );
+  });
 }

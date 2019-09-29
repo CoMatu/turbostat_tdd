@@ -28,4 +28,25 @@ void main() {
       expect(result, tEntryModel);
     });
   });
+
+    group('toJson', () {
+    test(
+      'should return a JSON map containing the proper data',
+      () async {
+        // act
+        final result = tEntryModel.toJson();
+        // assert
+        final expectedJsonMap = {
+                "entryId": "1",
+      "maintenanceId": "1",
+      "entryDateTime": "2019-07-22T00:00:00.000",
+      "entryMileage": 80000,
+      "entryWorkPrice": 200.00,
+      "entryNote": "entry note"
+        };
+        expect(result, expectedJsonMap);
+      },
+    );
+  });
+
 }

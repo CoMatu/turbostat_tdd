@@ -20,11 +20,30 @@ void main() {
 
   group('fromJson', () {
     test('should be return a valid model', () async {
-      final Map<String, dynamic> jsonMap = jsonDecode(fixture('maintenance.json'));
+      final Map<String, dynamic> jsonMap =
+          jsonDecode(fixture('maintenance.json'));
 
       final result = MaintenanceModel.fromJson(jsonMap);
 
       expect(result, tMaintenanceModel);
     });
+  });
+
+  group('toJson', () {
+    test(
+      'should return a JSON map containing the proper data',
+      () async {
+        // act
+        final result = tMaintenanceModel.toJson();
+        // assert
+        final expectedJsonMap = {
+          "maintenanceId": "1",
+          "maintenanceName": "Cabin filter",
+          "maintenanceMonthLimit": 12,
+          "maintenanceMileageLimit": 15000,
+        };
+        expect(result, expectedJsonMap);
+      },
+    );
   });
 }

@@ -1,4 +1,3 @@
-
 // Cars
 
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car.dart';
@@ -7,24 +6,22 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/maintenance
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/part.dart';
 
 final Car mockCar_1 = Car(
-  carId: '1',
-  carName: 'car 1',
-  carMark: 'nissan',
-  carModel: 'note',
-  carYear: 2012,
-  carMileage: 83300,
-  carVin: 'VIN123'
-);
+    carId: '1',
+    carName: 'car 1',
+    carMark: 'nissan',
+    carModel: 'note',
+    carYear: 2012,
+    carMileage: 83300,
+    carVin: 'VIN123');
 
 final Car mockCar_2 = Car(
-  carId: '2',
-  carName: 'car 2',
-  carMark: 'nissan',
-  carModel: 'murano',
-  carYear: 2017,
-  carMileage: 8100,
-  carVin: 'VIN321'
-);
+    carId: '2',
+    carName: 'car 2',
+    carMark: 'nissan',
+    carModel: 'murano',
+    carYear: 2017,
+    carMileage: 8100,
+    carVin: 'VIN321');
 
 // Maintenansies
 
@@ -45,24 +42,22 @@ final Maintenance mockMaint_2 = Maintenance(
 // Entries
 
 final Entry mockEntry_1 = Entry(
-  entryId: '1',
-  maintenanceId: '1',
-  entryDateTime: DateTime(2019, 22, 7),
-  entryMileage: 80000,
-  entryWorkPrice: 200.00,
-  entryNote: 'entry note'
-);
+    entryId: '1',
+    maintenanceId: '1',
+    entryDateTime: DateTime(2019, 22, 7),
+    entryMileage: 80000,
+    entryWorkPrice: 200.00,
+    entryNote: 'entry note');
 
 final Entry mockEntry_2 = Entry(
-  entryId: '2',
-  maintenanceId: '2',
-  entryDateTime: DateTime(2019, 20, 8),
-  entryMileage: 7700,
-  entryWorkPrice: 150.00,
-  entryNote: 'entry note'
-);
+    entryId: '2',
+    maintenanceId: '2',
+    entryDateTime: DateTime(2019, 20, 8),
+    entryMileage: 7700,
+    entryWorkPrice: 150.00,
+    entryNote: 'entry note');
 
-// Parts 
+// Parts
 
 final Part mockPart_1 = Part(
   partId: 'part1',
