@@ -32,11 +32,14 @@ dependencies:
   http: ^0.12.0+2
   # Local cache
   shared_preferences: ^0.5.3+4
+  json_annotation: ^3.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^4.1.1
+  build_runner: ^1.7.1
+  json_serializable: ^3.2.2
 
 
 # For information on the generic Dart part of this file, see the

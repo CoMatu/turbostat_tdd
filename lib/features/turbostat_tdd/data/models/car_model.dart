@@ -1,5 +1,10 @@
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car.dart';
 import 'package:meta/meta.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'car_model.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 
 class CarModel extends Car {
   CarModel({
@@ -20,15 +25,8 @@ class CarModel extends Car {
     carMileage: carMileage,
   );
 
-  factory CarModel.fromJson(Map<String, dynamic> json) {
-    return CarModel(
-      carId: json['carId'],
-      carMark: json['carMark'],
-      carModel: json['carModel'],
-      carName: json['carName'],
-      carVin: json['carVin'],
-      carMileage: json['carMileage'],
-      carYear: json['carYear'],
-    );
-  }
+  factory CarModel.fromJson(Map<String, dynamic> json) => _$CarModelFromJson(json);
+  
+  Map<String, dynamic> toJson() => _$CarModelToJson(this);
+
 }

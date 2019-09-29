@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'car.g.dart';
+
+@JsonSerializable()
 
 class Car extends Equatable {
   final String carId;
@@ -27,4 +31,7 @@ class Car extends Equatable {
           carMileage,
           carYear,
         ]);
+
+  factory Car.fromJson(Map<String, dynamic> json) => _$CarFromJson(json);
+  Map<String, dynamic> toJson() => _$CarToJson(this);
 }

@@ -1,5 +1,10 @@
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/part.dart';
 import 'package:meta/meta.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'part_model.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 
 class PartModel extends Part {
   PartModel(
@@ -14,12 +19,8 @@ class PartModel extends Part {
         partPrice: partPrice,
       );
 
-  factory PartModel.fromJson(Map<String, dynamic> json) {
-    return PartModel(
-      partId: json['partId'],
-      partName: json['partName'],
-      partCode: json['partCode'],
-      partPrice: json['partPrice'],
-    );
-  }
+  factory PartModel.fromJson(Map<String, dynamic> json) => _$PartModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PartModelToJson(this);
+
 }
