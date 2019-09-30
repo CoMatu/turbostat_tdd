@@ -100,13 +100,22 @@ main() {
       test(
           'should return last locally cached data when the cached data is present',
           () async {
-        when(mockLocalDataSource.getAllCarModels(tUserId))
+        when(mockLocalDataSource.getLastCarModels())
             .thenAnswer((_) async => tAllCarModels);
 
-            final result = await repository.getAllCarModels(tUserId);
-            verifyZeroInteractions(mockLocalDataSource);
-            verify(mockLocalDataSource.getAllCarModels(tUserId));
-            expect(result, equals(Right(tAllCarModels)));
+        final result = await repository.getAllCarModels(tUserId);
+        verifyZeroInteractions(mockRemoteDataSourse);
+        verify(mockLocalDataSource.getLastCarModels());
+        expect(result, equals(Right(tAllCarModels)));
+      });
+      test('should return CacheFailure when there is no cached data present',
+          () async {
+        when(mockLocalDataSource.getLastCarModels())
+            .thenThrow(CacheException());
+        final result = await repository.getAllCarModels(tUserId);
+        verifyZeroInteractions(mockRemoteDataSourse);
+        verify(mockLocalDataSource.getLastCarModels());
+        expect(result, equals(Left(CacheFailure())));
       });
     });
   });

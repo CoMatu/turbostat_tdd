@@ -6,5 +6,7 @@ abstract class TurbostatLocalDataSource {
 
   Future<List<CarModel>> getAllCarModels(String userId);
 
+  Future<List<CarModel>> getLastCarModels();
+
   Future<void> cacheListCarModels(List<CarModel> listCarModelsToCache);
 }
