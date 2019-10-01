@@ -41,12 +41,21 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
 
   @override
   Future<Either<Failure, CarModel>> getConcreteCarModel(String carId) async {
-    networkInfo.isConnected;
-    try {
-      final remoteCarModel = await remoteDataSource.getConcreteCarModel(carId);
-      return Right(remoteCarModel);
-    } on ServerException {
-      return Left(ServerFailure());
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteCarModel =
+            await remoteDataSource.getConcreteCarModel(carId);
+        return Right(remoteCarModel);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      try {
+        final localCarModel = await localDataSource.getConcreteCarModel(carId);
+        return Right(localCarModel);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
     }
   }
 }

@@ -168,5 +168,30 @@ main() {
         },
       );
     });
+    group('device is offline', () {
+      setUp(() {
+        when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+      });
+      test(
+          'should return last locally cached data when the cached data is present',
+          () async {
+        when(mockLocalDataSource.getConcreteCarModel(tCarId))
+            .thenAnswer((_) async => tCarModel);
+
+        final result = await repository.getConcreteCarModel(tCarId);
+        verifyZeroInteractions(mockRemoteDataSourse);
+        verify(mockLocalDataSource.getConcreteCarModel(tCarId));
+        expect(result, equals(Right(tCarModel)));
+      });
+      test('should return CacheFailure when there is no cached data present',
+          () async {
+        when(mockLocalDataSource.getConcreteCarModel(tCarId))
+            .thenThrow(CacheException());
+        final result = await repository.getConcreteCarModel(tCarId);
+        verifyZeroInteractions(mockRemoteDataSourse);
+        verify(mockLocalDataSource.getConcreteCarModel(tCarId));
+        expect(result, equals(Left(CacheFailure())));
+      });
+    });
   });
 }
