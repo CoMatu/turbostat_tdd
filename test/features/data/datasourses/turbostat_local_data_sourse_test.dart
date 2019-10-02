@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:mockito/mockito.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data_source.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
 
 class MockTurbostatLocalDataSource extends Mock
     implements TurbostatLocalDataSourceImpl {}
@@ -12,8 +14,6 @@ class MockTurbostatLocalDataSource extends Mock
 void main() async {
   TurbostatLocalDataSourceImpl dataSource;
   MockTurbostatLocalDataSource mockTurbostatLocalDataSource;
-
-
 
   final tAllCarModels = [
     CarModel(
@@ -34,13 +34,25 @@ void main() async {
         carVin: 'VIN321'),
   ];
 
-  setUp(() async{
-          final appDocumentDirPath =
-        "/data/user/0/com.example.turbostat_tdd/app_flutter";
-    Hive.init(appDocumentDirPath);
+  setUpAll(() async {
+    final appDocumentDirPath = await Directory.systemTemp.createTemp();
+    Hive.init(appDocumentDirPath.path);
 
-    mockTurbostatLocalDataSource = mockTurbostatLocalDataSource;
+    // Mock out the MethodChannel for the path_provider plugin.
+    const MethodChannel('plugins.flutter.io/path_provider')
+        .setMockMethodCallHandler((MethodCall methodCall) async {
+      // If you're getting the apps documents directory, return the path to the
+      // temp directory on the test environment instead.
+      if (methodCall.method == 'getApplicationDocumentsDirectory') {
+        return appDocumentDirPath.path;
+      }
+      return null;
+    });
+
+    mockTurbostatLocalDataSource = MockTurbostatLocalDataSource();
     dataSource = TurbostatLocalDataSourceImpl();
+    final testBox = await Hive.openBox('cars');
+    testBox.add('test 1');
   });
 
   test('should return LastCarModels from local DataBase', () async {
