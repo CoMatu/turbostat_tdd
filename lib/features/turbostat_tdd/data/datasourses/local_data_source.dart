@@ -1,3 +1,4 @@
+import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:meta/meta.dart';
@@ -11,10 +12,6 @@ abstract class TurbostatLocalDataSource {
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
-  final SharedPreferences sharedPreferences;
-
-  TurbostatLocalDataSourceImpl({@required this.sharedPreferences});
-
   @override
   Future<void> cacheListCarModels(List<CarModel> listCarModelsToCache) {
     // TODO: implement cacheListCarModels
@@ -28,8 +25,10 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
   }
 
   @override
-  Future<List<CarModel>> getLastCarModels() {
+  Future<List<CarModel>> getLastCarModels() async {
+    final carsBox = await Hive.openBox('cars');
+    final lastCarModels = carsBox.get('car');
     // TODO: implement getLastCarModels
-    return null;
+    return lastCarModels;
   }
 }
