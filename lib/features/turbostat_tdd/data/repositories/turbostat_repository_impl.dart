@@ -32,7 +32,7 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
     } else {
       try {
         final localCarModels = await localDataSource.getLastCarModels();
-        return localCarModels;
+        return Right(localCarModels);
       } on CacheException {
         return Left(CacheFailure());
       }
@@ -52,7 +52,7 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
     } else {
       try {
         final localCarModel = await localDataSource.getConcreteCarModel(carId);
-        return localCarModel;
+        return Right(localCarModel);
       } on CacheException {
         return Left(CacheFailure());
       }

@@ -59,10 +59,8 @@ void main() async {
 
   test('should return LastCarModels from local DataBase', () async {
     when(mockTurbostatLocalDataSource.getLastCarModels())
-        .thenAnswer((_) async => Right(tAllCarModels));
+        .thenAnswer((_) async => tAllCarModels);
     final result = await dataSource.getLastCarModels();
-    print(Right(result).runtimeType);
-    print(Right(tAllCarModels).runtimeType);
-    expect(result, equals(Right(tAllCarModels)));
+    expect(result, tAllCarModels);
   });
 }
