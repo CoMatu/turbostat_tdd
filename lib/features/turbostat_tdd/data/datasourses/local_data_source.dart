@@ -17,8 +17,17 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
   }
 
   @override
-  Future<CarModel> getConcreteCarModel(String carId) {
-    // TODO: implement getConcreteCarModel
+  Future<CarModel> getConcreteCarModel(String carId) async {
+    List<CarModel> _carsFromDataBase = [];
+    final carsBox = await Hive.openBox('cars');
+    var ind = carsBox.length;
+    for (int i = 0; i < ind; i++) {
+      _carsFromDataBase.add(CarModel.fromJson(carsBox.get(i)));
+    }
+    final CarModel carModel = _carsFromDataBase.where((f) {
+      if(f.carId == carId)
+      return f;
+    })
     return null;
   }
 
