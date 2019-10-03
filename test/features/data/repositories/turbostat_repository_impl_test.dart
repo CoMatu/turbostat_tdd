@@ -101,7 +101,7 @@ main() {
           'should return last locally cached data when the cached data is present',
           () async {
         when(mockLocalDataSource.getLastCarModels())
-            .thenAnswer((_) async => tAllCarModels);
+            .thenAnswer((_) async => Right(tAllCarModels));
 
         final result = await repository.getAllCarModels(tUserId);
         verifyZeroInteractions(mockRemoteDataSourse);
@@ -176,7 +176,7 @@ main() {
           'should return last locally cached data when the cached data is present',
           () async {
         when(mockLocalDataSource.getConcreteCarModel(tCarId))
-            .thenAnswer((_) async => tCarModel);
+            .thenAnswer((_) async => Right(tCarModel));
 
         final result = await repository.getConcreteCarModel(tCarId);
         verifyZeroInteractions(mockRemoteDataSourse);

@@ -1,10 +1,12 @@
+import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
+import 'package:turbostat_tdd/core/error/failures.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 
 abstract class TurbostatLocalDataSource {
-  Future<CarModel> getConcreteCarModel(String carId);
+  Future<Either<Failure, CarModel>> getConcreteCarModel(String carId);
 
-  Future<List<CarModel>> getLastCarModels();
+  Future<Either<Failure, List<CarModel>>> getLastCarModels();
 
   Future<void> cacheListCarModels(List<CarModel> listCarModelsToCache);
 }
@@ -17,17 +19,21 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
   }
 
   @override
-  Future<CarModel> getConcreteCarModel(String carId) {
+  Future<Either<Failure, CarModel>> getConcreteCarModel(String carId) {
     // TODO: implement getConcreteCarModel
     return null;
   }
 
   @override
-  Future<List<CarModel>> getLastCarModels() async {
+  Future<Either<Failure, List<CarModel>>> getLastCarModels() async {
+    List<CarModel> carsFromDataBase = [];
     final carsBox = await Hive.openBox('cars');
-    final lastCarModels = carsBox.get(0);
-    print(lastCarModels);
-    // TODO: implement getLastCarModels
-    return lastCarModels;
+    var ind = carsBox.length;
+    for (int i = 0; i < ind; i++) {
+      carsFromDataBase.add(CarModel.fromJson(carsBox.get(i)));
+    }
+    print('runtime type:');
+    print(Right(carsFromDataBase).runtimeType);
+    return Right(carsFromDataBase);
   }
 }

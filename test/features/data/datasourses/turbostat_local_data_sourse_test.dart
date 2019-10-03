@@ -15,7 +15,7 @@ void main() async {
   TurbostatLocalDataSourceImpl dataSource;
   MockTurbostatLocalDataSource mockTurbostatLocalDataSource;
 
-  final tAllCarModels = [
+  final List<CarModel> tAllCarModels = [
     CarModel(
         carId: '1',
         carName: 'car 1',
@@ -52,13 +52,17 @@ void main() async {
     mockTurbostatLocalDataSource = MockTurbostatLocalDataSource();
     dataSource = TurbostatLocalDataSourceImpl();
     final testBox = await Hive.openBox('cars');
-    testBox.add('test 1');
+    tAllCarModels.forEach((r) {
+        testBox.add(r.toJson());
+    });
   });
 
   test('should return LastCarModels from local DataBase', () async {
     when(mockTurbostatLocalDataSource.getLastCarModels())
-        .thenAnswer((_) async => tAllCarModels);
+        .thenAnswer((_) async => Right(tAllCarModels));
     final result = await dataSource.getLastCarModels();
-    expect(result, Right(tAllCarModels));
+    print(Right(result).runtimeType);
+    print(Right(tAllCarModels).runtimeType);
+    expect(result, equals(Right(tAllCarModels)));
   });
 }
