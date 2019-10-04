@@ -72,15 +72,11 @@ void main() async {
     });
 
     test('should return LastCarModels from local DataBase', () async {
-      when(mockTurbostatLocalDataSource.getLastCarModels())
-          .thenAnswer((_) async => tAllCarModels);
       final result = await dataSource.getLastCarModels();
       expect(result, tAllCarModels);
     });
 
     test('should return concrete CarModel from local DataBase', () async {
-      when(mockTurbostatLocalDataSource.getConcreteCarModel(any))
-          .thenAnswer((_) async => tCarModel);
       final result = await dataSource.getConcreteCarModel(tCarId);
       expect(result, tCarModel);
     });
@@ -88,12 +84,8 @@ void main() async {
 
   group('cache data to local database', () {
     test('should cache all CarModels to Local Data Source', () async {
-      when(mockTurbostatLocalDataSource.getLastCarModels())
-          .thenAnswer((_) async => tAllCarModels);
-
       await dataSource.cacheListCarModels(tAllCarModels);
       final result = await dataSource.getLastCarModels();
-
       expect(result, tAllCarModels);
     });
   });
