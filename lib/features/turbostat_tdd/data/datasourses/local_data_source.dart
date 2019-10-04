@@ -24,11 +24,8 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     for (int i = 0; i < ind; i++) {
       _carsFromDataBase.add(CarModel.fromJson(carsBox.get(i)));
     }
-    final CarModel carModel = _carsFromDataBase.where((f) {
-      if(f.carId == carId)
-      return f;
-    })
-    return null;
+    final concreteCar = _carsFromDataBase.where((f) => f.carId == carId).first;
+    return concreteCar;
   }
 
   @override

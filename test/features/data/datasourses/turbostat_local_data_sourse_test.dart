@@ -33,6 +33,17 @@ void main() async {
         carVin: 'VIN321'),
   ];
 
+  final tCarModel = CarModel(
+      carId: '1',
+      carName: 'car 1',
+      carMark: 'nissan',
+      carModel: 'note',
+      carYear: 2012,
+      carMileage: 83300,
+      carVin: 'VIN123');
+
+  final tCarId = '1';
+
   setUpAll(() async {
     final appDocumentDirPath = await Directory.systemTemp.createTemp();
     Hive.init(appDocumentDirPath.path);
@@ -52,7 +63,7 @@ void main() async {
     dataSource = TurbostatLocalDataSourceImpl();
     final testBox = await Hive.openBox('cars');
     tAllCarModels.forEach((r) {
-        testBox.add(r.toJson());
+      testBox.add(r.toJson());
     });
   });
 
@@ -61,5 +72,12 @@ void main() async {
         .thenAnswer((_) async => tAllCarModels);
     final result = await dataSource.getLastCarModels();
     expect(result, tAllCarModels);
+  });
+
+  test('should return concrete CarModel from local DataBase', () async {
+    when(mockTurbostatLocalDataSource.getConcreteCarModel(any))
+        .thenAnswer((_) async => tCarModel);
+    final result = await dataSource.getConcreteCarModel(tCarId);
+    expect(result, tCarModel);
   });
 }
