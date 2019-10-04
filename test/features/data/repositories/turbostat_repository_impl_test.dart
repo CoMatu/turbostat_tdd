@@ -90,6 +90,18 @@ main() {
           expect(result, equals(Left(ServerFailure())));
         },
       );
+
+      test(
+          'should cache the data locally when the call to remote data source is successful',
+          () async {
+        when(mockRemoteDataSourse.getAllCarModels(tUserId))
+            .thenAnswer((_) async => tAllCarModels);
+
+            await repository.getAllCarModels(tUserId);
+
+            verify(mockRemoteDataSourse.getAllCarModels(tUserId));
+            verify(mockLocalDataSource.cacheListCarModels(tAllCarModels));
+      });
     });
 
     group('device is offline', () {

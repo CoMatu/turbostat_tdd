@@ -44,7 +44,7 @@ void main() async {
 
   final tCarId = '1';
 
-  setUpAll(() async {
+  setUp(() async {
     final appDocumentDirPath = await Directory.systemTemp.createTemp();
     Hive.init(appDocumentDirPath.path);
 
@@ -61,23 +61,40 @@ void main() async {
 
     mockTurbostatLocalDataSource = MockTurbostatLocalDataSource();
     dataSource = TurbostatLocalDataSourceImpl();
-    final testBox = await Hive.openBox('cars');
-    tAllCarModels.forEach((r) {
-      testBox.add(r.toJson());
+  });
+
+  group('get data from localDataSource', () {
+    setUp(() async {
+      final testBox = await Hive.openBox('cars');
+      tAllCarModels.forEach((r) {
+        testBox.add(r.toJson());
+      });
+    });
+
+    test('should return LastCarModels from local DataBase', () async {
+      when(mockTurbostatLocalDataSource.getLastCarModels())
+          .thenAnswer((_) async => tAllCarModels);
+      final result = await dataSource.getLastCarModels();
+      expect(result, tAllCarModels);
+    });
+
+    test('should return concrete CarModel from local DataBase', () async {
+      when(mockTurbostatLocalDataSource.getConcreteCarModel(any))
+          .thenAnswer((_) async => tCarModel);
+      final result = await dataSource.getConcreteCarModel(tCarId);
+      expect(result, tCarModel);
     });
   });
 
-  test('should return LastCarModels from local DataBase', () async {
-    when(mockTurbostatLocalDataSource.getLastCarModels())
-        .thenAnswer((_) async => tAllCarModels);
-    final result = await dataSource.getLastCarModels();
-    expect(result, tAllCarModels);
-  });
+  group('cache data to local database', () {
+    test('should cache all CarModels to Local Data Source', () async {
+      when(mockTurbostatLocalDataSource.getLastCarModels())
+          .thenAnswer((_) async => tAllCarModels);
 
-  test('should return concrete CarModel from local DataBase', () async {
-    when(mockTurbostatLocalDataSource.getConcreteCarModel(any))
-        .thenAnswer((_) async => tCarModel);
-    final result = await dataSource.getConcreteCarModel(tCarId);
-    expect(result, tCarModel);
+      await dataSource.cacheListCarModels(tAllCarModels);
+      final result = await dataSource.getLastCarModels();
+
+      expect(result, tAllCarModels);
+    });
   });
 }
