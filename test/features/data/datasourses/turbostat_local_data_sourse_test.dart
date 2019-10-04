@@ -3,16 +3,12 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
-import 'package:mockito/mockito.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data_source.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 
-class MockTurbostatLocalDataSource extends Mock
-    implements TurbostatLocalDataSourceImpl {}
 
 void main() async {
   TurbostatLocalDataSourceImpl dataSource;
-  MockTurbostatLocalDataSource mockTurbostatLocalDataSource;
 
   final List<CarModel> tAllCarModels = [
     CarModel(
@@ -59,7 +55,6 @@ void main() async {
       return null;
     });
 
-    mockTurbostatLocalDataSource = MockTurbostatLocalDataSource();
     dataSource = TurbostatLocalDataSourceImpl();
   });
 
