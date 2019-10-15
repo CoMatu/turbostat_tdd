@@ -97,10 +97,10 @@ main() {
         when(mockRemoteDataSourse.getAllCarModels(tUserId))
             .thenAnswer((_) async => tAllCarModels);
 
-            await repository.getAllCarModels(tUserId);
+        await repository.getAllCarModels(tUserId);
 
-            verify(mockRemoteDataSourse.getAllCarModels(tUserId));
-            verify(mockLocalDataSource.cacheListCarModels(tAllCarModels));
+        verify(mockRemoteDataSourse.getAllCarModels(tUserId));
+        verify(mockLocalDataSource.cacheListCarModels(tAllCarModels));
       });
     });
 
