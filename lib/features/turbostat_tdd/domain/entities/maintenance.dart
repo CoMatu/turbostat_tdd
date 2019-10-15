@@ -14,15 +14,17 @@ class Maintenance extends Equatable {
       {@required this.maintenanceId,
       @required this.maintenanceName,
       @required this.maintenanceMileageLimit,
-      @required this.maintenanceMonthLimit})
-      : super([
-          maintenanceId,
-          maintenanceName,
-          maintenanceMileageLimit,
-          maintenanceMonthLimit
-        ]);
+      @required this.maintenanceMonthLimit});
 
   factory Maintenance.fromJson(Map<String, dynamic> json) =>
       _$MaintenanceFromJson(json);
   Map<String, dynamic> toJson() => _$MaintenanceToJson(this);
+
+  @override
+  List<Object> get props => [
+        maintenanceId,
+        maintenanceName,
+        maintenanceMileageLimit,
+        maintenanceMonthLimit
+      ];
 }

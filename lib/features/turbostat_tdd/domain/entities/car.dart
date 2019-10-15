@@ -22,7 +22,13 @@ class Car extends Equatable {
       @required this.carMark,
       @required this.carYear,
       @required this.carMileage
-      }) : super([
+      });
+
+  factory Car.fromJson(Map<String, dynamic> json) => _$CarFromJson(json);
+  Map<String, dynamic> toJson() => _$CarToJson(this);
+
+  @override
+  List<Object> get props => [
           carId,
           carVin,
           carModel,
@@ -30,8 +36,5 @@ class Car extends Equatable {
           carName,
           carMileage,
           carYear,
-        ]);
-
-  factory Car.fromJson(Map<String, dynamic> json) => _$CarFromJson(json);
-  Map<String, dynamic> toJson() => _$CarToJson(this);
+        ];
 }

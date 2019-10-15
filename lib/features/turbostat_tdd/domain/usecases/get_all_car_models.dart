@@ -21,5 +21,8 @@ class GetAllCarModels implements UseCase<List<CarModel>, Params> {
 class Params extends Equatable {
   final String userId;
 
-  Params({@required this.userId}) : super([userId]);  
+  Params({@required this.userId});
+
+  @override
+  List<Object> get props => [userId];  
 }

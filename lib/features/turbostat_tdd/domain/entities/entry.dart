@@ -19,15 +19,18 @@ class Entry extends Equatable {
     @required this.entryDateTime,
     @required this.entryWorkPrice,
     @required this.entryMileage,
-  }) : super([
-          entryId,
-          maintenanceId,
-          entryNote,
-          entryDateTime,
-          entryWorkPrice,
-          entryMileage,
-        ]);
+  });
 
   factory Entry.fromJson(Map<String, dynamic> json) => _$EntryFromJson(json);
   Map<String, dynamic> toJson() => _$EntryToJson(this);
+
+  @override
+  List<Object> get props => [
+        entryId,
+        maintenanceId,
+        entryNote,
+        entryDateTime,
+        entryWorkPrice,
+        entryMileage,
+      ];
 }
