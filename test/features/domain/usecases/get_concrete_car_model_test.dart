@@ -18,12 +18,17 @@ void main() {
 
   final String tCarId = 'car1';
   final tCarModel = CarModel(
-      carId: '1',
-      carName: 'car 1',
-      carMark: 'nissan',
-      carModel: 'note',
-      carYear: 2012,
-      carVin: 'VIN123');
+    carId: '1',
+    carName: 'car 1',
+    carMark: 'nissan',
+    carModel: 'note',
+    carYear: 2012,
+    carVin: 'VIN123',
+    licencePlate: 'f333',
+    fuelType: 'liquid',
+    tankVolume: 38,
+    carNote: 'car note',
+  );
 
   test('should get car for carId from the repository', () async {
     when(mockTurbostatRepository.getConcreteCarModel(any))

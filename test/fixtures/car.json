@@ -4,5 +4,9 @@
     "carMark": "nissan",
     "carModel": "note",
     "carYear": 2012,
-    "carVin": "VIN123"
+    "carVin": "VIN123",
+    "fuelType": "liquid",
+    "tankVolume": 38,
+    "licencePlate": "f333",
+    "carNote": "car note"
 }

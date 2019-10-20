@@ -13,7 +13,12 @@ void main() {
       carMark: 'nissan',
       carModel: 'note',
       carYear: 2012,
-      carVin: 'VIN123');
+      carVin: 'VIN123',
+      licencePlate: 'f333',
+      fuelType: 'liquid',
+      tankVolume: 38,
+      carNote: 'car note',
+      );
 
   test('should be a subclass of Car entity', () async {
     expect(tCarModel, isA<Car>());

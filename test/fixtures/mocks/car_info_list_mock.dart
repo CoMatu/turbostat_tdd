@@ -6,20 +6,30 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/maintenance
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/part.dart';
 
 final Car mockCar_1 = Car(
-    carId: '1',
-    carName: 'car 1',
-    carMark: 'nissan',
-    carModel: 'note',
-    carYear: 2012,
-    carVin: 'VIN123');
+  carId: '1',
+  carName: 'car 1',
+  carMark: 'nissan',
+  carModel: 'note',
+  carYear: 2012,
+  carVin: 'VIN123',
+  licencePlate: 'f333',
+  fuelType: 'liquid',
+  tankVolume: 38,
+  carNote: 'car note',
+);
 
 final Car mockCar_2 = Car(
-    carId: '2',
-    carName: 'car 2',
-    carMark: 'nissan',
-    carModel: 'murano',
-    carYear: 2017,
-    carVin: 'VIN321');
+  carId: '2',
+  carName: 'car 2',
+  carMark: 'nissan',
+  carModel: 'murano',
+  carYear: 2017,
+  carVin: 'VIN321',
+  licencePlate: 'f333',
+  fuelType: 'liquid',
+  tankVolume: 38,
+  carNote: 'car note',
+);
 
 // Maintenansies
 

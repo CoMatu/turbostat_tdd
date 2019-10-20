@@ -36,19 +36,29 @@ main() {
     final tUserId = 'matu1';
     final tAllCarModels = [
       CarModel(
-          carId: '1',
-          carName: 'car 1',
-          carMark: 'nissan',
-          carModel: 'note',
-          carYear: 2012,
-          carVin: 'VIN123'),
+        carId: '1',
+        carName: 'car 1',
+        carMark: 'nissan',
+        carModel: 'note',
+        carYear: 2012,
+        carVin: 'VIN123',
+        licencePlate: 'f333',
+        fuelType: 'liquid',
+        tankVolume: 38,
+        carNote: 'car note',
+      ),
       CarModel(
-          carId: '2',
-          carName: 'car 2',
-          carMark: 'nissan',
-          carModel: 'murano',
-          carYear: 2017,
-          carVin: 'VIN321'),
+        carId: '2',
+        carName: 'car 2',
+        carMark: 'nissan',
+        carModel: 'murano',
+        carYear: 2017,
+        carVin: 'VIN321',
+        licencePlate: 'f333',
+        fuelType: 'liquid',
+        tankVolume: 38,
+        carNote: 'car note',
+      ),
     ];
 
     test('should check if the device is online', () {
@@ -133,12 +143,17 @@ main() {
   group('getConcreteCarModel', () {
     final tCarId = '1';
     final tCarModel = CarModel(
-        carId: '1',
-        carName: 'car 1',
-        carMark: 'nissan',
-        carModel: 'note',
-        carYear: 2012,
-        carVin: 'VIN123');
+      carId: '1',
+      carName: 'car 1',
+      carMark: 'nissan',
+      carModel: 'note',
+      carYear: 2012,
+      carVin: 'VIN123',
+      licencePlate: 'f333',
+      fuelType: 'liquid',
+      tankVolume: 38,
+      carNote: 'car note',
+    );
 
     test('should check if the device is online', () {
       //arrange

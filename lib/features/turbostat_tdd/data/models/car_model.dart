@@ -14,6 +14,10 @@ class CarModel extends Car {
   @required String carName,
   @required String carMark,
   @required int carYear,
+  @required String licencePlate,
+  @required int tankVolume,
+  @required String fuelType,
+  @required String carNote,
   }) : super(
     carId: carId,
     carVin: carVin,
@@ -21,6 +25,10 @@ class CarModel extends Car {
     carName: carName,
     carMark: carMark,
     carYear: carYear,
+    licencePlate: licencePlate,
+    tankVolume: tankVolume,
+    fuelType: fuelType,
+    carNote: carNote,
   );
 
   factory CarModel.fromJson(Map<String, dynamic> json) => _$CarModelFromJson(json);
