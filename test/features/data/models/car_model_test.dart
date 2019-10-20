@@ -8,17 +8,17 @@ import '../../../fixtures/fixture_reader.dart';
 
 void main() {
   final tCarModel = CarModel(
-      carId: '1',
-      carName: 'car 1',
-      carMark: 'nissan',
-      carModel: 'note',
-      carYear: 2012,
-      carVin: 'VIN123',
-      licencePlate: 'f333',
-      fuelType: 'liquid',
-      tankVolume: 38,
-      carNote: 'car note',
-      );
+    carId: '1',
+    carName: 'car 1',
+    carMark: 'nissan',
+    carModel: 'note',
+    carYear: 2012,
+    carVin: 'VIN123',
+    licencePlate: 'f333',
+    fuelType: 'liquid',
+    tankVolume: 38,
+    carNote: 'car note',
+  );
 
   test('should be a subclass of Car entity', () async {
     expect(tCarModel, isA<Car>());
@@ -47,8 +47,11 @@ void main() {
           "carMark": "nissan",
           "carModel": "note",
           "carYear": 2012,
-          "carMileage": 83300,
-          "carVin": "VIN123"
+          "carVin": "VIN123",
+          "fuelType": "liquid",
+          "tankVolume": 38,
+          "licencePlate": "f333",
+          "carNote": "car note"
         };
         expect(result, expectedJsonMap);
       },
