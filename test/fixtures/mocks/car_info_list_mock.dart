@@ -11,7 +11,6 @@ final Car mockCar_1 = Car(
     carMark: 'nissan',
     carModel: 'note',
     carYear: 2012,
-    carMileage: 83300,
     carVin: 'VIN123');
 
 final Car mockCar_2 = Car(
@@ -20,7 +19,6 @@ final Car mockCar_2 = Car(
     carMark: 'nissan',
     carModel: 'murano',
     carYear: 2017,
-    carMileage: 8100,
     carVin: 'VIN321');
 
 // Maintenansies

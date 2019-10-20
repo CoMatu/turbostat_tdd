@@ -41,7 +41,6 @@ main() {
           carMark: 'nissan',
           carModel: 'note',
           carYear: 2012,
-          carMileage: 83300,
           carVin: 'VIN123'),
       CarModel(
           carId: '2',
@@ -49,7 +48,6 @@ main() {
           carMark: 'nissan',
           carModel: 'murano',
           carYear: 2017,
-          carMileage: 8100,
           carVin: 'VIN321'),
     ];
 
@@ -140,7 +138,6 @@ main() {
         carMark: 'nissan',
         carModel: 'note',
         carYear: 2012,
-        carMileage: 83300,
         carVin: 'VIN123');
 
     test('should check if the device is online', () {

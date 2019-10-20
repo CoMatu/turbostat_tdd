@@ -17,7 +17,6 @@ void main() async {
         carMark: 'nissan',
         carModel: 'note',
         carYear: 2012,
-        carMileage: 83300,
         carVin: 'VIN123'),
     CarModel(
         carId: '2',
@@ -25,7 +24,6 @@ void main() async {
         carMark: 'nissan',
         carModel: 'murano',
         carYear: 2017,
-        carMileage: 8100,
         carVin: 'VIN321'),
   ];
 
@@ -35,7 +33,6 @@ void main() async {
       carMark: 'nissan',
       carModel: 'note',
       carYear: 2012,
-      carMileage: 83300,
       carVin: 'VIN123');
 
   final tCarId = '1';
