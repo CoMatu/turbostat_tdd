@@ -22,7 +22,7 @@ dependencies:
     # Service locator
   get_it: ^3.0.0+1
     # Bloc for state management
-  flutter_bloc: ^0.21.0
+  flutter_bloc: ^0.22.1
     # Value equality
   equatable: ^0.6.1
   # Functional programming thingies
@@ -64,7 +64,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - res/images/start_logo.png
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
