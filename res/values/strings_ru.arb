@@ -33,7 +33,7 @@
   "form_decorator_car_model": "Введите модель автомобиля",
   "form_decorator_car_year": "Введите год выпуска",
   "form_decorator_car_mileage": "Введите текущий пробег",
-  "form_decorator_car_vin": "Введите VIN",
+  "form_decorator_car_vin": "Введите VIN *необязательно",
   "add_car_page_description": "На этой странице необходимо ввести информацию о Вашем автомобиле:",
   "snack_bar_message_warning": "Форма заполнена некорректно! Исправьте ошибки...",
   "form_decorator_maintenance_interval": "Периодичность, мес",

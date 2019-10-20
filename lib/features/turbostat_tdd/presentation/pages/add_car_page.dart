@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turbostat_tdd/generated/i18n.dart';
 
 class AddCarPage extends StatefulWidget {
   @override
@@ -21,7 +22,9 @@ class _AddCarPageState extends State<AddCarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Регистрация автомобиля'),
+      ),
       body: Container(
         child: Form(
           key: _formKey,
@@ -32,123 +35,119 @@ class _AddCarPageState extends State<AddCarPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Text(
-                  'description of page',
+                  S.of(context).add_car_page_description,
                   style: TextStyle(fontSize: 16.0),
                 ),
               ),
-              TextFormField(
-                keyboardType: TextInputType.text,
-                initialValue: 'S.of(context).form_initial_my_car',
-                autocorrect: false,
-                onSaved: (String value) {
-                  carName = value;
-                },
-                maxLines: 1,
-                validator: (value) {
-                  if (value.isEmpty || value.length < 1) {
-                    return 'S.of(context).form_validator_car_name';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                    labelText: 'S.of(context).form_decorator_car_name',
-                    labelStyle: TextStyle(
-                      decorationStyle: TextDecorationStyle.solid,
-                    )),
-              ),
-              TextFormField(
-                keyboardType: TextInputType.text,
-                initialValue: '',
-                autocorrect: false,
-                onSaved: (String value) {
-                  carMark = value;
-                },
-                maxLines: 1,
-                validator: (value) {
-                  if (value.isEmpty || value.length < 1) {
-                    return 'S.of(context).form_validator_car_mark';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  labelText: 'S.of(context).form_decorator_car_mark',
+              Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  initialValue: S.of(context).form_initial_my_car,
+                  autocorrect: false,
+                  onSaved: (String value) {
+                    carName = value;
+                  },
+                  maxLines: 1,
+                  validator: (value) {
+                    if (value.isEmpty || value.length < 1) {
+                      return S.of(context).form_validator_car_name;
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      labelText: S.of(context).form_decorator_car_name,
+                      labelStyle: TextStyle(
+                        decorationStyle: TextDecorationStyle.solid,
+                      )),
                 ),
               ),
-              TextFormField(
-                keyboardType: TextInputType.text,
-                initialValue: '',
-                autocorrect: false,
-                onSaved: (String value) {
-                  carModel = value;
-                },
-                maxLines: 1,
-                validator: (value) {
-                  if (value.isEmpty || value.length < 1) {
-                    return 'S.of(context).form_validator_car_model';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  labelText: 'S.of(context).form_validator_car_model',
+              Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  initialValue: '',
+                  autocorrect: false,
+                  onSaved: (String value) {
+                    carMark = value;
+                  },
+                  maxLines: 1,
+                  validator: (value) {
+                    if (value.isEmpty || value.length < 1) {
+                      return S.of(context).form_validator_car_mark;
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    labelText: S.of(context).form_decorator_car_mark,
+                  ),
                 ),
               ),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                initialValue: '',
-                autocorrect: false,
-                onSaved: (String value) {
-                  carYear = int.parse(value);
-                },
-                maxLines: 1,
-                validator: (value) {
-                  if (value.isEmpty || value.length < 1) {
-                    return 'S.of(context).form_validator_car_year';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  labelText: 'S.of(context).form_decorator_car_year',
+              Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  initialValue: '',
+                  autocorrect: false,
+                  onSaved: (String value) {
+                    carModel = value;
+                  },
+                  maxLines: 1,
+                  validator: (value) {
+                    if (value.isEmpty || value.length < 1) {
+                      return S.of(context).form_validator_car_model;
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    labelText: S.of(context).form_validator_car_model,
+                  ),
                 ),
               ),
-              TextFormField(
-                keyboardType: TextInputType.text,
-                initialValue: '',
-                autocorrect: false,
-                onSaved: (String value) {
-                  carVin = value;
-                },
-                maxLines: 1,
-                validator: (value) {
-                  if (value.isEmpty || value.length < 1) {
-                    return 'S.of(context).form_validator_car_vin';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  labelText: 'S.of(context).form_decorator_car_vin',
+              Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  initialValue: '',
+                  autocorrect: false,
+                  onSaved: (String value) {
+                    carYear = int.parse(value);
+                  },
+                  maxLines: 1,
+                  validator: (value) {
+                    if (value.isEmpty || value.length < 1) {
+                      return S.of(context).form_validator_car_year;
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    labelText: S.of(context).form_decorator_car_year,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  initialValue: '',
+                  autocorrect: false,
+                  onSaved: (String value) {
+                    carVin = value;
+                  },
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                    labelText: S.of(context).form_decorator_car_vin,
+                  ),
                 ),
               ),
               Container(
                 height: 30.0,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'car_list_page');
-                    },
-                    child: Text(
-                      'S.of(context).button_cancel',
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ),
-                  FlatButton(
-                    child: Text('S.of(context).button_save'),
+              RaisedButton(
+                    child: Text(S.of(context).button_save),
                     onPressed: _submitDetails,
+                    color: Colors.yellow,
                   ),
-                ],
-              )
             ],
           ),
         ),

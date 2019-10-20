@@ -40,7 +40,7 @@
   "form_decorator_car_model": "Enter a car model",
   "form_decorator_car_year": "Enter a car year",
   "form_decorator_car_mileage": "Enter a current mileage",
-  "form_decorator_car_vin": "Enter a VIN code",
+  "form_decorator_car_vin": "Enter a VIN code * unnecessary",
   "form_decorator_maintenance_interval": "Maintenance interval, mo",
   "form_decorator_maintenance_interval_km": "Maintenance interval, km",
   "form_decorator_maintenance_name": "Maintenance title",
