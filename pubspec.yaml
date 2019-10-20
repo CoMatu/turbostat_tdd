@@ -19,6 +19,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  flutter_localizations:
+    sdk: flutter
+
     # Service locator
   get_it: ^3.0.0+1
     # Bloc for state management
@@ -42,6 +46,8 @@ dependencies:
   firebase_auth: ^0.14.0+5
   google_sign_in: ^4.0.7
   meta: ^1.1.7
+  intl: ^0.15.8
+
 
 dev_dependencies:
   flutter_test:

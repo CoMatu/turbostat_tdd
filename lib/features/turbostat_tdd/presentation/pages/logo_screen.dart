@@ -20,7 +20,7 @@ class LogoScreenState extends State<LogoScreen>
   }
 
   void navigationPage() {
-//    Navigator.of(context).pushReplacementNamed('start_page');
+    Navigator.of(context).pushReplacementNamed('add_car');
   }
 
   @override
