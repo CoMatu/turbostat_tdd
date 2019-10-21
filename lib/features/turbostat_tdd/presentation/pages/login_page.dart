@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/providers/auth_provider.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/auth_service.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/main_appbar.dart';
 import 'dart:async';
 
 import 'package:turbostat_tdd/generated/i18n.dart';
@@ -115,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: key,
-        appBar: AppBar(),
+        appBar: MainAppBar(),
         body: ListView(
           children: <Widget>[
             Card(

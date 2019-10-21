@@ -8,6 +8,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/auth_servic
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/add_car_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/load_data_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/logo_screen.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/select_data_source_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/start_page.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
 
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           'add_car': (context) => AddCarPage(),
           'start_page': (context) => StartPage(),
           'load_data_page': (context) => LoadDataPage(),
+          'select_page': (context) => SelectDataSourcePage(),
         },
       ),
     );
