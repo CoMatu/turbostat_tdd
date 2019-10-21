@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class LogoScreen extends StatefulWidget {
   @override
@@ -12,7 +13,15 @@ class LogoScreenState extends State<LogoScreen>
     with SingleTickerProviderStateMixin {
   Animation<double> animation;
   AnimationController animationController;
+  Map<PermissionGroup, PermissionStatus> permissions;
 
+
+  void getPermission() async {
+    permissions = await PermissionHandler().requestPermissions([
+      PermissionGroup.camera,
+      PermissionGroup.storage,
+    ]);
+  }
 
   startTime() async {
     var _duration = Duration(seconds: 2);
@@ -33,6 +42,8 @@ class LogoScreenState extends State<LogoScreen>
       ..addListener(() => this.setState(() {}))
       ..addStatusListener((AnimationStatus status) {});
     animationController.forward();
+
+    getPermission();
   }
 
   @override
