@@ -56,29 +56,52 @@ class SelectDataSourcePage extends StatelessWidget {
                 'Облачное хранилище:',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  color: Colors.grey[400],
                 ),
               ),
             ),
             Text(
-                'Ваши данные будут храниться на защищенном сервере Google. Можно использовать на разных устройствах. Необходимо будет зарегистрировать аккаунт или войти с использованием аккаунта Google.'),
+              'Ваши данные будут храниться на защищенном сервере Google. Можно использовать на разных устройствах. Необходимо будет зарегистрировать аккаунт или войти с использованием аккаунта Google.',
+              style: TextStyle(color: Colors.grey[400]),
+            ),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.warning,
+                    color: Colors.red,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('Функционал в разработке'),
+                ),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: RaisedButton(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Icon(Icons.cloud_queue),
+                    Icon(Icons.cloud_queue, color: Colors.grey[400],),
                     Padding(
                       padding: const EdgeInsets.only(left: 12.0),
-                      child: Text('Облачное хранилище'),
+                      child: Text(
+                        'Облачное хранилище',
+                        style: TextStyle(color: Colors.grey[400]),
+                      ),
                     ),
                   ],
                 ),
                 onPressed: () async {
+/*
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   await prefs.setString('data_source', 'cloud');
                   Navigator.of(context).pushReplacementNamed('start_page');
+*/
                 },
                 color: Colors.yellow,
               ),
