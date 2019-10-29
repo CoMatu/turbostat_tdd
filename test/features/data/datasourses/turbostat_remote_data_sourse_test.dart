@@ -10,8 +10,8 @@ void main() {
     app = await fb.FirebaseApp.configure(
       name: 'test',
       options: const fb.FirebaseOptions(
-        googleAppID: 'eee',
-        projectID: 'wwwferw'
+        googleAppID: 'com.example.turbostat_tdd',
+        projectID: 'carstat-d0da1'
       )
     );
   });
