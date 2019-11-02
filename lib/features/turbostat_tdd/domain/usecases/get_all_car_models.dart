@@ -9,7 +9,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbost
 class GetAllCarModels implements UseCase<List<CarModel>, Params> {
   final TurbostatRepository repository;
 
-  GetAllCarModels(this.repository);
+  GetAllCarModels({@required this.repository});
 
   @override
   Future<Either<Failure, List<CarModel>>> call(Params params) async {

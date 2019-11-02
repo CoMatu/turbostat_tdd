@@ -58,4 +58,9 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
       }
     }
   }
+
+  @override
+  Future<void> addConcreteCarModel(CarModel carModel) async {
+    await localDataSource.addCarModel(carModel);
+  }
 }

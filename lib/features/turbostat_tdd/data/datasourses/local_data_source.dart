@@ -7,6 +7,8 @@ abstract class TurbostatLocalDataSource {
   Future<List<CarModel>> getLastCarModels();
 
   Future<void> cacheListCarModels(List<CarModel> listCarModelsToCache);
+
+  Future<void> addCarModel(CarModel carModel);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
@@ -37,5 +39,12 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
       carsFromDataBase.add(CarModel.fromJson(carsBox.get(i)));
     }
     return carsFromDataBase;
+  }
+
+  @override
+  Future<void> addCarModel(CarModel carModel) async {
+    final carsBox = await Hive.openBox('cars');
+    final carString = carModel.toJson();
+    carsBox.add(carString);
   }
 }

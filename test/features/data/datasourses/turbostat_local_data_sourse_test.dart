@@ -94,5 +94,11 @@ void main() async {
       final result = await dataSource.getLastCarModels();
       expect(result, tAllCarModels);
     });
+
+    test('should add CarModel to Local Data Source', () async {
+      await dataSource.addCarModel(tCarModel);
+      final result = await dataSource.getConcreteCarModel(tCarModel.carId);
+      expect(result, tCarModel);
+    });
   });
 }

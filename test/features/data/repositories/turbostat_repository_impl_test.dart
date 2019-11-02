@@ -216,6 +216,11 @@ main() {
         verify(mockLocalDataSource.getConcreteCarModel(tCarId));
         expect(result, equals(Left(CacheFailure())));
       });
+
+      test('should add CarModel to repository', () async {
+        await mockLocalDataSource.addCarModel(tCarModel);
+        verify(mockLocalDataSource.addCarModel(tCarModel)).called(1);
+      });
     });
   });
 }

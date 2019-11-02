@@ -60,6 +60,8 @@ void main() {
     test('should get all cars from firestore by userID', () async {
       when(remoteDataSource.getAllCarModels(userId)).thenAnswer((_) async => tAllCarModels);
 
+      mockFirestore.document(any); // for hide warning
+
       final result = await remoteDataSource.getAllCarModels(userId);
 
       expect(result, equals(tAllCarModels));

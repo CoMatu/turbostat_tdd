@@ -17,6 +17,7 @@ void main() {
 
     test('should return current user if he is logged', () async {});
     when(mockBaseAuth.currentUser()).thenAnswer((_) async => tUserId);
+    baseAuth.currentUser();
   });
 
 }
