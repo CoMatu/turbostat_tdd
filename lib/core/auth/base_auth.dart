@@ -14,7 +14,7 @@ abstract class BaseAuth {
   Future<void> signOut();
 }
 
-class AuthService implements BaseAuth {
+class BaseAuthImpl implements BaseAuth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 

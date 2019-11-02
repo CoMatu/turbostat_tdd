@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/providers/auth_provider.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/auth_service.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/main_appbar.dart';
+import 'package:turbostat_tdd/core/auth/auth_provider.dart';
+import 'package:turbostat_tdd/core/auth/base_auth.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
 import 'dart:async';
 
 import 'package:turbostat_tdd/generated/i18n.dart';

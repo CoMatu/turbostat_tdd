@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/auth_service.dart';
+import 'package:turbostat_tdd/core/auth/base_auth.dart';
 
 class AuthProvider extends InheritedWidget {
   const AuthProvider({Key key, Widget child, this.auth}) : super(key: key, child: child);

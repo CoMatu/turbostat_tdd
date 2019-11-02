@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/providers/auth_provider.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/auth_service.dart';
+import 'package:turbostat_tdd/core/auth/auth_provider.dart';
+import 'package:turbostat_tdd/core/auth/base_auth.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/build_waiting_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/load_data_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/login_page.dart';

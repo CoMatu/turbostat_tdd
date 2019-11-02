@@ -3,8 +3,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:provider/provider.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/providers/auth_provider.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/auth_service.dart';
+import 'package:turbostat_tdd/core/auth/auth_provider.dart';
+import 'package:turbostat_tdd/core/auth/base_auth.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/add_car_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/load_data_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/logo_screen.dart';
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthProvider(
-      auth: AuthService(),
+      auth: BaseAuthImpl(),
       child: MaterialApp(
         theme: ThemeData(
             primarySwatch: Colors.yellow,
