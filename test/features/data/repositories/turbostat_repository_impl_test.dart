@@ -33,7 +33,7 @@ main() {
   });
 
   group('getAllCarModels', () {
-    final tUserId = 'matu1';
+   // final tUserId = 'matu1';
     final tAllCarModels = [
       CarModel(
         carId: '1',
@@ -65,7 +65,7 @@ main() {
       //arrange
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       // act
-      repository.getAllCarModels(tUserId);
+      repository.getAllCarModels();
       // assert
       verify(mockNetworkInfo.isConnected);
     });
@@ -78,22 +78,22 @@ main() {
       test(
           'should return remote data when the call to remote data source is successful',
           () async {
-        when(mockRemoteDataSourse.getAllCarModels(tUserId))
+        when(mockRemoteDataSourse.getAllCarModels())
             .thenAnswer((_) async => tAllCarModels);
-        final result = await repository.getAllCarModels(tUserId);
-        verify(mockRemoteDataSourse.getAllCarModels(tUserId));
+        final result = await repository.getAllCarModels();
+        verify(mockRemoteDataSourse.getAllCarModels());
         expect(result, equals(Right(tAllCarModels)));
       });
       test(
         'should return server failure when the call to remote data source is unsuccessful',
         () async {
           // arrange
-          when(mockRemoteDataSourse.getAllCarModels(tUserId))
+          when(mockRemoteDataSourse.getAllCarModels())
               .thenThrow(ServerException());
           // act
-          final result = await repository.getAllCarModels(tUserId);
+          final result = await repository.getAllCarModels();
           // assert
-          verify(mockRemoteDataSourse.getAllCarModels(tUserId));
+          verify(mockRemoteDataSourse.getAllCarModels());
           verifyZeroInteractions(mockLocalDataSource);
           expect(result, equals(Left(ServerFailure())));
         },
@@ -102,12 +102,12 @@ main() {
       test(
           'should cache the data locally when the call to remote data source is successful',
           () async {
-        when(mockRemoteDataSourse.getAllCarModels(tUserId))
+        when(mockRemoteDataSourse.getAllCarModels())
             .thenAnswer((_) async => tAllCarModels);
 
-        await repository.getAllCarModels(tUserId);
+        await repository.getAllCarModels();
 
-        verify(mockRemoteDataSourse.getAllCarModels(tUserId));
+        verify(mockRemoteDataSourse.getAllCarModels());
         verify(mockLocalDataSource.cacheListCarModels(tAllCarModels));
       });
     });
@@ -123,7 +123,7 @@ main() {
         when(mockLocalDataSource.getLastCarModels())
             .thenAnswer((_) async => tAllCarModels);
 
-        final result = await repository.getAllCarModels(tUserId);
+        final result = await repository.getAllCarModels();
         verifyZeroInteractions(mockRemoteDataSourse);
         verify(mockLocalDataSource.getLastCarModels());
         expect(result, equals(Right(tAllCarModels)));
@@ -132,7 +132,7 @@ main() {
           () async {
         when(mockLocalDataSource.getLastCarModels())
             .thenThrow(CacheException());
-        final result = await repository.getAllCarModels(tUserId);
+        final result = await repository.getAllCarModels();
         verifyZeroInteractions(mockRemoteDataSourse);
         verify(mockLocalDataSource.getLastCarModels());
         expect(result, equals(Left(CacheFailure())));

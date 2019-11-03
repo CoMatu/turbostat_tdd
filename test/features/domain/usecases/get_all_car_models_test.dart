@@ -45,13 +45,13 @@ void main() {
   ];
 
   test('should get cars for userId from the repository', () async {
-    when(mockTurbostatRepository.getAllCarModels(any))
+    when(mockTurbostatRepository.getAllCarModels())
         .thenAnswer((_) async => Right(tAllCarModels));
 
     final result = await usecase(Params(userId: tUserId));
 
     expect(result, Right(tAllCarModels));
-    verify(mockTurbostatRepository.getAllCarModels(tUserId));
+    verify(mockTurbostatRepository.getAllCarModels());
     verifyNoMoreInteractions(mockTurbostatRepository);
   });
 }

@@ -13,17 +13,17 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
   final TurbostatLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 
-  TurbostatRepositoryImpl(
-      {@required this.remoteDataSource,
-      @required this.localDataSource,
-      @required this.networkInfo});
+  TurbostatRepositoryImpl({
+    @required this.remoteDataSource,
+    @required this.localDataSource,
+    @required this.networkInfo,
+  });
 
   @override
-  Future<Either<Failure, List<CarModel>>> getAllCarModels(String userId) async {
+  Future<Either<Failure, List<CarModel>>> getAllCarModels() async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteAllCarModels =
-            await remoteDataSource.getAllCarModels(userId);
+        final remoteAllCarModels = await remoteDataSource.getAllCarModels();
         localDataSource.cacheListCarModels(remoteAllCarModels);
         return Right(remoteAllCarModels);
       } on ServerException {

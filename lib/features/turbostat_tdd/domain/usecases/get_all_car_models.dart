@@ -13,7 +13,7 @@ class GetAllCarModels implements UseCase<List<CarModel>, Params> {
 
   @override
   Future<Either<Failure, List<CarModel>>> call(Params params) async {
-    return await repository.getAllCarModels(params.userId);
+    return await repository.getAllCarModels();
   }
 
 }

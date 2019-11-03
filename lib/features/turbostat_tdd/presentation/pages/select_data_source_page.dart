@@ -40,7 +40,7 @@ class SelectDataSourcePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                onPressed: () async {
+                onPressed: () async { //TODO extract method
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   await prefs.setString('data_source', 'device');

@@ -21,7 +21,7 @@ void main() {
   TurbostatRemoteDataSourceImpl remoteDataSource;
   CollectionReference mockRef;
 
-  final String userId = '-LjyAjQ_1FvhXW6UAqAd';
+  //final String userId = '-LjyAjQ_1FvhXW6UAqAd';
     final List<CarModel> tAllCarModels = [
     CarModel(
       carId: '1',
@@ -58,11 +58,11 @@ void main() {
 
   group('Collections and documents', () {
     test('should get all cars from firestore by userID', () async {
-      when(remoteDataSource.getAllCarModels(userId)).thenAnswer((_) async => tAllCarModels);
+      when(remoteDataSource.getAllCarModels()).thenAnswer((_) async => tAllCarModels);
 
       mockFirestore.document(any); // for hide warning
 
-      final result = await remoteDataSource.getAllCarModels(userId);
+      final result = await remoteDataSource.getAllCarModels();
 
       expect(result, equals(tAllCarModels));
     });

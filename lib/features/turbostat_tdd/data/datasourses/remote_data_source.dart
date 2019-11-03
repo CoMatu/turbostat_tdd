@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 abstract class TurbostatRemoteDataSource {
   Future<CarModel> getConcreteCarModel(String carId);
 
-  Future<List<CarModel>> getAllCarModels(String userId);
+  Future<List<CarModel>> getAllCarModels();
 }
 
 class TurbostatRemoteDataSourceImpl implements TurbostatRemoteDataSource {
@@ -14,8 +14,10 @@ class TurbostatRemoteDataSourceImpl implements TurbostatRemoteDataSource {
 
   TurbostatRemoteDataSourceImpl({@required this.collectionReference});
   @override
-  Future<List<CarModel>> getAllCarModels(String userId) async {
+  Future<List<CarModel>> getAllCarModels() async {
     List<CarModel> list = [];
+
+    String userId = 'test';
 
     final result = await collectionReference
         .where('userId', isEqualTo: userId)
