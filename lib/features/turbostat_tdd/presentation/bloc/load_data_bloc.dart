@@ -26,7 +26,7 @@ class LoadDataBloc extends Bloc<LoadDataEvent, LoadDataState> {
   ) async* {
     if(event is GetAllCar){
       yield Loading();
-      final failureOrAllCars = await getAllCarModels;
+      //final failureOrAllCars = await getAllCarModels;
     }
   }
 }

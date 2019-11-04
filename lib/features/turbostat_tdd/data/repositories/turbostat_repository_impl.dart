@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 import 'package:turbostat_tdd/core/error/exception.dart';
 import 'package:turbostat_tdd/core/error/failures.dart';
+import 'package:turbostat_tdd/core/mode/mode_info.dart';
 import 'package:turbostat_tdd/core/network/network_info.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data_source.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/remote_data_source.dart';
@@ -12,22 +13,33 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
   final TurbostatRemoteDataSource remoteDataSource;
   final TurbostatLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
+  final ModeInfo mode;
 
   TurbostatRepositoryImpl({
     @required this.remoteDataSource,
     @required this.localDataSource,
     @required this.networkInfo,
+    @required this.mode,
   });
 
   @override
   Future<Either<Failure, List<CarModel>>> getAllCarModels() async {
-    if (await networkInfo.isConnected) {
-      try {
-        final remoteAllCarModels = await remoteDataSource.getAllCarModels();
-        localDataSource.cacheListCarModels(remoteAllCarModels);
-        return Right(remoteAllCarModels);
-      } on ServerException {
-        return Left(ServerFailure());
+    if (await mode.isCloudMode) {
+      if (await networkInfo.isConnected) {
+        try {
+          final remoteAllCarModels = await remoteDataSource.getAllCarModels();
+          localDataSource.cacheListCarModels(remoteAllCarModels);
+          return Right(remoteAllCarModels);
+        } on ServerException {
+          return Left(ServerFailure());
+        }
+      } else {
+        try {
+          final localCarModels = await localDataSource.getLastCarModels();
+          return Right(localCarModels);
+        } on CacheException {
+          return Left(CacheFailure());
+        }
       }
     } else {
       try {

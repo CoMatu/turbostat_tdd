@@ -1,8 +1,11 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turbostat_tdd/core/error/exception.dart';
 import 'package:turbostat_tdd/core/error/failures.dart';
+import 'package:turbostat_tdd/core/mode/mode_info.dart';
 import 'package:turbostat_tdd/core/network/network_info.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data_source.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/remote_data_source.dart';
@@ -15,25 +18,44 @@ class MockRemoteDataSourse extends Mock implements TurbostatRemoteDataSource {}
 
 class MockNetworkInfo extends Mock implements NetworkInfo {}
 
+class MockModeInfo extends Mock implements ModeInfo {}
+
 main() {
   TurbostatRepositoryImpl repository;
   MockRemoteDataSourse mockRemoteDataSourse;
   MockLocalDataSource mockLocalDataSource;
   MockNetworkInfo mockNetworkInfo;
+  MockModeInfo mockModeInfo;
 
   setUp(() {
     mockRemoteDataSourse = MockRemoteDataSourse();
     mockLocalDataSource = MockLocalDataSource();
     mockNetworkInfo = MockNetworkInfo();
+    mockModeInfo = MockModeInfo();
+
     repository = TurbostatRepositoryImpl(
       remoteDataSource: mockRemoteDataSourse,
       localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,
+      mode: mockModeInfo,
     );
   });
 
+  setUpAll(() async {
+    const MethodChannel('plugins.flutter.io/shared_preferences')
+        .setMockMethodCallHandler((MethodCall methodCall) async {
+      if (methodCall.method == 'getAll') {
+        return <String, dynamic>{
+          "flutter.data_source": "device", // without flutter. test don't work
+        }; // set initial values here if desired
+      }
+      return null;
+    });
+    await SharedPreferences.getInstance();
+  });
+
   group('getAllCarModels', () {
-   // final tUserId = 'matu1';
+    // final tUserId = 'matu1';
     final tAllCarModels = [
       CarModel(
         carId: '1',
@@ -63,15 +85,17 @@ main() {
 
     test('should check if the device is online', () {
       //arrange
+      when(mockModeInfo.isCloudMode).thenAnswer((_) async => true);
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       // act
       repository.getAllCarModels();
       // assert
-      verify(mockNetworkInfo.isConnected);
+      verify(mockModeInfo.isCloudMode);
     });
 
     group('device is online', () {
       setUp(() {
+        when(mockModeInfo.isCloudMode).thenAnswer((_) async => true);
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       });
 
@@ -114,6 +138,7 @@ main() {
 
     group('device is offline', () {
       setUp(() {
+        when(mockModeInfo.isCloudMode).thenAnswer((_) async => false);
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
       });
 
