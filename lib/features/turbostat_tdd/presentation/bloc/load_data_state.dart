@@ -17,11 +17,11 @@ class Loading extends LoadDataState {
 }
 
 class Loaded extends LoadDataState {
-  final List<CarModel> list;
+  final List<CarModel> listAll;
 
-  Loaded(this.list);
+  Loaded({@required this.listAll});
   @override
-  List<Object> get props => [list];
+  List<Object> get props => [listAll];
 }
 
 class Error extends LoadDataState {

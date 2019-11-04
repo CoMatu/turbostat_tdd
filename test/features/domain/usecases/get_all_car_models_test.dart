@@ -48,7 +48,7 @@ void main() {
     when(mockTurbostatRepository.getAllCarModels())
         .thenAnswer((_) async => Right(tAllCarModels));
 
-    final result = await usecase(Params(userId: tUserId));
+    final result = await usecase(NoParams());
 
     expect(result, Right(tAllCarModels));
     verify(mockTurbostatRepository.getAllCarModels());
