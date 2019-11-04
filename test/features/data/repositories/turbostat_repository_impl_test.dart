@@ -37,7 +37,7 @@ main() {
       remoteDataSource: mockRemoteDataSourse,
       localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,
-      mode: mockModeInfo,
+      modeInfo: mockModeInfo,
     );
   });
 
@@ -182,6 +182,7 @@ main() {
 
     test('should check if the device is online', () {
       //arrange
+      when(mockModeInfo.isCloudMode).thenAnswer((_) async => true);
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       // act
       repository.getConcreteCarModel(tCarId);
@@ -191,6 +192,8 @@ main() {
 
     group('device is online', () {
       setUp(() {
+        when(mockModeInfo.isCloudMode).thenAnswer((_) async => true);
+
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       });
       test(
@@ -220,6 +223,7 @@ main() {
     group('device is offline', () {
       setUp(() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+        when(mockModeInfo.isCloudMode).thenAnswer((_) async => false);
       });
       test(
           'should return last locally cached data when the cached data is present',

@@ -13,18 +13,18 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
   final TurbostatRemoteDataSource remoteDataSource;
   final TurbostatLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
-  final ModeInfo mode;
+  final ModeInfo modeInfo;
 
   TurbostatRepositoryImpl({
     @required this.remoteDataSource,
     @required this.localDataSource,
     @required this.networkInfo,
-    @required this.mode,
+    @required this.modeInfo,
   });
 
   @override
   Future<Either<Failure, List<CarModel>>> getAllCarModels() async {
-    if (await mode.isCloudMode) {
+    if (await modeInfo.isCloudMode) {
       if (await networkInfo.isConnected) {
         try {
           final remoteAllCarModels = await remoteDataSource.getAllCarModels();
@@ -53,13 +53,23 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
 
   @override
   Future<Either<Failure, CarModel>> getConcreteCarModel(String carId) async {
-    if (await networkInfo.isConnected) {
-      try {
-        final remoteCarModel =
-            await remoteDataSource.getConcreteCarModel(carId);
-        return Right(remoteCarModel);
-      } on ServerException {
-        return Left(ServerFailure());
+    if (await modeInfo.isCloudMode) {
+      if (await networkInfo.isConnected) {
+        try {
+          final remoteCarModel =
+              await remoteDataSource.getConcreteCarModel(carId);
+          return Right(remoteCarModel);
+        } on ServerException {
+          return Left(ServerFailure());
+        }
+      } else {
+        try {
+          final localCarModel =
+              await localDataSource.getConcreteCarModel(carId);
+          return Right(localCarModel);
+        } on CacheException {
+          return Left(CacheFailure());
+        }
       }
     } else {
       try {
@@ -73,6 +83,10 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
 
   @override
   Future<void> addConcreteCarModel(CarModel carModel) async {
-    await localDataSource.addCarModel(carModel);
+    if (await modeInfo.isCloudMode) {
+      //   await remoteDataSource.addCarModel(carModel);
+    } else {
+      await localDataSource.addCarModel(carModel);
+    }
   }
 }
