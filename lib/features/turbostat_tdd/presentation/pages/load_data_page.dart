@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/add_car_form.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 
@@ -21,7 +20,9 @@ class LoadDataPage extends StatelessWidget {
           BlocBuilder<LoadDataBloc, LoadDataState>(builder: (context, state) {
 //            state = Loading();
         if (state is InitialLoadDataState) {
-          return AddCarForm();
+          return Container(
+            child: CustomCircleProgressBar(),
+          );
         } else if (state is Loading) {
           return Container(
             child: CustomCircleProgressBar(),

@@ -5,6 +5,8 @@ import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart
 import 'package:turbostat_tdd/generated/i18n.dart';
 
 class AddCarForm extends StatefulWidget {
+  const AddCarForm({Key key}) : super(key: key);
+
   @override
   _AddCarFormState createState() => _AddCarFormState();
 }
@@ -139,17 +141,17 @@ class _AddCarFormState extends State<AddCarForm> {
               height: 30.0,
             ),
             RaisedButton(
-                  child: Text(S.of(context).button_save),
-                  onPressed: () => _submitDetails(context),
-                  color: Colors.yellow,
-                ),
+              child: Text(S.of(context).button_save),
+              onPressed: _submitDetails,
+              color: Colors.yellow,
+            ),
           ],
         ),
       ),
     );
   }
 
-    void _submitDetails(BuildContext context) async {
+  void _submitDetails() async {
     final FormState formState = _formKey.currentState;
 
     if (!formState.validate()) {
@@ -157,18 +159,20 @@ class _AddCarFormState extends State<AddCarForm> {
     } else {
       formState.save();
       final carModel = CarModel(
-        carId: '123',
-        carName: carName,
-        carMark: carMark,
-        carModel: carMark,
-        carYear: carYear,
-        carVin: carVin,
-        carNote: '',
-        licencePlate: '',
-        tankVolume: 38,
-        fuelType: 'gasoil'
-      );
-      await BlocProvider.of<LoadDataBloc>(context).addCarModel.addCarModel(carModel);
+          carId: '123',
+          carName: carName,
+          carMark: carMark,
+          carModel: carMark,
+          carYear: carYear,
+          carVin: carVin,
+          carNote: '',
+          licencePlate: '',
+          tankVolume: 38,
+          fuelType: 'gasoil');
+
+      BlocProvider.of<LoadDataBloc>(context).add(AddConcreteCar(car: carModel));
+
+      print('after bloc');
     }
   }
 }
