@@ -11,8 +11,10 @@ import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/logo_scr
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/select_data_source_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/start_page.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
+import 'injection_container.dart' as di;
 
 void main() async {
+  await di.init();
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   runApp(

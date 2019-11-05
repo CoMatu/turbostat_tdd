@@ -1,12 +1,56 @@
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:turbostat_tdd/core/mode/mode_info.dart';
+import 'package:turbostat_tdd/core/network/network_info.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data_source.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/repositories/turbostat_repository_impl.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car_models.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
+
+import 'features/turbostat_tdd/presentation/bloc/bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
   //! Features - Turbostat
-  // 
+  //Bloc
+  sl.registerFactory(() => LoadDataBloc(
+        repository: sl(),
+        concrete: sl.call(),
+        allCarModels: sl.call(),
+        addCar: sl.call(),
+      ));
+
+  // Usecases
+  sl.registerLazySingleton(() => GetAllCarModels(sl()));
+  sl.registerLazySingleton(() => GetConcreteCarModel(sl()));
+  sl.registerLazySingleton(() => AddCarModel(repository: sl()));
+
+  // Repository
+  sl.registerLazySingleton<TurbostatRepository>(() => TurbostatRepositoryImpl(
+        networkInfo: sl(),
+        modeInfo: sl(),
+        localDataSource: sl(),
+    //    remoteDataSource: sl(),
+      ));
+
+  // Data sources
+//  sl.registerLazySingleton<TurbostatRemoteDataSource>(
+//      () => TurbostatRemoteDataSourceImpl(collectionReference: sl()));
+  sl.registerLazySingleton<TurbostatLocalDataSource>(
+      () => TurbostatLocalDataSourceImpl());
 
   //! Core
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+  sl.registerLazySingleton<ModeInfo>(() => ModeInfoImpl());
 
   //! External
+  final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => sharedPreferences);
+  sl.registerLazySingleton(() => DataConnectionChecker());
+//  final collectionReference = Firestore.instance.collection('users');
+//  sl.registerLazySingleton(() => collectionReference);
 }

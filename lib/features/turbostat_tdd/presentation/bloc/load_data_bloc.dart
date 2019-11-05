@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:turbostat_tdd/core/error/failures.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car_models.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
 import './bloc.dart';
@@ -12,14 +14,20 @@ const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
 class LoadDataBloc extends Bloc<LoadDataEvent, LoadDataState> {
   final GetAllCarModels getAllCarModels;
   final GetConcreteCarModel getConcreteCarModel;
+  final AddCarModel addCarModel;
+
+  final TurbostatRepository repository;
 
   LoadDataBloc({
     @required GetAllCarModels allCarModels,
     @required GetConcreteCarModel concrete,
+    @required AddCarModel addCar,
+    @required this.repository,
   })  : assert(allCarModels != null),
         assert(concrete != null),
         getAllCarModels = allCarModels,
-        getConcreteCarModel = concrete;
+        getConcreteCarModel = concrete,
+        addCarModel = addCar;
 
   @override
   LoadDataState get initialState => InitialLoadDataState();
@@ -44,8 +52,11 @@ class LoadDataBloc extends Bloc<LoadDataEvent, LoadDataState> {
         (concreteCar) => LoadedConcreteCar(concreteCar: concreteCar),
       );
     } else if (event is AddConcreteCar) {
-      if (state is LoadedAllCars || state is LoadedConcreteCar) {
-        
+      if (state is LoadedAllCars) {
+        //final List<CarModel> updatedCarList = List.from((state as LoadedAllCars).listAll)..add(event.car);
+        //yield LoadedAllCars(listAll: updatedCarList);
+        await repository.addConcreteCarModel(event.car);
+        //TODO update carModels list 
       }
     }
   }

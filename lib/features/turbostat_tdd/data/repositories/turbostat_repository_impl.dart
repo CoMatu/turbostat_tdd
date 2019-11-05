@@ -5,18 +5,17 @@ import 'package:turbostat_tdd/core/error/failures.dart';
 import 'package:turbostat_tdd/core/mode/mode_info.dart';
 import 'package:turbostat_tdd/core/network/network_info.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data_source.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/remote_data_source.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 
 class TurbostatRepositoryImpl implements TurbostatRepository {
-  final TurbostatRemoteDataSource remoteDataSource;
+//  final TurbostatRemoteDataSource remoteDataSource;
   final TurbostatLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
   final ModeInfo modeInfo;
 
   TurbostatRepositoryImpl({
-    @required this.remoteDataSource,
+//    @required this.remoteDataSource,
     @required this.localDataSource,
     @required this.networkInfo,
     @required this.modeInfo,
@@ -27,9 +26,10 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
     if (await modeInfo.isCloudMode) {
       if (await networkInfo.isConnected) {
         try {
-          final remoteAllCarModels = await remoteDataSource.getAllCarModels();
-          localDataSource.cacheListCarModels(remoteAllCarModels);
-          return Right(remoteAllCarModels);
+//          final remoteAllCarModels = await remoteDataSource.getAllCarModels();
+//          localDataSource.cacheListCarModels(remoteAllCarModels);
+//          return Right(remoteAllCarModels);
+          return null;
         } on ServerException {
           return Left(ServerFailure());
         }
@@ -56,9 +56,10 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
     if (await modeInfo.isCloudMode) {
       if (await networkInfo.isConnected) {
         try {
-          final remoteCarModel =
-              await remoteDataSource.getConcreteCarModel(carId);
-          return Right(remoteCarModel);
+//          final remoteCarModel =
+//              await remoteDataSource.getConcreteCarModel(carId);
+//          return Right(remoteCarModel);
+          return null;
         } on ServerException {
           return Left(ServerFailure());
         }
