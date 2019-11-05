@@ -16,12 +16,21 @@ class Loading extends LoadDataState {
   List<Object> get props => [];
 }
 
-class Loaded extends LoadDataState {
+class LoadedAllCars extends LoadDataState {
   final List<CarModel> listAll;
 
-  Loaded({@required this.listAll});
+  LoadedAllCars({@required this.listAll});
   @override
   List<Object> get props => [listAll];
+}
+
+class LoadedConcreteCar extends LoadDataState {
+  final CarModel concreteCar;
+
+  LoadedConcreteCar({@required this.concreteCar});
+  @override
+  List<Object> get props => [concreteCar];
+  
 }
 
 class Error extends LoadDataState {

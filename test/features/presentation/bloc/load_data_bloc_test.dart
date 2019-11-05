@@ -66,4 +66,22 @@ void main() {
   });
   });
 
+  test(
+  'should emit [Loading, Loaded] when data is gotten successfully',
+  () async {
+    // arrange
+    when(mockGetAllCar(NoParams()))
+        .thenAnswer((_) async => Right(tAllCarModels));
+    // assert later
+    final expected = [
+      InitialLoadDataState(),
+      Loading(),
+      LoadedAllCars(listAll: tAllCarModels),
+    ];
+    expectLater(bloc, emitsInOrder(expected));
+    // act
+    bloc.add(GetAllCar());
+  },
+);
+
 }

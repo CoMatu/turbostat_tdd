@@ -33,8 +33,20 @@ class LoadDataBloc extends Bloc<LoadDataEvent, LoadDataState> {
       final failureOrAllCars = await getAllCarModels(NoParams());
       yield failureOrAllCars.fold(
         (failure) => Error(message: _mapFailureToMessage(failure)),
-        (allCarModels) => Loaded(listAll: allCarModels),
+        (allCarModels) => LoadedAllCars(listAll: allCarModels),
       );
+    } else if (event is GetConcreteCar) {
+      yield Loading();
+      final failureOrConcreteCar =
+          await getConcreteCarModel(Params(carId: event.carId));
+      yield failureOrConcreteCar.fold(
+        (failure) => Error(message: _mapFailureToMessage(failure)),
+        (concreteCar) => LoadedConcreteCar(concreteCar: concreteCar),
+      );
+    } else if (event is AddConcreteCar) {
+      if (state is LoadedAllCars || state is LoadedConcreteCar) {
+        
+      }
     }
   }
 
