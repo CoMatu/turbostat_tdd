@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:turbostat_tdd/core/usecases/usecase.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
 import 'package:turbostat_tdd/injection_container.dart';
@@ -18,16 +20,29 @@ class LoadDataPage extends StatelessWidget {
       builder: (_) => sl<LoadDataBloc>(),
       child:
           BlocBuilder<LoadDataBloc, LoadDataState>(builder: (context, state) {
+            BlocProvider.of<LoadDataBloc>(context).add(GetAllCar());
 //            state = Loading();
         if (state is InitialLoadDataState) {
           return Container(
-            child: CustomCircleProgressBar(),
+            child: Column(
+              children: <Widget>[
+                CustomCircleProgressBar(),
+                Text('Empty State'),
+              ],
+            ),
           );
-        } else if (state is Loading) {
+        }
+        if (state is Loading) {
           return Container(
-            child: CustomCircleProgressBar(),
+            child: Column(
+              children: <Widget>[
+                CustomCircleProgressBar(),
+                Text('Loading State'),
+              ],
+            ),
           );
-        } else if (state is LoadedAllCars) {
+        }
+        if (state is LoadedAllCars) {
           return Column(
             children: <Widget>[
               Container(
