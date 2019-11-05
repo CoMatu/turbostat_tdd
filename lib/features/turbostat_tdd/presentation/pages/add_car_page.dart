@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
 
 class AddCarPage extends StatefulWidget {
@@ -146,7 +149,7 @@ class _AddCarPageState extends State<AddCarPage> {
               ),
               RaisedButton(
                     child: Text(S.of(context).button_save),
-                    onPressed: _submitDetails,
+                    onPressed: () => _submitDetails(context),
                     color: Colors.yellow,
                   ),
             ],
@@ -156,13 +159,24 @@ class _AddCarPageState extends State<AddCarPage> {
     );
   }
 
-  void _submitDetails() {
+  void _submitDetails(BuildContext context) async {
     final FormState formState = _formKey.currentState;
 
     if (!formState.validate()) {
       //     showSnackBarMessage(S.of(context).form_warning_fill_info);
     } else {
       formState.save();
+      final carModel = CarModel(
+        carId: '123',
+        carName: carName,
+        carMark: carMark,
+        carModel: carMark,
+        carYear: carYear,
+        carVin: carVin,
+        carNote: '',
+        licencePlate: '',
+      );
+      await BlocProvider.of<LoadDataBloc>(context).addCarModel.addCarModel(carModel);
     }
   }
 }

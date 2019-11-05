@@ -9,7 +9,7 @@ class LoadDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBar(),
-      body: SingleChildScrollView(child: buildBody(context)),
+      body: buildBody(context),
     );
   }
 
@@ -18,18 +18,46 @@ class LoadDataPage extends StatelessWidget {
       builder: (_) => sl<LoadDataBloc>(),
       child:
           BlocBuilder<LoadDataBloc, LoadDataState>(builder: (context, state) {
-        return Column(
-          children: <Widget>[
-            Container(
-              height: 50,
-              child: Placeholder(),
+//            state = Loading();
+        if (state is InitialLoadDataState) {
+          return Container(
+            child: RaisedButton(
+              child: Text('Add Car'),
+              onPressed: () {
+                Navigator.pushNamed(context, 'add_car');
+              },
             ),
-            Expanded(
-              child: Placeholder(),
-            ),
-          ],
-        );
+          );
+        } else if (state is Loading) {
+          return Container(
+            child: CustomCircleProgressBar(),
+          );
+        } else if (state is LoadedAllCars) {
+          return Column(
+            children: <Widget>[
+              Container(
+                height: 50,
+                child: new DropdownCarButton(),
+              ),
+              Expanded(
+                child: Placeholder(),
+              ),
+            ],
+          );
+        }
+        return Container();
       }),
     );
+  }
+}
+
+class DropdownCarButton extends StatelessWidget {
+  const DropdownCarButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Placeholder();
   }
 }
