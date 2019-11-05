@@ -36,7 +36,9 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     final carsBox = await Hive.openBox('cars');
     var ind = carsBox.length;
     for (int i = 0; i < ind; i++) {
-      carsFromDataBase.add(CarModel.fromJson(carsBox.get(i)));
+      final res = carsBox.get(i);
+      print(res.runtimeType);
+      carsFromDataBase.add(CarModel.fromJson(res.cast<String, dynamic>()));
     }
     return carsFromDataBase;
   }
