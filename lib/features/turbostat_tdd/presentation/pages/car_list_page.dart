@@ -17,7 +17,9 @@ class CarListPage extends StatelessWidget {
         builder: (context, state) {
           BlocProvider.of<LoadDataBloc>(context).add(GetAllCar());
 
-          if (state is InitialLoadDataState) {}
+          if (state is InitialLoadDataState) {
+            return CustomCircleProgressBar();
+          }
           if (state is Loading) {
             return CustomCircleProgressBar();
           }
