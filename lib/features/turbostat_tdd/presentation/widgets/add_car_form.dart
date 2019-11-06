@@ -63,7 +63,7 @@ class _AddCarFormState extends State<AddCarForm> {
               padding: const EdgeInsets.only(top: 12.0),
               child: TextFormField(
                 keyboardType: TextInputType.text,
-                initialValue: '',
+                initialValue: '', // TODO add base cars and choise from the base
                 autocorrect: false,
                 onSaved: (String value) {
                   carMark = value;
@@ -158,11 +158,11 @@ class _AddCarFormState extends State<AddCarForm> {
       //     showSnackBarMessage(S.of(context).form_warning_fill_info);
     } else {
       formState.save();
-      final carModel = CarModel(
+      final newCar = CarModel(
           carId: '123',
           carName: carName,
           carMark: carMark,
-          carModel: carMark,
+          carModel: carModel,
           carYear: carYear,
           carVin: carVin,
           carNote: '',
@@ -170,7 +170,7 @@ class _AddCarFormState extends State<AddCarForm> {
           tankVolume: 38,
           fuelType: 'gasoil');
 
-      BlocProvider.of<LoadDataBloc>(context).add(AddConcreteCar(car: carModel));
+      BlocProvider.of<LoadDataBloc>(context).add(AddConcreteCar(car: newCar));
 
       print('after bloc');
     }

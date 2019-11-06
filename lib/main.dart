@@ -5,7 +5,6 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/core/auth/auth_provider.dart';
 import 'package:turbostat_tdd/core/auth/base_auth.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/add_car_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/load_data_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/logo_screen.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/select_data_source_page.dart';
@@ -46,7 +45,6 @@ class MyApp extends StatelessWidget {
         title: 'turbostat',
         routes: {
           'logo_screen': (context) => LogoScreen(),
-          'add_car': (context) => AddCarPage(),
           'start_page': (context) => StartPage(),
           'load_data_page': (context) => LoadDataPage(),
           'select_page': (context) => SelectDataSourcePage(),
