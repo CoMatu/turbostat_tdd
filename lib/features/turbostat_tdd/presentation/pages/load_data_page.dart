@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/pages.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 
@@ -12,9 +13,8 @@ class LoadDataPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(Icons.add),
-        
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigation(),
       body: buildBody(context),
     );
@@ -48,7 +48,7 @@ class LoadDataPage extends StatelessWidget {
           );
         }
         if (state is LoadedAllCars) {
-          print(state.listAll);
+          //print(state.listAll);
           return state.listAll.isEmpty
               ? AddCarForm()
               : Column(
@@ -63,7 +63,7 @@ class LoadDataPage extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Placeholder(),
+                      child: new MainPageView(),
                     ),
                   ],
                 );
@@ -71,5 +71,43 @@ class LoadDataPage extends StatelessWidget {
         return Container();
       }),
     );
+  }
+}
+
+class MainPageView extends StatefulWidget {
+  const MainPageView({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _MainPageViewState createState() => _MainPageViewState();
+}
+
+class _MainPageViewState extends State<MainPageView> {
+  PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return PageView(
+      controller: pageController,
+      onPageChanged: (index) {
+        pageChanged(index);
+      },
+      children: <Widget>[
+        HistoryPage(),
+        StatsPage(),
+        CarListPage(),
+        SettingPage(),
+      ],
+    );
+  }
+
+  void pageChanged(int index) {
+    setState(() {
+      //bottomSelectedIndex = index;
+    });
   }
 }

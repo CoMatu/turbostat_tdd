@@ -29,10 +29,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
           title: Text('Stats'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(null),
-          title: Text(''),
-        ),
-        BottomNavigationBarItem(
           icon: Icon(Icons.directions_car),
           title: Text('Cars'),
         ),

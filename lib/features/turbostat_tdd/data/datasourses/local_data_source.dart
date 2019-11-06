@@ -37,7 +37,6 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     var ind = carsBox.length;
     for (int i = 0; i < ind; i++) {
       final res = carsBox.get(i);
-      print(res.runtimeType);
       carsFromDataBase.add(CarModel.fromJson(res.cast<String, dynamic>()));
     }
     return carsFromDataBase;
