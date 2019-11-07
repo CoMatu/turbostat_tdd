@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nanoid/async/nanoid.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
@@ -158,8 +159,9 @@ class _AddCarFormState extends State<AddCarForm> {
       //     showSnackBarMessage(S.of(context).form_warning_fill_info);
     } else {
       formState.save();
+      final carGenId = await nanoid(10);
       final newCar = CarModel(
-          carId: '123',
+          carId: carGenId,
           carName: carName,
           carMark: carMark,
           carModel: carModel,
@@ -168,7 +170,7 @@ class _AddCarFormState extends State<AddCarForm> {
           carNote: '',
           licencePlate: '',
           tankVolume: 38,
-          fuelType: 'gasoil');
+          fuelType: 'petrol');
 
       BlocProvider.of<LoadDataBloc>(context).add(AddConcreteCar(car: newCar));
 
