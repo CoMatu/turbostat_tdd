@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/pages.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 
 class LoadDataPage extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +63,7 @@ class LoadDataPage extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: new MainPageView(),
+                      child: PageViewController(),
                     ),
                   ],
                 );
@@ -71,43 +71,5 @@ class LoadDataPage extends StatelessWidget {
         return Container();
       }),
     );
-  }
-}
-
-class MainPageView extends StatefulWidget {
-  const MainPageView({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  _MainPageViewState createState() => _MainPageViewState();
-}
-
-class _MainPageViewState extends State<MainPageView> {
-  PageController pageController = PageController(
-    initialPage: 0,
-    keepPage: true,
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return PageView(
-      controller: pageController,
-      onPageChanged: (index) {
-        pageChanged(index);
-      },
-      children: <Widget>[
-        HistoryPage(),
-        StatsPage(),
-        CarListPage(),
-        SettingPage(),
-      ],
-    );
-  }
-
-  void pageChanged(int index) {
-    setState(() {
-      //bottomSelectedIndex = index;
-    });
   }
 }

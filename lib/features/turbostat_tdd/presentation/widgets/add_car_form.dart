@@ -159,7 +159,7 @@ class _AddCarFormState extends State<AddCarForm> {
       //     showSnackBarMessage(S.of(context).form_warning_fill_info);
     } else {
       formState.save();
-      final carGenId = await nanoid(10);
+      final carGenId = await nanoid(4);
       final newCar = CarModel(
           carId: carGenId,
           carName: carName,

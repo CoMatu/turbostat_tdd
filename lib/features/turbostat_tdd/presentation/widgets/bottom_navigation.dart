@@ -1,18 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:turbostat_tdd/core/util/util.dart';
 
 class BottomNavigation extends StatefulWidget {
+  BottomNavigation();
+
+  
   @override
   _BottomNavigationState createState() => _BottomNavigationState();
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int _selectedIndex = 0;
+  int selectedIndex = 0;
+  int bottomSelectedIndex = 0;
 
-  void _onItemTapped(int index) {
-  setState(() {
-    _selectedIndex = index;
-  });
-}
+  PageController pageController;
+
+  void onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+      print('bottom $selectedIndex');
+    });
+  }
+
+  void bottomTapped(int index) {
+    setState(() {
+      pageController = PageController();
+      bottomSelectedIndex = index;
+      pageController.animateToPage(index,
+          duration: Duration(milliseconds: 500), curve: Curves.ease);
+    });
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +60,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
           title: Text('Setting'),
         ),
       ],
-      currentIndex: _selectedIndex,
+      currentIndex: selectedIndex,
       selectedItemColor: Colors.black,
-      onTap: _onItemTapped,
+      onTap: onItemTapped,
     );
   }
 }
