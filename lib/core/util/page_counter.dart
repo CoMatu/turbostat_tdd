@@ -1,11 +1,11 @@
-class PageCounter {
-  static final PageCounter _appData = PageCounter._internal();
-  
-  int pageIndex;
-  factory PageCounter() {
-    return _appData;
-  }
-  PageCounter._internal();
-}
+import 'dart:async';
 
-final pageCounter = PageCounter();
+class PageCounter {
+  StreamController _streamController = StreamController();
+
+  Stream get updatedIndex => _streamController.stream;
+
+  void updateIndex(int index) {
+    _streamController.add(index);
+  }
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/load_data_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/pages.dart';
 
 class PageViewController extends StatefulWidget {
@@ -11,7 +12,6 @@ class PageViewController extends StatefulWidget {
 }
 
 class _PageViewControllerState extends State<PageViewController> {
-
   void Function(int) onItemTapped;
 
   int bottomSelectedIndex = 0;
@@ -21,10 +21,18 @@ class _PageViewControllerState extends State<PageViewController> {
     keepPage: true,
   );
 
+  void bottomTapped(int index) {
+    setState(() {
+      pageController = PageController();
+      bottomSelectedIndex = index;
+      pageController.animateToPage(index,
+          duration: Duration(milliseconds: 500), curve: Curves.ease);
+    });
+  }
+
   void pageChanged(int index) {
     setState(() {
-      bottomSelectedIndex = index;
-      print(bottomSelectedIndex);
+      LoadDataPage.pageCounter.updateIndex(index);
     });
   }
 

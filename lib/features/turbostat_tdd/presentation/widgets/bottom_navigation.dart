@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:turbostat_tdd/core/util/util.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/load_data_page.dart';
 
 class BottomNavigation extends StatefulWidget {
-  BottomNavigation();
+  final int selectedIndex;
 
+  const BottomNavigation({Key key, this.selectedIndex}) : super(key: key);
   
   @override
   _BottomNavigationState createState() => _BottomNavigationState();
@@ -13,28 +15,18 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int selectedIndex = 0;
   int bottomSelectedIndex = 0;
 
-  PageController pageController;
+  @override
+  void initState() {
+    
+    super.initState();
+  }
 
   void onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
+      LoadDataPage.pageCounter.updateIndex(index);
       print('bottom $selectedIndex');
     });
-  }
-
-  void bottomTapped(int index) {
-    setState(() {
-      pageController = PageController();
-      bottomSelectedIndex = index;
-      pageController.animateToPage(index,
-          duration: Duration(milliseconds: 500), curve: Curves.ease);
-    });
-  }
-
-  @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
   }
 
   @override
