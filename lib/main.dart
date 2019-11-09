@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/core/auth/auth_provider.dart';
 import 'package:turbostat_tdd/core/auth/base_auth.dart';
+import 'package:turbostat_tdd/core/util/page_counter.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/load_data_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/logo_screen.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/select_data_source_page.dart';
@@ -18,7 +19,9 @@ void main() async {
   Hive.init(appDocumentDir.path);
   runApp(
     MultiProvider(
-      providers: [],
+      providers: [
+        ChangeNotifierProvider(builder: (context) => PageCounter()),
+      ],
       child: MyApp(),
     ),
   );

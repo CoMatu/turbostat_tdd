@@ -1,11 +1,12 @@
-import 'dart:async';
+import 'package:flutter/material.dart';
 
-class PageCounter {
-  StreamController _streamController = StreamController();
+class PageCounter extends ChangeNotifier {
+  int _index = 0;
 
-  Stream get updatedIndex => _streamController.stream;
+  int get pageIndex => _index;
 
   void updateIndex(int index) {
-    _streamController.add(index);
+    _index = index;
+    notifyListeners();
   }
 }
