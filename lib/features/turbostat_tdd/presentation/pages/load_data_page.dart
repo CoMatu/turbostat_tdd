@@ -7,16 +7,31 @@ import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widget
 import 'package:turbostat_tdd/injection_container.dart';
 
 class LoadDataPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
+      floatingActionButton: Consumer<PageCounter>(
+        builder: (context, page, child) {
+          switch (page.pageIndex) {
+            case 0:
+              return FloatingActionButton(
+                onPressed: () {},
+                child: Icon(Icons.add),
+              );
+            case 2:
+              return FloatingActionButton(
+                onPressed: () {},
+                child: Icon(Icons.add),
+              );
+          }
+          return Visibility(
+              visible: false,
+              child: FloatingActionButton(
+                onPressed: () {},
+              ));
+        },
       ),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigation(),
       body: buildBody(context),
     );

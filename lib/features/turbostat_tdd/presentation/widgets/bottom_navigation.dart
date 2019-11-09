@@ -12,16 +12,10 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int selectedIndex = 0;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
       Provider.of<PageCounter>(context).updateIndex(index);
-      print('bottom $selectedIndex');
     });
   }
 
