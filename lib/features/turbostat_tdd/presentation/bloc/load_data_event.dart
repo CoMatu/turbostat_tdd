@@ -27,3 +27,12 @@ class AddConcreteCar extends LoadDataEvent {
   List<Object> get props => [car];
   
 }
+
+class DeleteConcreteCar extends LoadDataEvent {
+  final String carId;
+
+  DeleteConcreteCar({@required this.carId});
+  @override
+  List<Object> get props => [carId];
+  
+}

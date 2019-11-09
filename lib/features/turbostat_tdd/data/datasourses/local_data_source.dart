@@ -9,6 +9,8 @@ abstract class TurbostatLocalDataSource {
   Future<void> cacheListCarModels(List<CarModel> listCarModelsToCache);
 
   Future<void> addCarModel(CarModel carModel);
+
+  Future<void> deleteCarModel(String carId);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
@@ -37,6 +39,7 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     var ind = carsBox.length;
     for (int i = 0; i < ind; i++) {
       final res = carsBox.get(i);
+      print(res);
       carsFromDataBase.add(CarModel.fromJson(res.cast<String, dynamic>()));
     }
     return carsFromDataBase;
@@ -48,5 +51,11 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     final carString = carModel.toJson();
     carsBox.add(carString);
     print('added car $carString');
+  }
+
+  @override
+  Future<void> deleteCarModel(String carId) async {
+        final carsBox = await Hive.openBox('cars');
+        carsBox.delete(carId);
   }
 }

@@ -7,6 +7,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data
 import 'package:turbostat_tdd/features/turbostat_tdd/data/repositories/turbostat_repository_impl.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car_models.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
 
@@ -22,19 +23,21 @@ Future<void> init() async {
         concrete: sl.call(),
         allCarModels: sl.call(),
         addCar: sl.call(),
+        deleteCar: sl.call(),
       ));
 
   // Usecases
   sl.registerLazySingleton(() => GetAllCarModels(sl()));
   sl.registerLazySingleton(() => GetConcreteCarModel(sl()));
   sl.registerLazySingleton(() => AddCarModel(repository: sl()));
+  sl.registerLazySingleton(() => DeleteCarModel(repository: sl()));
 
   // Repository
   sl.registerLazySingleton<TurbostatRepository>(() => TurbostatRepositoryImpl(
         networkInfo: sl(),
         modeInfo: sl(),
         localDataSource: sl(),
-    //    remoteDataSource: sl(),
+        //    remoteDataSource: sl(),
       ));
 
   // Data sources

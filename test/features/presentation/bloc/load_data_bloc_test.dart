@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car_models.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
@@ -14,6 +15,8 @@ class MockGetAllCar extends Mock implements GetAllCarModels {}
 
 class MockAddCarModel extends Mock implements AddCarModel {}
 
+class MockDeleteCarModel extends Mock implements DeleteCarModel {}
+
 class MockTurbostatRepository extends Mock implements TurbostatRepository {}
 
 void main() {
@@ -21,18 +24,21 @@ void main() {
   MockGetConcreteCar mockGetConcreteCar;
   MockGetAllCar mockGetAllCar;
   MockAddCarModel mockAddCarModel;
+  MockDeleteCarModel mockDeleteCarModel;
   MockTurbostatRepository mockTurbostatRepository;
 
   setUpAll(() {
     mockGetAllCar = MockGetAllCar();
     mockGetConcreteCar = MockGetConcreteCar();
     mockAddCarModel = MockAddCarModel();
+    mockDeleteCarModel = MockDeleteCarModel();
     mockTurbostatRepository = MockTurbostatRepository();
 
     bloc = LoadDataBloc(
       concrete: mockGetConcreteCar,
       allCarModels: mockGetAllCar,
       addCar: mockAddCarModel,
+      deleteCar: mockDeleteCarModel,
       repository: mockTurbostatRepository,
     );
   });

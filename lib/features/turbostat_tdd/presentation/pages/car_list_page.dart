@@ -42,7 +42,10 @@ class CarListPage extends StatelessWidget {
                       ),
                       IconButton(
                         icon: Icon(Icons.delete_outline),
-                        onPressed: () {},
+                        onPressed: () async {
+                          final String carId = state.listAll[index].carId;
+                          BlocProvider.of<LoadDataBloc>(context).add(DeleteConcreteCar(carId: carId));
+                        },
                       ),
                     ],
                   ),

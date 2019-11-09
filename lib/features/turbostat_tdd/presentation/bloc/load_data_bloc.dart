@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:turbostat_tdd/core/error/failures.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car_models.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
 import './bloc.dart';
@@ -15,6 +16,7 @@ class LoadDataBloc extends Bloc<LoadDataEvent, LoadDataState> {
   final GetAllCarModels getAllCarModels;
   final GetConcreteCarModel getConcreteCarModel;
   final AddCarModel addCarModel;
+  final DeleteCarModel deleteConcreteCar;
 
   final TurbostatRepository repository;
 
@@ -22,12 +24,14 @@ class LoadDataBloc extends Bloc<LoadDataEvent, LoadDataState> {
     @required GetAllCarModels allCarModels,
     @required GetConcreteCarModel concrete,
     @required AddCarModel addCar,
+    @required DeleteCarModel deleteCar,
     @required this.repository,
   })  : assert(allCarModels != null),
         assert(concrete != null),
         getAllCarModels = allCarModels,
         getConcreteCarModel = concrete,
-        addCarModel = addCar;
+        addCarModel = addCar,
+        deleteConcreteCar = deleteCar;
 
   @override
   LoadDataState get initialState => Loading();
@@ -54,6 +58,8 @@ class LoadDataBloc extends Bloc<LoadDataEvent, LoadDataState> {
     } else if (event is AddConcreteCar) {
       await repository.addConcreteCarModel(event.car);
       print('in bloc ' + event.car.toString());
+    } else if (event is DeleteConcreteCar) {
+      await repository.deleteCarModel(event.carId);
     }
   }
 
