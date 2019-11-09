@@ -11,17 +11,22 @@ class LoadDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Consumer<PageCounter>(
         builder: (context, page, child) {
           switch (page.pageIndex) {
-            case 0:
+            case 0: // history page
               return FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  // TODO add new entry to history
+                },
                 child: Icon(Icons.add),
               );
-            case 2:
+            case 2: // cars list page
               return FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, 'add_car');
+                },
                 child: Icon(Icons.add),
               );
           }
@@ -39,21 +44,9 @@ class LoadDataPage extends StatelessWidget {
 
   BlocProvider<LoadDataBloc> buildBody(BuildContext context) {
     return BlocProvider(
-      builder: (_) => sl<LoadDataBloc>(),
+      builder: (_) => sl<LoadDataBloc>()..add(GetAllCar()),
       child:
           BlocBuilder<LoadDataBloc, LoadDataState>(builder: (context, state) {
-        BlocProvider.of<LoadDataBloc>(context).add(GetAllCar());
-        //            state = Loading();
-        if (state is InitialLoadDataState) {
-          return Container(
-            child: Column(
-              children: <Widget>[
-                CustomCircleProgressBar(),
-                //Text('Empty State'),
-              ],
-            ),
-          );
-        }
         if (state is Loading) {
           return Container(
             child: Column(
@@ -76,7 +69,6 @@ class LoadDataPage extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Theme.of(context).primaryColorLight),
                       child: DropdownCarButton(
-                        listAll: state.listAll,
                       ),
                     ),
                     Expanded(

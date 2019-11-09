@@ -12,13 +12,9 @@ class CarListPage extends StatelessWidget {
 
   BlocProvider<LoadDataBloc> buildPageBody(BuildContext context) {
     return BlocProvider(
-      builder: (_) => sl<LoadDataBloc>(),
+      builder: (_) => sl<LoadDataBloc>()..add(GetAllCar()),
       child: BlocBuilder<LoadDataBloc, LoadDataState>(
         builder: (context, state) {
-          BlocProvider.of<LoadDataBloc>(context).add(GetAllCar());
-          if (state is InitialLoadDataState) {
-            return CustomCircleProgressBar();
-          }
           if (state is Loading) {
             return CustomCircleProgressBar();
           }
@@ -32,7 +28,9 @@ class CarListPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       CircleAvatar(),
-                      SizedBox(width: 12,),
+                      SizedBox(
+                        width: 12,
+                      ),
                       Expanded(
                         child: Text(
                           state.listAll[index].carMark,
@@ -49,12 +47,6 @@ class CarListPage extends StatelessWidget {
                     ],
                   ),
                 );
-/*                 return ListTile(
-                  title: Text(
-                    state.listAll[index].carMark,
-                  ),
-                );
- */
               },
             );
           }

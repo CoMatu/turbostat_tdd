@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
+import 'package:turbostat_tdd/injection_container.dart';
 
 class DropdownCarButton extends StatefulWidget {
-  final List<CarModel> listAll;
   const DropdownCarButton({
-    @required this.listAll,
     Key key,
   }) : super(key: key);
 
   @override
-  _DropdownCarButtonState createState() => _DropdownCarButtonState(listAll);
+  _DropdownCarButtonState createState() => _DropdownCarButtonState();
 }
 
 class _DropdownCarButtonState extends State<DropdownCarButton> {
-  List<CarModel> listAll;
-  _DropdownCarButtonState(this.listAll);
-  get dropDownItems => listAll.map<DropdownMenuItem<Text>>((v) {
+  dropDownItems(List<CarModel> listAll) =>
+      listAll.map<DropdownMenuItem<Text>>((v) {
         var text = v.carMark + ' ' + v.carModel + ' ' + v.carYear.toString();
         return DropdownMenuItem<Text>(
           child: Text(text),
@@ -24,11 +24,21 @@ class _DropdownCarButtonState extends State<DropdownCarButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 12.0),
-      child: DropdownButton(
-        items: dropDownItems,
-        onChanged: (newValue) {},
+    return BlocProvider(
+      builder: (_) => sl<LoadDataBloc>()..add(GetAllCar()),
+      child: BlocBuilder<LoadDataBloc, LoadDataState>(
+        builder: (context, state) {
+          if (state is LoadedAllCars) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 12.0),
+              child: DropdownButton(
+                items: dropDownItems(state.listAll),
+                onChanged: (newValue) {},
+              ),
+            );
+          }
+          return Container();
+        },
       ),
     );
   }

@@ -66,7 +66,7 @@ void main() {
 
   test('initialState should be Empty', () {
     // assert
-    expect(bloc.initialState, equals(InitialLoadDataState()));
+    expect(bloc.initialState, equals(Loading()));
   });
 
   group('getAllCarsModels bloc', () {
@@ -86,7 +86,6 @@ void main() {
         .thenAnswer((_) async => Right(tAllCarModels));
     // assert later
     final expected = [
-      InitialLoadDataState(),
       Loading(),
       LoadedAllCars(listAll: tAllCarModels),
     ];

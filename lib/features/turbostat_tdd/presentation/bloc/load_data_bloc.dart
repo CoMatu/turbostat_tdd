@@ -30,7 +30,7 @@ class LoadDataBloc extends Bloc<LoadDataEvent, LoadDataState> {
         addCarModel = addCar;
 
   @override
-  LoadDataState get initialState => InitialLoadDataState();
+  LoadDataState get initialState => Loading();
 
   @override
   Stream<LoadDataState> mapEventToState(
@@ -52,12 +52,8 @@ class LoadDataBloc extends Bloc<LoadDataEvent, LoadDataState> {
         (concreteCar) => LoadedConcreteCar(concreteCar: concreteCar),
       );
     } else if (event is AddConcreteCar) {
-      if (state is LoadedAllCars) {
-        //final List<CarModel> updatedCarList = List.from((state as LoadedAllCars).listAll)..add(event.car);
-        //yield LoadedAllCars(listAll: updatedCarList);
-        await repository.addConcreteCarModel(event.car);
-        //TODO update carModels list 
-      }
+      await repository.addConcreteCarModel(event.car);
+      print('in bloc ' + event.car.toString());
     }
   }
 

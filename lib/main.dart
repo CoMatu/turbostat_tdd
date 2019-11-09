@@ -8,6 +8,7 @@ import 'package:turbostat_tdd/core/auth/base_auth.dart';
 import 'package:turbostat_tdd/core/util/page_counter.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/load_data_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/logo_screen.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/pages.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/select_data_source_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/start_page.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
           'start_page': (context) => StartPage(),
           'load_data_page': (context) => LoadDataPage(),
           'select_page': (context) => SelectDataSourcePage(),
+          'add_car': (context) => AddCarPage(),
         },
       ),
     );

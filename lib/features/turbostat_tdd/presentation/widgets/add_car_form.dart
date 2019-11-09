@@ -173,8 +173,8 @@ class _AddCarFormState extends State<AddCarForm> {
           fuelType: 'petrol');
 
       BlocProvider.of<LoadDataBloc>(context).add(AddConcreteCar(car: newCar));
-
-      print('after bloc');
+      print('after bloc $carGenId');
+      Navigator.pushReplacementNamed(context, 'load_data_page');
     }
   }
 }

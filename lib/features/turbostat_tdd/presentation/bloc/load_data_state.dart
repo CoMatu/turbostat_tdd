@@ -6,11 +6,6 @@ abstract class LoadDataState extends Equatable {
   const LoadDataState();
 }
 
-class InitialLoadDataState extends LoadDataState {
-  @override
-  List<Object> get props => [];
-}
-
 class Loading extends LoadDataState {
   @override
   List<Object> get props => [];
@@ -30,7 +25,6 @@ class LoadedConcreteCar extends LoadDataState {
   LoadedConcreteCar({@required this.concreteCar});
   @override
   List<Object> get props => [concreteCar];
-  
 }
 
 class Error extends LoadDataState {
