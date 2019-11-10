@@ -33,29 +33,31 @@ class CarListPage extends StatelessWidget {
                       CircleAvatar(
                         backgroundColor: Colors.blueAccent,
                       ),
-                      GestureDetector(
-                        onTap: () async {
-                          final pref = await SharedPreferences.getInstance();
-                          pref.setString('carId', state.listAll[index].carId);
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () async {
+                            final pref = await SharedPreferences.getInstance();
+                            pref.setString('carId', state.listAll[index].carId);
 
-                          Provider.of<PageCounter>(context).updateIndex(0);
+                            Provider.of<PageCounter>(context).updateIndex(0);
 
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Container(
-                              child: Text(
-                                state.listAll[index].carMark,
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                child: Text(
+                                  state.listAll[index].carMark,
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 12,),
-                            Container(
-                              child: Text(
-                                state.listAll[index].carModel,
+                              SizedBox(width: 12,),
+                              Container(
+                                child: Text(
+                                  state.listAll[index].carModel,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       IconButton(

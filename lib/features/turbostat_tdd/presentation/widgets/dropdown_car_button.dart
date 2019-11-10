@@ -21,10 +21,8 @@ class _DropdownCarButtonState extends State<DropdownCarButton> {
     return Consumer<PageCounter>(
       builder: (context, page, child) {
         return FlatButton(
-          onPressed: () {
-
-          },
-          child: Text(''), // TODO решить как брать стейт по текущей машине
+          onPressed: () {},
+          child: Text(page.pageIndex.toString()), // TODO решить как брать стейт по текущей машине
         );
       },
     );
