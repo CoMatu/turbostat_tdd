@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:nanoid/async/nanoid.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
@@ -63,22 +62,7 @@ class _AddCarFormState extends State<AddCarForm> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 12.0),
-              child: TypeAheadField(
-                textFieldConfiguration: TextFieldConfiguration(
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: S.of(context).form_decorator_car_mark,
-                  ),
-                ),
-                suggestionsCallback: (value) async {
-                  return null;
-                },
-                itemBuilder: (context, suggestion) {
-                  return Text('wwwwwww');
-                },
-                onSuggestionSelected: (suggestion) {},
-              ),
-              /* TextFormField(
+              child: TextFormField(
                 keyboardType: TextInputType.text,
                 initialValue: '', // TODO add base cars and choise from the base
                 autocorrect: false,
@@ -95,7 +79,7 @@ class _AddCarFormState extends State<AddCarForm> {
                 decoration: InputDecoration(
                   labelText: S.of(context).form_decorator_car_mark,
                 ),
-              ), */
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 12.0),

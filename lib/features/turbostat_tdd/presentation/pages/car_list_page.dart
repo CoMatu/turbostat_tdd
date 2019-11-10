@@ -38,9 +38,6 @@ class CarListPage extends StatelessWidget {
                           state.listAll[index].carMark,
                         ),
                       ),
-                      SizedBox(
-                        width: 12,
-                      ),
                       Expanded(
                         child: Text(
                           state.listAll[index].carModel,

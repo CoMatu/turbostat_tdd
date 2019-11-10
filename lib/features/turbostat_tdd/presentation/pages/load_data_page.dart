@@ -25,7 +25,7 @@ class LoadDataPage extends StatelessWidget {
             case 2: // cars list page
               return FloatingActionButton(
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, 'add_car');
+                  Navigator.popAndPushNamed(context, 'add_car');
                 },
                 child: Icon(Icons.add),
               );
