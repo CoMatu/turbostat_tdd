@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:turbostat_tdd/core/util/page_counter.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/injection_container.dart';
@@ -14,7 +16,21 @@ class DropdownCarButton extends StatefulWidget {
 }
 
 class _DropdownCarButtonState extends State<DropdownCarButton> {
-  dropDownItems(List<CarModel> listAll) =>
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<PageCounter>(
+      builder: (context, page, child) {
+        return FlatButton(
+          onPressed: () {
+
+          },
+          child: Text(''), // TODO решить как брать стейт по текущей машине
+        );
+      },
+    );
+  }
+
+/*  dropDownItems(List<CarModel> listAll) =>
       listAll.map<DropdownMenuItem<Text>>((v) {
         var text = v.carMark + ' ' + v.carModel + ' ' + v.carYear.toString();
         return DropdownMenuItem<Text>(
@@ -41,5 +57,5 @@ class _DropdownCarButtonState extends State<DropdownCarButton> {
         },
       ),
     );
-  }
+  }*/
 }

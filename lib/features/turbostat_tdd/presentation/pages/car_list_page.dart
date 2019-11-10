@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:turbostat_tdd/core/util/util.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
 import 'package:turbostat_tdd/injection_container.dart';
@@ -30,17 +33,29 @@ class CarListPage extends StatelessWidget {
                       CircleAvatar(
                         backgroundColor: Colors.blueAccent,
                       ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Expanded(
-                        child: Text(
-                          state.listAll[index].carMark,
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          state.listAll[index].carModel,
+                      GestureDetector(
+                        onTap: () async {
+                          final pref = await SharedPreferences.getInstance();
+                          pref.setString('carId', state.listAll[index].carId);
+
+                          Provider.of<PageCounter>(context).updateIndex(0);
+
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Container(
+                              child: Text(
+                                state.listAll[index].carMark,
+                              ),
+                            ),
+                            SizedBox(width: 12,),
+                            Container(
+                              child: Text(
+                                state.listAll[index].carModel,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       IconButton(
