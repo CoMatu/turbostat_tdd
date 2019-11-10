@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turbostat_tdd/core/util/util.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
 import 'package:turbostat_tdd/injection_container.dart';
@@ -37,10 +40,12 @@ class CarListPage extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () async {
                             final pref = await SharedPreferences.getInstance();
-                            pref.setString('carId', state.listAll[index].carId);
+                            CarModel car = state.listAll[index];
+                            String currentCar = jsonEncode(car);
+                            pref.setString('carId', currentCar);
 
-                            Provider.of<PageCounter>(context).updateIndex(0);
-
+                            Provider.of<CurrentCar>(context)
+                                .updateCurrentCar(state.listAll[index]);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +55,9 @@ class CarListPage extends StatelessWidget {
                                   state.listAll[index].carMark,
                                 ),
                               ),
-                              SizedBox(width: 12,),
+                              SizedBox(
+                                width: 12,
+                              ),
                               Container(
                                 child: Text(
                                   state.listAll[index].carModel,

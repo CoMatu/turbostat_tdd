@@ -11,7 +11,7 @@ class LoadDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBar(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Consumer<PageCounter>(
         builder: (context, page, child) {
           switch (page.pageIndex) {
