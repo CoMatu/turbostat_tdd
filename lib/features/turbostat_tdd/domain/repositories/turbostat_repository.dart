@@ -6,5 +6,5 @@ abstract class TurbostatRepository {
   Future<Either<Failure, CarModel>> getConcreteCarModel(String carId);
   Future<Either<Failure, List<CarModel>>> getAllCarModels();
   Future<void> addConcreteCarModel(CarModel carModel);
-  Future<void> deleteCarModel(String carId);
+  Future<void> deleteCarModel(String carKey);
 }

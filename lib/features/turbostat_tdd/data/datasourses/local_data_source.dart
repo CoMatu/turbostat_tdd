@@ -10,14 +10,14 @@ abstract class TurbostatLocalDataSource {
 
   Future<void> addCarModel(CarModel carModel);
 
-  Future<void> deleteCarModel(String carId);
+  Future<void> deleteCarModel(String carKey);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
   @override
   Future<void> cacheListCarModels(List<CarModel> listCarModelsToCache) async {
-    final carsBox = await Hive.openBox('cars');
-    listCarModelsToCache.forEach((f) => carsBox.add(f.toJson()));
+    //! final carsBox = await Hive.openBox('cars');
+    //! listCarModelsToCache.forEach((f) => carsBox.add(f.toJson()));
   }
 
   @override
@@ -36,12 +36,12 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
   Future<List<CarModel>> getLastCarModels() async {
     List<CarModel> carsFromDataBase = [];
     final carsBox = await Hive.openBox('cars');
-    var ind = carsBox.length;
-    for (int i = 0; i < ind; i++) {
-      final res = carsBox.get(i);
-      print(res);
-      carsFromDataBase.add(CarModel.fromJson(res.cast<String, dynamic>()));
-    }
+
+    final boxResult = carsBox.toMap();
+
+    carsFromDataBase = boxResult.entries
+        .map((entry) => CarModel.fromJson(entry.value.cast<String, dynamic>()))
+        .toList();
     return carsFromDataBase;
   }
 
@@ -49,13 +49,15 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
   Future<void> addCarModel(CarModel carModel) async {
     final carsBox = await Hive.openBox('cars');
     final carString = carModel.toJson();
-    carsBox.add(carString);
+    carsBox.put(carModel.carId, carString);
     print('added car $carString');
   }
 
   @override
-  Future<void> deleteCarModel(String carId) async {
-        final carsBox = await Hive.openBox('cars');
-        carsBox.delete(carId);
+  Future<void> deleteCarModel(String carKey) async {
+    final carsBox = await Hive.openBox('cars');
+    // final res = carsBox.toMap();
+
+    await carsBox.delete(carKey);
   }
 }

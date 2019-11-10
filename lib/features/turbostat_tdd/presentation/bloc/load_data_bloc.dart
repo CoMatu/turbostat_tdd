@@ -59,7 +59,7 @@ class LoadDataBloc extends Bloc<LoadDataEvent, LoadDataState> {
       await repository.addConcreteCarModel(event.car);
       print('in bloc ' + event.car.toString());
     } else if (event is DeleteConcreteCar) {
-      await repository.deleteCarModel(event.carId);
+      await repository.deleteCarModel(event.carKey);
     }
   }
 

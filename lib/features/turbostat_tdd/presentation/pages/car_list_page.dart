@@ -27,7 +27,9 @@ class CarListPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      CircleAvatar(),
+                      CircleAvatar(
+                        backgroundColor: Colors.blueAccent,
+                      ),
                       SizedBox(
                         width: 12,
                       ),
@@ -43,8 +45,12 @@ class CarListPage extends StatelessWidget {
                       IconButton(
                         icon: Icon(Icons.delete_outline),
                         onPressed: () async {
-                          final String carId = state.listAll[index].carId;
-                          BlocProvider.of<LoadDataBloc>(context).add(DeleteConcreteCar(carId: carId));
+                          final String carKey = state.listAll[index].carId;
+                          BlocProvider.of<LoadDataBloc>(context)
+                              .add(DeleteConcreteCar(carKey: carKey));
+                          BlocProvider.of<LoadDataBloc>(context)
+                              .add(GetAllCar());
+                          // TODO add AlertDialog
                         },
                       ),
                     ],

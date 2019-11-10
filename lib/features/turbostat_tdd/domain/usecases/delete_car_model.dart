@@ -6,7 +6,7 @@ class DeleteCarModel {
 
   DeleteCarModel({@required this.repository});
 
-  Future<void> addCarModel(String carId) async {
-    await repository.deleteCarModel(carId);
+  Future<void> addCarModel(String carKey) async {
+    await repository.deleteCarModel(carKey);
   }
 }

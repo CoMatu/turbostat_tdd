@@ -92,11 +92,11 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
   }
 
   @override
-  Future<void> deleteCarModel(String carId) async {
+  Future<void> deleteCarModel(String carKey) async {
     if (await modeInfo.isCloudMode) {
       //   await remoteDataSource.addCarModel(carModel);
     } else {
-      await localDataSource.deleteCarModel(carId);
+      await localDataSource.deleteCarModel(carKey);
     }
   }
 }
