@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/core/util/util.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
+import 'package:turbostat_tdd/generated/i18n.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 
 class LoadDataPage extends StatelessWidget {
@@ -18,6 +19,7 @@ class LoadDataPage extends StatelessWidget {
             case 0: // history page
               return FloatingActionButton(
                 onPressed: () {
+                  modalBottomSheet(context);
                   // TODO add new entry to history
                 },
                 child: Icon(Icons.add),
@@ -81,4 +83,49 @@ class LoadDataPage extends StatelessWidget {
       }),
     );
   }
+
+    modalBottomSheet(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext ctx) {
+          return Container(
+            color: Color(0xFF737373),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Theme.of(context).canvasColor,
+                  borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(20),
+                      topRight: const Radius.circular(20))),
+              child: Wrap(
+                children: <Widget>[
+                  Container(
+                    height: 20.0,
+                  ),
+                  ListTile(
+                    title: Text(S.of(context).add_maintenance_regular),
+                    leading: Icon(Icons.calendar_today),
+                    onTap: () {
+                    },
+                  ),
+                  ListTile(
+                    title: Text(S.of(context).add_maintenance_operation),
+                    leading: Icon(Icons.pan_tool),
+                    onTap: () {
+                    },
+                  ),
+                  ListTile(
+                    title: Text(S.of(context).button_cancel),
+                    leading: Icon(Icons.subdirectory_arrow_left),
+                    onTap: () => Navigator.pop(context),
+                  ),
+                  Container(
+                    height: 10.0,
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
 }
