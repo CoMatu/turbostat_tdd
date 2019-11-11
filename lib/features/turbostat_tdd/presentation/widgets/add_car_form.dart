@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nanoid/async/nanoid.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:turbostat_tdd/core/util/util.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
@@ -194,8 +199,17 @@ class _AddCarFormState extends State<AddCarForm> {
           fuelType: 'petrol');
 
       BlocProvider.of<LoadDataBloc>(context).add(AddConcreteCar(car: newCar));
-      print('after bloc $carGenId');
+
+      setCurrentCar(newCar);
+      
       Navigator.pushReplacementNamed(context, 'load_data_page');
     }
+  }
+
+  void setCurrentCar(CarModel newCar) async {
+    final pref = await SharedPreferences.getInstance();
+    String currentCar = jsonEncode(newCar);
+    pref.setString('carId', currentCar);
+    Provider.of<CurrentCar>(context).updateCurrentCar(newCar);
   }
 }
