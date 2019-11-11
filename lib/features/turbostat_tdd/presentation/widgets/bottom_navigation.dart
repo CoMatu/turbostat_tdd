@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turbostat_tdd/core/util/util.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({Key key}) : super(key: key);

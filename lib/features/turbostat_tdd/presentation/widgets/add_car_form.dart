@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nanoid/async/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:turbostat_tdd/core/util/util.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
 
 class AddCarForm extends StatefulWidget {
@@ -201,7 +201,7 @@ class _AddCarFormState extends State<AddCarForm> {
       BlocProvider.of<LoadDataBloc>(context).add(AddConcreteCar(car: newCar));
 
       setCurrentCar(newCar);
-      
+
       Navigator.pushReplacementNamed(context, 'load_data_page');
     }
   }
