@@ -51,7 +51,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            title: Text('Setting'),
+            title: Text('Settings'),
           ),
         ],
         currentIndex: selectedIndex,
