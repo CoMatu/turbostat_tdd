@@ -8,7 +8,10 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart'
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
+import 'package:turbostat_tdd/generated/i18n.dart';
 import 'package:turbostat_tdd/injection_container.dart';
+
+enum ConfirmAction { CANCEL, ACCEPT }
 
 class CarListPage extends StatelessWidget {
   @override
@@ -75,11 +78,16 @@ class CarListPage extends StatelessWidget {
                         icon: Icon(Icons.delete_outline),
                         onPressed: () async {
                           final String carKey = state.listAll[index].carId;
-                          BlocProvider.of<LoadDataBloc>(context)
-                              .add(DeleteConcreteCar(carKey: carKey));
-                          BlocProvider.of<LoadDataBloc>(context)
-                              .add(GetAllCar());
-                          // TODO add AlertDialog
+
+                          final ConfirmAction confirmAction =
+                              await asyncConfirmDialog(context, carKey);
+
+                          if (confirmAction == ConfirmAction.ACCEPT) {
+                            BlocProvider.of<LoadDataBloc>(context)
+                                .add(DeleteConcreteCar(carKey: carKey));
+                            BlocProvider.of<LoadDataBloc>(context)
+                                .add(GetAllCar());
+                          }
                         },
                       ),
                     ],
@@ -91,6 +99,39 @@ class CarListPage extends StatelessWidget {
           return Container();
         },
       ),
+    );
+  }
+
+  Future<ConfirmAction> asyncConfirmDialog(
+      BuildContext context, String carId) async {
+    return showDialog<ConfirmAction>(
+      context: context,
+      barrierDismissible: false, // user must tap button for close dialog!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(S.of(context).car_card_alert_dialog_title),
+          content: Text(S.of(context).car_card_content_text),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(
+                S.of(context).button_cancel,
+                style: TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(ConfirmAction.CANCEL);
+              },
+            ),
+            FlatButton(
+              child: Text(
+                S.of(context).button_delete,
+              ),
+              onPressed: () async {
+                Navigator.of(context).pop(ConfirmAction.ACCEPT);
+              },
+            )
+          ],
+        );
+      },
     );
   }
 }

@@ -70,8 +70,7 @@ class LoadDataPage extends StatelessWidget {
                       height: 50,
                       decoration: BoxDecoration(
                           color: Theme.of(context).primaryColorLight),
-                      child: DropdownCarButton(
-                      ),
+                      child: DropdownCarButton(),
                     ),
                     Expanded(
                       child: PageViewController(),
@@ -84,7 +83,7 @@ class LoadDataPage extends StatelessWidget {
     );
   }
 
-    modalBottomSheet(context) {
+  modalBottomSheet(context) {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext ctx) {
@@ -104,14 +103,12 @@ class LoadDataPage extends StatelessWidget {
                   ListTile(
                     title: Text(S.of(context).add_maintenance_regular),
                     leading: Icon(Icons.calendar_today),
-                    onTap: () {
-                    },
+                    onTap: () {},
                   ),
                   ListTile(
                     title: Text(S.of(context).add_maintenance_operation),
-                    leading: Icon(Icons.pan_tool),
-                    onTap: () {
-                    },
+                    leading: Icon(Icons.build),
+                    onTap: () {},
                   ),
                   ListTile(
                     title: Text(S.of(context).button_cancel),
