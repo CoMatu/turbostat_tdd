@@ -7,7 +7,8 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_mod
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car_models.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
-import './bloc.dart';
+
+import 'load_data.dart';
 
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';
 const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
