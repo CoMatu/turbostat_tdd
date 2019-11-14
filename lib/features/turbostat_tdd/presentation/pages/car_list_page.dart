@@ -28,73 +28,85 @@ class CarListPage extends StatelessWidget {
             return CustomCircleProgressBar();
           }
           if (state is LoadedAllCars) {
-            return ListView.builder(
-              itemCount: state.listAll.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      CircleAvatar(
-                        backgroundColor: Colors.blueAccent,
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () async {
-                            final pref = await SharedPreferences.getInstance();
-                            CarModel car = state.listAll[index];
-                            String currentCar = jsonEncode(car);
-                            pref.setString('carId', currentCar);
+            return state.listAll.isEmpty
+                ? Center(
+                    child: RaisedButton(
+                      child: Text('Add car'),
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                            context, 'load_data_page');
+                      },
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: state.listAll.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            CircleAvatar(
+                              backgroundColor: Colors.blueAccent,
+                            ),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () async {
+                                  final pref =
+                                      await SharedPreferences.getInstance();
+                                  CarModel car = state.listAll[index];
+                                  String currentCar = jsonEncode(car);
+                                  pref.setString('carId', currentCar);
 
-                            Provider.of<CurrentCar>(context)
-                                .updateCurrentCar(state.listAll[index]);
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                child: Text(
-                                  state.listAll[index].carMark,
+                                  Provider.of<CurrentCar>(context)
+                                      .updateCurrentCar(state.listAll[index]);
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Text(
+                                        state.listAll[index].carMark,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 12,
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        state.listAll[index].carModel,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              SizedBox(
-                                width: 12,
-                              ),
-                              Container(
-                                child: Text(
-                                  state.listAll[index].carModel,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.edit),
+                              onPressed: () {},
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.delete_outline),
+                              onPressed: () async {
+                                final String carKey =
+                                    state.listAll[index].carId;
+
+                                final ConfirmAction confirmAction =
+                                    await asyncConfirmDialog(context, carKey);
+// TODO исправить логику при удалении последнего авто
+                                if (confirmAction == ConfirmAction.ACCEPT) {
+                                  BlocProvider.of<LoadDataBloc>(context)
+                                      .add(DeleteConcreteCar(carKey: carKey));
+                                  BlocProvider.of<LoadDataBloc>(context)
+                                      .add(GetAllCar());
+                                }
+                              },
+                            ),
+                          ],
                         ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.delete_outline),
-                        onPressed: () async {
-                          final String carKey = state.listAll[index].carId;
-
-                          final ConfirmAction confirmAction =
-                              await asyncConfirmDialog(context, carKey);
-
-                          if (confirmAction == ConfirmAction.ACCEPT) {
-                            BlocProvider.of<LoadDataBloc>(context)
-                                .add(DeleteConcreteCar(carKey: carKey));
-                            BlocProvider.of<LoadDataBloc>(context)
-                                .add(GetAllCar());
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              },
-            );
+                      );
+                    },
+                  );
           }
           return Container();
         },
