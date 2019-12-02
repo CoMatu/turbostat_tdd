@@ -4,7 +4,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 
-class AddCarPage extends StatelessWidget {
+class EditCarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,7 @@ class AddCarPage extends StatelessWidget {
   BlocProvider<LoadDataBloc> buildBody(BuildContext context) {
     return BlocProvider(
       builder: (_) => sl<LoadDataBloc>(),
-      child: AddCarForm(),
+      child: EditCarForm(),
     );
   }
 }
