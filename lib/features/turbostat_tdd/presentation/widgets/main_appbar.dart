@@ -7,6 +7,7 @@ class MainAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       centerTitle: true,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,

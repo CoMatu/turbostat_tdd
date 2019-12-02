@@ -10,37 +10,40 @@ import 'package:turbostat_tdd/injection_container.dart';
 class LoadDataPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MainAppBar(),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Consumer<PageCounter>(
-        builder: (context, page, child) {
-          switch (page.pageIndex) {
-            case 0: // history page
-              return FloatingActionButton(
-                onPressed: () {
-                  modalBottomSheet(context);
-                  // TODO add new entry to history
-                },
-                child: Icon(Icons.add),
-              );
-            case 2: // cars list page
-              return FloatingActionButton(
-                onPressed: () {
-                  Navigator.popAndPushNamed(context, 'add_car');
-                },
-                child: Icon(Icons.add),
-              );
-          }
-          return Visibility(
-              visible: false,
-              child: FloatingActionButton(
-                onPressed: () {},
-              ));
-        },
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: MainAppBar(),
+        //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Consumer<PageCounter>(
+          builder: (context, page, child) {
+            switch (page.pageIndex) {
+              case 0: // history page
+                return FloatingActionButton(
+                  onPressed: () {
+                    modalBottomSheet(context);
+                    // TODO add new entry to history
+                  },
+                  child: Icon(Icons.add),
+                );
+              case 2: // cars list page
+                return FloatingActionButton(
+                  onPressed: () {
+                    Navigator.popAndPushNamed(context, 'add_car');
+                  },
+                  child: Icon(Icons.add),
+                );
+            }
+            return Visibility(
+                visible: false,
+                child: FloatingActionButton(
+                  onPressed: () {},
+                ));
+          },
+        ),
+        bottomNavigationBar: BottomNavigation(),
+        body: buildBody(context),
       ),
-      bottomNavigationBar: BottomNavigation(),
-      body: buildBody(context),
     );
   }
 
@@ -124,5 +127,4 @@ class LoadDataPage extends StatelessWidget {
           );
         });
   }
-
 }
