@@ -83,7 +83,9 @@ class CarListPage extends StatelessWidget {
                             ),
                             IconButton(
                               icon: Icon(Icons.edit),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(context, 'edit_car');
+                              },
                             ),
                             IconButton(
                               icon: Icon(Icons.delete_outline),

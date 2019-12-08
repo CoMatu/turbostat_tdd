@@ -54,6 +54,7 @@ class MyApp extends StatelessWidget {
           'load_data_page': (context) => LoadDataPage(),
           'select_page': (context) => SelectDataSourcePage(),
           'add_car': (context) => AddCarPage(),
+          'edit_car': (context) => EditCarPage(),
         },
       ),
     );

@@ -27,12 +27,6 @@ class _EditCarFormState extends State<EditCarForm> {
   String carModel;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       child: Form(
