@@ -26,9 +26,9 @@ dependencies:
     # Service locator
   get_it: ^3.0.0+1
     # Bloc for state management
-  flutter_bloc: ^2.0.0
+  flutter_bloc: ^3.0.0
     # Value equality
-  equatable: ^0.6.1
+  equatable: ^1.0.0
   # Functional programming thingies
   dartz: ^0.8.7
   # Remote API
@@ -48,7 +48,7 @@ dependencies:
   google_sign_in: ^4.0.7
   meta: ^1.1.7
   intl: ^0.16.0
-  provider: ^3.1.0+1
+  provider: ^4.0.1
   permission_handler: ^3.3.0
   # unique ID for entries
   nanoid: ^0.1.0

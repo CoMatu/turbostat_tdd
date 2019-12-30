@@ -21,7 +21,7 @@ class CarListPage extends StatelessWidget {
 
   BlocProvider<LoadDataBloc> buildPageBody(BuildContext context) {
     return BlocProvider(
-      builder: (_) => sl<LoadDataBloc>()..add(GetAllCar()),
+      create: (_) => sl<LoadDataBloc>()..add(GetAllCar()),
       child: BlocBuilder<LoadDataBloc, LoadDataState>(
         builder: (context, state) {
           if (state is Loading) {

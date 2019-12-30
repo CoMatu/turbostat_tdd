@@ -49,7 +49,7 @@ class LoadDataPage extends StatelessWidget {
 
   BlocProvider<LoadDataBloc> buildBody(BuildContext context) {
     return BlocProvider(
-      builder: (_) => sl<LoadDataBloc>()..add(GetAllCar()),
+      create: (_) => sl<LoadDataBloc>()..add(GetAllCar()),
       child:
           BlocBuilder<LoadDataBloc, LoadDataState>(builder: (context, state) {
         if (state is Loading) {

@@ -16,7 +16,7 @@ class EditCarPage extends StatelessWidget {
 
   BlocProvider<LoadDataBloc> buildBody(BuildContext context) {
     return BlocProvider(
-      builder: (_) => sl<LoadDataBloc>(),
+      create: (_) => sl<LoadDataBloc>(),
       child: EditCarForm(),
     );
   }

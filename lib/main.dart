@@ -22,8 +22,8 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(builder: (context) => PageCounter()),
-        ChangeNotifierProvider(builder: (context) => CurrentCar()),
+        ChangeNotifierProvider(create: (context) => PageCounter()),
+        ChangeNotifierProvider(create: (context) => CurrentCar()),
       ],
       child: MyApp(),
     ),
