@@ -58,7 +58,7 @@ class CarListPage extends StatelessWidget {
                                   String currentCar = jsonEncode(car);
                                   pref.setString('carId', currentCar);
 
-                                  Provider.of<CurrentCar>(context)
+                                  Provider.of<CurrentCar>(context, listen: false)
                                       .updateCurrentCar(state.listAll[index]);
                                 },
                                 child: Row(

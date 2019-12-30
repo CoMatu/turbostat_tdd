@@ -210,6 +210,6 @@ class _EditCarFormState extends State<EditCarForm> {
     final pref = await SharedPreferences.getInstance();
     String currentCar = jsonEncode(newCar);
     pref.setString('carId', currentCar);
-    Provider.of<CurrentCar>(context).updateCurrentCar(newCar);
+    Provider.of<CurrentCar>(context, listen: false).updateCurrentCar(newCar);
   }
 }

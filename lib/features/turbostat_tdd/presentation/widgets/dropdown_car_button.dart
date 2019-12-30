@@ -20,11 +20,11 @@ class _DropdownCarButtonState extends State<DropdownCarButton> {
       builder: (context, car, child) {
         return FlatButton(
           onPressed: ()  async {
-            Provider.of<PageCounter>(context).updateIndex(2);
+            Provider.of<PageCounter>(context, listen: false).updateIndex(2);
           },
           child: Row(
             children: <Widget>[
-              Text(car.currentCar.carMark),
+              Text('car.currentCar.carMark'),
               SizedBox(width: 12,),
               Icon(Icons.arrow_drop_down),
             ],

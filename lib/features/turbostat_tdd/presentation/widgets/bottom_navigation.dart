@@ -26,7 +26,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   void onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
-      Provider.of<PageCounter>(context).updateIndex(index);
+      Provider.of<PageCounter>(context, listen: false).updateIndex(index);
     });
   }
 
