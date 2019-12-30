@@ -15,6 +15,7 @@ import 'features/turbostat_tdd/presentation/providers/providers.dart';
 import 'injection_container.dart' as di;
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); //без него ловит ошибку main
   await di.init();
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
