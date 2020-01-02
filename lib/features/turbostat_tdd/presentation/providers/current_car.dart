@@ -26,6 +26,7 @@ class CurrentCar extends ChangeNotifier {
     if (jsonString != null) {
       Map res = jsonDecode(pref.getString('carId'));
       _car = CarModel.fromJson(res);
+      updateCurrentCar(_car);
     } else {
       throw CacheException();
     }

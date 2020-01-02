@@ -16,21 +16,23 @@ class _DropdownCarButtonState extends State<DropdownCarButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CurrentCar>(
-      builder: (context, car, child) {
-        return FlatButton(
-          onPressed: ()  async {
-            Provider.of<PageCounter>(context, listen: false).updateIndex(2);
-          },
-          child: Row(
-            children: <Widget>[
-              Text('car.currentCar.carMark'),
-              SizedBox(width: 12,),
-              Icon(Icons.arrow_drop_down),
-            ],
-          ),
-        );
+    return FlatButton(
+      onPressed: () async {
+        Provider.of<PageCounter>(context, listen: false).updateIndex(2); // переход на другую страницу
       },
+      child: Row(
+        children: <Widget>[
+          Consumer<CurrentCar>(
+            builder: (context, car, child) {
+              return car.currentCar != null? Text(car.currentCar.carMark) : Container();
+            },
+          ),
+          SizedBox(
+            width: 12,
+          ),
+          Icon(Icons.arrow_drop_down),
+        ],
+      ),
     );
   }
 
