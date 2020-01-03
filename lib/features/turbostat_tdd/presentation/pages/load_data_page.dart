@@ -106,7 +106,9 @@ class LoadDataPage extends StatelessWidget {
                   ListTile(
                     title: Text(S.of(context).add_maintenance_regular),
                     leading: Icon(Icons.calendar_today),
-                    onTap: () {},
+                    onTap: () {
+                    Navigator.popAndPushNamed(context, 'add_maintenance');
+                    },
                   ),
                   ListTile(
                     title: Text(S.of(context).add_maintenance_operation),
