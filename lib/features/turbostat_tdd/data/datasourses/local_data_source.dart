@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
 
 abstract class TurbostatLocalDataSource {
   Future<CarModel> getConcreteCarModel(String carId);
@@ -11,6 +12,8 @@ abstract class TurbostatLocalDataSource {
   Future<void> addCarModel(CarModel carModel);
 
   Future<void> deleteCarModel(String carKey);
+
+  Future<void> addMaintenanceModel(MaintenanceModel model, String carId);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
@@ -59,5 +62,14 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     // final res = carsBox.toMap();
 
     await carsBox.delete(carKey);
+  }
+
+  @override
+  Future<void> addMaintenanceModel(MaintenanceModel model, String carId) async {
+    String name = 'maint_' + carId;
+    final maintBox = await Hive.openBox(name);
+    final maintString = model.toJson();
+    maintBox.put(model.maintenanceId, maintString);
+    print('added maintenance $maintString');
   }
 }
