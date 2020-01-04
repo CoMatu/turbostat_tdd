@@ -14,6 +14,8 @@ abstract class TurbostatLocalDataSource {
   Future<void> deleteCarModel(String carKey);
 
   Future<void> addMaintenanceModel(MaintenanceModel model, String carId);
+
+  Future<List<MaintenanceModel>> getCarMaintenancies(String carId);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
@@ -71,5 +73,19 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     final maintString = model.toJson();
     maintBox.put(model.maintenanceId, maintString);
     print('added maintenance $maintString');
+  }
+
+  @override
+  Future<List<MaintenanceModel>> getCarMaintenancies(String carId) async {
+    List<MaintenanceModel> maintsFromDataBase = [];
+    String name = 'maint_' + carId;
+    final maintBox = await Hive.openBox(name);
+
+    final boxResult = maintBox.toMap();
+
+    maintsFromDataBase = boxResult.entries
+        .map((entry) => MaintenanceModel.fromJson(entry.value.cast<String, dynamic>()))
+        .toList();
+    return maintsFromDataBase;
   }
 }

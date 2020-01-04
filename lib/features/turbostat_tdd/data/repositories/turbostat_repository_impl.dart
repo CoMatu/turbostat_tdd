@@ -109,4 +109,13 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
       await localDataSource.addMaintenanceModel(model, carId);
     }
   }
+
+  @override
+  Future<Either<Failure, MaintenanceModel>> getCarMaintenancies(String carId) async {
+    if(await modeInfo.isCloudMode) {
+      // TODO add implementation
+    } else {
+      await localDataSource.getCarMaintenancies(carId);
+    }
+  }
 }

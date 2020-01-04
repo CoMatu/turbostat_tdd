@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nanoid/async/nanoid.dart';
+import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
 
 class AddMaintenanceForm extends StatefulWidget {
@@ -102,31 +104,34 @@ class _AddMaintenanceFormState extends State<AddMaintenanceForm> {
             Container(
               height: 30.0,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(
-                  width: 120,
-                  child: RaisedButton(
-                    child: Text(S.of(context).button_cancel),
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, 'load_data_page');
-                    },
-                    color: Colors.grey,
+            Consumer<CurrentCar>(
+              builder: (context, car, child) => Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    width: 120,
+                    child: RaisedButton(
+                      child: Text(S.of(context).button_cancel),
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                            context, 'load_data_page');
+                      },
+                      color: Colors.grey,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 12,
-                ),
-                SizedBox(
-                  width: 120,
-                  child: RaisedButton(
-                    child: Text(S.of(context).button_save),
-                    onPressed: _submitDetails,
-                    color: Colors.yellow,
+                  SizedBox(
+                    width: 12,
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: 120,
+                    child: RaisedButton(
+                      child: Text(S.of(context).button_save),
+                      onPressed: () async => _submitDetails(car.currentCar.carId),
+                      color: Colors.yellow,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -134,7 +139,7 @@ class _AddMaintenanceFormState extends State<AddMaintenanceForm> {
     );
   }
 
-  void _submitDetails() async {
+  _submitDetails(String carId) async {
     final FormState formState = _formKey.currentState;
 
     if (!formState.validate()) {
@@ -148,7 +153,6 @@ class _AddMaintenanceFormState extends State<AddMaintenanceForm> {
         maintenanceMileageLimit: maintenanceMileageLimit,
         maintenanceMonthLimit: maintenanceMonthLimit,
       );
-      print(maintenanceName);
 
       Navigator.pushReplacementNamed(context, 'load_data_page');
     }
