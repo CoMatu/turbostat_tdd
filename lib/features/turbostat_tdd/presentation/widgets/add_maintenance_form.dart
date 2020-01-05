@@ -113,7 +113,8 @@ class _AddMaintenanceFormState extends State<AddMaintenanceForm> {
                     child: RaisedButton(
                       child: Text(S.of(context).button_cancel),
                       onPressed: () {
-                        Navigator.pop(context); //TODO при добавлении из списка отмена уводить на страницу настроек, а должна вернуть к списку
+                        Navigator.pop(context); 
+                        //TODO при добавлении из списка отмена уводит на страницу настроек, а должна вернуть к списку
                       },
                       color: Colors.grey,
                     ),
@@ -152,6 +153,7 @@ class _AddMaintenanceFormState extends State<AddMaintenanceForm> {
         maintenanceMileageLimit: maintenanceMileageLimit,
         maintenanceMonthLimit: maintenanceMonthLimit,
       );
+      Provider.of<Maintenancies>(context).add(newMaintenance, carId);
 
       Navigator.pushReplacementNamed(context, 'load_data_page');
     }

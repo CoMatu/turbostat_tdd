@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
@@ -24,6 +26,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => PageCounter()),
         ChangeNotifierProvider(create: (context) => CurrentCar()),
+        ChangeNotifierProvider(create: (context) => Maintenancies()),
       ],
       child: MyApp(),
     ),
