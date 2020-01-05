@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
@@ -60,7 +58,7 @@ class MyApp extends StatelessWidget {
           'add_car': (context) => AddCarPage(),
           'edit_car': (context) => EditCarPage(),
           'add_maintenance': (context) => AddMaintenancePage(),
-          'maintenancies_page': (context) => MaintenanciesPage(),
+          'maintenancies_page': (context) => MaintenancesPage(),
         },
       ),
     );

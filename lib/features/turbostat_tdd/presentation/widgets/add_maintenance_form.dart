@@ -153,7 +153,7 @@ class _AddMaintenanceFormState extends State<AddMaintenanceForm> {
         maintenanceMileageLimit: maintenanceMileageLimit,
         maintenanceMonthLimit: maintenanceMonthLimit,
       );
-      Provider.of<Maintenancies>(context).add(newMaintenance, carId);
+      Provider.of<Maintenancies>(context, listen: false).add(newMaintenance, carId);
 
       Navigator.pushReplacementNamed(context, 'load_data_page');
     }

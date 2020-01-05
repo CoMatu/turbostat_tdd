@@ -5,10 +5,10 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_mod
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_maintenance_model.dart';
 
 class Maintenancies extends ChangeNotifier {
-  final List<MaintenanceModel> _maintenancies = [];
+  final List<MaintenanceModel> _maintenances = [];
 
-  UnmodifiableListView<MaintenanceModel> get maintenancies =>
-      UnmodifiableListView(_maintenancies);
+  UnmodifiableListView<MaintenanceModel> get maintenances =>
+      UnmodifiableListView(_maintenances);
   
   void add(MaintenanceModel model, String carId) async {
     AddMaintenanceModel addMaintenanceModel;
