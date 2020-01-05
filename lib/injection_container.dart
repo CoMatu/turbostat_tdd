@@ -12,6 +12,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_car_
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car_models.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
 
+import 'features/turbostat_tdd/domain/usecases/get_all_maintenances.dart';
 import 'features/turbostat_tdd/presentation/bloc/bloc.dart';
 
 final sl = GetIt.instance;
@@ -28,11 +29,12 @@ Future<void> init() async {
       ));
 
   // Usecases
-  sl.registerLazySingleton(() => GetAllCarModels(sl()));
-  sl.registerLazySingleton(() => GetConcreteCarModel(sl()));
+  sl.registerLazySingleton(() => GetAllCarModels(repository: sl()));
+  sl.registerLazySingleton(() => GetConcreteCarModel(repository: sl()));
   sl.registerLazySingleton(() => AddCarModel(repository: sl()));
   sl.registerLazySingleton(() => DeleteCarModel(repository: sl()));
   sl.registerLazySingleton(() => AddMaintenanceModel(repository: sl()));
+  sl.registerLazySingleton(() => GetAllMaintenances(repository: sl()));
 
   // Repository
   sl.registerLazySingleton<TurbostatRepository>(() => TurbostatRepositoryImpl(

@@ -103,7 +103,7 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
 
   @override
   Future<void> addMaintenanceModel(MaintenanceModel model, String carId) async {
-    if(await modeInfo.isCloudMode) {
+    if (await modeInfo.isCloudMode) {
       // TODO add implementation
     } else {
       await localDataSource.addMaintenanceModel(model, carId);
@@ -111,11 +111,19 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
   }
 
   @override
-  Future<Either<Failure, MaintenanceModel>> getCarMaintenancies(String carId) async {
-    if(await modeInfo.isCloudMode) {
+  Future<Either<Failure, List<MaintenanceModel>>> getCarMaintenancies(
+      String carId) async {
+    if (await modeInfo.isCloudMode) {
       // TODO add implementation
     } else {
-      await localDataSource.getCarMaintenancies(carId);
+      try {
+        final allLocalMaintenances =
+            await localDataSource.getCarMaintenancies(carId);
+        return Right(allLocalMaintenances);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
     }
+    return null;
   }
 }

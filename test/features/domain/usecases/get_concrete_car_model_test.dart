@@ -13,7 +13,7 @@ void main() {
 
   setUp(() {
     mockTurbostatRepository = MockTurbostatRepository();
-    usecase = GetConcreteCarModel(mockTurbostatRepository);
+    usecase = GetConcreteCarModel(repository: mockTurbostatRepository);
   });
 
   final String tCarId = 'car1';

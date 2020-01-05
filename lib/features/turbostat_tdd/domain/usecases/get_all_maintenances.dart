@@ -3,19 +3,19 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:turbostat_tdd/core/error/failures.dart';
 import 'package:turbostat_tdd/core/usecases/usecase.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 
-class GetConcreteCarModel implements UseCase<CarModel, Params> {
-  final TurbostatRepository repository;
+class GetAllMaintenances implements UseCase<List<MaintenanceModel>, Params> {
+    final TurbostatRepository repository;
 
-  GetConcreteCarModel({@required this.repository});
+  GetAllMaintenances({@required this.repository});
 
   @override
-  Future<Either<Failure, CarModel>> call(Params params) async {
-    return await repository.getConcreteCarModel(params.carId);
+  Future<Either<Failure, List<MaintenanceModel>>> call(Params params) async {
+    return await repository.getCarMaintenancies(params.carId);
   }
-
+  
 }
 
 class Params extends Equatable {
