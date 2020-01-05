@@ -24,7 +24,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => PageCounter()),
         ChangeNotifierProvider(create: (context) => CurrentCar()),
-        ChangeNotifierProvider(create: (context) => Maintenancies()),
+        ChangeNotifierProvider(create: (context) => Maintenances()),
       ],
       child: MyApp(),
     ),

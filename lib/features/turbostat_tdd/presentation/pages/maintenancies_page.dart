@@ -24,7 +24,7 @@ class MaintenancesPage extends StatelessWidget {
 
   Widget buildMaintenancesList(BuildContext context) => Container(
     child: ListView.builder(
-      itemCount: Provider.of<Maintenancies>(context).maintenances.length,
+      itemCount: Provider.of<Maintenances>(context).maintenances.length,
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
           leading: CircleAvatar(),
