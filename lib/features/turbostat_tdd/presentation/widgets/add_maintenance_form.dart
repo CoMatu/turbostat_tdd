@@ -113,8 +113,7 @@ class _AddMaintenanceFormState extends State<AddMaintenanceForm> {
                     child: RaisedButton(
                       child: Text(S.of(context).button_cancel),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(
-                            context, 'load_data_page');
+                        Navigator.pop(context); //TODO при добавлении из списка отмена уводить на страницу настроек, а должна вернуть к списку
                       },
                       color: Colors.grey,
                     ),

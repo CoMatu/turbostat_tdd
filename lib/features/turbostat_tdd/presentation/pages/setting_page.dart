@@ -6,7 +6,17 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Placeholder(color: Colors.indigoAccent,),
+      child: ListView(
+        children: <Widget>[
+          ListTile(
+            leading: CircleAvatar(),
+            title: Text('Список операций технического обслуживания'),
+            onTap: () {
+                    Navigator.pushNamed(context, 'maintenancies_page');
+            },
+          )
+        ],
+      ),
     );
   }
 }
