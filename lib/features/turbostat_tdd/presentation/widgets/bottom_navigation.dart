@@ -19,7 +19,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   @override
   void didChangeDependencies() {
-    selectedIndex = Provider.of<PageCounter>(context).pageIndex;
+    selectedIndex = Provider.of<PageCounter>(context, listen: false).pageIndex;
     super.didChangeDependencies();
   }
 
