@@ -7,7 +7,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_mod
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 
 class GetAllMaintenances implements UseCase<List<MaintenanceModel>, Params> {
-    final TurbostatRepository repository;
+  final TurbostatRepository repository;
 
   GetAllMaintenances({@required this.repository});
 
@@ -15,7 +15,6 @@ class GetAllMaintenances implements UseCase<List<MaintenanceModel>, Params> {
   Future<Either<Failure, List<MaintenanceModel>>> call(Params params) async {
     return await repository.getCarMaintenancies(params.carId);
   }
-  
 }
 
 class Params extends Equatable {
@@ -24,5 +23,5 @@ class Params extends Equatable {
   Params({@required this.carId});
 
   @override
-  List<Object> get props => [carId];  
+  List<Object> get props => [carId];
 }
