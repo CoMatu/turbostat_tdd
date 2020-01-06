@@ -19,6 +19,8 @@ class Maintenances extends ChangeNotifier {
     _maintenances.addAll(allMaintenancesList.fold(
         (failure) => null, //TODO не уверен, что так правильно, но пока работает
         (allMaintenancesList) => allMaintenancesList));
+
+    notifyListeners();
   }
 
   void add(MaintenanceModel model, String carId) async {

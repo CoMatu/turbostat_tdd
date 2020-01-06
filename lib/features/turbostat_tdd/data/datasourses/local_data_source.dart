@@ -4,18 +4,13 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_mod
 
 abstract class TurbostatLocalDataSource {
   Future<CarModel> getConcreteCarModel(String carId);
-
   Future<List<CarModel>> getLastCarModels();
-
   Future<void> cacheListCarModels(List<CarModel> listCarModelsToCache);
-
   Future<void> addCarModel(CarModel carModel);
-
   Future<void> deleteCarModel(String carKey);
-
   Future<void> addMaintenanceModel(MaintenanceModel model, String carId);
-
   Future<List<MaintenanceModel>> getCarMaintenancies(String carId);
+  Future<void> deleteMaintenance(String maintenanceId, String carId);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
@@ -84,8 +79,16 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     final boxResult = maintBox.toMap();
 
     maintsFromDataBase = boxResult.entries
-        .map((entry) => MaintenanceModel.fromJson(entry.value.cast<String, dynamic>()))
+        .map((entry) =>
+            MaintenanceModel.fromJson(entry.value.cast<String, dynamic>()))
         .toList();
     return maintsFromDataBase;
+  }
+
+  @override
+  Future<void> deleteMaintenance(String maintenanceId, String carId) async {
+    String name = 'maint_' + carId;
+    final maintBox = await Hive.openBox(name);
+    await maintBox.delete(maintenanceId);
   }
 }

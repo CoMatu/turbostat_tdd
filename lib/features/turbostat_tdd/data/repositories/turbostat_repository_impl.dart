@@ -126,4 +126,17 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
     }
     return null;
   }
+
+  @override
+  Future<void> deleteMaintenance(String maintenanceId, String carId) async {
+    if(await modeInfo.isCloudMode) {
+      // TODO add implementation
+    } else {
+      try {
+        await localDataSource.deleteMaintenance(maintenanceId, carId);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
+  }
 }
