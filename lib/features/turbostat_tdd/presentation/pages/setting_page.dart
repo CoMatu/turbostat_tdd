@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key key}) : super(key: key);
@@ -11,8 +13,10 @@ class SettingPage extends StatelessWidget {
           ListTile(
             leading: CircleAvatar(),
             title: Text('Список операций технического обслуживания'),
-            onTap: () {
-                    Navigator.pushNamed(context, 'maintenancies_page');
+            onTap: () async {
+              final carId = Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
+              await Provider.of<Maintenances>(context, listen: false).getAllMaintenances(carId);
+              Navigator.pushNamed(context, 'maintenancies_page');
             },
           )
         ],

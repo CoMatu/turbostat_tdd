@@ -13,10 +13,11 @@ class Maintenances extends ChangeNotifier {
   }
 
   Future<void> getAllMaintenances(String carId) async {
+    _maintenances.clear();
     final allMaintenancesList =
         await sl<GetAllMaintenances>().call(Params(carId: carId));
     _maintenances.addAll(allMaintenancesList.fold(
-        (failure) => null, //TODO не уверен, что так правильно
+        (failure) => null, //TODO не уверен, что так правильно, но пока работает
         (allMaintenancesList) => allMaintenancesList));
   }
 
