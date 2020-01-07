@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_maintenance.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/pages.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/current_maintenance.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
@@ -56,13 +57,25 @@ class _MaintenancesPageState extends State<MaintenancesPage> {
                     ),
                     IconButton(
                       icon: Icon(Icons.edit),
-                      onPressed: () {},
+                      onPressed: () async {
+                        final carId =
+                            Provider.of<CurrentCar>(context, listen: false)
+                                .currentCar
+                                .carId;
+
+                        Provider.of<CurrentMaintenance>(context, listen: false)
+                            .update(carId,
+                                maintenances.maintenances[index].maintenanceId);
+                        Navigator.pushNamed(context, 'edit_maintenance');
+                      },
                     ),
                     IconButton(
                       icon: Icon(Icons.delete_outline),
                       onPressed: () async {
                         final carId =
-                            Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
+                            Provider.of<CurrentCar>(context, listen: false)
+                                .currentCar
+                                .carId;
 
                         final ConfirmAction confirmAction =
                             await asyncConfirmDialog(context);

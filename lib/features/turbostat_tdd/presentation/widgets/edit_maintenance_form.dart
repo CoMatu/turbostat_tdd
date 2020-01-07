@@ -18,6 +18,13 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
   String maintenanceName;
   int maintenanceMileageLimit;
   int maintenanceMonthLimit;
+  MaintenanceModel _model;
+
+  @override
+  void initState() { 
+    super.initState();
+    _model = Provider.of<CurrentMaintenance>(context, listen: false).currentMaintenance;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +46,7 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
               padding: const EdgeInsets.only(top: 12.0),
               child: TextFormField(
                 keyboardType: TextInputType.text,
-                initialValue: '',
+                initialValue: _model.maintenanceName,
                 autocorrect: false,
                 onSaved: (String value) {
                   maintenanceName = value;

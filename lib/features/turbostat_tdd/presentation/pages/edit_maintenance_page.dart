@@ -6,8 +6,11 @@ class EditMaintenancePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: EditMaintenanceForm(),
+    return Scaffold(
+      appBar: MainAppBar(),
+      body: Container(
+        child: EditMaintenanceForm(),
+      ),
     );
   }
 }
