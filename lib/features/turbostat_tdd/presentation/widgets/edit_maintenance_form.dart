@@ -13,7 +13,7 @@ class EditMaintenanceForm extends StatefulWidget {
 }
 
 class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
-    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String maintenanceId;
   String maintenanceName;
   int maintenanceMileageLimit;
@@ -113,7 +113,7 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
                     child: RaisedButton(
                       child: Text(S.of(context).button_cancel),
                       onPressed: () {
-                        Navigator.pop(context); 
+                        Navigator.pop(context);
                         //TODO при добавлении из списка отмена уводит на страницу настроек, а должна вернуть к списку
                       },
                       color: Colors.grey,
@@ -126,7 +126,8 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
                     width: 120,
                     child: RaisedButton(
                       child: Text(S.of(context).button_save),
-                      onPressed: () async => _submitDetails(car.currentCar.carId),
+                      onPressed: () async =>
+                          _submitDetails(car.currentCar.carId),
                       color: Colors.yellow,
                     ),
                   ),
@@ -138,7 +139,8 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
       ),
     );
   }
-    _submitDetails(String carId) async {
+
+  _submitDetails(String carId) async {
     final FormState formState = _formKey.currentState;
 
     if (!formState.validate()) {
@@ -152,10 +154,10 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
         maintenanceMileageLimit: maintenanceMileageLimit,
         maintenanceMonthLimit: maintenanceMonthLimit,
       );
-      Provider.of<Maintenances>(context, listen: false).add(newMaintenance, carId);
+      Provider.of<Maintenances>(context, listen: false)
+          .add(newMaintenance, carId);
 
       Navigator.pushReplacementNamed(context, 'load_data_page');
     }
   }
-
 }

@@ -14,6 +14,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concret
 
 import 'features/turbostat_tdd/domain/usecases/delete_maintenance.dart';
 import 'features/turbostat_tdd/domain/usecases/get_all_maintenances.dart';
+import 'features/turbostat_tdd/domain/usecases/get_concrete_maintenance.dart';
 import 'features/turbostat_tdd/presentation/bloc/bloc.dart';
 
 final sl = GetIt.instance;
@@ -37,6 +38,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddMaintenanceModel(repository: sl()));
   sl.registerLazySingleton(() => GetAllMaintenances(repository: sl()));
   sl.registerLazySingleton(() => DeleteMaintenance(repository: sl()));
+  sl.registerLazySingleton(() => GetConcreteMaintenance(repository: sl()));
 
   // Repository
   sl.registerLazySingleton<TurbostatRepository>(() => TurbostatRepositoryImpl(
