@@ -154,9 +154,8 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
       //     showSnackBarMessage(S.of(context).form_warning_fill_info);
     } else {
       formState.save();
-      final maintenanceGenId = await nanoid(4);
       final newMaintenance = MaintenanceModel(
-        maintenanceId: maintenanceGenId,
+        maintenanceId: _model.maintenanceId,
         maintenanceName: maintenanceName,
         maintenanceMileageLimit: maintenanceMileageLimit,
         maintenanceMonthLimit: maintenanceMonthLimit,
