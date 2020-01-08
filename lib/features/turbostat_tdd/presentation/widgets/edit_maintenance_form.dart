@@ -69,7 +69,7 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
               padding: const EdgeInsets.only(top: 12.0),
               child: TextFormField(
                 keyboardType: TextInputType.number,
-                initialValue: '',
+                initialValue: _model.maintenanceMileageLimit.toString(),
                 autocorrect: false,
                 onSaved: (String value) {
                   maintenanceMileageLimit = int.parse(value);
@@ -91,7 +91,7 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
               padding: const EdgeInsets.only(top: 12.0),
               child: TextFormField(
                 keyboardType: TextInputType.number,
-                initialValue: '',
+                initialValue: _model.maintenanceMonthLimit.toString(),
                 autocorrect: false,
                 onSaved: (String value) {
                   maintenanceMonthLimit = int.parse(value);
