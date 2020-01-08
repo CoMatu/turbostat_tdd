@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
           'add_maintenance': (context) => AddMaintenancePage(),
           'maintenancies_page': (context) => MaintenancesPage(),
           'edit_maintenance': (context) => EditMaintenancePage(),
+          'add_entry': (context) => AddEntryPage(),
         },
       ),
     );

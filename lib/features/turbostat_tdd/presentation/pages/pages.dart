@@ -7,3 +7,4 @@ export 'edit_car_page.dart';
 export 'add_maintenance_page.dart';
 export 'maintenances_page.dart';
 export 'edit_maintenance_page.dart';
+export 'add_entry_page.dart';
