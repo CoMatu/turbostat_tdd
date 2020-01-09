@@ -21,6 +21,12 @@ class LoadDataPage extends StatelessWidget {
               case 0: // history page
                 return FloatingActionButton(
                   onPressed: () {
+                    final carId =
+                        Provider.of<CurrentCar>(context, listen: false)
+                            .currentCar
+                            .carId;
+                    Provider.of<Maintenances>(context, listen: false)
+                        .getAllMaintenances(carId);
                     modalBottomSheet(context);
                     // TODO add new entry to history
                   },
@@ -107,7 +113,7 @@ class LoadDataPage extends StatelessWidget {
                     title: Text(S.of(context).add_maintenance_regular),
                     leading: Icon(Icons.calendar_today),
                     onTap: () {
-                    Navigator.popAndPushNamed(context, 'add_maintenance');
+                      Navigator.popAndPushNamed(context, 'add_maintenance');
                     },
                   ),
                   ListTile(
