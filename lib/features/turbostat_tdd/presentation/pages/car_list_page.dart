@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +59,7 @@ class CarListPage extends StatelessWidget {
 
                                   Provider.of<CurrentCar>(context, listen: false)
                                       .updateCurrentCar(state.listAll[index]);
+                                  Provider.of<Maintenances>(context, listen: false).getAllMaintenances(car.carId);
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,

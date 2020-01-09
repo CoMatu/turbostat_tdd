@@ -106,38 +106,19 @@ class _AddEntryFormState extends State<AddEntryForm> {
             Padding(
               padding: const EdgeInsets.only(top: 12.0),
               child: TextFormField(
-                keyboardType: TextInputType.text,
-                initialValue: '', // TODO add base cars and choise from the base
-                autocorrect: false,
-                onSaved: (String value) {},
-                maxLines: 1,
-                validator: (value) {
-                  if (value.isEmpty || value.length < 1) {
-                    return S.of(context).form_validator_car_mark;
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  labelText: S.of(context).form_decorator_car_mark,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 12.0),
-              child: TextFormField(
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.number,
                 initialValue: '',
                 autocorrect: false,
-                onSaved: (String value) {},
+                onSaved: (String value) => entryMileage = int.parse(value),
                 maxLines: 1,
                 validator: (value) {
                   if (value.isEmpty || value.length < 1) {
-                    return S.of(context).form_validator_car_model;
+                    return S.of(context).form_decorator_car_mileage;
                   }
                   return null;
                 },
                 decoration: InputDecoration(
-                  labelText: S.of(context).form_validator_car_model,
+                  labelText: S.of(context).form_decorator_odometer_value,
                 ),
               ),
             ),
@@ -147,16 +128,16 @@ class _AddEntryFormState extends State<AddEntryForm> {
                 keyboardType: TextInputType.number,
                 initialValue: '',
                 autocorrect: false,
-                onSaved: (String value) {},
+                onSaved: (String value) => entryWorkPrice = double.parse(value),
                 maxLines: 1,
                 validator: (value) {
-                  if (value.isEmpty || value.length < 1) {
-                    return S.of(context).form_validator_car_year;
+                  if (value.contains(',')) {
+                    return S.of(context).form_validator_dot;
                   }
                   return null;
                 },
                 decoration: InputDecoration(
-                  labelText: S.of(context).form_decorator_car_year,
+                  labelText: S.of(context).form_decorator_value_work,
                 ),
               ),
             ),
@@ -166,10 +147,10 @@ class _AddEntryFormState extends State<AddEntryForm> {
                 keyboardType: TextInputType.text,
                 initialValue: '',
                 autocorrect: false,
-                onSaved: (String value) {},
-                maxLines: 1,
+                onSaved: (String value) => entryNote = value,
+                maxLines: 3,
                 decoration: InputDecoration(
-                  labelText: S.of(context).form_decorator_car_vin,
+                  labelText: S.of(context).form_decorator_notes,
                 ),
               ),
             ),
