@@ -143,6 +143,36 @@ class _AddEntryFormState extends State<AddEntryForm> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 12.0),
+              child: Column(
+                children: <Widget>[
+                  //TODO сделать добавление запчастей
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          S.of(context).form_decorator_value_parts,
+                          style: Theme.of(context).textTheme.subhead,
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add_circle_outline),
+                        onPressed: () {
+                          //TODO add form for entry
+                        },
+                      ),
+                    ],
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 3,
+                    itemBuilder: (BuildContext context, int index) =>
+                        Text('test 1'),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0),
               child: TextFormField(
                 keyboardType: TextInputType.text,
                 initialValue: '',
