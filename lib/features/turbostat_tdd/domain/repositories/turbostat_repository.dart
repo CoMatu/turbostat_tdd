@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:turbostat_tdd/core/error/failures.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
 
 abstract class TurbostatRepository {
@@ -14,4 +15,5 @@ abstract class TurbostatRepository {
   Future<Either<Failure, MaintenanceModel>> getConcreteMaintenance(
       String carId, String maintenanceId);
   Future<void> deleteMaintenance(String maintenanceId, String carId);
+  Future<void> addEntryModel(String carId, EntryModel model);
 }

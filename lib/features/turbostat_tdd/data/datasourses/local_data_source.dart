@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
 
 abstract class TurbostatLocalDataSource {
@@ -13,6 +14,7 @@ abstract class TurbostatLocalDataSource {
   Future<void> deleteMaintenance(String maintenanceId, String carId);
   Future<MaintenanceModel> concreteMaintenance(
       String carId, String maintenanceId);
+  Future<void> addEntry(String carId, EntryModel model);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
@@ -109,5 +111,11 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
         .where((f) => f.maintenanceId == maintenanceId)
         .first;
     return concrete;
+  }
+
+  @override
+  Future<void> addEntry(String carId, EntryModel model) {
+    // TODO: implement addEntry
+    throw UnimplementedError();
   }
 }

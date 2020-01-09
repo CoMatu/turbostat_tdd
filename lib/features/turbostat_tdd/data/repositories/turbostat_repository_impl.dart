@@ -6,6 +6,7 @@ import 'package:turbostat_tdd/core/mode/mode_info.dart';
 import 'package:turbostat_tdd/core/network/network_info.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data_source.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 
@@ -155,5 +156,18 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
       }
     }
     return null;
+  }
+
+  @override
+  Future<void> addEntryModel(String carId, EntryModel model) async {
+    if (await modeInfo.isCloudMode) {
+      // TODO add implementation
+    } else {
+      try {
+        await localDataSource.addEntry(carId, model);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
   }
 }
