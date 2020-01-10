@@ -23,6 +23,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
 
   String entryId;
   String maintenanceId;
+  String entryName;
   String entryNote;
   DateTime entryDateTime;
   double entryWorkPrice;
@@ -228,10 +229,13 @@ class _AddEntryFormState extends State<AddEntryForm> {
       //     showSnackBarMessage(S.of(context).form_warning_fill_info);
     } else {
       formState.save();
+      final filtrRes = _maintenances.where((f) => f.maintenanceId == maintenanceId).first;
+      entryName = filtrRes.maintenanceName;
       entryId = await nanoid(4);
       final _result = EntryModel(
         entryId: entryId,
         maintenanceId: maintenanceId,
+        entryName: entryName,
         entryDateTime: entryDateTime,
         entryMileage: entryMileage,
         entryWorkPrice: entryWorkPrice,

@@ -10,6 +10,7 @@ void main() {
   final tEntryModel = EntryModel(
       entryId: '1',
       maintenanceId: '1',
+      entryName: 'name',
       entryDateTime: DateTime(2019, 7, 22),
       entryMileage: 80000,
       entryWorkPrice: 200.00,

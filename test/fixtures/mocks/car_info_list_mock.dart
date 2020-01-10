@@ -52,6 +52,7 @@ final Maintenance mockMaint_2 = Maintenance(
 final Entry mockEntry_1 = Entry(
     entryId: '1',
     maintenanceId: '1',
+    entryName: 'name',
     entryDateTime: DateTime(2019, 22, 7),
     entryMileage: 80000,
     entryWorkPrice: 200.00,
@@ -60,6 +61,7 @@ final Entry mockEntry_1 = Entry(
 final Entry mockEntry_2 = Entry(
     entryId: '2',
     maintenanceId: '2',
+    entryName: 'name',
     entryDateTime: DateTime(2019, 20, 8),
     entryMileage: 7700,
     entryWorkPrice: 150.00,

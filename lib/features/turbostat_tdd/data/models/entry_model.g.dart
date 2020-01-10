@@ -10,6 +10,7 @@ EntryModel _$EntryModelFromJson(Map<String, dynamic> json) {
   return EntryModel(
     entryId: json['entryId'] as String,
     maintenanceId: json['maintenanceId'] as String,
+    entryName: json['entryName'] as String,
     entryNote: json['entryNote'] as String,
     entryDateTime: json['entryDateTime'] == null
         ? null
@@ -23,6 +24,7 @@ Map<String, dynamic> _$EntryModelToJson(EntryModel instance) =>
     <String, dynamic>{
       'entryId': instance.entryId,
       'maintenanceId': instance.maintenanceId,
+      'entryName': instance.entryName,
       'entryNote': instance.entryNote,
       'entryDateTime': instance.entryDateTime?.toIso8601String(),
       'entryWorkPrice': instance.entryWorkPrice,

@@ -7,6 +7,7 @@ part 'entry.g.dart';
 class Entry extends Equatable {
   final String entryId;
   final String maintenanceId;
+  final String entryName;
   final String entryNote;
   final DateTime entryDateTime;
   final double entryWorkPrice;
@@ -15,6 +16,7 @@ class Entry extends Equatable {
   Entry({
     @required this.entryId,
     @required this.maintenanceId,
+    @required this.entryName,
     @required this.entryNote,
     @required this.entryDateTime,
     @required this.entryWorkPrice,
@@ -28,6 +30,7 @@ class Entry extends Equatable {
   List<Object> get props => [
         entryId,
         maintenanceId,
+        entryName,
         entryNote,
         entryDateTime,
         entryWorkPrice,

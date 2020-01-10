@@ -19,4 +19,5 @@ abstract class TurbostatRepository {
   Future<Either<Failure, List<EntryModel>>> getEntries(
       String carId, String maintenanceId);
   Future<void> deleteEntry(String carId, String entryId);
+  Future<Either<Failure, List<EntryModel>>> getAllEntries(String carId);
 }

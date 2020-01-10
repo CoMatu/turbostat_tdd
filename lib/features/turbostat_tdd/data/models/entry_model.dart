@@ -10,6 +10,7 @@ class EntryModel extends Entry {
   EntryModel({
     @required String entryId,
     @required String maintenanceId,
+    @required String entryName,
     @required String entryNote,
     @required DateTime entryDateTime,
     @required double entryWorkPrice,
@@ -17,6 +18,7 @@ class EntryModel extends Entry {
   }) : super(
           entryId: entryId,
           maintenanceId: maintenanceId,
+          entryName: entryName,
           entryNote: entryNote,
           entryDateTime: entryDateTime,
           entryWorkPrice: entryWorkPrice,

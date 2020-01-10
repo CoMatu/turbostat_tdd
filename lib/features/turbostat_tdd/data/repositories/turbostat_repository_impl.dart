@@ -198,4 +198,18 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, List<EntryModel>>> getAllEntries(String carId) async {
+    if (await modeInfo.isCloudMode) {
+      // TODO add implementation
+    } else {
+      try {
+        await localDataSource.getAllEntries(carId);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
+    return null;
+  }
 }

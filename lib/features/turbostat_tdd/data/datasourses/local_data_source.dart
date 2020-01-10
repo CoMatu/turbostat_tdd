@@ -17,6 +17,7 @@ abstract class TurbostatLocalDataSource {
   Future<void> addEntry(String carId, EntryModel model);
   Future<List<EntryModel>> getEntries(String carId, String maintenanceId);
   Future<void> deleteEntry(String carId, String entryId);
+  Future<List<EntryModel>> getAllEntries(String carId);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
@@ -145,5 +146,18 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     final String name = 'entries_' + carId;
     final entriesBox = await Hive.openBox(name);
     await entriesBox.delete(entryId);
+  }
+
+  @override
+  Future<List<EntryModel>> getAllEntries(String carId) async {
+    List<EntryModel> _entriesFromHive = [];
+    final String name = 'entries_' + carId;
+    final entriesBox = await Hive.openBox(name);
+    var _int = entriesBox.length;
+    for (int i = 0; i < _int; i++) {
+      _entriesFromHive.add(EntryModel.fromJson(entriesBox.get(i)));
+    }
+
+    return _entriesFromHive;
   }
 }

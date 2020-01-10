@@ -13,9 +13,7 @@ class HistoryPage extends StatelessWidget {
           itemCount: entry.entries.length,
           itemBuilder: (BuildContext context, int index) => Padding(
             padding: const EdgeInsets.all(12.0),
-            child: entry.entries.length != 0
-                ? Text(entry.entries[index].maintenanceId)
-                : Text('На этой странице еще нет ни одной записи'),
+            child: Text(entry.entries[index].entryName),
           ),
         );
       },

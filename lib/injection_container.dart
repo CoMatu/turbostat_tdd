@@ -13,6 +13,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_car_
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_entry.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_maintenance.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car_models.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_entries.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_maintenances.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_maintenance.dart';
@@ -43,6 +44,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetConcreteMaintenance(repository: sl()));
   sl.registerLazySingleton(() => AddEntryModel(repository: sl()));
   sl.registerLazySingleton(() => GetEntries(repository: sl()));
+  sl.registerLazySingleton(() => GetAllEntries(repository: sl()));
   sl.registerLazySingleton(() => DeleteEntry(repository: sl()));
 
   // Repository
