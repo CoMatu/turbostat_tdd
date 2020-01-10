@@ -3,8 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:nanoid/async/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/core/fixtures/date_validator.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/entry.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
 
@@ -229,7 +229,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
     } else {
       formState.save();
       entryId = await nanoid(4);
-      final _result = Entry(
+      final _result = EntryModel(
         entryId: entryId,
         maintenanceId: maintenanceId,
         entryDateTime: entryDateTime,
