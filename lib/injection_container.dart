@@ -7,16 +7,17 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data
 import 'package:turbostat_tdd/features/turbostat_tdd/data/repositories/turbostat_repository_impl.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_maintenance_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_entry.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_maintenance.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car_models.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_maintenances.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
-
-import 'features/turbostat_tdd/domain/usecases/add_entry_model.dart';
-import 'features/turbostat_tdd/domain/usecases/delete_maintenance.dart';
-import 'features/turbostat_tdd/domain/usecases/get_all_maintenances.dart';
-import 'features/turbostat_tdd/domain/usecases/get_concrete_maintenance.dart';
-import 'features/turbostat_tdd/presentation/bloc/bloc.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_maintenance.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_entries.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -41,6 +42,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => DeleteMaintenance(repository: sl()));
   sl.registerLazySingleton(() => GetConcreteMaintenance(repository: sl()));
   sl.registerLazySingleton(() => AddEntryModel(repository: sl()));
+  sl.registerLazySingleton(() => GetEntries(repository: sl()));
+  sl.registerLazySingleton(() => DeleteEntry(repository: sl()));
 
   // Repository
   sl.registerLazySingleton<TurbostatRepository>(() => TurbostatRepositoryImpl(

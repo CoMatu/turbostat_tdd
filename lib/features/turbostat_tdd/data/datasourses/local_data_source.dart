@@ -15,6 +15,8 @@ abstract class TurbostatLocalDataSource {
   Future<MaintenanceModel> concreteMaintenance(
       String carId, String maintenanceId);
   Future<void> addEntry(String carId, EntryModel model);
+  Future<List<EntryModel>> getEntries(String carId, String maintenanceId);
+  Future<void> deleteEntry(String carId, String entryId);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
@@ -67,7 +69,7 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
 
   @override
   Future<void> addMaintenanceModel(MaintenanceModel model, String carId) async {
-    String name = 'maint_' + carId;
+    final String name = 'maint_' + carId;
     final maintBox = await Hive.openBox(name);
     final maintString = model.toJson();
     maintBox.put(model.maintenanceId, maintString);
@@ -77,7 +79,7 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
   @override
   Future<List<MaintenanceModel>> getCarMaintenancies(String carId) async {
     List<MaintenanceModel> maintsFromDataBase = [];
-    String name = 'maint_' + carId;
+    final String name = 'maint_' + carId;
     final maintBox = await Hive.openBox(name);
 
     final boxResult = maintBox.toMap();
@@ -91,7 +93,7 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
 
   @override
   Future<void> deleteMaintenance(String maintenanceId, String carId) async {
-    String name = 'maint_' + carId;
+    final String name = 'maint_' + carId;
     final maintBox = await Hive.openBox(name);
     await maintBox.delete(maintenanceId);
   }
@@ -101,7 +103,7 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
       String carId, String maintenanceId) async {
     List<MaintenanceModel> _maintsFromDataBase = [];
 
-    String name = 'maint_' + carId;
+    final String name = 'maint_' + carId;
     final maintBox = await Hive.openBox(name);
     var ind = maintBox.length;
     for (int i = 0; i < ind; i++) {
@@ -114,8 +116,34 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
   }
 
   @override
-  Future<void> addEntry(String carId, EntryModel model) {
-    // TODO: implement addEntry
-    throw UnimplementedError();
+  Future<void> addEntry(String carId, EntryModel model) async {
+    final String name = 'entries_' + carId;
+    final entriesBox = await Hive.openBox(name);
+    final _entryString = model.toJson();
+    entriesBox.put(model.entryId, _entryString);
+    print('added entry $_entryString');
+  }
+
+  @override
+  Future<List<EntryModel>> getEntries(
+      String carId, String maintenanceId) async {
+    List<EntryModel> _entriesFromHive = [];
+    final String name = 'entries_' + carId;
+    final entriesBox = await Hive.openBox(name);
+    var _int = entriesBox.length;
+    for (int i = 0; i < _int; i++) {
+      _entriesFromHive.add(EntryModel.fromJson(entriesBox.get(i)));
+    }
+
+    final entries =
+        _entriesFromHive.where((res) => res.maintenanceId == maintenanceId);
+    return entries;
+  }
+
+  @override
+  Future<void> deleteEntry(String carId, String entryId) async {
+    final String name = 'entries_' + carId;
+    final entriesBox = await Hive.openBox(name);
+    await entriesBox.delete(entryId);
   }
 }

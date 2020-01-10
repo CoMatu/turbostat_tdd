@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:nanoid/async/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/core/fixtures/date_validator.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/entry.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
 
@@ -226,7 +228,17 @@ class _AddEntryFormState extends State<AddEntryForm> {
       //     showSnackBarMessage(S.of(context).form_warning_fill_info);
     } else {
       formState.save();
-      Navigator.pushReplacementNamed(context, 'load_data_page');
+      entryId = await nanoid(4);
+      final _result = Entry(
+        entryId: entryId,
+        maintenanceId: maintenanceId,
+        entryDateTime: entryDateTime,
+        entryMileage: entryMileage,
+        entryWorkPrice: entryWorkPrice,
+        entryNote: entryNote,
+      );
+      print(_result.maintenanceId);
+      //Navigator.pushReplacementNamed(context, 'load_data_page');
     }
   }
 
