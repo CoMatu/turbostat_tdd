@@ -237,8 +237,11 @@ class _AddEntryFormState extends State<AddEntryForm> {
         entryWorkPrice: entryWorkPrice,
         entryNote: entryNote,
       );
-      print(_result.maintenanceId);
-      //Navigator.pushReplacementNamed(context, 'load_data_page');
+      final String _carId =
+          Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
+      Provider.of<Entries>(context, listen: false).add(_carId, _result);
+
+      Navigator.pushReplacementNamed(context, 'load_data_page');
     }
   }
 
