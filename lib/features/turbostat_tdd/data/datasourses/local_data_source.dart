@@ -131,10 +131,13 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     List<EntryModel> _entriesFromHive = [];
     final String name = 'entries_' + carId;
     final entriesBox = await Hive.openBox(name);
-    var _int = entriesBox.length;
-    for (int i = 0; i < _int; i++) {
-      _entriesFromHive.add(EntryModel.fromJson(entriesBox.get(i)));
-    }
+
+    final res = entriesBox.toMap();
+
+    _entriesFromHive = res.entries
+        .map(
+            (entry) => EntryModel.fromJson(entry.value.cast<String, dynamic>()))
+        .toList();
 
     final entries =
         _entriesFromHive.where((res) => res.maintenanceId == maintenanceId);
@@ -156,8 +159,10 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
 
     final res = entriesBox.toMap();
 
-    _entriesFromHive = res.entries.map(
-        (entry) => EntryModel.fromJson(entry.value.cast<String, dynamic>())).toList();
+    _entriesFromHive = res.entries
+        .map(
+            (entry) => EntryModel.fromJson(entry.value.cast<String, dynamic>()))
+        .toList();
 
     print(res);
 
