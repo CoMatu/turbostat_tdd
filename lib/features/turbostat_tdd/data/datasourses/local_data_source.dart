@@ -153,11 +153,18 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     List<EntryModel> _entriesFromHive = [];
     final String name = 'entries_' + carId;
     final entriesBox = await Hive.openBox(name);
-    var _int = entriesBox.length;
-    for (int i = 0; i < _int; i++) {
-      _entriesFromHive.add(EntryModel.fromJson(entriesBox.get(i)));
-    }
+
+    final res = entriesBox.toMap();
+
+    _entriesFromHive = res.entries.map(
+        (entry) => EntryModel.fromJson(entry.value.cast<String, dynamic>())).toList();
+
+    print(res);
 
     return _entriesFromHive;
   }
 }
+
+/*
+I/flutter (26933): {-rZv: {entryId: -rZv, maintenanceId: wUtF, entryName: test3, entryNote: zaeb, entryDateTime: 2020-01-10T00:00:00.000, entryWorkPrice: 1200.0, entryMileage: 55000}, 2KbH: {entryId: 2KbH, maintenanceId: SKnn, entryNote: awesome, entryDateTime: 2020-01-10T00:00:00.000, entryWorkPrice: 2300.0, entryMileage: 5000}, 5pah: {entryId: 5pah, maintenanceId: SKnn, entryName: test1, entryNote: , entryDateTime: 2020-01-08T00:00:00.000, entryWorkPrice: 222.0, entryMileage: 77777}, iipP: {entryId: iipP, maintenanceId: SKnn, entryName: test1, entryNote: , entryDateTime: 2020-01-12T00:00:00.000, entryWorkPrice: 2222.0, entryMileage: 5555}}
+*/
