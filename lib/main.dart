@@ -10,7 +10,6 @@ import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/logo_scr
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/pages.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/select_data_source_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/start_page.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/current_maintenance.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
 import 'features/turbostat_tdd/presentation/providers/providers.dart';
 import 'injection_container.dart' as di;
