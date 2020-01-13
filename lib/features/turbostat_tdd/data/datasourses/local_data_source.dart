@@ -164,7 +164,7 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
             (entry) => EntryModel.fromJson(entry.value.cast<String, dynamic>()))
         .toList();
 
-    print(_entriesFromHive);
+    print(res);
 
     return _entriesFromHive;
   }

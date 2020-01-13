@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -10,6 +11,7 @@ import 'package:turbostat_tdd/core/network/network_info.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data_source.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/remote_data_source.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/repositories/turbostat_repository_impl.dart';
 
 class MockLocalDataSource extends Mock implements TurbostatLocalDataSource {}
@@ -27,6 +29,8 @@ main() {
   MockNetworkInfo mockNetworkInfo;
   MockModeInfo mockModeInfo;
 
+  WidgetsFlutterBinding.ensureInitialized(); 
+
   setUp(() {
     mockRemoteDataSourse = MockRemoteDataSourse();
     mockLocalDataSource = MockLocalDataSource();
@@ -34,7 +38,7 @@ main() {
     mockModeInfo = MockModeInfo();
 
     repository = TurbostatRepositoryImpl(
-    //  remoteDataSource: mockRemoteDataSourse,
+      //  remoteDataSource: mockRemoteDataSourse,
       localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,
       modeInfo: mockModeInfo,
@@ -225,6 +229,36 @@ main() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
         when(mockModeInfo.isCloudMode).thenAnswer((_) async => false);
       });
+      final List<EntryModel> tAllEntryModels = [
+        EntryModel(
+          entryId: '1',
+          maintenanceId: '1',
+          entryName: 'name1',
+          entryDateTime: DateTime(2019, 07, 22, 00, 00),
+          entryMileage: 80000,
+          entryWorkPrice: 200.00,
+          entryNote: 'entry note',
+        ),
+        EntryModel(
+          entryId: '2',
+          maintenanceId: '2',
+          entryName: 'name2',
+          entryDateTime: DateTime(2019, 11, 15, 00, 00),
+          entryMileage: 55000,
+          entryWorkPrice: 500.00,
+          entryNote: 'entry note',
+        ),
+      ];
+
+      test('should return all entry model from local DataSource', () async {
+        when(mockLocalDataSource.getAllEntries(tCarId))
+            .thenAnswer((_) async => tAllEntryModels);
+        final result = await repository.getAllEntries(tCarId);
+        verifyZeroInteractions(mockRemoteDataSourse);
+        verify(mockLocalDataSource.getAllEntries(tCarId));
+        expect(result, equals(Right(tAllEntryModels)));
+      });
+
       test(
           'should return last locally cached data when the cached data is present',
           () async {

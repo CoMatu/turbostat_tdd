@@ -178,7 +178,8 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
       // TODO add implementation
     } else {
       try {
-        await localDataSource.getEntries(carId, maintenanceId);
+        final result = await localDataSource.getEntries(carId, maintenanceId);
+        return Right(result);
       } on CacheException {
         return Left(CacheFailure());
       }
@@ -205,7 +206,8 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
       // TODO add implementation
     } else {
       try {
-        await localDataSource.getAllEntries(carId);
+        final result = await localDataSource.getAllEntries(carId);
+        return Right(result);
       } on CacheException {
         return Left(CacheFailure());
       }
