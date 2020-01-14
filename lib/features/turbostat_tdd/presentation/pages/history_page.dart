@@ -44,7 +44,6 @@ class HistoryPage extends StatelessWidget {
       Map res = jsonDecode(pref.getString('carId'));
       final _car = CarModel.fromJson(res);
       Provider.of<Entries>(context, listen: false).updateAll(_car.carId);
-      print('update FutureBuilder');
     } else {
       throw CacheException();
     }
