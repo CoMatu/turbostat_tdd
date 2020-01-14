@@ -47,6 +47,7 @@ class CarListPage extends StatelessWidget {
                           children: <Widget>[
                             CircleAvatar(
                               backgroundColor: Colors.blueAccent,
+                              child: Icon(Icons.directions_car),
                             ),
                             Expanded(
                               child: GestureDetector(

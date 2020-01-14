@@ -11,11 +11,16 @@ class SettingPage extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           ListTile(
-            leading: CircleAvatar(),
+            leading: CircleAvatar(
+              child: Icon(Icons.build),
+            ),
             title: Text('Список операций технического обслуживания'),
             onTap: () async {
-              final carId = Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
-              await Provider.of<Maintenances>(context, listen: false).getAllMaintenances(carId);
+              final carId = Provider.of<CurrentCar>(context, listen: false)
+                  .currentCar
+                  .carId;
+              await Provider.of<Maintenances>(context, listen: false)
+                  .getAllMaintenances(carId);
               Navigator.pushNamed(context, 'maintenancies_page');
             },
           )

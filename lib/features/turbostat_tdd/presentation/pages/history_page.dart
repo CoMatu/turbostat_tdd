@@ -8,7 +8,6 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart'
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/entries.dart';
 
 class HistoryPage extends StatelessWidget {
-
   HistoryPage({Key key}) : super(key: key);
 
   @override
@@ -23,9 +22,35 @@ class HistoryPage extends StatelessWidget {
                 itemCount: entry.entries.length,
                 itemBuilder: (BuildContext context, int index) => Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Text(entry.entries[index].entryName != null
-                      ? entry.entries[index].entryName
-                      : 'unknowing entry'),
+                  child: Row(
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundColor: Colors.cyan,
+                        child: Icon(
+                          Icons.settings,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Container(
+                        width: 10.0,
+                      ),
+                      Expanded(
+                        child: Text(entry.entries[index].entryName != null
+                            ? entry.entries[index].entryName
+                            : 'unknowing entry'),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+//                                Navigator.pushReplacementNamed(context, 'edit_car');
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete_outline),
+                        onPressed: () async {},
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
@@ -49,4 +74,3 @@ class HistoryPage extends StatelessWidget {
     }
   }
 }
-
