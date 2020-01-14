@@ -17,17 +17,23 @@ class HistoryPage extends StatelessWidget {
     return FutureBuilder(
       initialData: _getData(context),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return Consumer<Entries>(
-          builder: (context, entry, child) {
-            return ListView.builder(
-              itemCount: entry.entries.length,
-              itemBuilder: (BuildContext context, int index) => Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(entry.entries[index].entryName),
-              ),
-            );
-          },
-        );
+        if (snapshot.hasData) {
+          return Consumer<Entries>(
+            builder: (context, entry, child) {
+              return ListView.builder(
+                itemCount: entry.entries.length,
+                itemBuilder: (BuildContext context, int index) => Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(entry.entries[index].entryName != null
+                      ? entry.entries[index].entryName
+                      : 'unknowing entry'),
+                ),
+              );
+            },
+          );
+        } else {
+          return CircularProgressIndicator();
+        }
       },
     );
   }
