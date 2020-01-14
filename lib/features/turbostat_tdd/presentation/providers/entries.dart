@@ -41,7 +41,6 @@ class Entries extends ChangeNotifier {
       (failure) => null,
       (result) => result,
     ));
-
     notifyListeners();
   }
 }

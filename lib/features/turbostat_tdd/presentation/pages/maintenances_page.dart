@@ -62,15 +62,9 @@ class _MaintenancesPageState extends State<MaintenancesPage> {
                             Provider.of<CurrentCar>(context, listen: false)
                                 .currentCar
                                 .carId;
-                        final maintenance =
-                            maintenances.maintenances[index];
+                        final maintenance = maintenances.maintenances[index];
                         Provider.of<CurrentMaintenance>(context, listen: false)
                             .update(maintenance);
-/*                         final currentMaint = Provider.of<CurrentMaintenance>(
-                                context,
-                                listen: false)
-                            .currentMaintenance;
-                        print(currentMaint.maintenanceId); */
                         Navigator.pushNamed(context, 'edit_maintenance');
                       },
                     ),

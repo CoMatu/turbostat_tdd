@@ -28,7 +28,6 @@ class LoadDataPage extends StatelessWidget {
                     Provider.of<Maintenances>(context, listen: false)
                         .getAllMaintenances(carId);
                     modalBottomSheet(context);
-                    // TODO add new entry to history
                   },
                   child: Icon(Icons.add),
                 );
@@ -69,7 +68,6 @@ class LoadDataPage extends StatelessWidget {
           );
         }
         if (state is LoadedAllCars) {
-          //print(state.listAll);
           return state.listAll.isEmpty
               ? AddCarForm()
               : Column(
