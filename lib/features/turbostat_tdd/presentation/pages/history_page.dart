@@ -5,7 +5,12 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turbostat_tdd/core/error/exception.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_entry.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/pages.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/entries.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
+import 'package:turbostat_tdd/generated/i18n.dart';
+import 'package:turbostat_tdd/injection_container.dart';
 
 class HistoryPage extends StatelessWidget {
   HistoryPage({Key key}) : super(key: key);
@@ -47,7 +52,19 @@ class HistoryPage extends StatelessWidget {
                       ),
                       IconButton(
                         icon: Icon(Icons.delete_outline),
-                        onPressed: () async {},
+                        onPressed: () async {
+                                                  final carId =
+                            Provider.of<CurrentCar>(context, listen: false)
+                                .currentCar
+                                .carId;
+
+                          final ConfirmAction confirmAction =
+                              await asyncConfirmDialog(context);
+                          if (confirmAction == ConfirmAction.ACCEPT) {
+                            sl<DeleteEntry>().deleteEntry(carId, entry.entries[index].entryId);
+                            Provider.of<Entries>(context, listen: false).updateAll(carId);
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -72,5 +89,37 @@ class HistoryPage extends StatelessWidget {
     } else {
       throw CacheException();
     }
+  }
+
+  Future<ConfirmAction> asyncConfirmDialog(BuildContext context) async {
+    return showDialog<ConfirmAction>(
+      context: context,
+      barrierDismissible: false, // user must tap button for close dialog!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(S.of(context).delete_entry_operation),
+          content: Text(S.of(context).delete_entry_operation_warning),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(
+                S.of(context).button_cancel,
+                style: TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(ConfirmAction.CANCEL);
+              },
+            ),
+            FlatButton(
+              child: Text(
+                S.of(context).button_delete,
+              ),
+              onPressed: () async {
+                Navigator.of(context).pop(ConfirmAction.ACCEPT);
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 }
