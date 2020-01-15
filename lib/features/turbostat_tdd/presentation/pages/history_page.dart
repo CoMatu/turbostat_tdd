@@ -47,22 +47,26 @@ class HistoryPage extends StatelessWidget {
                       IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
-//                                Navigator.pushReplacementNamed(context, 'edit_car');
+                          Provider.of<CurrentEntry>(context, listen: false)
+                              .update(entry.entries[index]);
+                                Navigator.pushReplacementNamed(context, 'edit_entry');
                         },
                       ),
                       IconButton(
                         icon: Icon(Icons.delete_outline),
                         onPressed: () async {
-                                                  final carId =
-                            Provider.of<CurrentCar>(context, listen: false)
-                                .currentCar
-                                .carId;
+                          final carId =
+                              Provider.of<CurrentCar>(context, listen: false)
+                                  .currentCar
+                                  .carId;
 
                           final ConfirmAction confirmAction =
                               await asyncConfirmDialog(context);
                           if (confirmAction == ConfirmAction.ACCEPT) {
-                            sl<DeleteEntry>().deleteEntry(carId, entry.entries[index].entryId);
-                            Provider.of<Entries>(context, listen: false).updateAll(carId);
+                            sl<DeleteEntry>().deleteEntry(
+                                carId, entry.entries[index].entryId);
+                            Provider.of<Entries>(context, listen: false)
+                                .updateAll(carId);
                           }
                         },
                       ),

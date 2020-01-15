@@ -27,6 +27,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => Maintenances()),
         ChangeNotifierProvider(create: (context) => CurrentMaintenance()),
         ChangeNotifierProvider(create: (context) => Entries()),
+        ChangeNotifierProvider(create: (context) => CurrentEntry()),
       ],
       child: MyApp(),
     ),
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
           'maintenancies_page': (context) => MaintenancesPage(),
           'edit_maintenance': (context) => EditMaintenancePage(),
           'add_entry': (context) => AddEntryPage(),
+          'edit_entry': (context) => EditEntryPage(),
         },
       ),
     );
