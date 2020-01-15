@@ -46,10 +46,18 @@ class HistoryPage extends StatelessWidget {
                       ),
                       IconButton(
                         icon: Icon(Icons.edit),
-                        onPressed: () {
+                        onPressed: () async {
+                          final carId =
+                              Provider.of<CurrentCar>(context, listen: false)
+                                  .currentCar
+                                  .carId;
+
                           Provider.of<CurrentEntry>(context, listen: false)
                               .update(entry.entries[index]);
-                                Navigator.pushReplacementNamed(context, 'edit_entry');
+                          await Provider.of<Maintenances>(context,
+                                  listen: false)
+                              .getAllMaintenances(carId);
+                          Navigator.pushReplacementNamed(context, 'edit_entry');
                         },
                       ),
                       IconButton(

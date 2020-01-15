@@ -59,7 +59,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                       labelText:
                           S.of(context).form_decorator_select_maintenance,
                       labelStyle: TextStyle(fontSize: 22.0)),
-                  isEmpty: maintenanceId == 'выберите проверку',
+                  isEmpty: maintenanceId == '',
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
                       value: maintenanceId,
@@ -86,7 +86,6 @@ class _EditEntryFormState extends State<EditEntryForm> {
               Expanded(
                   child: TextFormField(
                 decoration: InputDecoration(
-                  //                        icon: const Icon(Icons.calendar_today),
                   labelText: S.of(context).form_decorator_date,
                 ),
                 controller: _controller,
@@ -110,7 +109,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
               padding: const EdgeInsets.only(top: 12.0),
               child: TextFormField(
                 keyboardType: TextInputType.number,
-                initialValue: '',
+                initialValue: _model.entryMileage.toString(),
                 autocorrect: false,
                 onSaved: (String value) => entryMileage = int.parse(value),
                 maxLines: 1,
