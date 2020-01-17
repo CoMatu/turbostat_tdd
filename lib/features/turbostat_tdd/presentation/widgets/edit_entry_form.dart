@@ -14,7 +14,7 @@ class EditEntryForm extends StatefulWidget {
 
 class _EditEntryFormState extends State<EditEntryForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _controller = TextEditingController();
+  TextEditingController _controller;
 
   List<MaintenanceModel> _maintenances;
 
@@ -31,9 +31,11 @@ class _EditEntryFormState extends State<EditEntryForm> {
   @override
   void initState() {
     super.initState();
+    var f = DateFormat('dd.MM.yyyy');
     _model = Provider.of<CurrentEntry>(context, listen: false).currentEntry;
     _maintenances =
         Provider.of<Maintenances>(context, listen: false).maintenances;
+    _controller = TextEditingController(text: f.format(_model.entryDateTime));
   }
 
   @override
@@ -80,6 +82,13 @@ class _EditEntryFormState extends State<EditEntryForm> {
                     ),
                   ),
                 );
+              },
+              validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  print('value is Empty');
+                  return S.of(context).form_warning_fill_info;
+                }
+                return null;
               },
             ),
             Row(children: <Widget>[
@@ -128,7 +137,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
               padding: const EdgeInsets.only(top: 12.0),
               child: TextFormField(
                 keyboardType: TextInputType.number,
-                initialValue: '',
+                initialValue: _model.entryWorkPrice.toString(),
                 autocorrect: false,
                 onSaved: (String value) => entryWorkPrice = double.parse(value),
                 maxLines: 1,
