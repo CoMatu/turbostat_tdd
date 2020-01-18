@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/core/auth/auth_provider.dart';
 import 'package:turbostat_tdd/core/auth/base_auth.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/add_part_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/load_data_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/logo_screen.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/pages.dart';
@@ -65,6 +66,7 @@ class MyApp extends StatelessWidget {
           'edit_maintenance': (context) => EditMaintenancePage(),
           'add_entry': (context) => AddEntryPage(),
           'edit_entry': (context) => EditEntryPage(),
+          'add_part': (context) => AddPartPage(),
         },
       ),
     );

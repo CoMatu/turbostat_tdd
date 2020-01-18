@@ -10,3 +10,4 @@ export 'add_maintenance_form.dart';
 export 'edit_maintenance_form.dart';
 export 'add_entry_form.dart';
 export 'edit_entry_form.dart';
+export 'add_part_form.dart';

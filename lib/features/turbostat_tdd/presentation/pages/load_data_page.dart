@@ -125,7 +125,7 @@ class LoadDataPage extends StatelessWidget {
                     title: Text('Записать покупку запчастей / расходников'),
                     leading: Icon(Icons.add_shopping_cart),
                     onTap: () {
-                      
+                      Navigator.popAndPushNamed(context, 'add_part');
                     },
                   ),
                   ListTile(

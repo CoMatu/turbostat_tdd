@@ -177,7 +177,7 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     final partsBox = await Hive.openBox(name);
     final _partString = model.toJson();
     partsBox.put(model.partId, _partString);
-    print('added entry $_partString');
+    print('added part $_partString');
   }
 
   @override
