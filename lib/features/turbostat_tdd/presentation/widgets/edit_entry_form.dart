@@ -64,6 +64,10 @@ class _EditEntryFormState extends State<EditEntryForm> {
                   isEmpty: maintenanceId == '',
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
+                      hint: DropdownMenuItem(
+                        value: _model.maintenanceId,
+                        child: Text(_model?.entryName ?? ''),
+                      ),
                       value: maintenanceId,
                       isDense: true,
                       isExpanded: true,

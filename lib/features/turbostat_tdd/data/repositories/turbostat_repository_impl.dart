@@ -8,6 +8,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 
 class TurbostatRepositoryImpl implements TurbostatRepository {
@@ -207,6 +208,47 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
     } else {
       try {
         final result = await localDataSource.getAllEntries(carId);
+        return Right(result);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
+    return null;
+  }
+
+  @override
+  Future<void> addPartModel(String carId, PartModel model) async {
+    if (await modeInfo.isCloudMode) {
+      // TODO add implementation
+    } else {
+      try {
+        await localDataSource.addPart(carId, model);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
+  }
+
+  @override
+  Future<void> deletePartModel(String carId, PartModel model) async {
+    if (await modeInfo.isCloudMode) {
+      // TODO add implementation
+    } else {
+      try {
+        await localDataSource.deletePart(carId, model);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<PartModel>>> getAllPartModels(String carId) async {
+    if (await modeInfo.isCloudMode) {
+      // TODO add implementation
+    } else {
+      try {
+        final result = await localDataSource.getAllParts(carId);
         return Right(result);
       } on CacheException {
         return Left(CacheFailure());

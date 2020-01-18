@@ -3,6 +3,7 @@ import 'package:turbostat_tdd/core/error/failures.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part_model.dart';
 
 abstract class TurbostatRepository {
   Future<Either<Failure, CarModel>> getConcreteCarModel(String carId);
@@ -20,4 +21,7 @@ abstract class TurbostatRepository {
       String carId, String maintenanceId);
   Future<void> deleteEntry(String carId, String entryId);
   Future<Either<Failure, List<EntryModel>>> getAllEntries(String carId);
+  Future<void> addPartModel(String carId, PartModel model);
+  Future<void> deletePartModel(String carId, PartModel model);
+  Future<Either<Failure, List<PartModel>>> getAllPartModels(String carId);
 }

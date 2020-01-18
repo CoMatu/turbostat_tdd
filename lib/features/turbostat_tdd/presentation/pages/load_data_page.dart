@@ -122,6 +122,13 @@ class LoadDataPage extends StatelessWidget {
                     },
                   ),
                   ListTile(
+                    title: Text('Записать покупку запчастей / расходников'),
+                    leading: Icon(Icons.add_shopping_cart),
+                    onTap: () {
+                      
+                    },
+                  ),
+                  ListTile(
                     title: Text(S.of(context).button_cancel),
                     leading: Icon(Icons.subdirectory_arrow_left),
                     onTap: () => Navigator.pop(context),

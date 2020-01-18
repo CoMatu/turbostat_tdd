@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part_model.dart';
 
 abstract class TurbostatLocalDataSource {
   Future<CarModel> getConcreteCarModel(String carId);
@@ -18,6 +19,9 @@ abstract class TurbostatLocalDataSource {
   Future<List<EntryModel>> getEntries(String carId, String maintenanceId);
   Future<void> deleteEntry(String carId, String entryId);
   Future<List<EntryModel>> getAllEntries(String carId);
+  Future<void> addPart(String carId, PartModel model);
+  Future<void> deletePart(String carId, PartModel model);
+  Future<List<PartModel>> getAllParts(String carId);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
@@ -166,8 +170,34 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
 
     return _entriesFromHive;
   }
-}
 
-/*
-I/flutter (26933): {-rZv: {entryId: -rZv, maintenanceId: wUtF, entryName: test3, entryNote: zaeb, entryDateTime: 2020-01-10T00:00:00.000, entryWorkPrice: 1200.0, entryMileage: 55000}, 2KbH: {entryId: 2KbH, maintenanceId: SKnn, entryNote: awesome, entryDateTime: 2020-01-10T00:00:00.000, entryWorkPrice: 2300.0, entryMileage: 5000}, 5pah: {entryId: 5pah, maintenanceId: SKnn, entryName: test1, entryNote: , entryDateTime: 2020-01-08T00:00:00.000, entryWorkPrice: 222.0, entryMileage: 77777}, iipP: {entryId: iipP, maintenanceId: SKnn, entryName: test1, entryNote: , entryDateTime: 2020-01-12T00:00:00.000, entryWorkPrice: 2222.0, entryMileage: 5555}}
-*/
+  @override
+  Future<void> addPart(String carId, PartModel model) async {
+    final String name = 'parts_' + carId;
+    final partsBox = await Hive.openBox(name);
+    final _partString = model.toJson();
+    partsBox.put(model.partId, _partString);
+    print('added entry $_partString');
+  }
+
+  @override
+  Future<void> deletePart(String carId, PartModel model) async {
+    final String name = 'parts_' + carId;
+    final partsBox = await Hive.openBox(name);
+    await partsBox.delete(model.partId);
+  }
+
+  @override
+  Future<List<PartModel>> getAllParts(String carId) async {
+    List<PartModel> _partsFromHive = [];
+    final String name = 'parts_' + carId;
+    final partsBox = await Hive.openBox(name);
+    final res = partsBox.toMap();
+
+    _partsFromHive = res.entries
+        .map((part) => PartModel.fromJson(part.value.cast<String, dynamic>()))
+        .toList();
+
+    return _partsFromHive;
+  }
+}

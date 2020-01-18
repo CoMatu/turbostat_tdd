@@ -9,12 +9,15 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbost
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_part_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_entry.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_maintenance.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_part_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car_models.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_entries.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_maintenances.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_part_models.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_maintenance.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_entries.dart';
@@ -46,6 +49,9 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetEntries(repository: sl()));
   sl.registerLazySingleton(() => GetAllEntries(repository: sl()));
   sl.registerLazySingleton(() => DeleteEntry(repository: sl()));
+  sl.registerLazySingleton(() => AddPartModel(repository: sl()));
+  sl.registerLazySingleton(() => DeletePartModel(repository: sl()));
+  sl.registerLazySingleton(() => GetAllPartModels(repository: sl()));
 
   // Repository
   sl.registerLazySingleton<TurbostatRepository>(() => TurbostatRepositoryImpl(
