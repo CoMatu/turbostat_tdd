@@ -14,7 +14,8 @@ class SettingPage extends StatelessWidget {
             leading: CircleAvatar(
               child: Icon(Icons.build),
             ),
-            title: Text('Список операций технического обслуживания'),
+            title: Text(
+                'Список операций технического обслуживания'), //TODO add to plugin
             onTap: () async {
               final carId = Provider.of<CurrentCar>(context, listen: false)
                   .currentCar
@@ -22,6 +23,20 @@ class SettingPage extends StatelessWidget {
               await Provider.of<Maintenances>(context, listen: false)
                   .getAllMaintenances(carId);
               Navigator.pushNamed(context, 'maintenancies_page');
+            },
+          ),
+          ListTile(
+            leading: CircleAvatar(
+              child: Icon(Icons.assignment),
+            ),
+            title: Text('Список запасных частей и расходников'),
+            onTap: () async {
+              final carId = Provider.of<CurrentCar>(context, listen: false)
+                  .currentCar
+                  .carId;
+              await Provider.of<Maintenances>(context, listen: false)
+                  .getAllMaintenances(carId);
+              Navigator.pushNamed(context, 'parts_page');
             },
           )
         ],

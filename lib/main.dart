@@ -67,6 +67,7 @@ class MyApp extends StatelessWidget {
           'add_entry': (context) => AddEntryPage(),
           'edit_entry': (context) => EditEntryPage(),
           'add_part': (context) => AddPartPage(),
+          'parts_page': (context) => PartsPage(),
         },
       ),
     );
