@@ -157,8 +157,7 @@ class _AddPartFormState extends State<AddPartForm> {
             partCode: partCode,
             partPrice: partPrice);
 
-        await sl<AddPartModel>().addPartModel(
-            _carId, _result); //TODO лучше переделать через провайдера
+        Provider.of<Parts>(context, listen: false).add(_carId, _result);
       }
 
       Navigator.pushReplacementNamed(context, 'load_data_page');

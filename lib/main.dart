@@ -29,6 +29,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => CurrentMaintenance()),
         ChangeNotifierProvider(create: (context) => Entries()),
         ChangeNotifierProvider(create: (context) => CurrentEntry()),
+        ChangeNotifierProvider(create: (context) => Parts()),
       ],
       child: MyApp(),
     ),
