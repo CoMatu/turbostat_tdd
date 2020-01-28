@@ -165,7 +165,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                          S.of(context).form_decorator_value_parts,
+                          'Расход запчастей и их стоимость', //TODO generate 18
                           style: Theme.of(context).textTheme.subhead,
                         ),
                       ),
@@ -179,7 +179,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                   ),
                   ListView.builder(
                     shrinkWrap: true,
-                    itemCount: 3,
+                    itemCount: 0,
                     itemBuilder: (BuildContext context, int index) =>
                         Text('test 1'),
                   ),

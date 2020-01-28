@@ -21,6 +21,7 @@ class _AddPartFormState extends State<AddPartForm> {
   String partName;
   String partCode;
   double partPrice;
+  int partQnty;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class _AddPartFormState extends State<AddPartForm> {
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
               child: Text(
-                'На этой странице необходимо записать информацию о покупке запчасти или расходника',//TODO generate
+                'На этой странице необходимо записать информацию о покупке запчасти или расходника', //TODO generate
                 style: TextStyle(fontSize: 16.0),
               ),
             ),
@@ -47,7 +48,7 @@ class _AddPartFormState extends State<AddPartForm> {
                 onSaved: (String value) => partName = value,
                 maxLines: 1,
                 decoration: InputDecoration(
-                  labelText: 'Наименование',//TODO generate
+                  labelText: 'Наименование', //TODO generate
                 ),
               ),
             ),
@@ -79,7 +80,26 @@ class _AddPartFormState extends State<AddPartForm> {
                   return null;
                 },
                 decoration: InputDecoration(
-                  labelText: 'Стоимость',//TODO generate
+                  labelText: 'Стоимость', //TODO generate
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                initialValue: '1',
+                autocorrect: false,
+                onSaved: (String value) => partQnty = int.parse(value),
+                maxLines: 1,
+                validator: (value) {
+                  if (value.contains(',')) {
+                    return S.of(context).form_validator_dot;
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  labelText: 'Quantity', //TODO generate
                 ),
               ),
             ),
@@ -126,17 +146,19 @@ class _AddPartFormState extends State<AddPartForm> {
     } else {
       formState.save();
 
-      partId = await nanoid(4);
-      final _result = PartModel(
-        partId: partId,
-        partName: partName,
-        partCode: partCode,
-        partPrice: partPrice
-      );
       final String _carId =
           Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
 
-      await sl<AddPartModel>().addPartModel(_carId, _result); //TODO лучше переделать через провайдера
+      for (int i = 0; i < partQnty; i++) {
+        partId = await nanoid(4);
+        final _result = PartModel(
+            partId: partId,
+            partName: partName,
+            partCode: partCode,
+            partPrice: partPrice);
+
+        Provider.of<Parts>(context, listen: false).add(_carId, _result);
+      }
 
       Navigator.pushReplacementNamed(context, 'load_data_page');
     }
