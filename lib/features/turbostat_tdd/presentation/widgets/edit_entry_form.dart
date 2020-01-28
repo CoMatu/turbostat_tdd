@@ -28,6 +28,8 @@ class _EditEntryFormState extends State<EditEntryForm> {
 
   EntryModel _model;
 
+  bool isVisible;
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +38,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
     _maintenances =
         Provider.of<Maintenances>(context, listen: false).maintenances;
     _controller = TextEditingController(text: f.format(_model.entryDateTime));
+    isVisible = false;
   }
 
   @override
@@ -172,17 +175,34 @@ class _EditEntryFormState extends State<EditEntryForm> {
                       IconButton(
                         icon: Icon(Icons.add_circle_outline),
                         onPressed: () {
+                          setState(() {
+                            isVisible = true;
+                          });
                           //TODO add form for entry
                         },
                       ),
                     ],
                   ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 0,
-                    itemBuilder: (BuildContext context, int index) =>
-                        Text('test 1'),
-                  ),
+                  isVisible
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: 3,
+                          itemBuilder: (BuildContext context, int index) => Row(
+                            children: <Widget>[
+                              Expanded(child: Text('test 1')),
+                              IconButton(
+                                icon: Icon(Icons.remove_circle_outline),
+                                onPressed: () {},
+                              ),
+                              Text('number'),
+                              IconButton(
+                                icon: Icon(Icons.add_circle_outline),
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),
