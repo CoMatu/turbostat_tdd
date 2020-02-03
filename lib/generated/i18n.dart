@@ -72,8 +72,6 @@ class S implements WidgetsLocalizations {
   String get form_decorator_odometer_value => "Odometer value, km";
   String get form_decorator_part_name => "Consumables / parts";
   String get form_decorator_select_maintenance => "Select maintenance from list";
-  String get form_decorator_value_parts => "Value of parts";
-  String get form_decorator_value_work => "Value of work";
   String get form_initial_my_car => "My Car";
   String get form_switch_check => "Check";
   String get form_switch_replacement => "Replacement";
@@ -111,6 +109,8 @@ class S implements WidgetsLocalizations {
   String form_alert_car_model(String model) => "Car model: $model";
   String form_alert_car_name(String name) => "Car name: $name";
   String form_alert_car_year(String year) => "Car year: $year";
+  String get form_decorator_value_parts => "Value of parts";
+  String get form_decorator_value_work => "Value of work";
 }
 
 class $ru extends S {
