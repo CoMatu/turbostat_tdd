@@ -30,6 +30,8 @@ class _EditEntryFormState extends State<EditEntryForm> {
 
   bool isVisible;
 
+  int numberOfPart;
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +41,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
         Provider.of<Maintenances>(context, listen: false).maintenances;
     _controller = TextEditingController(text: f.format(_model.entryDateTime));
     isVisible = false;
+    numberOfPart = 0;
   }
 
   @override
@@ -169,7 +172,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                       Expanded(
                         child: Text(
                           'Расход запчастей и их стоимость', //TODO generate 18
-                          style: Theme.of(context).textTheme.subhead,
+                          style: Theme.of(context).textTheme.subtitle1,
                         ),
                       ),
                       IconButton(
@@ -183,26 +186,43 @@ class _EditEntryFormState extends State<EditEntryForm> {
                       ),
                     ],
                   ),
+                  Divider(),
                   isVisible
-                      ? ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: 3,
-                          itemBuilder: (BuildContext context, int index) => Row(
-                            children: <Widget>[
-                              Expanded(child: Text('test 1')),
-                              IconButton(
-                                icon: Icon(Icons.remove_circle_outline),
-                                onPressed: () {},
+                      ? Consumer<Parts>(
+                          builder: (context, partsList, child) {
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: partsList.parts.length,
+                              itemBuilder: (BuildContext context, int index) =>
+                                  Row(
+                                children: <Widget>[
+                                  Expanded(child: Text(partsList.parts[index].partName)),
+                                  IconButton(
+                                    icon: Icon(Icons.remove),
+                                    onPressed: () {
+                                      setState(() {
+                                        if(numberOfPart > 0) {
+                                          numberOfPart--;
+                                        }
+                                      });
+                                    },
+                                  ),
+                                  Text(numberOfPart.toString()),
+                                  IconButton(
+                                    icon: Icon(Icons.add),
+                                    onPressed: () {
+                                      setState(() {
+                                        numberOfPart++;
+                                      });
+                                    },
+                                  ),
+                                ],
                               ),
-                              Text('number'),
-                              IconButton(
-                                icon: Icon(Icons.add_circle_outline),
-                                onPressed: () {},
-                              ),
-                            ],
-                          ),
+                            );
+                          },
                         )
                       : Container(),
+                  Divider(),
                 ],
               ),
             ),

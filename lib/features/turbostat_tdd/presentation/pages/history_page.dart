@@ -57,6 +57,8 @@ class HistoryPage extends StatelessWidget {
                           await Provider.of<Maintenances>(context,
                                   listen: false)
                               .getAllMaintenances(carId);
+                          await Provider.of<Parts>(context, listen: false)
+                              .update(carId);
                           Navigator.pushReplacementNamed(context, 'edit_entry');
                         },
                       ),
