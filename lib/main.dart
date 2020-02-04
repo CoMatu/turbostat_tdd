@@ -30,6 +30,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => Entries()),
         ChangeNotifierProvider(create: (context) => CurrentEntry()),
         ChangeNotifierProvider(create: (context) => Parts()),
+        ChangeNotifierProvider(create: (context) => PartsCart()),
       ],
       child: MyApp(),
     ),

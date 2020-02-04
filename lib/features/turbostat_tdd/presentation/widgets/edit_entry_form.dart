@@ -186,6 +186,22 @@ class _EditEntryFormState extends State<EditEntryForm> {
                       ),
                     ],
                   ),
+                  Consumer<PartsCart>(
+                    builder: (context, partsCart, child) {
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount:
+                              Provider.of<PartsCart>(context, listen: false)
+                                  .partsCart
+                                  .length,
+                          itemBuilder: (BuildContext context, int index) => Row(
+                                children: <Widget>[
+                                  Expanded(child: Text(partsCart.partsCart[index].partName)),
+                                  Text(partsCart.partsCart[index].partPrice.toString()),
+                                ],
+                              ));
+                    },
+                  ),
                   Divider(),
                   isVisible
                       ? Consumer<Parts>(
@@ -196,12 +212,14 @@ class _EditEntryFormState extends State<EditEntryForm> {
                               itemBuilder: (BuildContext context, int index) =>
                                   Row(
                                 children: <Widget>[
-                                  Expanded(child: Text(partsList.parts[index].partName)),
+                                  Expanded(
+                                      child: Text(
+                                          partsList.parts[index].partName)),
                                   IconButton(
                                     icon: Icon(Icons.remove),
                                     onPressed: () {
                                       setState(() {
-                                        if(numberOfPart > 0) {
+                                        if (numberOfPart > 0) {
                                           numberOfPart--;
                                         }
                                       });
@@ -211,9 +229,9 @@ class _EditEntryFormState extends State<EditEntryForm> {
                                   IconButton(
                                     icon: Icon(Icons.add),
                                     onPressed: () {
-                                      setState(() {
-                                        numberOfPart++;
-                                      });
+                                      Provider.of<PartsCart>(context,
+                                              listen: false)
+                                          .add(partsList.parts[index]);
                                     },
                                   ),
                                 ],
