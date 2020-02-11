@@ -186,6 +186,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                       ),
                     ],
                   ),
+                  
                   Consumer<PartsCart>(
                     builder: (context, partsCart, child) {
                       return ListView.builder(
@@ -202,45 +203,44 @@ class _EditEntryFormState extends State<EditEntryForm> {
                               ));
                     },
                   ),
-                  Divider(),
+                  
                   isVisible
                       ? Consumer<Parts>(
                           builder: (context, partsList, child) {
-                            return ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: partsList.parts.length,
-                              itemBuilder: (BuildContext context, int index) =>
-                                  Row(
-                                children: <Widget>[
-                                  Expanded(
-                                      child: Text(
-                                          partsList.parts[index].partName)),
-                                  IconButton(
-                                    icon: Icon(Icons.remove),
-                                    onPressed: () {
-                                      setState(() {
-                                        if (numberOfPart > 0) {
-                                          numberOfPart--;
-                                        }
-                                      });
-                                    },
-                                  ),
-                                  Text(numberOfPart.toString()),
-                                  IconButton(
-                                    icon: Icon(Icons.add),
-                                    onPressed: () {
-                                      Provider.of<PartsCart>(context,
-                                              listen: false)
-                                          .add(partsList.parts[index]);
-                                    },
-                                  ),
-                                ],
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 12.0,),
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: partsList.parts.length,
+                                itemBuilder: (BuildContext context, int index) =>
+                                    Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                        child: Text(
+                                            partsList.parts[index].partName)),
+                                    IconButton(
+                                      icon: Icon(Icons.remove),
+                                      onPressed: () {
+                                        Provider.of<PartsCart>(context,
+                                                listen: false).delete(partsList.parts[index]);
+                                      },
+                                    ),
+                                    Text(numberOfPart.toString()),
+                                    IconButton(
+                                      icon: Icon(Icons.add),
+                                      onPressed: () {
+                                        Provider.of<PartsCart>(context,
+                                                listen: false)
+                                            .add(partsList.parts[index]);
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           },
                         )
                       : Container(),
-                  Divider(),
                 ],
               ),
             ),
@@ -268,6 +268,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                   child: RaisedButton(
                     child: Text(S.of(context).button_cancel),
                     onPressed: () {
+                      Provider.of<PartsCart>(context, listen: false).clearCart();
                       Navigator.pushReplacementNamed(context, 'load_data_page');
                     },
                     color: Colors.grey,

@@ -12,7 +12,17 @@ class PartsCart extends ChangeNotifier {
 
   void add(PartModel part) {
     _parts.add(part);
+    notifyListeners();
+  }
 
+  void clearCart() {
+    _parts.clear();
+    notifyListeners();
+  }
+
+  void delete(PartModel part) {
+   // _parts.removeWhere((element) => element.partId == part.partId);
+    _parts.remove(part);
     notifyListeners();
   }
 }
