@@ -30,6 +30,8 @@ class _EditEntryFormState extends State<EditEntryForm> {
 
   bool isVisible;
 
+  int numberOfPart;
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +41,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
         Provider.of<Maintenances>(context, listen: false).maintenances;
     _controller = TextEditingController(text: f.format(_model.entryDateTime));
     isVisible = false;
+    numberOfPart = 0;
   }
 
   @override
@@ -169,7 +172,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                       Expanded(
                         child: Text(
                           'Расход запчастей и их стоимость', //TODO generate 18
-                          style: Theme.of(context).textTheme.subhead,
+                          style: Theme.of(context).textTheme.subtitle1,
                         ),
                       ),
                       IconButton(
@@ -183,24 +186,59 @@ class _EditEntryFormState extends State<EditEntryForm> {
                       ),
                     ],
                   ),
-                  isVisible
-                      ? ListView.builder(
+                  
+                  Consumer<PartsCart>(
+                    builder: (context, partsCart, child) {
+                      return ListView.builder(
                           shrinkWrap: true,
-                          itemCount: 3,
+                          itemCount:
+                              Provider.of<PartsCart>(context, listen: false)
+                                  .partsCart
+                                  .length,
                           itemBuilder: (BuildContext context, int index) => Row(
-                            children: <Widget>[
-                              Expanded(child: Text('test 1')),
-                              IconButton(
-                                icon: Icon(Icons.remove_circle_outline),
-                                onPressed: () {},
+                                children: <Widget>[
+                                  Expanded(child: Text(partsCart.partsCart[index].partName)),
+                                  Text(partsCart.partsCart[index].partPrice.toString()),
+                                ],
+                              ));
+                    },
+                  ),
+                  
+                  isVisible
+                      ? Consumer<Parts>(
+                          builder: (context, partsList, child) {
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 12.0,),
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: partsList.parts.length,
+                                itemBuilder: (BuildContext context, int index) =>
+                                    Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                        child: Text(
+                                            partsList.parts[index].partName)),
+                                    IconButton(
+                                      icon: Icon(Icons.remove),
+                                      onPressed: () {
+                                        Provider.of<PartsCart>(context,
+                                                listen: false).delete(partsList.parts[index]);
+                                      },
+                                    ),
+                                    Text(numberOfPart.toString()),
+                                    IconButton(
+                                      icon: Icon(Icons.add),
+                                      onPressed: () {
+                                        Provider.of<PartsCart>(context,
+                                                listen: false)
+                                            .add(partsList.parts[index]);
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Text('number'),
-                              IconButton(
-                                icon: Icon(Icons.add_circle_outline),
-                                onPressed: () {},
-                              ),
-                            ],
-                          ),
+                            );
+                          },
                         )
                       : Container(),
                 ],
@@ -230,6 +268,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                   child: RaisedButton(
                     child: Text(S.of(context).button_cancel),
                     onPressed: () {
+                      Provider.of<PartsCart>(context, listen: false).clearCart();
                       Navigator.pushReplacementNamed(context, 'load_data_page');
                     },
                     color: Colors.grey,
