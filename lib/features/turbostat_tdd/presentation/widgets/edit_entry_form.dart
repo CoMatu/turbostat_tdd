@@ -25,6 +25,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
   DateTime entryDateTime;
   double entryWorkPrice;
   int entryMileage;
+  double totalPrice;
 
   EntryModel _model;
 
@@ -41,7 +42,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
         Provider.of<Maintenances>(context, listen: false).maintenances;
     _controller = TextEditingController(text: f.format(_model.entryDateTime));
     isVisible = false;
-    numberOfPart = 0;
+    totalPrice = Provider.of<PartsCart>(context, listen: false).totalPrice;
   }
 
   @override
@@ -70,6 +71,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                   isEmpty: maintenanceId == '',
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
+                      //TODO добавить начальное значение, чтобы не выбирать при каждом исправлении
                       hint: DropdownMenuItem(
                         value: _model.maintenanceId,
                         child: Text(_model?.entryName ?? ''),
@@ -186,7 +188,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                       ),
                     ],
                   ),
-                  
+
                   Consumer<PartsCart>(
                     builder: (context, partsCart, child) {
                       return ListView.builder(
@@ -197,45 +199,86 @@ class _EditEntryFormState extends State<EditEntryForm> {
                                   .length,
                           itemBuilder: (BuildContext context, int index) => Row(
                                 children: <Widget>[
-                                  Expanded(child: Text(partsCart.partsCart[index].partName)),
-                                  Text(partsCart.partsCart[index].partPrice.toString()),
+                                  Expanded(
+                                      child: Text(
+                                          partsCart.partsCart[index].partName)),
+                                  Text(partsCart.partsCart[index].partPrice
+                                      .toString()),
                                 ],
                               ));
                     },
                   ),
-                  
+                  Divider(),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text('Amount: '),
+                      ), //TODO add plugin i18n
+                      Text(totalPrice.toString()),
+                    ],
+                  ),
+                  Container(
+                    height: 12.0,
+                  ),
+
                   isVisible
                       ? Consumer<Parts>(
                           builder: (context, partsList, child) {
                             return Padding(
-                              padding: const EdgeInsets.only(left: 12.0,),
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: partsList.parts.length,
-                                itemBuilder: (BuildContext context, int index) =>
-                                    Row(
-                                  children: <Widget>[
-                                    Expanded(
-                                        child: Text(
-                                            partsList.parts[index].partName)),
-                                    IconButton(
-                                      icon: Icon(Icons.remove),
-                                      onPressed: () {
-                                        Provider.of<PartsCart>(context,
-                                                listen: false).delete(partsList.parts[index]);
-                                      },
+                              padding: const EdgeInsets.only(
+                                left: 12.0,
+                              ),
+                              child: Column(
+                                children: <Widget>[
+                                  Text('База данных запчастей и расходников'),
+                                  // TODO добавить 18
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: partsList.parts.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) =>
+                                            Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                            child: Text(partsList
+                                                .parts[index].partName)),
+                                        Text(partsList.parts[index].partPrice
+                                            .toString()),
+                                        IconButton(
+                                          icon: Icon(Icons.remove),
+                                          onPressed: () {
+                                            Provider.of<PartsCart>(context,
+                                                    listen: false)
+                                                .delete(partsList.parts[index]);
+                                            setState(() {
+                                              totalPrice =
+                                                  Provider.of<PartsCart>(
+                                                          context,
+                                                          listen: false)
+                                                      .totalPrice;
+                                            });
+                                          },
+                                        ),
+                                        //  Text(numberOfPart.toString()),
+                                        IconButton(
+                                          icon: Icon(Icons.add),
+                                          onPressed: () {
+                                            Provider.of<PartsCart>(context,
+                                                    listen: false)
+                                                .add(partsList.parts[index]);
+                                            setState(() {
+                                              totalPrice =
+                                                  Provider.of<PartsCart>(
+                                                          context,
+                                                          listen: false)
+                                                      .totalPrice;
+                                            });
+                                          },
+                                        ),
+                                      ],
                                     ),
-                                    Text(numberOfPart.toString()),
-                                    IconButton(
-                                      icon: Icon(Icons.add),
-                                      onPressed: () {
-                                        Provider.of<PartsCart>(context,
-                                                listen: false)
-                                            .add(partsList.parts[index]);
-                                      },
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             );
                           },
@@ -268,7 +311,8 @@ class _EditEntryFormState extends State<EditEntryForm> {
                   child: RaisedButton(
                     child: Text(S.of(context).button_cancel),
                     onPressed: () {
-                      Provider.of<PartsCart>(context, listen: false).clearCart();
+                      Provider.of<PartsCart>(context, listen: false)
+                          .clearCart();
                       Navigator.pushReplacementNamed(context, 'load_data_page');
                     },
                     color: Colors.grey,
@@ -350,6 +394,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
       Provider.of<Entries>(context, listen: false).add(_carId, _result);
 
       Navigator.pushReplacementNamed(context, 'load_data_page');
+      Provider.of<PartsCart>(context, listen: false).clearCart();
     }
   }
 }

@@ -10,6 +10,14 @@ class PartsCart extends ChangeNotifier {
     return UnmodifiableListView(_parts);
   }
 
+  double get totalPrice {
+    double total = 0;
+    _parts.forEach((element) {
+      total = total + element.partPrice;
+    });
+    return total;
+  }
+
   void add(PartModel part) {
     _parts.add(part);
     notifyListeners();
