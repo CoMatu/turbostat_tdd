@@ -256,4 +256,31 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
     }
     return null;
   }
+
+  @override
+  Future<void> addEntryParts(String entryId, List<PartModel> partsList) async {
+    if (await modeInfo.isCloudMode) {
+      // TODO add implementation
+    } else {
+      try {
+        await localDataSource.addEntryParts(entryId, partsList);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }  }
+
+  @override
+  Future<Either<Failure, List<PartModel>>> getEntryParts(String entryId) async {
+    if (await modeInfo.isCloudMode) {
+      // TODO add implementation
+    } else {
+      try {
+        final result = await localDataSource.getEntryParts(entryId);
+        return Right(result);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
+    return null;
+  }
 }

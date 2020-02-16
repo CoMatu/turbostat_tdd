@@ -22,6 +22,8 @@ abstract class TurbostatLocalDataSource {
   Future<void> addPart(String carId, PartModel model);
   Future<void> deletePart(String carId, PartModel model);
   Future<List<PartModel>> getAllParts(String carId);
+  Future<void> addEntryParts(String entryId, List<PartModel> partsList);
+  Future<List<PartModel>> getEntryParts(String entryId);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
@@ -198,6 +200,26 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
         .map((part) => PartModel.fromJson(part.value.cast<String, dynamic>()))
         .toList();
 
+    return _partsFromHive;
+  }
+
+  @override
+  Future<void> addEntryParts(String entryId, List<PartModel> partsList) async {
+    final String name = 'usedParts';
+    final usedPartsBox = await Hive.openBox(name);
+    partsList.forEach((element) {
+      final _part = element.toJson();
+      usedPartsBox.put(entryId, _part);
+    });
+  }
+
+  @override
+  Future<List<PartModel>> getEntryParts(String entryId) async {
+    List<PartModel> _partsFromHive = [];
+    final String name = 'usedParts';
+    final usedPartsBox = await Hive.openBox(name);
+    final res = usedPartsBox.get(entryId).toMap();
+    _partsFromHive = res.entries.map((e) => PartModel.fromJson(e.value.cast<String, dynamic>())).toList();
     return _partsFromHive;
   }
 }

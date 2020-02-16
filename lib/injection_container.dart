@@ -8,6 +8,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/repositories/turbostat
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_parts.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_maintenance_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_part_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_car_model.dart';
@@ -21,6 +22,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_par
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_maintenance.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_entries.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_entry_parts.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 
 final sl = GetIt.instance;
@@ -52,6 +54,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddPartModel(repository: sl()));
   sl.registerLazySingleton(() => DeletePartModel(repository: sl()));
   sl.registerLazySingleton(() => GetAllPartModels(repository: sl()));
+  sl.registerLazySingleton(() => AddEntryParts(repository: sl()));
+  sl.registerLazySingleton(() => GetEntryParts(repository: sl()));
 
   // Repository
   sl.registerLazySingleton<TurbostatRepository>(() => TurbostatRepositoryImpl(

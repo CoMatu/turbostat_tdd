@@ -47,6 +47,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
 
   @override
   Widget build(BuildContext context) {
+    //TODO разбить на виджеты по контексту
     return Container(
       child: Form(
         key: _formKey,
