@@ -43,6 +43,11 @@ class Entries extends ChangeNotifier {
       (failure) => null,
       (result) => result,
     ));
+
+    // sort by date
+    _entries.sort((a, b) => b.entryDateTime.millisecondsSinceEpoch
+        .compareTo(a.entryDateTime.millisecondsSinceEpoch));
+
     notifyListeners();
   }
 }

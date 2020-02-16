@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turbostat_tdd/core/error/exception.dart';
@@ -40,9 +41,39 @@ class HistoryPage extends StatelessWidget {
                         width: 10.0,
                       ),
                       Expanded(
-                        child: Text(entry.entries[index].entryName != null
-                            ? entry.entries[index].entryName
-                            : 'unknowing entry'),
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                entry.entries[index].entryName != null
+                                    ? entry.entries[index].entryName
+                                    : 'unknowing entry',
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 6.0, right: 10.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    entry.entries[index].entryDateTime != null ?
+                                    DateFormat('dd.MM.yyyy').format(
+                                        entry.entries[index].entryDateTime) : 'undefinied',
+                                    //                          entry.entries[index].entryDateTime.toString(),
+                                    style: Theme.of(context).textTheme.overline,
+                                  ),
+                                  Text(
+                                    S.of(context).car_card_mileage(entry
+                                        .entries[index].entryMileage
+                                        .toString()),
+                                    style: Theme.of(context).textTheme.overline,
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       IconButton(
                         icon: Icon(Icons.edit),

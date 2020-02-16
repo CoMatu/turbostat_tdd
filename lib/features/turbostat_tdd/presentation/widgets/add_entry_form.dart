@@ -5,8 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/core/fixtures/date_validator.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_parts.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
+import 'package:turbostat_tdd/injection_container.dart';
 
 class AddEntryForm extends StatefulWidget {
   AddEntryForm({Key key}) : super(key: key);
@@ -28,12 +30,16 @@ class _AddEntryFormState extends State<AddEntryForm> {
   DateTime entryDateTime;
   double entryWorkPrice;
   int entryMileage;
+  bool isVisible;
+  double totalPrice;
 
   @override
   void initState() {
     _maintenances =
         Provider.of<Maintenances>(context, listen: false).maintenances;
     super.initState();
+    isVisible = false;
+    totalPrice = Provider.of<PartsCart>(context, listen: false).totalPrice;
   }
 
   @override
@@ -153,24 +159,117 @@ class _AddEntryFormState extends State<AddEntryForm> {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                          S.of(context).form_decorator_value_parts,
-                          style: Theme.of(context).textTheme.subhead,
+                          'Расход запчастей и их стоимость', //TODO generate 18
+                          style: Theme.of(context).textTheme.subtitle1,
                         ),
                       ),
                       IconButton(
                         icon: Icon(Icons.add_circle_outline),
                         onPressed: () {
+                          setState(() {
+                            isVisible = true;
+                          });
                           //TODO add form for entry
                         },
                       ),
                     ],
                   ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 3,
-                    itemBuilder: (BuildContext context, int index) =>
-                        Text('test 1'),
+
+                  Consumer<PartsCart>(
+                    builder: (context, partsCart, child) {
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount:
+                              Provider.of<PartsCart>(context, listen: false)
+                                  .partsCart
+                                  .length,
+                          itemBuilder: (BuildContext context, int index) => Row(
+                                children: <Widget>[
+                                  Expanded(
+                                      child: Text(
+                                          partsCart.partsCart[index].partName)),
+                                  Text(partsCart.partsCart[index].partPrice
+                                      .toString()),
+                                ],
+                              ));
+                    },
                   ),
+                  Divider(),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text('Amount: '),
+                      ), //TODO add plugin i18n
+                      Text(totalPrice.toString()),
+                    ],
+                  ),
+                  Container(
+                    height: 12.0,
+                  ),
+
+                  isVisible
+                      ? Consumer<Parts>(
+                          builder: (context, partsList, child) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                left: 12.0,
+                              ),
+                              child: Column(
+                                children: <Widget>[
+                                  Text('База данных запчастей и расходников'),
+                                  // TODO добавить 18
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: partsList.parts.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) =>
+                                            Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                            child: Text(partsList
+                                                .parts[index].partName)),
+                                        Text(partsList.parts[index].partPrice
+                                            .toString()),
+                                        IconButton(
+                                          icon: Icon(Icons.remove),
+                                          onPressed: () {
+                                            Provider.of<PartsCart>(context,
+                                                    listen: false)
+                                                .delete(partsList.parts[index]);
+                                            setState(() {
+                                              totalPrice =
+                                                  Provider.of<PartsCart>(
+                                                          context,
+                                                          listen: false)
+                                                      .totalPrice;
+                                            });
+                                          },
+                                        ),
+                                        //  Text(numberOfPart.toString()),
+                                        IconButton(
+                                          icon: Icon(Icons.add),
+                                          onPressed: () {
+                                            Provider.of<PartsCart>(context,
+                                                    listen: false)
+                                                .add(partsList.parts[index]);
+                                            setState(() {
+                                              totalPrice =
+                                                  Provider.of<PartsCart>(
+                                                          context,
+                                                          listen: false)
+                                                      .totalPrice;
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        )
+                      : Container(),
                 ],
               ),
             ),
@@ -198,6 +297,9 @@ class _AddEntryFormState extends State<AddEntryForm> {
                   child: RaisedButton(
                     child: Text(S.of(context).button_cancel),
                     onPressed: () {
+                      Provider.of<PartsCart>(context, listen: false)
+                          .clearCart();
+
                       Navigator.pushReplacementNamed(context, 'load_data_page');
                     },
                     color: Colors.grey,
@@ -229,7 +331,8 @@ class _AddEntryFormState extends State<AddEntryForm> {
       //     showSnackBarMessage(S.of(context).form_warning_fill_info);
     } else {
       formState.save();
-      final filtrRes = _maintenances.where((f) => f.maintenanceId == maintenanceId).first;
+      final filtrRes =
+          _maintenances.where((f) => f.maintenanceId == maintenanceId).first;
       entryName = filtrRes.maintenanceName;
       entryId = await nanoid(4);
       final _result = EntryModel(
@@ -243,6 +346,12 @@ class _AddEntryFormState extends State<AddEntryForm> {
       );
       final String _carId =
           Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
+      Provider.of<Entries>(context, listen: false).add(_carId, _result);
+
+      var _parts = Provider.of<PartsCart>(context, listen: false).partsCart;
+      await sl<AddEntryParts>().addEntryParts(entryId, _parts);
+      Provider.of<PartsCart>(context, listen: false).clearCart();
+
       Provider.of<Entries>(context, listen: false).add(_carId, _result);
 
       Navigator.pushReplacementNamed(context, 'load_data_page');
