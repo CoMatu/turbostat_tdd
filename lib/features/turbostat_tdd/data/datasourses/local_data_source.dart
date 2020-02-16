@@ -206,11 +206,15 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
   @override
   Future<void> addEntryParts(String entryId, List<PartModel> partsList) async {
     final String name = 'usedParts';
+    var _list = [];
     final usedPartsBox = await Hive.openBox(name);
     partsList.forEach((element) {
       final _part = element.toJson();
-      usedPartsBox.put(entryId, _part);
+      print(_part);
+      _list.add(_part);
     });
+
+    usedPartsBox.put(entryId, _list);
   }
 
   @override
@@ -218,8 +222,13 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     List<PartModel> _partsFromHive = [];
     final String name = 'usedParts';
     final usedPartsBox = await Hive.openBox(name);
-    final res = usedPartsBox.get(entryId).toMap();
-    _partsFromHive = res.entries.map((e) => PartModel.fromJson(e.value.cast<String, dynamic>())).toList();
+//    usedPartsBox.delete(entryId); //for delete errors
+    final res = usedPartsBox.get(entryId);
+    print(res);
+    if (res != null) {
+      _partsFromHive = List<PartModel>.from(
+          res.map((e) => PartModel.fromJson(e.cast<String, dynamic>())));
+    }
     return _partsFromHive;
   }
 }

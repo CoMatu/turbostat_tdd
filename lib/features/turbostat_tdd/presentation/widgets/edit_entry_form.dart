@@ -4,8 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/core/fixtures/date_validator.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_parts.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
+import 'package:turbostat_tdd/injection_container.dart';
 
 class EditEntryForm extends StatefulWidget {
   @override
@@ -18,7 +20,6 @@ class _EditEntryFormState extends State<EditEntryForm> {
 
   List<MaintenanceModel> _maintenances;
 
-  //String entryId;
   String maintenanceId;
   String entryName;
   String entryNote;
@@ -26,11 +27,8 @@ class _EditEntryFormState extends State<EditEntryForm> {
   double entryWorkPrice;
   int entryMileage;
   double totalPrice;
-
   EntryModel _model;
-
   bool isVisible;
-
   int numberOfPart;
 
   @override
@@ -179,7 +177,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.add_circle_outline),
+                        icon: Icon(Icons.edit),
                         onPressed: () {
                           setState(() {
                             isVisible = true;
@@ -374,6 +372,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
 
     if (!formState.validate()) {
       //     showSnackBarMessage(S.of(context).form_warning_fill_info);
+      // TODO добавить сообщение об ошибке
     } else {
       formState.save();
       final filtrRes =
@@ -391,11 +390,14 @@ class _EditEntryFormState extends State<EditEntryForm> {
       );
       final String _carId =
           Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
+//      Provider.of<PartsCart>(context, listen: false).addPartsToDataSource(entryId);
+      var _parts = Provider.of<PartsCart>(context, listen: false).partsCart;
+      await sl<AddEntryParts>().addEntryParts(entryId, _parts);
 
+      Provider.of<PartsCart>(context, listen: false).clearCart();
       Provider.of<Entries>(context, listen: false).add(_carId, _result);
 
       Navigator.pushReplacementNamed(context, 'load_data_page');
-      Provider.of<PartsCart>(context, listen: false).clearCart();
     }
   }
 }
