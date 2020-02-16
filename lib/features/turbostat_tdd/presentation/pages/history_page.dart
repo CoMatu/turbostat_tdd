@@ -110,6 +110,7 @@ class HistoryPage extends StatelessWidget {
                                 carId, entry.entries[index].entryId);
                             Provider.of<Entries>(context, listen: false)
                                 .updateAll(carId);
+                          //TODO решить что делать с запчастями при удалении записи
                           }
                         },
                       ),

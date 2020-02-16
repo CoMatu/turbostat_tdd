@@ -180,7 +180,11 @@ class _EditEntryFormState extends State<EditEntryForm> {
                         icon: Icon(Icons.edit),
                         onPressed: () {
                           setState(() {
-                            isVisible = true;
+                            if (!isVisible) {
+                              isVisible = true;
+                            } else {
+                              isVisible = false;
+                            }
                           });
                           //TODO add form for entry
                         },
