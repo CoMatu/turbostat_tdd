@@ -41,6 +41,7 @@ class S implements WidgetsLocalizations {
   String get car_card_enter_current_mileage => "Enter current mileage";
   String get car_card_no_image_selected => "No image selected";
   String get car_list_page_warning => "To get started you need to add a car";
+  String get cars => "Cars";
   String get dashboard_page_not_determinate_title => "No maintenance information";
   String get dashboard_page_welcome => "Welcome to TurboStat!";
   String get dashboard_page_welcome_thanks => "";
@@ -86,6 +87,7 @@ class S implements WidgetsLocalizations {
   String get form_validator_date_format => "Wrong date format";
   String get form_validator_dot => "Use dot for groups of digits";
   String get form_warning_fill_info => "Fill in the required information";
+  String get history => "History";
   String get image_deleted => "Image deleted";
   String get km => " km";
   String get login => "SIGN IN:";
@@ -95,10 +97,12 @@ class S implements WidgetsLocalizations {
   String get password => "Password";
   String get pick_image => "Pick Image";
   String get registration => "Create an Account";
+  String get settings => "Settings";
   String get signin => "SIGN IN";
   String get signin_with_google => "SIGN IN WITH GOOGLE";
   String get snack_bar_message_warning => "The form is filled incorrectly! Correct the mistakes";
   String get statistics => "Statistics";
+  String get stats => "Stats";
   String get will_pop_alert => "Exit the App?";
   String get works => "Works: ";
   String car_card_mileage(String mileage) => "Mileage: $mileage km";
@@ -150,6 +154,8 @@ class $ru extends S {
   @override
   String get form_validator_car_mileage => "Пожалуйста, введите текущий пробег";
   @override
+  String get stats => "Статистика";
+  @override
   String get form_decorator_part_name => "Расходные материалы / запчасти";
   @override
   String get signin => "ВХОД";
@@ -157,6 +163,8 @@ class $ru extends S {
   String get car_card_no_image_selected => "Изображение не выбрано";
   @override
   String get form_decorator_value_parts => "Стоимость запчастей";
+  @override
+  String get settings => "Настройки";
   @override
   String get form_validator_dot => "Используйте точку для групп разрядов";
   @override
@@ -176,11 +184,15 @@ class $ru extends S {
   @override
   String get form_warning_fill_info => "Заполните необходимую информацию";
   @override
+  String get history => "История";
+  @override
   String get button_edit_camel => "Изменить";
   @override
   String get edit_car_page_title => "Редактировать информацию об автомобиле:";
   @override
   String get dashboard_page_not_determinate_title => "Нет информации о проведении ТО";
+  @override
+  String get cars => "Машины";
   @override
   String get button_delete_camel => "Удалить";
   @override

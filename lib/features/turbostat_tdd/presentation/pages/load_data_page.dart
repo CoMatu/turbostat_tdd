@@ -59,12 +59,7 @@ class LoadDataPage extends StatelessWidget {
           BlocBuilder<LoadDataBloc, LoadDataState>(builder: (context, state) {
         if (state is Loading) {
           return Container(
-            child: Column(
-              children: <Widget>[
-                CustomCircleProgressBar(),
-                //Text('Loading State'),
-              ],
-            ),
+            child: Center(child: CustomCircleProgressBar()),
           );
         }
         if (state is LoadedAllCars) {

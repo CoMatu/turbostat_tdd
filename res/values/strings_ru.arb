@@ -88,5 +88,9 @@
   "button_add_calendar_camel": "Напомнить",
   "will_pop_alert": "Выйти из приложения?",
   "pick_image": "Выбрать изображение",
-  "statistics": "Статистика"
+  "statistics": "Статистика",
+  "history": "История",
+  "stats": "Статистика",
+  "cars": "Машины",
+  "settings": "Настройки"
 }

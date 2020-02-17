@@ -88,5 +88,9 @@
   "delete_entry_operation_warning": "You will delete the current record without the possibility of recovery",
   "will_pop_alert": "Exit the App?",
   "pick_image": "Pick Image",
-  "statistics": "Statistics"
+  "statistics": "Statistics",
+  "history": "History",
+  "stats": "Stats",
+  "cars": "Cars",
+  "settings": "Settings"
 }
