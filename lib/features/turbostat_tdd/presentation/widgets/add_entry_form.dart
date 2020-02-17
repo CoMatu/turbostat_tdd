@@ -167,7 +167,11 @@ class _AddEntryFormState extends State<AddEntryForm> {
                         icon: Icon(Icons.add_circle_outline),
                         onPressed: () {
                           setState(() {
-                            isVisible = true;
+                            if (!isVisible) {
+                              isVisible = true;
+                            } else {
+                              isVisible = false;
+                            }
                           });
                           //TODO add form for entry
                         },
