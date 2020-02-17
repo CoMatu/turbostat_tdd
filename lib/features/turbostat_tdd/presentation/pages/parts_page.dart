@@ -18,7 +18,7 @@ class _PartsPageState extends State<PartsPage> {
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
-            //        Navigator.popAndPushNamed(context, 'add_maintenance');
+            Navigator.popAndPushNamed(context, 'add_part');
           },
         ),
       ),

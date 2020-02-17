@@ -39,7 +39,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.view_list),
-            title: Text('History'),
+            title: Text('History'), // TODO add i18n plugin translate
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pie_chart),
@@ -54,7 +54,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
             title: Text('Settings'),
           ),
         ],
-        currentIndex: selectedIndex,
+        currentIndex: page.pageIndex,
         selectedItemColor: Colors.black,
         onTap: onItemTapped,
       );
