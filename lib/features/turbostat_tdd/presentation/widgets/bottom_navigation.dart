@@ -40,7 +40,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.view_list),
-            title: Text(S.of(context).history), // TODO add i18n plugin translate
+            title: Text(S.of(context).history),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pie_chart),
