@@ -43,23 +43,42 @@ class HistoryPage extends StatelessWidget {
                       Expanded(
                         child: Column(
                           children: <Widget>[
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                entry.entries[index].entryName != null
-                                    ? entry.entries[index].entryName
-                                    : 'unknowing entry',
+                            GestureDetector(
+                              // TODO детектор поднять в колонку?
+                              onTap: () async {
+                                final carId = Provider.of<CurrentCar>(context,
+                                        listen: false)
+                                    .currentCar
+                                    .carId;
+                                    
+                                Provider.of<PartsCart>(context, listen: false)
+                                    .getEntryParts(
+                                        entry.entries[index].entryId);
+
+                                Navigator.pushNamed(
+                                    context, 'maintenance_details');
+                              },
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  entry.entries[index].entryName != null
+                                      ? entry.entries[index].entryName
+                                      : 'unknowing entry',
+                                ),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 6.0, right: 10.0),
+                              padding:
+                                  const EdgeInsets.only(top: 6.0, right: 10.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Text(
-                                    entry.entries[index].entryDateTime != null ?
-                                    DateFormat('dd.MM.yyyy').format(
-                                        entry.entries[index].entryDateTime) : 'undefinied',
+                                    entry.entries[index].entryDateTime != null
+                                        ? DateFormat('dd.MM.yyyy').format(
+                                            entry.entries[index].entryDateTime)
+                                        : 'undefinied',
                                     //                          entry.entries[index].entryDateTime.toString(),
                                     style: Theme.of(context).textTheme.overline,
                                   ),
@@ -110,7 +129,7 @@ class HistoryPage extends StatelessWidget {
                                 carId, entry.entries[index].entryId);
                             Provider.of<Entries>(context, listen: false)
                                 .updateAll(carId);
-                          //TODO решить что делать с запчастями при удалении записи
+                            //TODO решить что делать с запчастями при удалении записи
                           }
                         },
                       ),

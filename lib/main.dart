@@ -70,6 +70,7 @@ class MyApp extends StatelessWidget {
           'edit_entry': (context) => EditEntryPage(),
           'add_part': (context) => AddPartPage(),
           'parts_page': (context) => PartsPage(),
+          'maintenance_details': (context) => MaintenanceDetailsPage(),
         },
       ),
     );
