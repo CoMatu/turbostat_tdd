@@ -294,7 +294,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
               padding: const EdgeInsets.only(top: 12.0),
               child: TextFormField(
                 keyboardType: TextInputType.text,
-                initialValue: '',
+                initialValue: _model.entryNote,
                 autocorrect: false,
                 onSaved: (String value) => entryNote = value,
                 maxLines: 3,
