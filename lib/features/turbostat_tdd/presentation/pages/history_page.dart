@@ -56,7 +56,8 @@ class HistoryPage extends StatelessWidget {
                                         entry.entries[index].entryId);
 
                                 Navigator.pushNamed(
-                                    context, 'maintenance_details');
+                                    context, 'maintenance_details',
+                                    arguments: entry.entries[index]);
                               },
                               child: Container(
                                 alignment: Alignment.centerLeft,
