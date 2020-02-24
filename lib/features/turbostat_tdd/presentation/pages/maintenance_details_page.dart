@@ -4,6 +4,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dar
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
+import 'package:turbostat_tdd/generated/i18n.dart';
 
 class MaintenanceDetailsPage extends StatefulWidget {
   const MaintenanceDetailsPage({Key key}) : super(key: key);
@@ -20,15 +21,16 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
   @override
   void initState() {
     totalPrice = Provider.of<PartsCart>(context, listen: false).totalPrice;
-    final _listMaintenancies =
-        Provider.of<Maintenances>(context, listen: false).maintenances;
-
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
     model = ModalRoute.of(context).settings.arguments;
+    final _listMaintenancies =
+        Provider.of<Maintenances>(context, listen: false).maintenances;
+    _maintenanceModel = _listMaintenancies
+        .singleWhere((element) => element.maintenanceId == model.maintenanceId);
     super.didChangeDependencies();
   }
 
@@ -45,13 +47,16 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text('maintenance_name'),
+                        child: Text(model.entryName),
                       ),
                     ],
                   )
                 ],
               ),
-              subtitle: Text('maintenance description'),
+              subtitle: Text(S.of(context).entry_details_page_description(
+                    _maintenanceModel.maintenanceMonthLimit.toString(),
+                    _maintenanceModel.maintenanceMileageLimit.toString(),
+                  )),
             ),
             Divider(),
             Padding(
@@ -116,6 +121,15 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
                         child: Text('Стоимость выполнения работ: '),
                       ),
                       Text(model.entryWorkPrice.toString()),
+                    ],
+                  ),
+                  Divider(),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text('Total amount: '),
+                      ),
+                      Text((model.entryWorkPrice + totalPrice).toString()),
                     ],
                   ),
                   Container(

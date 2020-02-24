@@ -50,10 +50,14 @@ class HistoryPage extends StatelessWidget {
                                         listen: false)
                                     .currentCar
                                     .carId;
-                                    
+
                                 Provider.of<PartsCart>(context, listen: false)
                                     .getEntryParts(
                                         entry.entries[index].entryId);
+
+                                await Provider.of<Maintenances>(context,
+                                        listen: false)
+                                    .getAllMaintenances(carId);
 
                                 Navigator.pushNamed(
                                     context, 'maintenance_details',
