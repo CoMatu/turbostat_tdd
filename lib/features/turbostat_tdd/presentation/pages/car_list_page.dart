@@ -58,34 +58,90 @@ class CarListPage extends StatelessWidget {
                                   String currentCar = jsonEncode(car);
                                   pref.setString('carId', currentCar);
 
-                                  Provider.of<CurrentCar>(context, listen: false)
+                                  Provider.of<CurrentCar>(context,
+                                          listen: false)
                                       .updateCurrentCar(state.listAll[index]);
-                                  Provider.of<Maintenances>(context, listen: false).getAllMaintenances(car.carId);
+                                  Provider.of<Maintenances>(context,
+                                          listen: false)
+                                      .getAllMaintenances(car.carId);
                                 },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                      child: Text(
-                                        state.listAll[index].carMark,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 10.0,
+                                    right: 10.0,
+                                  ),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: <Widget>[
+                                          Container(
+                                            child: Text(
+                                              state.listAll[index].carMark,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 12,
+                                          ),
+                                          Container(
+                                            child: Text(
+                                              state.listAll[index].carModel,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 12,
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        state.listAll[index].carModel,
+                                      Divider(),
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: <Widget>[
+                                                Text(
+                                                  'mileage: ', // add i18n
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .overline,
+                                                ),
+                                                Text(
+                                                  'data',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .overline,
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left:10.0, right: 10.0),
+                                                  child: GestureDetector(
+                                                    onTap: () async {
+
+                                                    },
+                                                    child: Icon(Icons.edit, size: 14.0, color: Colors.green,),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              state.listAll[index].carYear
+                                                  .toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .overline,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                             IconButton(
                               icon: Icon(Icons.edit),
                               onPressed: () {
-                                Navigator.pushReplacementNamed(context, 'edit_car');
+                                Navigator.pushReplacementNamed(
+                                    context, 'edit_car');
                               },
                             ),
                             IconButton(

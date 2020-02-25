@@ -50,7 +50,8 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
                         child: Text(model.entryName),
                       ),
                     ],
-                  )
+                  ),
+                  Divider(),
                 ],
               ),
               subtitle: Text(S.of(context).entry_details_page_description(
