@@ -24,6 +24,7 @@ abstract class TurbostatLocalDataSource {
   Future<List<PartModel>> getAllParts(String carId);
   Future<void> addEntryParts(String entryId, List<PartModel> partsList);
   Future<List<PartModel>> getEntryParts(String entryId);
+  Future<void> addCarMileage(String carId, int mileage);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
@@ -230,5 +231,11 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
           res.map((e) => PartModel.fromJson(e.cast<String, dynamic>())));
     }
     return _partsFromHive;
+  }
+
+  @override
+  Future<void> addCarMileage(String carId, int mileage) {
+    // TODO: implement addCarMileage
+    throw UnimplementedError();
   }
 }

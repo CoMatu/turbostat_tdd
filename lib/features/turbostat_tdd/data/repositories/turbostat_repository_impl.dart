@@ -243,7 +243,8 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
   }
 
   @override
-  Future<Either<Failure, List<PartModel>>> getAllPartModels(String carId) async {
+  Future<Either<Failure, List<PartModel>>> getAllPartModels(
+      String carId) async {
     if (await modeInfo.isCloudMode) {
       // TODO add implementation
     } else {
@@ -267,7 +268,8 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
       } on CacheException {
         return Left(CacheFailure());
       }
-    }  }
+    }
+  }
 
   @override
   Future<Either<Failure, List<PartModel>>> getEntryParts(String entryId) async {
@@ -282,5 +284,18 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
       }
     }
     return null;
+  }
+
+  @override
+  Future<void> addCarMileage(String carId, int mileage) async {
+    if (await modeInfo.isCloudMode) {
+      // TODO add implementation
+    } else {
+      try {
+        await localDataSource.addCarMileage(carId, mileage);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
   }
 }

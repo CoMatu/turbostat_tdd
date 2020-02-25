@@ -26,4 +26,5 @@ abstract class TurbostatRepository {
   Future<Either<Failure, List<PartModel>>> getAllPartModels(String carId);
   Future<void> addEntryParts(String entryId, List<PartModel> partsList);
   Future<Either<Failure, List<PartModel>>> getEntryParts(String entryId);
+  Future<void> addCarMileage(String carId, int mileage);
 }

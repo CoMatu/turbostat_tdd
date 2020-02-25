@@ -13,6 +13,8 @@ import 'package:turbostat_tdd/injection_container.dart';
 enum ConfirmAction { CANCEL, ACCEPT }
 
 class CarListPage extends StatelessWidget {
+  final TextEditingController _textFieldController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return buildPageBody(context);
@@ -95,29 +97,37 @@ class CarListPage extends StatelessWidget {
                                       Container(
                                         alignment: Alignment.centerLeft,
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Row(
                                               children: <Widget>[
                                                 Text(
-                                                  'mileage: ', // add i18n
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .overline,
-                                                ),
-                                                Text(
-                                                  'data',
+                                                  S
+                                                      .of(context)
+                                                      .car_card_mileage(
+                                                          '85000'), // add i18n
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .overline,
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(left:10.0, right: 10.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10.0,
+                                                          right: 10.0),
                                                   child: GestureDetector(
                                                     onTap: () async {
-
+                                                      _displayDialog(
+                                                          context,
+                                                          state.listAll[index]
+                                                              .carId);
                                                     },
-                                                    child: Icon(Icons.edit, size: 14.0, color: Colors.green,),
+                                                    child: Icon(
+                                                      Icons.edit,
+                                                      size: 14.0,
+                                                      color: Colors.green,
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -204,5 +214,39 @@ class CarListPage extends StatelessWidget {
         );
       },
     );
+  }
+
+  _displayDialog(BuildContext context, String documentID) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: TextField(
+              controller: _textFieldController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                  hintText: S.of(context).car_card_enter_current_mileage),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text(
+                  S.of(context).button_cancel,
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: Text(
+                  S.of(context).button_save,
+                ),
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
   }
 }
