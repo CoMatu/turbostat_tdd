@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:hive/hive.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
@@ -234,8 +236,12 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
   }
 
   @override
-  Future<void> addCarMileage(String carId, int mileage) {
-    // TODO: implement addCarMileage
-    throw UnimplementedError();
+  Future<void> addCarMileage(String carId, int mileage) async {
+    final String name = 'carMileage_' + carId;
+    final DateTime date = DateTime.now();
+    final mileageDate = jsonEncode(date);
+    final carMileageBox = await Hive.openBox(name);
+
+    carMileageBox.put(mileageDate, mileage);
   }
 }
