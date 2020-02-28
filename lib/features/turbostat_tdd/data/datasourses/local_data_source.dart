@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
+import 'package:nanoid/async/nanoid.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part_model.dart';
 
 abstract class TurbostatLocalDataSource {
@@ -26,7 +28,8 @@ abstract class TurbostatLocalDataSource {
   Future<List<PartModel>> getAllParts(String carId);
   Future<void> addEntryParts(String entryId, List<PartModel> partsList);
   Future<List<PartModel>> getEntryParts(String entryId);
-  Future<void> addCarMileage(String carId, int mileage);
+  Future<void> addCarMileage(String carId, MileageModel mileage);
+  Future<MileageModel> getLastMileageMode(String carId);
 }
 
 class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
@@ -236,12 +239,16 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
   }
 
   @override
-  Future<void> addCarMileage(String carId, int mileage) async {
+  Future<void> addCarMileage(String carId, MileageModel mileage) async {
     final String name = 'carMileage_' + carId;
-    final DateTime date = DateTime.now();
-    final mileageDate = jsonEncode(date);
+    final dataToBox = mileage.toJson();
     final carMileageBox = await Hive.openBox(name);
+    var mileageKey = await nanoid(4);
+    carMileageBox.put(mileageKey, dataToBox);
+  }
 
-    carMileageBox.put(mileageDate, mileage);
+  @override
+  Future<MileageModel> getLastMileageMode(String carId) async {
+
   }
 }

@@ -3,18 +3,17 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:turbostat_tdd/core/error/failures.dart';
 import 'package:turbostat_tdd/core/usecases/usecase.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 
-class GetCarMileage implements UseCase<int, Params>{
+class GetCarMileage implements UseCase<MileageModel, Params>{
   final TurbostatRepository repository;
 
   GetCarMileage({@required this.repository});
 
   @override
-  Future<Either<Failure, int>> call(Params params) {
-    // TODO: implement call
-    throw UnimplementedError();
-  }
+  Future<Either<Failure, MileageModel>> call(Params params) async {
+return await repository.getLastMileageModel(params.carId);  }
 
 
   }

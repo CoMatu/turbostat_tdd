@@ -8,6 +8,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 
@@ -287,7 +288,7 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
   }
 
   @override
-  Future<void> addCarMileage(String carId, int mileage) async {
+  Future<void> addCarMileage(String carId, MileageModel mileage) async {
     if (await modeInfo.isCloudMode) {
       // TODO add implementation
     } else {
@@ -297,5 +298,20 @@ class TurbostatRepositoryImpl implements TurbostatRepository {
         return Left(CacheFailure());
       }
     }
+  }
+
+  @override
+  Future<Either<Failure, MileageModel>> getLastMileageModel(String carId) async {
+    if (await modeInfo.isCloudMode) {
+      // TODO add implementation
+    } else {
+      try {
+        final result = await localDataSource.getLastMileageMode(carId);
+        return Right(result);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
+    return null;
   }
 }
