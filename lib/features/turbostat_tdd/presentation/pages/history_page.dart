@@ -116,7 +116,7 @@ class HistoryPage extends StatelessWidget {
                               .update(carId);
                           Provider.of<PartsCart>(context, listen: false)
                               .getEntryParts(entry.entries[index].entryId);
-                          Navigator.pushReplacementNamed(context, 'edit_entry');
+                          Navigator.popAndPushNamed(context, 'edit_entry');
                         },
                       ),
                       IconButton(

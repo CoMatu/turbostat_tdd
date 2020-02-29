@@ -6,6 +6,7 @@ import 'package:turbostat_tdd/core/network/network_info.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data_source.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/repositories/turbostat_repository_impl.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_mileage.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_parts.dart';
@@ -19,6 +20,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_entries.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_maintenances.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_part_models.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_car_mileage.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_maintenance.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_entries.dart';
@@ -56,6 +58,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetAllPartModels(repository: sl()));
   sl.registerLazySingleton(() => AddEntryParts(repository: sl()));
   sl.registerLazySingleton(() => GetEntryParts(repository: sl()));
+  sl.registerLazySingleton(() => AddCarMileage(repository: sl()));
+  sl.registerLazySingleton(() => GetCarMileage(repository: sl()));
 
   // Repository
   sl.registerLazySingleton<TurbostatRepository>(() => TurbostatRepositoryImpl(
