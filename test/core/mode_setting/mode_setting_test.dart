@@ -9,6 +9,7 @@ class MockSharedPreferences extends Mock implements SharedPreferences {}
 class MockModeSettingImpl extends Mock implements ModeInfoImpl {}
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   ModeInfoImpl mode;
 
   setUp(() async {
