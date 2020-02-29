@@ -7,8 +7,8 @@ part 'mileage_model.g.dart';
 
 class MileageModel extends Mileage {
   MileageModel({
-    @required mileageDateTime,
-    @required mileage,
+    @required DateTime mileageDateTime,
+    @required int mileage,
   }) : super(
           mileageDateTime: mileageDateTime,
           mileage: mileage,

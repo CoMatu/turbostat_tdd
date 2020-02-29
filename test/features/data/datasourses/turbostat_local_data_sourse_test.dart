@@ -6,13 +6,15 @@ import 'package:hive/hive.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/datasourses/local_data_source.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
 
 void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
   TurbostatLocalDataSourceImpl dataSource;
 
   final List<CarModel> tAllCarModels = [
     CarModel(
-      carId: '1',
+      carId: '1ss',
       carName: 'car 1',
       carMark: 'nissan',
       carModel: 'note',
@@ -24,7 +26,7 @@ void main() async {
       carNote: 'car note',
     ),
     CarModel(
-      carId: '2',
+      carId: '2ss',
       carName: 'car 2',
       carMark: 'nissan',
       carModel: 'murano',
@@ -58,8 +60,18 @@ void main() async {
     ),
   ];
 
+  final tEntry = EntryModel(
+    entryId: '1',
+    maintenanceId: '1',
+    entryName: 'name1',
+    entryDateTime: DateTime(2019, 07, 22, 00, 00),
+    entryMileage: 80000,
+    entryWorkPrice: 200.00,
+    entryNote: 'entry note',
+  );
+
   final tCarModel = CarModel(
-    carId: '1',
+    carId: '1dd',
     carName: 'car 1',
     carMark: 'nissan',
     carModel: 'note',
@@ -69,6 +81,11 @@ void main() async {
     fuelType: 'liquid',
     tankVolume: 38,
     carNote: 'car note',
+  );
+
+  final tCarMileage = MileageModel(
+    mileage: 88128,
+    mileageDateTime: DateTime(2020, 1, 1),
   );
 
   final tCarId = '1';
@@ -121,7 +138,10 @@ void main() async {
 
   group('cache data to local database', () {
     test('should cache all CarModels to Local Data Source', () async {
-      await dataSource.cacheListCarModels(tAllCarModels);
+      for (int i = 0; i < tAllCarModels.length; i++) {
+        await dataSource.addCarModel(tAllCarModels[i]);
+      }
+
       final result = await dataSource.getLastCarModels();
       expect(result, tAllCarModels);
     });
@@ -130,6 +150,21 @@ void main() async {
       await dataSource.addCarModel(tCarModel);
       final result = await dataSource.getConcreteCarModel(tCarModel.carId);
       expect(result, tCarModel);
+    });
+    test('should add Mileage to Local Data Source', () async {
+      await dataSource.addCarMileage(tCarModel.carId, tCarMileage);
+      final result = await dataSource.getLastMileageMode(tCarModel.carId);
+      expect(result, tCarMileage);
+    });
+
+    test('should add EntryModel to Local Data Source', () async {
+      await dataSource.addEntry(
+        tCarModel.carId,
+        tEntry,
+      );
+      final result = await dataSource.getEntries(tCarModel.carId, tEntry.maintenanceId);
+      final _entry = result.first;
+      expect(_entry, tEntry);
     });
   });
 }

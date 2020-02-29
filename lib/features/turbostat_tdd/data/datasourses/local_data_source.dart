@@ -43,10 +43,12 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
   Future<CarModel> getConcreteCarModel(String carId) async {
     List<CarModel> _carsFromDataBase = [];
     final carsBox = await Hive.openBox('cars');
-    var ind = carsBox.length;
-    for (int i = 0; i < ind; i++) {
-      _carsFromDataBase.add(CarModel.fromJson(carsBox.get(i)));
-    }
+    final boxResult = carsBox.toMap();
+
+    _carsFromDataBase = boxResult.entries
+        .map((entry) => CarModel.fromJson(entry.value.cast<String, dynamic>()))
+        .toList();
+
     final concreteCar = _carsFromDataBase.where((f) => f.carId == carId).first;
     return concreteCar;
   }
@@ -152,7 +154,7 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
         .toList();
 
     final entries =
-        _entriesFromHive.where((res) => res.maintenanceId == maintenanceId);
+        _entriesFromHive.where((res) => res.maintenanceId == maintenanceId).toList();
     return entries;
   }
 
@@ -230,7 +232,7 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     final usedPartsBox = await Hive.openBox(name);
 //    usedPartsBox.delete(entryId); //for delete errors
     final res = usedPartsBox.get(entryId);
-    print(res);
+//    print(res);
     if (res != null) {
       _partsFromHive = List<PartModel>.from(
           res.map((e) => PartModel.fromJson(e.cast<String, dynamic>())));
@@ -249,6 +251,18 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
 
   @override
   Future<MileageModel> getLastMileageMode(String carId) async {
+    List<MileageModel> _mileageFromHive = [];
+    final String name = 'carMileage_' + carId;
+    final carMileageBox = await Hive.openBox(name);
+    final _res = carMileageBox.toMap();
+    _mileageFromHive = _res.entries
+        .map(
+            (part) => MileageModel.fromJson(part.value.cast<String, dynamic>()))
+        .toList();
 
+    _mileageFromHive.sort((a, b) => b.mileageDateTime.millisecondsSinceEpoch
+        .compareTo(a.mileageDateTime.millisecondsSinceEpoch));
+
+    return _mileageFromHive.first;
   }
 }

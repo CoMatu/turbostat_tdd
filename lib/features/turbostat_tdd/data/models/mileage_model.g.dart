@@ -8,8 +8,10 @@ part of 'mileage_model.dart';
 
 MileageModel _$MileageModelFromJson(Map<String, dynamic> json) {
   return MileageModel(
-    mileageDateTime: json['mileageDateTime'],
-    mileage: json['mileage'],
+    mileageDateTime: json['mileageDateTime'] == null
+        ? null
+        : DateTime.parse(json['mileageDateTime'] as String),
+    mileage: json['mileage'] as int,
   );
 }
 
