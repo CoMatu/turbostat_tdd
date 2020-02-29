@@ -7,6 +7,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/entities/car.dart';
 import '../../../fixtures/fixture_reader.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   final tCarModel = CarModel(
     carId: '1',
     carName: 'car 1',
