@@ -23,6 +23,7 @@ class MockNetworkInfo extends Mock implements NetworkInfo {}
 class MockModeInfo extends Mock implements ModeInfo {}
 
 main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   TurbostatRepositoryImpl repository;
   MockRemoteDataSourse mockRemoteDataSourse;
   MockLocalDataSource mockLocalDataSource;
