@@ -15,10 +15,9 @@ class GetMileage extends LoadMileageEvent {
 
 class AddMileage extends LoadMileageEvent {
   final String carId;
+  final MileageModel mileage;
 
-  AddMileage({@required this.carId});
+  AddMileage({@required this.carId, @required this.mileage});
   @override
-
-  List<Object> get props => [carId];
-  
+  List<Object> get props => [carId, mileage];
 }

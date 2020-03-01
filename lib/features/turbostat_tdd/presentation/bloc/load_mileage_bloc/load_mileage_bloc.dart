@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:turbostat_tdd/core/error/failures.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_mileage.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_car_mileage.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
@@ -15,8 +16,10 @@ part 'load_mileage_state.dart';
 class LoadMileageBloc extends Bloc<LoadMileageEvent, LoadMileageState> {
   final GetCarMileage getCarMileage;
   final AddCarMileage addCarMileage;
+  final TurbostatRepository repository;
 
   LoadMileageBloc({
+    @required this.repository,
     @required GetCarMileage getMileage,
     @required AddCarMileage addMileage,
   })  : assert(getMileage != null),
@@ -39,6 +42,9 @@ class LoadMileageBloc extends Bloc<LoadMileageEvent, LoadMileageState> {
         (failure) => Error(message: _mapFailureToMessage(failure)),
         (carMileage) => LoadedCarMileage(mileage: carMileage),
       );
+    } else if (event is AddMileage) {
+      await repository.addCarMileage(event.carId, event.mileage);
+      yield LoadMileageInitial();
     }
   }
 

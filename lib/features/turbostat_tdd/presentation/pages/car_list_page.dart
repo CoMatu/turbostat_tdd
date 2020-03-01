@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_mileage.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/load_mileage_bloc/load_mileage_bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
@@ -101,31 +103,8 @@ class CarListPage extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Row(
-                                              children: <Widget>[
-                                                buildMileageText(context,
-                                                    state.listAll[index].carId),
-                                                GestureDetector(
-                                                  onTap: () async {
-                                                    _displayDialog(
-                                                        context,
-                                                        state.listAll[index]
-                                                            .carId);
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 12.0,
-                                                            right: 12.0),
-                                                    child: Icon(
-                                                      Icons.edit,
-                                                      size: 18.0,
-                                                      color: Colors.green,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                            buildRowMileage(context,
+                                                state.listAll[index].carId),
                                             Text(
                                               state.listAll[index].carYear
                                                   .toString(),
@@ -177,29 +156,52 @@ class CarListPage extends StatelessWidget {
     );
   }
 
-  BlocProvider<LoadMileageBloc> buildMileageText(
+  BlocProvider<LoadMileageBloc> buildRowMileage(
       BuildContext context, String carId) {
     return BlocProvider(
-        create: (_) => sl<LoadMileageBloc>()..add(GetMileage(carId: carId)),
-        child: BlocBuilder<LoadMileageBloc, LoadMileageState>(
-            builder: (context, state) {
+      create: (_) => sl<LoadMileageBloc>()..add(GetMileage(carId: carId)),
+      child: BlocBuilder<LoadMileageBloc, LoadMileageState>(
+        builder: (context, state) {
           if (state is LoadMileageInitial) {
             return CustomCircleProgressBar();
           }
           if (state is LoadedCarMileage) {
-            return state.mileage.mileage == 0
-                ? Text(
-                    'there are not data', // TODO add i18n
-                    style: Theme.of(context).textTheme.overline,
-                  )
-                : Text(
-                    S.of(context).car_card_mileage(
-                        state.mileage.mileage.toString()), // add i18n
-                    style: Theme.of(context).textTheme.overline,
-                  );
+            return Row(
+              children: <Widget>[
+                state.mileage.mileage == 0
+                    ? Text(
+                        'there are not data', // TODO add i18n
+                        style: Theme.of(context).textTheme.overline,
+                      )
+                    : Text(
+                        S.of(context).car_card_mileage(
+                            state.mileage.mileage.toString()), // add i18n
+                        style: Theme.of(context).textTheme.overline,
+                      ),
+                GestureDetector(
+                  onTap: () async {
+                    _displayDialog(
+                      context,
+                      carId,
+                      state,
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                    child: Icon(
+                      Icons.edit,
+                      size: 18.0,
+                      color: Colors.green,
+                    ),
+                  ),
+                ),
+              ],
+            );
           }
           return null;
-        }));
+        },
+      ),
+    );
   }
 
   Future<ConfirmAction> asyncConfirmDialog(
@@ -235,8 +237,9 @@ class CarListPage extends StatelessWidget {
     );
   }
 
-  _displayDialog(BuildContext context, String documentID) async {
-    return showDialog(
+  _displayDialog(BuildContext context, String carId, LoadMileageState state) async {
+    return 
+    showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
@@ -261,6 +264,12 @@ class CarListPage extends StatelessWidget {
                   S.of(context).button_save,
                 ),
                 onPressed: () async {
+                  MileageModel mileage = MileageModel(
+                      mileageDateTime: DateTime.now(),
+                      mileage: int.parse(_textFieldController.text));
+                  sl<LoadMileageBloc>()
+                      .add(AddMileage(carId: carId, mileage: mileage));
+                  //             sl<LoadDataBloc>().add(GetAllCar());
                   Navigator.of(context).pop();
                 },
               )
@@ -269,3 +278,9 @@ class CarListPage extends StatelessWidget {
         });
   }
 }
+
+/*
+
+
+
+*/

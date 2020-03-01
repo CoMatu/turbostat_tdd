@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_mileage.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_car_mileage.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/load_mileage_bloc/load_mileage_bloc.dart';
@@ -10,16 +11,21 @@ class MockGetCarMileage extends Mock implements GetCarMileage {}
 
 class MockAddCarMileage extends Mock implements AddCarMileage {}
 
+class MockTurbostatRepository extends Mock implements TurbostatRepository {}
+
 void main() {
   LoadMileageBloc bloc;
   MockGetCarMileage mockGetCarMileage;
   MockAddCarMileage mockAddCarMileage;
+  MockTurbostatRepository mockTurbostatRepository;
 
   setUp(() {
     mockGetCarMileage = MockGetCarMileage();
     mockAddCarMileage = MockAddCarMileage();
+    mockTurbostatRepository = MockTurbostatRepository();
 
     bloc = LoadMileageBloc(
+      repository: mockTurbostatRepository,
       getMileage: mockGetCarMileage,
       addMileage: mockAddCarMileage,
     );

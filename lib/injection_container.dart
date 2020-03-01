@@ -42,8 +42,9 @@ Future<void> init() async {
       ));
 
   sl.registerFactory(() => LoadMileageBloc(
-        addMileage: sl(),
-        getMileage: sl(),
+        repository: sl(),
+        addMileage: sl.call(),
+        getMileage: sl.call(),
       ));
 
   // Usecases
