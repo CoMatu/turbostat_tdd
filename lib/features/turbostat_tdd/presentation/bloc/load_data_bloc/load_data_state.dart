@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:meta/meta.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
 
 abstract class LoadDataState extends Equatable {
   const LoadDataState();
@@ -25,6 +26,14 @@ class LoadedConcreteCar extends LoadDataState {
   LoadedConcreteCar({@required this.concreteCar});
   @override
   List<Object> get props => [concreteCar];
+}
+
+class LoadedCarMileage extends LoadDataState {
+  final MileageModel mileage;
+
+  LoadedCarMileage({@required this.mileage});
+  @override
+  List<Object> get props => [mileage];
 }
 
 class Error extends LoadDataState {

@@ -3,9 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_mileage.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car_models.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_car_mileage.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 
@@ -17,6 +19,10 @@ class MockAddCarModel extends Mock implements AddCarModel {}
 
 class MockDeleteCarModel extends Mock implements DeleteCarModel {}
 
+class MockGetCarMileage extends Mock implements GetCarMileage {}
+
+class MockAddCarMileage extends Mock implements AddCarMileage {}
+
 class MockTurbostatRepository extends Mock implements TurbostatRepository {}
 
 void main() {
@@ -25,6 +31,8 @@ void main() {
   MockGetAllCar mockGetAllCar;
   MockAddCarModel mockAddCarModel;
   MockDeleteCarModel mockDeleteCarModel;
+  MockGetCarMileage mockGetCarMileage;
+  MockAddCarMileage mockAddCarMileage;
   MockTurbostatRepository mockTurbostatRepository;
 
   setUpAll(() {
@@ -32,6 +40,8 @@ void main() {
     mockGetConcreteCar = MockGetConcreteCar();
     mockAddCarModel = MockAddCarModel();
     mockDeleteCarModel = MockDeleteCarModel();
+    mockAddCarMileage = MockAddCarMileage();
+    mockGetCarMileage = MockGetCarMileage();
     mockTurbostatRepository = MockTurbostatRepository();
 
     bloc = LoadDataBloc(
@@ -39,11 +49,13 @@ void main() {
       allCarModels: mockGetAllCar,
       addCar: mockAddCarModel,
       deleteCar: mockDeleteCarModel,
+      getMileage: mockGetCarMileage,
+      addMileage: mockAddCarMileage,
       repository: mockTurbostatRepository,
     );
   });
 
-    final List<CarModel> tAllCarModels = [
+  final List<CarModel> tAllCarModels = [
     CarModel(
       carId: '1',
       carName: 'car 1',
@@ -76,29 +88,28 @@ void main() {
   });
 
   group('getAllCarsModels bloc', () {
-  test('should get data from the allcarmodels use case', () async {
-    when(mockGetAllCar(any)).thenAnswer((_) async => Right(tAllCarModels));
-    bloc.add(GetAllCar());
-    await untilCalled(mockGetAllCar(any));
-    verify(mockGetAllCar(NoParams()));
-  });
+    test('should get data from the allcarmodels use case', () async {
+      when(mockGetAllCar(any)).thenAnswer((_) async => Right(tAllCarModels));
+      bloc.add(GetAllCar());
+      await untilCalled(mockGetAllCar(any));
+      verify(mockGetAllCar(NoParams()));
+    });
   });
 
   test(
-  'should emit [Loading, Loaded] when data is gotten successfully',
-  () async {
-    // arrange
-    when(mockGetAllCar(NoParams()))
-        .thenAnswer((_) async => Right(tAllCarModels));
-    // assert later
-    final expected = [
-      Loading(),
-      LoadedAllCars(listAll: tAllCarModels),
-    ];
-    expectLater(bloc, emitsInOrder(expected));
-    // act
-    bloc.add(GetAllCar());
-  },
-);
-
+    'should emit [Loading, Loaded] when data is gotten successfully',
+    () async {
+      // arrange
+      when(mockGetAllCar(NoParams()))
+          .thenAnswer((_) async => Right(tAllCarModels));
+      // assert later
+      final expected = [
+        Loading(),
+        LoadedAllCars(listAll: tAllCarModels),
+      ];
+      expectLater(bloc, emitsInOrder(expected));
+      // act
+      bloc.add(GetAllCar());
+    },
+  );
 }
