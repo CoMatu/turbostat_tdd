@@ -109,7 +109,7 @@ class _AddMaintenanceFormState extends State<AddMaintenanceForm> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                    width: 120,
+                    width: 150,
                     child: RaisedButton(
                       child: Text(S.of(context).button_cancel),
                       onPressed: () {
@@ -123,7 +123,7 @@ class _AddMaintenanceFormState extends State<AddMaintenanceForm> {
                     width: 12,
                   ),
                   SizedBox(
-                    width: 120,
+                    width: 150,
                     child: RaisedButton(
                       child: Text(S.of(context).button_save),
                       onPressed: () async => _submitDetails(car.currentCar.carId),

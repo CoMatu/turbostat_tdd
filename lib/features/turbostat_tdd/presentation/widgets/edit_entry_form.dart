@@ -310,7 +310,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                  width: 120,
+                  width: 150,
                   child: RaisedButton(
                     child: Text(S.of(context).button_cancel),
                     onPressed: () {
@@ -325,7 +325,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                   width: 12,
                 ),
                 SizedBox(
-                  width: 120,
+                  width: 150,
                   child: RaisedButton(
                     child: Text(S.of(context).button_save),
                     onPressed: _submitDetails,
