@@ -153,8 +153,9 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
             (entry) => EntryModel.fromJson(entry.value.cast<String, dynamic>()))
         .toList();
 
-    final entries =
-        _entriesFromHive.where((res) => res.maintenanceId == maintenanceId).toList();
+    final entries = _entriesFromHive
+        .where((res) => res.maintenanceId == maintenanceId)
+        .toList();
     return entries;
   }
 
@@ -263,6 +264,11 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     _mileageFromHive.sort((a, b) => b.mileageDateTime.millisecondsSinceEpoch
         .compareTo(a.mileageDateTime.millisecondsSinceEpoch));
 
-    return _mileageFromHive.first;
+    return _mileageFromHive.length == 0
+        ? MileageModel(
+            mileageDateTime: DateTime.now(),
+            mileage: 0,
+          )
+        : _mileageFromHive.first;
   }
 }

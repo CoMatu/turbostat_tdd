@@ -296,7 +296,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                  width: 120,
+                  width: 150,
                   child: RaisedButton(
                     child: Text(S.of(context).button_cancel),
                     onPressed: () {
@@ -312,7 +312,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
                   width: 12,
                 ),
                 SizedBox(
-                  width: 120,
+                  width: 150,
                   child: RaisedButton(
                     child: Text(S.of(context).button_save),
                     onPressed: _submitDetails,

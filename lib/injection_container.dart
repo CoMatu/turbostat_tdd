@@ -26,6 +26,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concret
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_entries.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_entry_parts.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/load_mileage_bloc/load_mileage_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -38,6 +39,11 @@ Future<void> init() async {
         allCarModels: sl.call(),
         addCar: sl.call(),
         deleteCar: sl.call(),
+      ));
+
+  sl.registerFactory(() => LoadMileageBloc(
+        addMileage: sl(),
+        getMileage: sl(),
       ));
 
   // Usecases

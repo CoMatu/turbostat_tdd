@@ -19,8 +19,8 @@ class LoadMileageBloc extends Bloc<LoadMileageEvent, LoadMileageState> {
   LoadMileageBloc({
     @required GetCarMileage getMileage,
     @required AddCarMileage addMileage,
-  })  : assert(getCarMileage != null),
-        assert(addCarMileage != null),
+  })  : assert(getMileage != null),
+        assert(addMileage != null),
         getCarMileage = getMileage,
         addCarMileage = addMileage;
 

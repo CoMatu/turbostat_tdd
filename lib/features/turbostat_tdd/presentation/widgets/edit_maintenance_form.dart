@@ -116,7 +116,7 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                    width: 120,
+                    width: 150,
                     child: RaisedButton(
                       child: Text(S.of(context).button_cancel),
                       onPressed: () {
@@ -130,7 +130,7 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
                     width: 12,
                   ),
                   SizedBox(
-                    width: 120,
+                    width: 150,
                     child: RaisedButton(
                       child: Text(S.of(context).button_save),
                       onPressed: () async =>
