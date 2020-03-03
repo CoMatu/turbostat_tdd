@@ -31,6 +31,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => CurrentEntry()),
         ChangeNotifierProvider(create: (context) => Parts()),
         ChangeNotifierProvider(create: (context) => PartsCart()),
+        ChangeNotifierProvider(create: (context) => MileageProvider()),
       ],
       child: MyApp(),
     ),
