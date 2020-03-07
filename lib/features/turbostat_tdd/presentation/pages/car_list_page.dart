@@ -103,7 +103,7 @@ class CarListPage extends StatelessWidget {
                                           children: [
                                             MileageRowWidget(
                                                 textFieldController:
-                                                    _textFieldController),
+                                                    _textFieldController, carId: state.listAll[index].carId),
                                             Text(
                                               state.listAll[index].carYear
                                                   .toString(),

@@ -1,24 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_mileage.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_car_mileage.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
+import 'package:turbostat_tdd/injection_container.dart';
 
-class MileageRowWidget extends StatelessWidget {
-  
+class MileageRowWidget extends StatefulWidget {
   const MileageRowWidget({
     Key key,
     @required TextEditingController textFieldController,
+    String carId,
   })  : _textFieldController = textFieldController,
+        _carId = carId,
         super(key: key);
 
   final TextEditingController _textFieldController;
+  final String _carId;
 
+  @override
+  _MileageRowWidgetState createState() => _MileageRowWidgetState();
+}
+
+class _MileageRowWidgetState extends State<MileageRowWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Text(
-          'mileage data',
-          style: Theme.of(context).textTheme.overline,
-        ),
+        FutureBuilder(
+            future: _getMileage(widget._carId),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data != null) {
+                  return Text(
+                    snapshot.data.toString(),
+                    style: Theme.of(context).textTheme.overline,
+                  );
+                }
+              }
+              return Text('data mileage');
+            }),
         GestureDetector(
           onTap: () async {
             showDialog(
@@ -26,7 +46,7 @@ class MileageRowWidget extends StatelessWidget {
                 builder: (context) {
                   return AlertDialog(
                     content: TextField(
-                      controller: _textFieldController,
+                      controller: widget._textFieldController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           hintText:
@@ -47,6 +67,14 @@ class MileageRowWidget extends StatelessWidget {
                           S.of(context).button_save,
                         ),
                         onPressed: () async {
+                          final _entry = MileageModel(
+                            mileageDateTime: DateTime.now(),
+                            mileage:
+                                int.parse(widget._textFieldController.text),
+                          );
+                          await sl<AddCarMileage>()
+                              .addCarMileage(widget._carId, _entry);
+                          setState(() {});
                           Navigator.of(context).pop();
                         },
                       )
@@ -64,6 +92,14 @@ class MileageRowWidget extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  _getMileage(String carId) async {
+    final _res = await sl<GetCarMileage>().call(Params(carId: carId));
+    return _res.fold(
+      (failure) => null,
+      (_res) => _res.mileage,
     );
   }
 }
