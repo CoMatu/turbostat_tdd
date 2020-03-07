@@ -11,3 +11,4 @@ export 'add_entry_form.dart';
 export 'edit_entry_form.dart';
 export 'add_part_form.dart';
 export 'parts_list.dart';
+export 'mileage_row.dart';

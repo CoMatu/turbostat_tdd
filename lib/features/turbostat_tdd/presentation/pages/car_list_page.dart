@@ -101,8 +101,9 @@ class CarListPage extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            buildRowMileage(
-                                                state, index, context),
+                                            MileageRowWidget(
+                                                textFieldController:
+                                                    _textFieldController),
                                             Text(
                                               state.listAll[index].carYear
                                                   .toString(),
@@ -154,27 +155,6 @@ class CarListPage extends StatelessWidget {
     );
   }
 
-  Row buildRowMileage(LoadedAllCars state, int index, BuildContext context) {
-    return Row(
-      children: <Widget>[
-        MileageTextWidget(state.listAll[index].carId),
-        GestureDetector(
-          onTap: () async {
-            _displayDialog(context, state.listAll[index].carId);
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-            child: Icon(
-              Icons.edit,
-              size: 18.0,
-              color: Colors.green,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Future<ConfirmAction> asyncConfirmDialog(
       BuildContext context, String carId) async {
     return showDialog<ConfirmAction>(
@@ -207,76 +187,5 @@ class CarListPage extends StatelessWidget {
       },
     );
   }
-
-  _displayDialog(BuildContext context, String documentID) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: TextField(
-              controller: _textFieldController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  hintText: S.of(context).car_card_enter_current_mileage),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text(
-                  S.of(context).button_cancel,
-                  style: TextStyle(color: Colors.black),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              FlatButton(
-                child: Text(
-                  S.of(context).button_save,
-                ),
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        });
-  }
 }
 
-class MileageTextWidget extends StatefulWidget {
-  final String carId;
-  const MileageTextWidget(this.carId, {Key key}) : super(key: key);
-
-  @override
-  _MileageTextWidgetState createState() => _MileageTextWidgetState(carId);
-}
-
-class _MileageTextWidgetState extends State<MileageTextWidget> {
-  final String carId;
-  _MileageTextWidgetState(this.carId);
-
-  get _getTextMileage async {
-    final _res = await sl<GetCarMileage>().call(Params(carId: carId));
-
-    return _res.fold(
-      (failure) => 'no data',
-      (_res) => _res.mileage.toString(),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _getTextMileage,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.hasData) {
-          if (snapshot.data != null) {
-            return Text(snapshot.data.toString());
-          } else
-            return Text('data');
-        } else
-          return Text('data 2');
-      },
-    );
-  }
-}
