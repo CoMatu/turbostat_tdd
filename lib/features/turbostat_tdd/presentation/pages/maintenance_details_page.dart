@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/calculate_remainder.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
+import 'package:turbostat_tdd/injection_container.dart';
 
 class MaintenanceDetailsPage extends StatefulWidget {
   const MaintenanceDetailsPage({Key key}) : super(key: key);
@@ -17,10 +19,15 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
   double totalPrice;
   EntryModel model;
   MaintenanceModel _maintenanceModel;
+  int daysLeft;
+  int mileageLeft;
+  String carId;
 
   @override
   void initState() {
     totalPrice = Provider.of<PartsCart>(context, listen: false).totalPrice;
+    carId = Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
+
     super.initState();
   }
 
@@ -31,6 +38,7 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
         Provider.of<Maintenances>(context, listen: false).maintenances;
     _maintenanceModel = _listMaintenancies
         .singleWhere((element) => element.maintenanceId == model.maintenanceId);
+
     super.didChangeDependencies();
   }
 
@@ -62,8 +70,7 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
             Divider(),
             Padding(
               padding: const EdgeInsets.all(14.0),
-              child: Text(
-                  'До ближайшей операции ТО осталось ХХХ дней или 00000 км'),
+              child: RemaindedTextWidget(_maintenanceModel, carId),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 14.0, right: 14.0),
@@ -75,7 +82,7 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    child: Text('Список запасных частей:'),
+                    child: Text('Список запасных частей:'), // TODO add i18n
                     alignment: Alignment.centerLeft,
                   ),
                   Consumer<PartsCart>(
@@ -154,5 +161,46 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
         ),
       ),
     );
+  }
+}
+
+class RemaindedTextWidget extends StatelessWidget {
+  final MaintenanceModel maintenanceModel;
+  final String carId;
+  const RemaindedTextWidget(
+    this.maintenanceModel,
+    this.carId, {
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: getRemainded(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data != null) {
+              return Text(
+                S.of(context).dashboard_page_maintenance_before(
+                    snapshot.data[0].toString(), snapshot.data[1].toString()),
+              );
+            }
+          }
+          return Text(
+            'data not aviable',
+            style: Theme.of(context).textTheme.overline,
+          );
+        });
+  }
+
+  getRemainded() async {
+    int mileageLeft = await sl<CalculateRemainder>()
+        .getRemainderDistance(carId, maintenanceModel);
+    int daysLeft = await sl<CalculateRemainder>()
+        .getRemainderDays(carId, maintenanceModel);
+
+    List<int> remaindedList = [daysLeft, mileageLeft];
+
+    return remaindedList;
   }
 }

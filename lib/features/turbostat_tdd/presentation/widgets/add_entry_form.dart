@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/core/fixtures/date_validator.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_parts.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
@@ -22,6 +23,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
   final TextEditingController _controller = TextEditingController();
 
   List<MaintenanceModel> _maintenances;
+  MileageModel _mileageModel;
 
   String entryId;
   String maintenanceId;
@@ -37,9 +39,12 @@ class _AddEntryFormState extends State<AddEntryForm> {
   void initState() {
     _maintenances =
         Provider.of<Maintenances>(context, listen: false).maintenances;
-    super.initState();
     isVisible = false;
     totalPrice = Provider.of<PartsCart>(context, listen: false).totalPrice;
+    _mileageModel =
+        Provider.of<MileageProvider>(context, listen: false).mileages;
+
+    super.initState();
   }
 
   @override
@@ -116,7 +121,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
               padding: const EdgeInsets.only(top: 12.0),
               child: TextFormField(
                 keyboardType: TextInputType.number,
-                initialValue: '',
+                initialValue: _mileageModel.mileage.toString(),
                 autocorrect: false,
                 onSaved: (String value) => entryMileage = int.parse(value),
                 maxLines: 1,
@@ -177,7 +182,6 @@ class _AddEntryFormState extends State<AddEntryForm> {
                       ),
                     ],
                   ),
-
                   Consumer<PartsCart>(
                     builder: (context, partsCart, child) {
                       return ListView.builder(
@@ -209,7 +213,6 @@ class _AddEntryFormState extends State<AddEntryForm> {
                   Container(
                     height: 12.0,
                   ),
-
                   isVisible
                       ? Consumer<Parts>(
                           builder: (context, partsList, child) {
@@ -219,7 +222,8 @@ class _AddEntryFormState extends State<AddEntryForm> {
                               ),
                               child: Column(
                                 children: <Widget>[
-                                  Text('База данных запчастей и расходников'),
+                                  Text(
+                                      'База данных запчастей и расходников'), //TODO add i18n
                                   // TODO добавить 18
                                   ListView.builder(
                                     shrinkWrap: true,

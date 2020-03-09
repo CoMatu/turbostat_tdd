@@ -113,6 +113,12 @@ class LoadDataPage extends StatelessWidget {
                     title: Text(S.of(context).add_maintenance_operation),
                     leading: Icon(Icons.build),
                     onTap: () {
+                      final carId =
+                          Provider.of<CurrentCar>(context, listen: false)
+                              .currentCar
+                              .carId;
+                      Provider.of<MileageProvider>(context, listen: false)
+                          .getLastMileage(carId);
                       Navigator.popAndPushNamed(context, 'add_entry');
                     },
                   ),

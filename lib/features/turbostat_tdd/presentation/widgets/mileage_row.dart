@@ -27,18 +27,19 @@ class _MileageRowWidgetState extends State<MileageRowWidget> {
     return Row(
       children: <Widget>[
         FutureBuilder(
-            future: _getMileage(widget._carId),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                if (snapshot.data != null) {
-                  return Text(
-                    snapshot.data.toString(),
-                    style: Theme.of(context).textTheme.overline,
-                  );
-                }
+          future: _getMileage(widget._carId),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data != null) {
+                return Text(
+                  snapshot.data.toString(),
+                  style: Theme.of(context).textTheme.overline,
+                );
               }
-              return Text('data mileage');
-            }),
+            }
+            return Text('data not aviable');
+          },
+        ),
         GestureDetector(
           onTap: () async {
             showDialog(

@@ -12,6 +12,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_m
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_parts.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_maintenance_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_part_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/calculate_remainder.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_entry.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_maintenance.dart';
@@ -66,6 +67,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetEntryParts(repository: sl()));
   sl.registerLazySingleton(() => AddCarMileage(repository: sl()));
   sl.registerLazySingleton(() => GetCarMileage(repository: sl()));
+  sl.registerLazySingleton(() => CalculateRemainder());
 
   // Repository
   sl.registerLazySingleton<TurbostatRepository>(() => TurbostatRepositoryImpl(
