@@ -1,3 +1,4 @@
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
@@ -55,7 +56,10 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text(model.entryName),
+                        child: Text(
+                          model.entryName,
+                          style: Theme.of(context).textTheme.headline3,
+                        ),
                       ),
                     ],
                   ),
@@ -74,7 +78,23 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 14.0, right: 14.0),
-              child: Text('Set reminder'),
+              child: RaisedButton(
+                onPressed: () async {
+                  int duration = _maintenanceModel.maintenanceMonthLimit * 30 -
+                      DateTime.now().difference(model.entryDateTime).inDays;
+                  final Event event = Event(
+                    title: _maintenanceModel.maintenanceName,
+                    description: S.of(context).entry_details_page_description(
+                        _maintenanceModel.maintenanceMonthLimit.toString(),
+                        _maintenanceModel.maintenanceMileageLimit.toString()),
+                    startDate: DateTime.now().add(Duration(days: duration)),
+                    endDate: DateTime.now().add(Duration(days: duration + 1)),
+                  );
+                  Add2Calendar.addEvent2Cal(event);
+                },
+                child: Text(S.of(context).button_add_calendar_camel),
+                color: Theme.of(context).accentColor,
+              ),
             ),
             Divider(),
             Padding(
