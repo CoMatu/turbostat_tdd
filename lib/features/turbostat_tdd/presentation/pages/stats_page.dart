@@ -1,3 +1,4 @@
+import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_stats_data.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
@@ -15,10 +16,19 @@ class _StatsPageState extends State<StatsPage> {
   DateTime startDate;
   DateTime endDate;
   String carId;
+  var data;
+  Series dataSeries;
 
   @override
   void initState() {
     carId = sl<CurrentCar>().currentCar.carId;
+    data = [];
+    dataSeries = Series(
+      data: data,
+      id: 'pie',
+      measureFn: null,
+      domainFn: null,
+    );
     super.initState();
   }
 
@@ -42,7 +52,11 @@ class _StatsPageState extends State<StatsPage> {
                     onPressed: () async {
                       DateTime _date = DateTime.now();
                       startDate = DateTime(_date.year, _date.month, 1);
-                      sl<GetStatsData>().getData(carId, startDate, _date);
+                      var _res = await sl<GetStatsData>()
+                          .getData(carId, startDate, _date);
+                      setState(() {
+                        data = _res;
+                      });
                     },
                     child: Text('В этом месяце'), //TODO add i18n
                     shape: RoundedRectangleBorder(
