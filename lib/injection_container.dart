@@ -29,6 +29,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_entry_p
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_stats_data.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/load_mileage_bloc/load_mileage_bloc.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 
 final sl = GetIt.instance;
 
@@ -70,6 +71,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetCarMileage(repository: sl()));
   sl.registerLazySingleton(() => CalculateRemainder());
   sl.registerLazySingleton(() => GetStatsData());
+  sl.registerLazySingleton(() => CurrentCar());
 
   // Repository
   sl.registerLazySingleton<TurbostatRepository>(() => TurbostatRepositoryImpl(

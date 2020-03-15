@@ -1,12 +1,13 @@
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/pie_cart_data_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_entries.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_part_models.dart'
     as gP;
 import 'package:turbostat_tdd/injection_container.dart';
 
 class GetStatsData {
-  Future<Map<double, double>> getData(
+  Future<List<PieChartDataModel>> getData(
       String carId, DateTime startPeriod, DateTime endPeriod) async {
     List<EntryModel> _filteredEntries = [];
     List<PartModel> _filteredParts = [];
@@ -44,10 +45,10 @@ class GetStatsData {
       valueOfParts = valueOfParts + element.partPrice;
     });
 
-    final data = {
-      valueOfWork: valueOfWork,
-      valueOfParts: valueOfParts,
-    };
+    final data = [
+      PieChartDataModel('valueOfWork', valueOfWork),
+      PieChartDataModel('valueOfParts', valueOfParts),
+    ];
 
     return data;
   }

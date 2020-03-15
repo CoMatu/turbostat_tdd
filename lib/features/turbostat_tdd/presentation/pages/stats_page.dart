@@ -1,9 +1,9 @@
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_stats_data.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/donut_pie_chart.dart';
-import 'package:turbostat_tdd/injection_container.dart';
 
 class StatsPage extends StatefulWidget {
   const StatsPage({Key key}) : super(key: key);
@@ -20,18 +20,6 @@ class _StatsPageState extends State<StatsPage> {
   Series dataSeries;
 
   @override
-  void initState() {
-    carId = sl<CurrentCar>().currentCar.carId;
-    data = [];
-    dataSeries = Series(
-      data: data,
-      id: 'pie',
-      measureFn: null,
-      domainFn: null,
-    );
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,11 +40,6 @@ class _StatsPageState extends State<StatsPage> {
                     onPressed: () async {
                       DateTime _date = DateTime.now();
                       startDate = DateTime(_date.year, _date.month, 1);
-                      var _res = await sl<GetStatsData>()
-                          .getData(carId, startDate, _date);
-                      setState(() {
-                        data = _res;
-                      });
                     },
                     child: Text('В этом месяце'), //TODO add i18n
                     shape: RoundedRectangleBorder(
@@ -92,13 +75,32 @@ class _StatsPageState extends State<StatsPage> {
               ],
             ),
             Container(
-              child: Expanded(
-                child: DonutPieChart.withSampleData(),
-              ),
+              child: Expanded(child: Consumer<CurrentCar>(
+                builder: (context, car, child) {
+                  return car.currentCar != null
+                      ? FutureBuilder(
+                          future: _getStartData(carId),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              if (snapshot.data != null) {
+                                return DonutPieChart.withSampleData();
+                              }
+                            }
+                            return Text('data not aviable');
+                          })
+                      : Container();
+                },
+              )),
             ),
           ],
         ),
       ),
     );
+  }
+
+  _getStartData(String carId) async {
+    final carId =
+        Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
+    return 1;
   }
 }
