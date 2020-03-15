@@ -177,7 +177,6 @@ class _AddEntryFormState extends State<AddEntryForm> {
                               isVisible = false;
                             }
                           });
-                          //TODO add form for entry
                         },
                       ),
                     ],

@@ -167,7 +167,6 @@ class _EditEntryFormState extends State<EditEntryForm> {
               padding: const EdgeInsets.only(top: 12.0),
               child: Column(
                 children: <Widget>[
-                  //TODO сделать добавление запчастей
                   Row(
                     children: <Widget>[
                       Expanded(
