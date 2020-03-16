@@ -83,7 +83,7 @@ class _StatsPageState extends State<StatsPage> {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               if (snapshot.data != null) {
-                                return DonutPieChart.withSampleData();
+                                return DonutPieChart([snapshot.data]);
                               }
                             }
                             return Text('data not aviable');
@@ -99,8 +99,12 @@ class _StatsPageState extends State<StatsPage> {
   }
 
   _getStartData(String carId) async {
+    final endPeriod = DateTime.now();
+    final startPeriod = DateTime(endPeriod.year, endPeriod.month, 1);
     final carId =
         Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
-    return 1;
+    final chartData =
+        await GetStatsData().getData(carId, startPeriod, endPeriod);
+    return chartData;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:charts_flutter/flutter.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/pie_cart_data_model.dart';
@@ -7,7 +8,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_par
 import 'package:turbostat_tdd/injection_container.dart';
 
 class GetStatsData {
-  Future<List<PieChartDataModel>> getData(
+  Future<Series<PieChartDataModel, double>> getData(
       String carId, DateTime startPeriod, DateTime endPeriod) async {
     List<EntryModel> _filteredEntries = [];
     List<PartModel> _filteredParts = [];
@@ -50,6 +51,12 @@ class GetStatsData {
       PieChartDataModel('valueOfParts', valueOfParts),
     ];
 
-    return data;
+    return Series<PieChartDataModel, double>(
+      id: 'Sales',
+      domainFn: (PieChartDataModel amount, _) => amount.amount,
+      measureFn: (PieChartDataModel sales, _) => sales.amount,
+      data: data,
+      labelAccessorFn: (PieChartDataModel model, index) => model.amount.toString(),
+    );
   }
 }
