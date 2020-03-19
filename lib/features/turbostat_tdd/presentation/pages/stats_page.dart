@@ -83,7 +83,18 @@ class _StatsPageState extends State<StatsPage> {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               if (snapshot.data != null) {
-                                return DonutPieChart([snapshot.data]);
+                                return Stack(
+                                  children: <Widget>[
+                                    Center(
+                                      child: Text(
+                                          (snapshot.data.data[0].amount +
+                                                  snapshot.data.data[1].amount)
+                                              .toString(),
+                                              style: Theme.of(context).textTheme.headline4,),
+                                    ),
+                                    DonutPieChart([snapshot.data])
+                                  ],
+                                );
                               }
                             }
                             return Text('data not aviable');
