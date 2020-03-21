@@ -12,8 +12,8 @@ class GetStatsData {
       String carId, DateTime startPeriod, DateTime endPeriod) async {
     List<EntryModel> _filteredEntries = [];
     List<PartModel> _filteredParts = [];
-    double valueOfWork = 0;
-    double valueOfParts = 0;
+    double valueOfWork = 0.0;
+    double valueOfParts = 0.0;
     final res = await sl<GetAllEntries>().call(Params(carId: carId));
     List<EntryModel> _entriesList = res.fold(
       (failure) => [],
