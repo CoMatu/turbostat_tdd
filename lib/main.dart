@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-        title: 'turbostat',
+        title: 'TurboStat',
         routes: {
           'logo_screen': (context) => LogoScreen(),
           'start_page': (context) => StartPage(),

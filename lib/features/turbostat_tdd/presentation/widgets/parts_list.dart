@@ -41,23 +41,51 @@ class _PartsListWidgetState extends State<PartsListWidget> {
                       Expanded(
                         child: Column(
                           children: <Widget>[
-                            Text(part.parts[index].partName),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Text(
-                                  part.parts[index].partCode,
-                                  style: TextStyle(
-                                    color: Colors.black45,
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(part.parts[index].partName)),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12.0, top: 6.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        'Артикул: ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .overline,
+                                      ),
+                                      Text(
+                                        part.parts[index].partCode,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .overline,
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                Text(
-                                  part.parts[index].partPrice.toString(),
-                                  style: TextStyle(
-                                    color: Colors.black45,
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        'Стоимость: ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .overline,
+                                      ),
+                                      Text(
+                                        part.parts[index].partPrice.toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .overline,
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),
