@@ -32,7 +32,7 @@ class CarListPage extends StatelessWidget {
             return state.listAll.isEmpty
                 ? Center(
                     child: RaisedButton(
-                      child: Text('Add car'), // TODO add in18
+                      child: Text(S.of(context).drawer_add_car),
                       onPressed: () {
                         Navigator.pushReplacementNamed(
                             context, 'load_data_page');
