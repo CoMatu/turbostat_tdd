@@ -229,7 +229,7 @@ class TurbostatLocalDataSourceImpl implements TurbostatLocalDataSource {
     List<PartModel> _partsFromHive = [];
     final String name = 'usedParts';
     final usedPartsBox = await Hive.openBox(name);
-//    usedPartsBox.delete(entryId); //for delete errors
+//    usedPartsBox.delete(entryId); //!for delete errors
     final res = usedPartsBox.get(entryId);
 //    print(res);
     if (res != null) {

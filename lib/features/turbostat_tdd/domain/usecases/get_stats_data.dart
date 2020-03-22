@@ -3,8 +3,8 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dar
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/pie_cart_data_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_entries.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_part_models.dart'
-    as gP;
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_entry_parts.dart'
+    as gep;
 import 'package:turbostat_tdd/injection_container.dart';
 
 class GetStatsData {
@@ -34,12 +34,17 @@ class GetStatsData {
     });
 
     // достаем списки запчастей по каждой записи
-    final _parts =
-        await sl<gP.GetAllPartModels>().call(gP.Params(carId: carId));
-    _filteredParts = _parts.fold(
-      (failure) => [],
-      (_parts) => _parts,
-    );
+
+    _filteredEntries.forEach((element) async {
+      final _parts = await sl<gep.GetEntryParts>()
+          .call(gep.Params(entryId: element.entryId));
+      final List<PartModel> _preFiltered =
+          _parts.fold((failure) => [], (_parts) => _parts);
+//      _filteredParts.addAll(_preFiltered); //TODO проверить, нужно ли обнулять список при каждом обращении
+      _preFiltered.forEach((element) {
+        _filteredParts.add(element);
+      });
+    });
 
     // из них достаем сумму затрат на запчасти
     _filteredParts.forEach((element) {
@@ -52,11 +57,12 @@ class GetStatsData {
     ];
 
     return Series<PieChartDataModel, double>(
-      id: 'Sales',
+      id: 'Costs',
       domainFn: (PieChartDataModel amount, _) => amount.amount,
       measureFn: (PieChartDataModel sales, _) => sales.amount,
       data: data,
-      labelAccessorFn: (PieChartDataModel model, index) => model.amount.toString(),
+      labelAccessorFn: (PieChartDataModel model, index) =>
+          model.amount.toString(),
     );
   }
 }

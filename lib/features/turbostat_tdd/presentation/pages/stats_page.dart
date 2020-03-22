@@ -152,7 +152,7 @@ class _StatsPageState extends State<StatsPage> {
       final startDate = DateTime(endDate.year, endDate.month, 1);
 
       final chartData =
-          await GetStatsData().getData(carId, startDate, startDate);
+          await GetStatsData().getData(carId, startDate, endDate);
       return chartData;
     }
   }
