@@ -23,6 +23,7 @@ class _StatsPageState extends State<StatsPage> {
   var thisMonthColor = Colors.white;
   var lastMonthColor = Colors.white;
   var thisYearColor = Colors.white;
+  var totalColor = Colors.white;
 
   @override
   void didChangeDependencies() {
@@ -58,6 +59,7 @@ class _StatsPageState extends State<StatsPage> {
                         thisYearColor = Colors.white;
                         thisMonthColor = Colors.blue;
                         lastMonthColor = Colors.white;
+                        totalColor = Colors.white;
                       });
                     },
                     child: Text('В этом месяце'), //TODO add i18n
@@ -87,6 +89,7 @@ class _StatsPageState extends State<StatsPage> {
                         thisYearColor = Colors.white;
                         thisMonthColor = Colors.white;
                         lastMonthColor = Colors.blue;
+                        totalColor = Colors.white;
                       });
                     },
                     child: Text('В прошлом месяце'), //TODO add i18n
@@ -108,9 +111,32 @@ class _StatsPageState extends State<StatsPage> {
                         thisYearColor = Colors.blue;
                         thisMonthColor = Colors.white;
                         lastMonthColor = Colors.white;
+                        totalColor = Colors.white;
                       });
                     },
                     child: Text('С начала года'), //TODO add i18n
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                      side: BorderSide(color: Colors.blueAccent),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 6.0, right: 6.0),
+                  child: RaisedButton(
+                    color: totalColor,
+                    onPressed: () {
+                      DateTime _date = DateTime.now();
+                      startDate = DateTime(1970, 1, 1);
+                      endDate = _date;
+                      setState(() {
+                        thisYearColor = Colors.white;
+                        thisMonthColor = Colors.white;
+                        lastMonthColor = Colors.white;
+                        totalColor = Colors.blue;
+                      });
+                    },
+                    child: Text('Всего расходов'), //TODO add i18n
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0),
                       side: BorderSide(color: Colors.blueAccent),
@@ -137,7 +163,7 @@ class _StatsPageState extends State<StatsPage> {
                                                 snapshot.data.data[1].amount),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline5,
+                                            .headline6,
                                       ),
                                     ),
                                     DonutPieChart([snapshot.data])
@@ -151,6 +177,44 @@ class _StatsPageState extends State<StatsPage> {
                 },
               )),
             ),
+            Wrap(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.blue),
+                      ),
+                      Container(
+                        width: 5,
+                      ),
+                      Text('стоимость работ'),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.blue[200]),
+                      ),
+                      Container(
+                        width: 5,
+                      ),
+                      Text('стоимость запчастей'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -161,15 +225,13 @@ class _StatsPageState extends State<StatsPage> {
     final carId =
         Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
     if (startDate != null) {
-      final chartData =
-          await GetStatsData().getData(carId, startDate, endDate);
+      final chartData = await GetStatsData().getData(carId, startDate, endDate);
       return chartData;
     } else {
       final endDate = DateTime.now();
       final startDate = DateTime(endDate.year, endDate.month, 1);
 
-      final chartData =
-          await GetStatsData().getData(carId, startDate, endDate);
+      final chartData = await GetStatsData().getData(carId, startDate, endDate);
       return chartData;
     }
   }

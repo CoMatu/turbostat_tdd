@@ -19,15 +19,19 @@ class DonutPieChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return seriesList[0].data[0].amount != 0 && seriesList[0].data[1].amount != 0
-        ? charts.PieChart(seriesList,
+    return seriesList[0].data[0].amount != 0 &&
+            seriesList[0].data[1].amount != 0
+        ? charts.PieChart(
+            seriesList,
             animate: animate,
             // Configure the width of the pie slices to 60px. The remaining space in
             // the chart will be left as a hole in the center.
             defaultRenderer: new charts.ArcRendererConfig(
               arcWidth: 60,
               arcRendererDecorators: [charts.ArcLabelDecorator()],
-            ))
+            ),
+       //     behaviors: [charts.DatumLegend()],
+          )
         : Container();
   }
 
