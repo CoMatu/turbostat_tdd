@@ -35,7 +35,7 @@ class GetStatsData {
 
     // достаем списки запчастей по каждой записи
 
-    _filteredEntries.forEach((element) async {
+    await Future.forEach(_filteredEntries, (element) async {
       final _parts = await sl<gep.GetEntryParts>()
           .call(gep.Params(entryId: element.entryId));
       final List<PartModel> _preFiltered =

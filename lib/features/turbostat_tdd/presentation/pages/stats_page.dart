@@ -20,6 +20,9 @@ class _StatsPageState extends State<StatsPage> {
   var data;
   Series dataSeries;
   NumberFormat _numberFormat;
+  var thisMonthColor = Colors.white;
+  var lastMonthColor = Colors.white;
+  var thisYearColor = Colors.white;
 
   @override
   void didChangeDependencies() {
@@ -46,11 +49,16 @@ class _StatsPageState extends State<StatsPage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 6.0, right: 6.0),
                   child: RaisedButton(
-                    color: Colors.white,
+                    color: thisMonthColor,
                     onPressed: () async {
                       DateTime _date = DateTime.now();
                       startDate = DateTime(_date.year, _date.month, 1);
-                      setState(() {});
+                      endDate = _date;
+                      setState(() {
+                        thisYearColor = Colors.white;
+                        thisMonthColor = Colors.blue;
+                        lastMonthColor = Colors.white;
+                      });
                     },
                     child: Text('В этом месяце'), //TODO add i18n
                     shape: RoundedRectangleBorder(
@@ -62,7 +70,7 @@ class _StatsPageState extends State<StatsPage> {
                 Padding(
                   padding: EdgeInsets.only(left: 6.0, right: 6.0),
                   child: RaisedButton(
-                    color: Colors.white,
+                    color: lastMonthColor,
                     onPressed: () {
                       DateTime _date = DateTime.now();
                       if (_date.month == 1) {
@@ -75,7 +83,11 @@ class _StatsPageState extends State<StatsPage> {
                         endDate = DateTime(
                             _date.year, (_date.month - 1), _finalDayDate.day);
                       }
-                      setState(() {});
+                      setState(() {
+                        thisYearColor = Colors.white;
+                        thisMonthColor = Colors.white;
+                        lastMonthColor = Colors.blue;
+                      });
                     },
                     child: Text('В прошлом месяце'), //TODO add i18n
                     shape: RoundedRectangleBorder(
@@ -87,11 +99,16 @@ class _StatsPageState extends State<StatsPage> {
                 Padding(
                   padding: EdgeInsets.only(left: 6.0, right: 6.0),
                   child: RaisedButton(
-                    color: Colors.white,
+                    color: thisYearColor,
                     onPressed: () {
                       DateTime _date = DateTime.now();
                       startDate = DateTime(_date.year, 1, 1);
-                      setState(() {});
+                      endDate = _date;
+                      setState(() {
+                        thisYearColor = Colors.blue;
+                        thisMonthColor = Colors.white;
+                        lastMonthColor = Colors.white;
+                      });
                     },
                     child: Text('С начала года'), //TODO add i18n
                     shape: RoundedRectangleBorder(
@@ -145,7 +162,7 @@ class _StatsPageState extends State<StatsPage> {
         Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
     if (startDate != null) {
       final chartData =
-          await GetStatsData().getData(carId, startDate, startDate);
+          await GetStatsData().getData(carId, startDate, endDate);
       return chartData;
     } else {
       final endDate = DateTime.now();
