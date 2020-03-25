@@ -42,7 +42,9 @@ class _MaintenancesPageState extends State<MaintenancesPage> {
                 padding: const EdgeInsets.all(12.0),
                 child: Row(
                   children: <Widget>[
-                    CircleAvatar(),
+                    CircleAvatar(
+                      child: Icon(Icons.settings),
+                    ),
                     Expanded(
                       child: GestureDetector(
                         onTap: () {},

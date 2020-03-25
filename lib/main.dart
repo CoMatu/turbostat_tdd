@@ -14,28 +14,31 @@ import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/start_pa
 import 'package:turbostat_tdd/generated/i18n.dart';
 import 'features/turbostat_tdd/presentation/providers/providers.dart';
 import 'injection_container.dart' as di;
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //без него ловит ошибку main
   await di.init();
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => PageCounter()),
-        ChangeNotifierProvider(create: (context) => CurrentCar()),
-        ChangeNotifierProvider(create: (context) => Maintenances()),
-        ChangeNotifierProvider(create: (context) => CurrentMaintenance()),
-        ChangeNotifierProvider(create: (context) => Entries()),
-        ChangeNotifierProvider(create: (context) => CurrentEntry()),
-        ChangeNotifierProvider(create: (context) => Parts()),
-        ChangeNotifierProvider(create: (context) => PartsCart()),
-        ChangeNotifierProvider(create: (context) => MileageProvider()),
-      ],
-      child: MyApp(),
-    ),
-  );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) => runApp(
+            MultiProvider(
+              providers: [
+                ChangeNotifierProvider(create: (context) => PageCounter()),
+                ChangeNotifierProvider(create: (context) => CurrentCar()),
+                ChangeNotifierProvider(create: (context) => Maintenances()),
+                ChangeNotifierProvider(
+                    create: (context) => CurrentMaintenance()),
+                ChangeNotifierProvider(create: (context) => Entries()),
+                ChangeNotifierProvider(create: (context) => CurrentEntry()),
+                ChangeNotifierProvider(create: (context) => Parts()),
+                ChangeNotifierProvider(create: (context) => PartsCart()),
+                ChangeNotifierProvider(create: (context) => MileageProvider()),
+              ],
+              child: MyApp(),
+            ),
+          ));
 }
 
 class MyApp extends StatelessWidget {
