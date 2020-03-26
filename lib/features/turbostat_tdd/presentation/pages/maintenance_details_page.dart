@@ -102,7 +102,7 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    child: Text('Список запасных частей:'), // TODO add i18n
+                    child: Text('Список запасных частей:'),
                     alignment: Alignment.centerLeft,
                   ),
                   Consumer<PartsCart>(
@@ -113,7 +113,6 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
                         ),
                         child: Column(
                           children: <Widget>[
-                            // TODO добавить 18
                             ListView.builder(
                               shrinkWrap: true,
                               itemCount: partsList.partsCart.length,
@@ -134,7 +133,7 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
                               children: <Widget>[
                                 Expanded(
                                     child:
-                                        Text('Amount: ')), // TODO add to i18n
+                                        Text(S.of(context).amount)),
                                 Text(totalPrice.toString()),
                               ],
                             ),
@@ -146,7 +145,7 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text('Стоимость выполнения работ: '),
+                        child: Text(S.of(context).form_decorator_value_work),
                       ),
                       Text(model.entryWorkPrice.toString()),
                     ],

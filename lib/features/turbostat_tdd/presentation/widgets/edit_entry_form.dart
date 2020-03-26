@@ -171,7 +171,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                          'Расход запчастей и их стоимость', //TODO generate 18
+                          S.of(context).cost_spare_part,
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                       ),
@@ -185,12 +185,10 @@ class _EditEntryFormState extends State<EditEntryForm> {
                               isVisible = false;
                             }
                           });
-                          //TODO add form for entry
                         },
                       ),
                     ],
                   ),
-
                   Consumer<PartsCart>(
                     builder: (context, partsCart, child) {
                       return ListView.builder(
@@ -214,15 +212,14 @@ class _EditEntryFormState extends State<EditEntryForm> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text('Amount: '),
-                      ), //TODO add plugin i18n
+                        child: Text(S.of(context).amount),
+                      ),
                       Text(totalPrice.toString()),
                     ],
                   ),
                   Container(
                     height: 12.0,
                   ),
-
                   isVisible
                       ? Consumer<Parts>(
                           builder: (context, partsList, child) {
@@ -232,8 +229,8 @@ class _EditEntryFormState extends State<EditEntryForm> {
                               ),
                               child: Column(
                                 children: <Widget>[
-                                  Text('База данных запчастей и расходников'),
-                                  // TODO добавить 18
+                                  Text(S.of(context).database_parts),
+                                  //
                                   ListView.builder(
                                     shrinkWrap: true,
                                     itemCount: partsList.parts.length,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
+import 'package:turbostat_tdd/generated/i18n.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key key}) : super(key: key);
@@ -14,8 +15,7 @@ class SettingPage extends StatelessWidget {
             leading: CircleAvatar(
               child: Icon(Icons.build),
             ),
-            title: Text(
-                'Список операций технического обслуживания'), //TODO add to plugin
+            title: Text(S.of(context).maintenance_list),
             onTap: () async {
               final carId = Provider.of<CurrentCar>(context, listen: false)
                   .currentCar
@@ -29,7 +29,7 @@ class SettingPage extends StatelessWidget {
             leading: CircleAvatar(
               child: Icon(Icons.assignment),
             ),
-            title: Text('Список запасных частей и расходников'),
+            title: Text(S.of(context).parts_list),
             onTap: () async {
               final carId = Provider.of<CurrentCar>(context, listen: false)
                   .currentCar

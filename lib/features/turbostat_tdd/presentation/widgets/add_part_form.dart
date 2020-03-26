@@ -33,7 +33,7 @@ class _AddPartFormState extends State<AddPartForm> {
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
               child: Text(
-                'На этой странице необходимо записать информацию о покупке запчасти или расходника', //TODO generate
+                S.of(context).add_parts,
                 style: TextStyle(fontSize: 16.0),
               ),
             ),
@@ -46,7 +46,7 @@ class _AddPartFormState extends State<AddPartForm> {
                 onSaved: (String value) => partName = value,
                 maxLines: 1,
                 decoration: InputDecoration(
-                  labelText: 'Наименование', //TODO generate
+                  labelText: S.of(context).name,
                 ),
               ),
             ),
@@ -59,7 +59,7 @@ class _AddPartFormState extends State<AddPartForm> {
                 onSaved: (String value) => partCode = value,
                 maxLines: 1,
                 decoration: InputDecoration(
-                  labelText: 'Код или артикул', //TODO generate
+                  labelText: S.of(context).code_article,
                 ),
               ),
             ),
@@ -78,7 +78,7 @@ class _AddPartFormState extends State<AddPartForm> {
                   return null;
                 },
                 decoration: InputDecoration(
-                  labelText: 'Стоимость', //TODO generate
+                  labelText: S.of(context).cost,
                 ),
               ),
             ),
@@ -97,7 +97,7 @@ class _AddPartFormState extends State<AddPartForm> {
                   return null;
                 },
                 decoration: InputDecoration(
-                  labelText: 'Quantity', //TODO generate
+                  labelText: S.of(context).quantity,
                 ),
               ),
             ),

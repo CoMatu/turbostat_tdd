@@ -163,7 +163,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                          'Расход запчастей и их стоимость', //TODO generate 18
+                          S.of(context).cost_spare_part,
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                       ),
@@ -204,8 +204,8 @@ class _AddEntryFormState extends State<AddEntryForm> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text('Amount: '),
-                      ), //TODO add plugin i18n
+                        child: Text(S.of(context).amount),
+                      ),
                       Text(totalPrice.toString()),
                     ],
                   ),
@@ -221,9 +221,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
                               ),
                               child: Column(
                                 children: <Widget>[
-                                  Text(
-                                      'База данных запчастей и расходников'), //TODO add i18n
-                                  // TODO добавить 18
+                                  Text(S.of(context).database_parts),
                                   ListView.builder(
                                     shrinkWrap: true,
                                     itemCount: partsList.parts.length,

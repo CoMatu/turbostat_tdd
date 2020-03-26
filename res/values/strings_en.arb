@@ -92,5 +92,18 @@
   "history": "History",
   "stats": "Stats",
   "cars": "Cars",
-  "settings": "Settings"
+  "settings": "Settings",
+  "cost_spare_part": "Cost of spare part",
+  "amount": "Amount: ",
+  "database_parts": "Database for parts",
+  "add_parts": "This page should write information about the purchase of spare parts",
+  "name": "Name",
+  "code_article": "Code or article",
+  "cost": "Cost",
+  "quantity": "Quantity",
+  "spar_parts_list": "Spar parts list:",
+  "total_amount": "Total amount: ",
+  "maintenance_list": "Maintenance list",
+  "parts_list": "Parts list",
+  "expense_statistics": "Expense statistics"
 }

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_stats_data.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/donut_pie_chart.dart';
+import 'package:turbostat_tdd/generated/i18n.dart';
 
 class StatsPage extends StatefulWidget {
   const StatsPage({Key key}) : super(key: key);
@@ -42,7 +43,7 @@ class _StatsPageState extends State<StatsPage> {
         child: Column(
           children: <Widget>[
             Text(
-              'Статистика расходов',
+              S.of(context).expense_statistics,
               style: Theme.of(context).textTheme.headline5,
             ),
             Wrap(
