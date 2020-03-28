@@ -97,13 +97,17 @@ class S implements WidgetsLocalizations {
   String get history => "History";
   String get image_deleted => "Image deleted";
   String get km => " km";
+  String get last_month => "Last month";
   String get login => "SIGN IN:";
   String get maintenance_list => "Maintenance list";
   String get name => "Name";
   String get new_image_info => "* a new image can be selected on the list of your cars page";
   String get odometer => "odometer";
+  String get part_code => "Code of part: ";
+  String get part_price => "Part price: ";
   String get parts => "Parts: ";
   String get parts_list => "Parts list";
+  String get parts_value => "value of parts";
   String get password => "Password";
   String get pick_image => "Pick Image";
   String get quantity => "Quantity";
@@ -115,9 +119,13 @@ class S implements WidgetsLocalizations {
   String get spar_parts_list => "Spar parts list:";
   String get statistics => "Statistics";
   String get stats => "Stats";
+  String get this_month => "This month";
   String get total_amount => "Total amount: ";
+  String get total_cost => "Total cost";
   String get will_pop_alert => "Exit the App?";
+  String get work_value => "value of work";
   String get works => "Works: ";
+  String get year_to_date => "Year to date";
   String car_card_mileage(String mileage) => "Mileage: $mileage km";
   String dashboard_page_maintenance_before(String daysRemain, String mileageRemain) => "$daysRemain days or $mileageRemain km left before the next maintenance operation";
   String dashboard_page_missed_maintenance(String mileageFromLast) => "You missed a maintenance operation, your mileage was over $mileageFromLast km";
@@ -145,6 +153,8 @@ class $ru extends S {
   @override
   String get drawer_my_cars => "Мои автомобили";
   @override
+  String get total_cost => "Всего расходов";
+  @override
   String get enter_password => "Введите пароль";
   @override
   String get form_validator_car_year => "Пожалуйста, введите год выпуска";
@@ -160,6 +170,8 @@ class $ru extends S {
   String get stats => "Статистика";
   @override
   String get form_decorator_part_name => "Расходные материалы / запчасти";
+  @override
+  String get last_month => "В прошлом месяце";
   @override
   String get pick_image => "Выбрать изображение";
   @override
@@ -251,6 +263,8 @@ class $ru extends S {
   @override
   String get car_card_no_image_selected => "Изображение не выбрано";
   @override
+  String get part_code => "Артикул: ";
+  @override
   String get form_decorator_value_parts => "Стоимость запчастей";
   @override
   String get settings => "Настройки";
@@ -273,6 +287,8 @@ class $ru extends S {
   @override
   String get button_edit_camel => "Изменить";
   @override
+  String get this_month => "В этом месяце";
+  @override
   String get total_amount => "Общая стоимость: ";
   @override
   String get will_pop_alert => "Выйти из приложения?";
@@ -293,15 +309,23 @@ class $ru extends S {
   @override
   String get drawer_add_car => "Добавить автомобиль";
   @override
+  String get year_to_date => "С начала года";
+  @override
   String get form_validator_car_name => "Пожалуйста, введите название";
   @override
   String get form_decorator_car_mark => "Введите марку автомобиля";
+  @override
+  String get parts_value => "стоимость запчастей";
   @override
   String get parts_list => "Список запасных частей и расходников";
   @override
   String get code_article => "Код или артикул";
   @override
   String get form_validator_date_format => "Неправильный формат даты";
+  @override
+  String get part_price => "Стоимость: ";
+  @override
+  String get work_value => "стоимость работ";
   @override
   String get button_add_calendar_camel => "Напомнить";
   @override

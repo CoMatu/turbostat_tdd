@@ -63,7 +63,7 @@ class _StatsPageState extends State<StatsPage> {
                         totalColor = Colors.white;
                       });
                     },
-                    child: Text('В этом месяце'), //TODO add i18n
+                    child: Text(S.of(context).this_month),
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0),
                       side: BorderSide(color: Colors.blueAccent),
@@ -93,7 +93,7 @@ class _StatsPageState extends State<StatsPage> {
                         totalColor = Colors.white;
                       });
                     },
-                    child: Text('В прошлом месяце'), //TODO add i18n
+                    child: Text(S.of(context).last_month),
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0),
                       side: BorderSide(color: Colors.blueAccent),
@@ -115,7 +115,7 @@ class _StatsPageState extends State<StatsPage> {
                         totalColor = Colors.white;
                       });
                     },
-                    child: Text('С начала года'), //TODO add i18n
+                    child: Text(S.of(context).year_to_date),
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0),
                       side: BorderSide(color: Colors.blueAccent),
@@ -137,7 +137,7 @@ class _StatsPageState extends State<StatsPage> {
                         totalColor = Colors.blue;
                       });
                     },
-                    child: Text('Всего расходов'), //TODO add i18n
+                    child: Text(S.of(context).total_cost),
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0),
                       side: BorderSide(color: Colors.blueAccent),
@@ -193,7 +193,7 @@ class _StatsPageState extends State<StatsPage> {
                       Container(
                         width: 5,
                       ),
-                      Text('стоимость работ'),
+                      Text(S.of(context).work_value),
                     ],
                   ),
                 ),
@@ -210,7 +210,7 @@ class _StatsPageState extends State<StatsPage> {
                       Container(
                         width: 5,
                       ),
-                      Text('стоимость запчастей'),
+                      Text(S.of(context).parts_value),
                     ],
                   ),
                 ),

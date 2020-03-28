@@ -105,5 +105,14 @@
   "total_amount": "Total amount: ",
   "maintenance_list": "Maintenance list",
   "parts_list": "Parts list",
-  "expense_statistics": "Expense statistics"
+  "expense_statistics": "Expense statistics",
+  "this_month": "This month",
+  "last_month": "Last month",
+  "year_to_date": "Year to date",
+  "total_cost": "Total cost",
+  "work_value": "value of work",
+  "parts_value": "value of parts",
+  "part_code": "Code of part: ",
+  "part_price": "Part price: "
+
 }

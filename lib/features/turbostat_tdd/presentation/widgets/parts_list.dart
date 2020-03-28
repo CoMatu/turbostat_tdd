@@ -55,7 +55,7 @@ class _PartsListWidgetState extends State<PartsListWidget> {
                                   Row(
                                     children: <Widget>[
                                       Text(
-                                        'Артикул: ',
+                                        S.of(context).part_code,
                                         style: Theme.of(context)
                                             .textTheme
                                             .overline,
@@ -71,7 +71,7 @@ class _PartsListWidgetState extends State<PartsListWidget> {
                                   Row(
                                     children: <Widget>[
                                       Text(
-                                        'Стоимость: ',
+                                        S.of(context).part_price,
                                         style: Theme.of(context)
                                             .textTheme
                                             .overline,
