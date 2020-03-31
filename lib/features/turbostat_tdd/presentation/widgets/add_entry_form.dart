@@ -366,7 +366,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
     var now = DateTime.now();
     var initialDate = convertToDate(initialDateString) ?? now;
     assert(initialDate != null);
-    print(initialDate.toString());
+    //print(initialDate.toString());
     initialDate = (initialDate.year >= 2015 && initialDate.isBefore(now)
         ? initialDate
         : now);
@@ -386,8 +386,12 @@ class _AddEntryFormState extends State<AddEntryForm> {
 
   DateTime convertToDate(String input) {
     try {
-      var d = DateFormat('dd.MM.yyyy').parseStrict(input);
-      return d;
+      if (input != "") {
+        var d = DateFormat('dd.MM.yyyy').parseStrict(input);
+        return d;
+      } else {
+        return null;
+      }
     } catch (e) {
       return null;
     }
