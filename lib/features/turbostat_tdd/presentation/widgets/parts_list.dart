@@ -49,8 +49,8 @@ class _PartsListWidgetState extends State<PartsListWidget> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 12.0, top: 6.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              child: Wrap(
+//                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[

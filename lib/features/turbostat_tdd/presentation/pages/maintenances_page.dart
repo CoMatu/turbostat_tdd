@@ -48,12 +48,10 @@ class _MaintenancesPageState extends State<MaintenancesPage> {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(maintenances
-                                .maintenances[index].maintenanceName),
-                          ],
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text(
+                              maintenances.maintenances[index].maintenanceName),
                         ),
                       ),
                     ),
