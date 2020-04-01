@@ -164,7 +164,7 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
-                    child: Text('Notes: '),
+                    child: Text(S.of(context).form_decorator_notes+': '),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 12.0),
