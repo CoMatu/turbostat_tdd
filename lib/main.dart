@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
     return AuthProvider(
       auth: BaseAuthImpl(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primarySwatch: Colors.yellow,
             pageTransitionsTheme: PageTransitionsTheme(builders: {
