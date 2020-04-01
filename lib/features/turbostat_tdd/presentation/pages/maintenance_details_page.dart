@@ -154,7 +154,7 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text('Total amount: '),
+                        child: Text(S.of(context).total_amount),
                       ),
                       Text((model.entryWorkPrice + totalPrice).toString()),
                     ],
