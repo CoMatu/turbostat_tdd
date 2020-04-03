@@ -383,7 +383,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
       _controller.text = DateFormat('dd.MM.yyyy').format(result);
     });
   }
-
+// TODO при выборе даты из чекера получаем эксепшн
   DateTime convertToDate(String input) {
     try {
       if (input != "") {

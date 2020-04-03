@@ -21,6 +21,8 @@ class PartsCart extends ChangeNotifier {
     return total;
   }
 
+//TODO нет обнуления карты при вносе новой записи ТО
+
   Future<void> getEntryParts(String entryId) async {
     _parts.clear();
         final partsList =

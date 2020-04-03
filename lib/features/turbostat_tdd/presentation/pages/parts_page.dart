@@ -25,3 +25,5 @@ class _PartsPageState extends State<PartsPage> {
     );
   }
 }
+
+//TODO список запчастей сортировка
