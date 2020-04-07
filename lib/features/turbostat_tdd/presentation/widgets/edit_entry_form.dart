@@ -46,294 +46,302 @@ class _EditEntryFormState extends State<EditEntryForm> {
   @override
   Widget build(BuildContext context) {
     //TODO разбить на виджеты по контексту
-    return Container(
-      child: Form(
-        key: _formKey,
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          shrinkWrap: true,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Text(
-                S.of(context).add_operation_page_description,
-                style: TextStyle(fontSize: 16.0),
-              ),
-            ),
-            FormField<String>(
-              builder: (FormFieldState<String> state) {
-                return InputDecorator(
-                  decoration: InputDecoration(
-                      labelText:
-                          S.of(context).form_decorator_select_maintenance,
-                      labelStyle: TextStyle(fontSize: 22.0)),
-                  isEmpty: maintenanceId == '',
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      //TODO добавить начальное значение, чтобы не выбирать при каждом исправлении
-                      hint: DropdownMenuItem(
-                        value: _model.maintenanceId,
-                        child: Text(_model?.entryName ?? ''),
-                      ),
-                      value: maintenanceId,
-                      isDense: true,
-                      isExpanded: true,
-                      onChanged: (String newValue) {
-                        setState(() {
-                          maintenanceId = newValue;
-                          state.didChange(newValue);
-                        });
-                      },
-                      items: _maintenances.map((MaintenanceModel value) {
-                        return DropdownMenuItem<String>(
-                          value: value.maintenanceId,
-                          child: Text(value.maintenanceName),
-                        );
-                      }).toList(),
-                    ),
+    return WillPopScope(
+        onWillPop: () => Future.value(false),
+        child: Container(
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              shrinkWrap: true,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Text(
+                    S.of(context).add_operation_page_description,
+                    style: TextStyle(fontSize: 16.0),
                   ),
-                );
-              },
-              validator: (value) {
-                if (value?.isEmpty ?? true) {
-                  print('value is Empty');
-                  return S.of(context).form_warning_fill_info;
-                }
-                return null;
-              },
-            ),
-            Row(children: <Widget>[
-              Expanded(
-                  child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: S.of(context).form_decorator_date,
                 ),
-                controller: _controller,
-                keyboardType: TextInputType.datetime,
-                validator: (val) => DateValidator().isValidDate(val)
-                    ? null
-                    : S.of(context).form_validator_date_format,
-                onSaved: (val) =>
-                    entryDateTime = DateFormat('dd.MM.yyyy').parseStrict(val),
-              )),
-              IconButton(
-                icon: Icon(Icons.more_horiz),
-                tooltip: S.of(context).form_decorator_date_select,
-                onPressed: (() {
-                  assert(_controller.text != null);
-                  _chooseDate(context, _controller.text);
-                }),
-              ),
-            ]),
-            Padding(
-              padding: const EdgeInsets.only(top: 12.0),
-              child: TextFormField(
-                keyboardType: TextInputType.number,
-                initialValue: _model.entryMileage.toString(),
-                autocorrect: false,
-                onSaved: (String value) => entryMileage = int.parse(value),
-                maxLines: 1,
-                validator: (value) {
-                  if (value.isEmpty || value.length < 1) {
-                    return S.of(context).form_decorator_car_mileage;
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  labelText: S.of(context).form_decorator_odometer_value,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 12.0),
-              child: TextFormField(
-                keyboardType: TextInputType.number,
-                initialValue: _model.entryWorkPrice.toString(),
-                autocorrect: false,
-                onSaved: (String value) => entryWorkPrice = double.parse(value),
-                maxLines: 1,
-                validator: (value) {
-                  if (value.contains(',')) {
-                    return S.of(context).form_validator_dot;
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  labelText: S.of(context).form_decorator_value_work,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 12.0),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          S.of(context).cost_spare_part,
-                          style: Theme.of(context).textTheme.subtitle1,
+                FormField<String>(
+                  builder: (FormFieldState<String> state) {
+                    return InputDecorator(
+                      decoration: InputDecoration(
+                          labelText:
+                              S.of(context).form_decorator_select_maintenance,
+                          labelStyle: TextStyle(fontSize: 22.0)),
+                      isEmpty: maintenanceId == '',
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          //TODO добавить начальное значение, чтобы не выбирать при каждом исправлении
+                          hint: DropdownMenuItem(
+                            value: _model.maintenanceId,
+                            child: Text(_model?.entryName ?? ''),
+                          ),
+                          value: maintenanceId,
+                          isDense: true,
+                          isExpanded: true,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              maintenanceId = newValue;
+                              state.didChange(newValue);
+                            });
+                          },
+                          items: _maintenances.map((MaintenanceModel value) {
+                            return DropdownMenuItem<String>(
+                              value: value.maintenanceId,
+                              child: Text(value.maintenanceName),
+                            );
+                          }).toList(),
                         ),
                       ),
-                      IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {
-                          setState(() {
-                            if (!isVisible) {
-                              isVisible = true;
-                            } else {
-                              isVisible = false;
-                            }
-                          });
+                    );
+                  },
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      print('value is Empty');
+                      return S.of(context).form_warning_fill_info;
+                    }
+                    return null;
+                  },
+                ),
+                Row(children: <Widget>[
+                  Expanded(
+                      child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: S.of(context).form_decorator_date,
+                    ),
+                    controller: _controller,
+                    keyboardType: TextInputType.datetime,
+                    validator: (val) => DateValidator().isValidDate(val)
+                        ? null
+                        : S.of(context).form_validator_date_format,
+                    onSaved: (val) => entryDateTime =
+                        DateFormat('dd.MM.yyyy').parseStrict(val),
+                  )),
+                  IconButton(
+                    icon: Icon(Icons.more_horiz),
+                    tooltip: S.of(context).form_decorator_date_select,
+                    onPressed: (() {
+                      assert(_controller.text != null);
+                      _chooseDate(context, _controller.text);
+                    }),
+                  ),
+                ]),
+                Padding(
+                  padding: const EdgeInsets.only(top: 12.0),
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    initialValue: _model.entryMileage.toString(),
+                    autocorrect: false,
+                    onSaved: (String value) => entryMileage = int.parse(value),
+                    maxLines: 1,
+                    validator: (value) {
+                      if (value.isEmpty || value.length < 1) {
+                        return S.of(context).form_decorator_car_mileage;
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      labelText: S.of(context).form_decorator_odometer_value,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 12.0),
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    initialValue: _model.entryWorkPrice.toString(),
+                    autocorrect: false,
+                    onSaved: (String value) =>
+                        entryWorkPrice = double.parse(value),
+                    maxLines: 1,
+                    validator: (value) {
+                      if (value.contains(',')) {
+                        return S.of(context).form_validator_dot;
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      labelText: S.of(context).form_decorator_value_work,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 12.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              S.of(context).cost_spare_part,
+                              style: Theme.of(context).textTheme.subtitle1,
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.edit),
+                            onPressed: () {
+                              setState(() {
+                                if (!isVisible) {
+                                  isVisible = true;
+                                } else {
+                                  isVisible = false;
+                                }
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      Consumer<PartsCart>(
+                        builder: (context, partsCart, child) {
+                          return ListView.builder(
+                              shrinkWrap: true,
+                              itemCount:
+                                  Provider.of<PartsCart>(context, listen: false)
+                                      .partsCart
+                                      .length,
+                              itemBuilder: (BuildContext context, int index) =>
+                                  Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                          child: Text(partsCart
+                                              .partsCart[index].partName)),
+                                      Text(partsCart.partsCart[index].partPrice
+                                          .toString()),
+                                    ],
+                                  ));
                         },
                       ),
-                    ],
-                  ),
-                  Consumer<PartsCart>(
-                    builder: (context, partsCart, child) {
-                      return ListView.builder(
-                          shrinkWrap: true,
-                          itemCount:
-                              Provider.of<PartsCart>(context, listen: false)
-                                  .partsCart
-                                  .length,
-                          itemBuilder: (BuildContext context, int index) => Row(
-                                children: <Widget>[
-                                  Expanded(
-                                      child: Text(
-                                          partsCart.partsCart[index].partName)),
-                                  Text(partsCart.partsCart[index].partPrice
-                                      .toString()),
-                                ],
-                              ));
-                    },
-                  ),
-                  Divider(),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(S.of(context).amount),
+                      Divider(),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(S.of(context).amount),
+                          ),
+                          Text(totalPrice.toString()),
+                        ],
                       ),
-                      Text(totalPrice.toString()),
+                      Container(
+                        height: 12.0,
+                      ),
+                      isVisible
+                          ? Consumer<Parts>(
+                              builder: (context, partsList, child) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 12.0,
+                                  ),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Text(S.of(context).database_parts),
+                                      //
+                                      ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: partsList.parts.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) =>
+                                                Row(
+                                          children: <Widget>[
+                                            Expanded(
+                                                child: Text(partsList
+                                                    .parts[index].partName)),
+                                            Text(partsList
+                                                .parts[index].partPrice
+                                                .toString()),
+                                            IconButton(
+                                              icon: Icon(Icons.remove),
+                                              onPressed: () {
+                                                Provider.of<PartsCart>(context,
+                                                        listen: false)
+                                                    .delete(
+                                                        partsList.parts[index]);
+                                                setState(() {
+                                                  totalPrice =
+                                                      Provider.of<PartsCart>(
+                                                              context,
+                                                              listen: false)
+                                                          .totalPrice;
+                                                });
+                                              },
+                                            ),
+                                            //  Text(numberOfPart.toString()),
+                                            IconButton(
+                                              icon: Icon(Icons.add),
+                                              onPressed: () {
+                                                Provider.of<PartsCart>(context,
+                                                        listen: false)
+                                                    .add(
+                                                        partsList.parts[index]);
+                                                setState(() {
+                                                  totalPrice =
+                                                      Provider.of<PartsCart>(
+                                                              context,
+                                                              listen: false)
+                                                          .totalPrice;
+                                                });
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            )
+                          : Container(),
                     ],
                   ),
-                  Container(
-                    height: 12.0,
-                  ),
-                  isVisible
-                      ? Consumer<Parts>(
-                          builder: (context, partsList, child) {
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                left: 12.0,
-                              ),
-                              child: Column(
-                                children: <Widget>[
-                                  Text(S.of(context).database_parts),
-                                  //
-                                  ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: partsList.parts.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) =>
-                                            Row(
-                                      children: <Widget>[
-                                        Expanded(
-                                            child: Text(partsList
-                                                .parts[index].partName)),
-                                        Text(partsList.parts[index].partPrice
-                                            .toString()),
-                                        IconButton(
-                                          icon: Icon(Icons.remove),
-                                          onPressed: () {
-                                            Provider.of<PartsCart>(context,
-                                                    listen: false)
-                                                .delete(partsList.parts[index]);
-                                            setState(() {
-                                              totalPrice =
-                                                  Provider.of<PartsCart>(
-                                                          context,
-                                                          listen: false)
-                                                      .totalPrice;
-                                            });
-                                          },
-                                        ),
-                                        //  Text(numberOfPart.toString()),
-                                        IconButton(
-                                          icon: Icon(Icons.add),
-                                          onPressed: () {
-                                            Provider.of<PartsCart>(context,
-                                                    listen: false)
-                                                .add(partsList.parts[index]);
-                                            setState(() {
-                                              totalPrice =
-                                                  Provider.of<PartsCart>(
-                                                          context,
-                                                          listen: false)
-                                                      .totalPrice;
-                                            });
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        )
-                      : Container(),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 12.0),
-              child: TextFormField(
-                keyboardType: TextInputType.text,
-                initialValue: _model.entryNote,
-                autocorrect: false,
-                onSaved: (String value) => entryNote = value,
-                maxLines: 3,
-                decoration: InputDecoration(
-                  labelText: S.of(context).form_decorator_notes,
                 ),
-              ),
-            ),
-            Container(
-              height: 30.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(
-                  width: 150,
-                  child: RaisedButton(
-                    child: Text(S.of(context).button_cancel),
-                    onPressed: () {
-                      Provider.of<PartsCart>(context, listen: false)
-                          .clearCart();
-                      Navigator.pushReplacementNamed(context, 'load_data_page');
-                    },
-                    color: Colors.grey,
+                Padding(
+                  padding: const EdgeInsets.only(top: 12.0),
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    initialValue: _model.entryNote,
+                    autocorrect: false,
+                    onSaved: (String value) => entryNote = value,
+                    maxLines: 3,
+                    decoration: InputDecoration(
+                      labelText: S.of(context).form_decorator_notes,
+                    ),
                   ),
                 ),
-                SizedBox(
-                  width: 12,
+                Container(
+                  height: 30.0,
                 ),
-                SizedBox(
-                  width: 150,
-                  child: RaisedButton(
-                    child: Text(S.of(context).button_save),
-                    onPressed: _submitDetails,
-                    color: Colors.yellow,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 150,
+                      child: RaisedButton(
+                        child: Text(S.of(context).button_cancel),
+                        onPressed: () {
+                          Provider.of<PartsCart>(context, listen: false)
+                              .clearCart();
+                          Navigator.pushReplacementNamed(
+                              context, 'load_data_page');
+                        },
+                        color: Colors.grey,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    SizedBox(
+                      width: 150,
+                      child: RaisedButton(
+                        child: Text(S.of(context).button_save),
+                        onPressed: _submitDetails,
+                        color: Colors.yellow,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 
   Future _chooseDate(BuildContext context, String initialDateString) async {

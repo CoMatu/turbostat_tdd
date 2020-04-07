@@ -119,6 +119,7 @@ class LoadDataPage extends StatelessWidget {
                               .carId;
                       Provider.of<MileageProvider>(context, listen: false)
                           .getLastMileage(carId);
+                      Provider.of<PartsCart>(context, listen: false).clearCart();
                       Navigator.popAndPushNamed(context, 'add_entry');
                     },
                   ),
