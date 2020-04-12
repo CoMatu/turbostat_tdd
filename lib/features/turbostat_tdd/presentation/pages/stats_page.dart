@@ -128,7 +128,7 @@ class _StatsPageState extends State<StatsPage> {
                     color: totalColor,
                     onPressed: () {
                       DateTime _date = DateTime.now();
-                      startDate = DateTime(1970, 1, 1);
+                      startDate = DateTime(2010, 1, 1);
                       endDate = _date;
                       setState(() {
                         thisYearColor = Colors.white;

@@ -48,7 +48,9 @@ class GetStatsData {
 
     // из них достаем сумму затрат на запчасти
     _filteredParts.forEach((element) {
+      print('element price: '+element.partPrice.toString());
       valueOfParts = valueOfParts + element.partPrice;
+      print(valueOfParts);
     });
 
     final data = [

@@ -14,7 +14,7 @@ class _PartsPageState extends State<PartsPage> {
     return Container(
       child: Scaffold(
         appBar: MainAppBar(),
-        body: PartsListWidget(),
+        body: PartsList(),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {

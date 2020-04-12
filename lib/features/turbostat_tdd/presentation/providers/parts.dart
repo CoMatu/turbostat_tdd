@@ -30,6 +30,12 @@ class Parts extends ChangeNotifier {
       (result) => result,
     ));
 
+    _parts.sort((a, b) => a.partName
+        .toLowerCase()
+        .runes
+        .first
+        .compareTo(b.partName.toLowerCase().runes.first));
+
     notifyListeners();
   }
 

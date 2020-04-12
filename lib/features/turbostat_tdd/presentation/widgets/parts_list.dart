@@ -4,16 +4,16 @@ import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/pages.da
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
 
-class PartsListWidget extends StatefulWidget {
-  const PartsListWidget({
+class PartsList extends StatefulWidget {
+  const PartsList({
     Key key,
   }) : super(key: key);
 
   @override
-  _PartsListWidgetState createState() => _PartsListWidgetState();
+  _PartsListState createState() => _PartsListState();
 }
 
-class _PartsListWidgetState extends State<PartsListWidget> {
+class _PartsListState extends State<PartsList> {
   String _carId;
 
   @override
