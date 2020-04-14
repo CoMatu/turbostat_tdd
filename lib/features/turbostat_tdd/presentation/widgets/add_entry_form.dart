@@ -198,6 +198,21 @@ class _AddEntryFormState extends State<AddEntryForm> {
                                           partsCart.partsCart[index].partName)),
                                   Text(partsCart.partsCart[index].partPrice
                                       .toString()),
+                                  IconButton(
+                                    icon: Icon(Icons.remove_circle_outline),
+                                    onPressed: () {
+                                      final carId =
+                                          Provider.of<CurrentCar>(context, listen: false)
+                                              .currentCar
+                                              .carId;
+                                      Provider.of<Parts>(context, listen: false)
+                                          .add(carId,
+                                              partsCart.partsCart[index]);
+                                      Provider.of<PartsCart>(context,
+                                              listen: false)
+                                          .delete(partsCart.partsCart[index]);
+                                    },
+                                  )
                                 ],
                               ));
                     },
@@ -214,9 +229,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
                   Container(
                     height: 12.0,
                   ),
-                  isVisible
-                      ? PartsListWidget()
-                      : Container(),
+                  isVisible ? PartsListWidget() : Container(),
                 ],
               ),
             ),
@@ -326,6 +339,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
       _controller.text = DateFormat('dd.MM.yyyy').format(result);
     });
   }
+
 // TODO при выборе даты из чекера получаем эксепшн
   DateTime convertToDate(String input) {
     try {

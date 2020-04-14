@@ -34,7 +34,8 @@ class Parts extends ChangeNotifier {
         .toLowerCase()
         .runes
         .first
-        .compareTo(b.partName.toLowerCase().runes.first));
+        .compareTo(b.partName.toLowerCase().runes.first)); //TODO sort by runes
+
 
     notifyListeners();
   }

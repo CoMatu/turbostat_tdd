@@ -51,13 +51,20 @@ class _PartsListWidgetState extends State<PartsListWidget> {
                       onPressed: () {
                         Provider.of<PartsCart>(context, listen: false)
                             .add(partsList.parts[index]);
+
+                        final carId =
+                            Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
+
+                        Provider.of<Parts>(context, listen: false)
+                            .delete(carId, partsList.parts[index]);
+
                         setState(() {
                           totalPrice =
                               Provider.of<PartsCart>(context, listen: false)
                                   .totalPrice;
                         });
                       },
-                    ), 
+                    ),
                   ],
                 ),
               ),
