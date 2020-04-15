@@ -209,6 +209,24 @@ class _EditEntryFormState extends State<EditEntryForm> {
                                               .partsCart[index].partName)),
                                       Text(partsCart.partsCart[index].partPrice
                                           .toString()),
+                                      IconButton(
+                                        icon: Icon(Icons.remove_circle_outline),
+                                        onPressed: () {
+                                          final carId = Provider.of<CurrentCar>(
+                                                  context,
+                                                  listen: false)
+                                              .currentCar
+                                              .carId;
+                                          Provider.of<Parts>(context,
+                                                  listen: false)
+                                              .add(carId,
+                                                  partsCart.partsCart[index]);
+                                          Provider.of<PartsCart>(context,
+                                                  listen: false)
+                                              .delete(
+                                                  partsCart.partsCart[index]);
+                                        },
+                                      ),
                                     ],
                                   ));
                         },
@@ -225,9 +243,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                       Container(
                         height: 12.0,
                       ),
-                      isVisible
-                          ? PartsListWidget()
-                          : Container(),
+                      isVisible ? PartsListWidget() : Container(),
                     ],
                   ),
                 ),

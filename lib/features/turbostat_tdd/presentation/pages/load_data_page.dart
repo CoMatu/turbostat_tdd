@@ -7,6 +7,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widget
 import 'package:turbostat_tdd/generated/i18n.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 
+// При первом старте на странице добавления авто висит FAB
 class LoadDataPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
