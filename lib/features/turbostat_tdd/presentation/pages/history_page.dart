@@ -119,7 +119,7 @@ class HistoryPage extends StatelessWidget {
                           Navigator.popAndPushNamed(context, 'edit_entry');
                         },
                       ),
-                      IconButton(
+                      IconButton( // TODO при удалении надо запчасти обратно в список
                         icon: Icon(Icons.delete_outline),
                         onPressed: () async {
                           final carId =

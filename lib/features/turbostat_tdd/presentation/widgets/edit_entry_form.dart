@@ -63,47 +63,10 @@ class _EditEntryFormState extends State<EditEntryForm> {
                     style: TextStyle(fontSize: 16.0),
                   ),
                 ),
-                FormField<String>(
-                  builder: (FormFieldState<String> state) {
-                    return InputDecorator(
-                      decoration: InputDecoration(
-                          labelText:
-                              S.of(context).form_decorator_select_maintenance,
-                          labelStyle: TextStyle(fontSize: 22.0)),
-                      isEmpty: maintenanceId == '',
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          //TODO добавить начальное значение, чтобы не выбирать при каждом исправлении
-                          hint: DropdownMenuItem(
-                            value: _model.maintenanceId,
-                            child: Text(_model?.entryName ?? ''),
-                          ),
-                          value: maintenanceId,
-                          isDense: true,
-                          isExpanded: true,
-                          onChanged: (String newValue) {
-                            setState(() {
-                              maintenanceId = newValue;
-                              state.didChange(newValue);
-                            });
-                          },
-                          items: _maintenances.map((MaintenanceModel value) {
-                            return DropdownMenuItem<String>(
-                              value: value.maintenanceId,
-                              child: Text(value.maintenanceName),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    );
-                  },
-                  validator: (value) {
-                    if (value?.isEmpty ?? true) {
-                      print('value is Empty');
-                      return S.of(context).form_warning_fill_info;
-                    }
-                    return null;
-                  },
+                Divider(),
+                Text(
+                  _model.entryName,
+                  style: Theme.of(context).textTheme.headline5,
                 ),
                 Row(children: <Widget>[
                   Expanded(
@@ -337,9 +300,8 @@ class _EditEntryFormState extends State<EditEntryForm> {
       // TODO добавить сообщение об ошибке
     } else {
       formState.save();
-      final filtrRes =
-          _maintenances.where((f) => f.maintenanceId == maintenanceId).first;
-      entryName = filtrRes.maintenanceName;
+
+      entryName = _model.entryName;
       final entryId = _model.entryId;
       final _result = EntryModel(
         entryId: entryId,
