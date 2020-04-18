@@ -119,7 +119,7 @@ class HistoryPage extends StatelessWidget {
                           Navigator.popAndPushNamed(context, 'edit_entry');
                         },
                       ),
-                      IconButton( // TODO при удалении надо запчасти обратно в список
+                      IconButton(
                         icon: Icon(Icons.delete_outline),
                         onPressed: () async {
                           final carId =
@@ -130,11 +130,22 @@ class HistoryPage extends StatelessWidget {
                           final ConfirmAction confirmAction =
                               await asyncConfirmDialog(context);
                           if (confirmAction == ConfirmAction.ACCEPT) {
+                            await Provider.of<PartsCart>(context, listen: false)
+                                .getEntryParts(entry.entries[index].entryId);
+
+                            final _parts =
+                                Provider.of<PartsCart>(context, listen: false)
+                                    .partsCart;
+
+                            for (int i = 0; i < _parts.length; i++) {
+                              await Provider.of<Parts>(context, listen: false)
+                                  .add(carId, _parts[i]);
+                            }
+
                             sl<DeleteEntry>().deleteEntry(
                                 carId, entry.entries[index].entryId);
                             Provider.of<Entries>(context, listen: false)
                                 .updateAll(carId);
-                            //TODO решить что делать с запчастями при удалении записи
                           }
                         },
                       ),
