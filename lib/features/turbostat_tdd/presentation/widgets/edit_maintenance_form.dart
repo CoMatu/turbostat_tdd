@@ -20,12 +20,6 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
   MaintenanceModel _model;
 
   @override
-  void initState() { 
-    super.initState();
-    _model = Provider.of<CurrentMaintenance>(context, listen: false).currentMaintenance;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       child: Form(
@@ -153,6 +147,9 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
       //     showSnackBarMessage(S.of(context).form_warning_fill_info);
     } else {
       formState.save();
+      _model = Provider.of<CurrentMaintenance>(context, listen: false)
+          .currentMaintenance;
+
       final newMaintenance = MaintenanceModel(
         maintenanceId: _model.maintenanceId,
         maintenanceName: maintenanceName,

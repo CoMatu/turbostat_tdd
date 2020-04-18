@@ -142,7 +142,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
               padding: const EdgeInsets.only(top: 12.0),
               child: TextFormField(
                 keyboardType: TextInputType.number,
-                initialValue: '',
+                initialValue: '0',
                 autocorrect: false,
                 onSaved: (String value) => entryWorkPrice = double.parse(value),
                 maxLines: 1,

@@ -56,14 +56,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               shrinkWrap: true,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Text(
-                    S.of(context).add_operation_page_description,
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                ),
-                Divider(),
+                Container(height: 12.0,),
                 Text(
                   _model.entryName,
                   style: Theme.of(context).textTheme.headline5,
@@ -305,7 +298,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
       final entryId = _model.entryId;
       final _result = EntryModel(
         entryId: entryId,
-        maintenanceId: maintenanceId,
+        maintenanceId: _model.maintenanceId,
         entryName: entryName,
         entryDateTime: entryDateTime,
         entryMileage: entryMileage,

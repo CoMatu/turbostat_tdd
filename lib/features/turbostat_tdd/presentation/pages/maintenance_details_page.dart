@@ -38,7 +38,7 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
     final _listMaintenancies =
         Provider.of<Maintenances>(context, listen: false).maintenances;
     _maintenanceModel = _listMaintenancies
-        .singleWhere((element) => element.maintenanceId == model.maintenanceId);
+        .singleWhere((element) => element.maintenanceId == model.maintenanceId, orElse: () => null);
 
     super.didChangeDependencies();
   }
