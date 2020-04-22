@@ -31,6 +31,7 @@ class GetStatsData {
     // из них достаем сумму затрат на выполненные работы
     _filteredEntries.forEach((element) {
       valueOfWork = valueOfWork + element.entryWorkPrice;
+      print('стоимость works: ' + valueOfWork.toString());
     });
 
     // достаем списки запчастей по каждой записи
@@ -47,9 +48,9 @@ class GetStatsData {
 
     // из них достаем сумму затрат на запчасти
     _filteredParts.forEach((element) {
-      print('element price: '+element.partPrice.toString());
+      print('element price: ' + element.partPrice.toString());
       valueOfParts = valueOfParts + element.partPrice;
-      print(valueOfParts);
+      print('стоимость ЗЧ: ' + valueOfParts.toString());
     });
 
     final data = [

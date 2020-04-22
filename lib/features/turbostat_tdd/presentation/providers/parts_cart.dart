@@ -18,6 +18,7 @@ class PartsCart extends ChangeNotifier {
     _parts.forEach((element) {
       total = total + element.partPrice;
     });
+
     return total;
   }
 

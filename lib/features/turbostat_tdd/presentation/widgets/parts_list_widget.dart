@@ -33,19 +33,6 @@ class _PartsListWidgetState extends State<PartsListWidget> {
                   children: <Widget>[
                     Expanded(child: Text(partsList.parts[index].partName)),
                     Text(partsList.parts[index].partPrice.toString()),
-/*                     IconButton(
-                      icon: Icon(Icons.remove),
-                      onPressed: () {
-                        Provider.of<PartsCart>(context, listen: false)
-                            .delete(partsList.parts[index]);
-                        setState(() {
-                          totalPrice =
-                              Provider.of<PartsCart>(context, listen: false)
-                                  .totalPrice;
-                        });
-                      },
-                    ),*/
-                    //  Text(numberOfPart.toString()),
                     IconButton(
                       icon: Icon(Icons.add),
                       onPressed: () {
