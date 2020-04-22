@@ -98,18 +98,20 @@ class _AddEntryFormState extends State<AddEntryForm> {
             Row(children: <Widget>[
               Expanded(
                   child: TextFormField(
-                decoration: InputDecoration(
-                  //                        icon: const Icon(Icons.calendar_today),
-                  labelText: S.of(context).form_decorator_date,
-                ),
-                controller: _controller,
-                keyboardType: TextInputType.datetime,
-                validator: (val) => DateValidator().isValidDate(val)
-                    ? null
-                    : S.of(context).form_validator_date_format,
-                onSaved: (val) =>
-                    entryDateTime = DateFormat('dd.MM.yyyy').parseStrict(val),
-              )),
+                      decoration: InputDecoration(
+                        //                        icon: const Icon(Icons.calendar_today),
+                        labelText: S.of(context).form_decorator_date,
+                      ),
+                      controller: _controller,
+                      keyboardType: TextInputType.datetime,
+                      validator: (val) => DateValidator().isValidDate(val)
+                          ? null
+                          : S.of(context).form_validator_date_format,
+                      onSaved: (val) {
+                        entryDateTime = DateFormat('dd.MM.yyyy').parse(val);
+                        print(entryDateTime);
+                        return entryDateTime;
+                      })),
               IconButton(
                 icon: Icon(Icons.more_horiz),
                 tooltip: S.of(context).form_decorator_date_select,
@@ -201,10 +203,11 @@ class _AddEntryFormState extends State<AddEntryForm> {
                                   IconButton(
                                     icon: Icon(Icons.remove_circle_outline),
                                     onPressed: () {
-                                      final carId =
-                                          Provider.of<CurrentCar>(context, listen: false)
-                                              .currentCar
-                                              .carId;
+                                      final carId = Provider.of<CurrentCar>(
+                                              context,
+                                              listen: false)
+                                          .currentCar
+                                          .carId;
                                       Provider.of<Parts>(context, listen: false)
                                           .add(carId,
                                               partsCart.partsCart[index]);
@@ -344,7 +347,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
   DateTime convertToDate(String input) {
     try {
       if (input != "") {
-        var d = DateFormat('dd.MM.yyyy').parseStrict(input);
+        var d = DateFormat('dd.MM.yyyy').parse(input);
         return d;
       } else {
         return null;
