@@ -127,7 +127,10 @@ class _AddEntryFormState extends State<AddEntryForm> {
                 keyboardType: TextInputType.number,
                 initialValue: _mileageModel.mileage.toString(),
                 autocorrect: false,
-                onSaved: (String value) => entryMileage = int.parse(value),
+                onSaved: (String value) {
+                  entryMileage = int.parse(value);
+                  return entryMileage;
+                },
                 maxLines: 1,
                 validator: (value) {
                   if (value.isEmpty || value.length < 1) {
@@ -314,8 +317,6 @@ class _AddEntryFormState extends State<AddEntryForm> {
       var _parts = Provider.of<PartsCart>(context, listen: false).partsCart;
       await sl<AddEntryParts>().addEntryParts(entryId, _parts);
       Provider.of<PartsCart>(context, listen: false).clearCart();
-
-      Provider.of<Entries>(context, listen: false).add(_carId, _result);
 
       Navigator.pushReplacementNamed(context, 'load_data_page');
     }

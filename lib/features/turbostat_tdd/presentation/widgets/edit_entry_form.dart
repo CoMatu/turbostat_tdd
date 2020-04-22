@@ -56,7 +56,9 @@ class _EditEntryFormState extends State<EditEntryForm> {
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               shrinkWrap: true,
               children: <Widget>[
-                Container(height: 12.0,),
+                Container(
+                  height: 12.0,
+                ),
                 Text(
                   _model.entryName,
                   style: Theme.of(context).textTheme.headline5,
@@ -72,8 +74,8 @@ class _EditEntryFormState extends State<EditEntryForm> {
                     validator: (val) => DateValidator().isValidDate(val)
                         ? null
                         : S.of(context).form_validator_date_format,
-                    onSaved: (val) => entryDateTime =
-                        DateFormat('dd.MM.yyyy').parse(val),
+                    onSaved: (val) =>
+                        entryDateTime = DateFormat('dd.MM.yyyy').parse(val),
                   )),
                   IconButton(
                     icon: Icon(Icons.more_horiz),
@@ -90,7 +92,10 @@ class _EditEntryFormState extends State<EditEntryForm> {
                     keyboardType: TextInputType.number,
                     initialValue: _model.entryMileage.toString(),
                     autocorrect: false,
-                    onSaved: (String value) => entryMileage = int.parse(value),
+                    onSaved: (String value) {
+                      entryMileage = int.parse(value);
+                      return entryMileage;
+                    },
                     maxLines: 1,
                     validator: (value) {
                       if (value.isEmpty || value.length < 1) {
@@ -307,7 +312,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
       );
       final String _carId =
           Provider.of<CurrentCar>(context, listen: false).currentCar.carId;
-//      Provider.of<PartsCart>(context, listen: false).addPartsToDataSource(entryId);
+
       var _parts = Provider.of<PartsCart>(context, listen: false).partsCart;
       await sl<AddEntryParts>().addEntryParts(entryId, _parts);
 
