@@ -73,7 +73,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                         ? null
                         : S.of(context).form_validator_date_format,
                     onSaved: (val) => entryDateTime =
-                        DateFormat('dd.MM.yyyy').parseStrict(val),
+                        DateFormat('dd.MM.yyyy').parse(val),
                   )),
                   IconButton(
                     icon: Icon(Icons.more_horiz),
@@ -278,7 +278,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
 
   DateTime convertToDate(String input) {
     try {
-      var d = DateFormat('dd.MM.yyyy').parseStrict(input);
+      var d = DateFormat('dd.MM.yyyy').parse(input);
       return d;
     } catch (e) {
       return null;
