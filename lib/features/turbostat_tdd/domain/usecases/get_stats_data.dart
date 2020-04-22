@@ -40,7 +40,6 @@ class GetStatsData {
           .call(gep.Params(entryId: element.entryId));
       final List<PartModel> _preFiltered =
           _parts.fold((failure) => [], (_parts) => _parts);
-//      _filteredParts.addAll(_preFiltered); //TODO проверить, нужно ли обнулять список при каждом обращении
       _preFiltered.forEach((element) {
         _filteredParts.add(element);
       });
