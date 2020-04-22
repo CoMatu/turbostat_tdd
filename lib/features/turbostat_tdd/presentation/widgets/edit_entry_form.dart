@@ -304,7 +304,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
       final _result = EntryModel(
         entryId: entryId,
         maintenanceId: _model.maintenanceId,
-        entryName: entryName,
+        entryName: _model.entryName,
         entryDateTime: entryDateTime,
         entryMileage: entryMileage,
         entryWorkPrice: entryWorkPrice,

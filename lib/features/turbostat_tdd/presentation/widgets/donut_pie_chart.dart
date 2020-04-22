@@ -55,6 +55,7 @@ class DonutPieChart extends StatelessWidget {
   }
 }
 
+//TODO добавить обработку нулевого значения для вывода чарта
 /// Sample linear data type.
 class LinearSales {
   final int year;
