@@ -171,7 +171,7 @@ class _AddEntryFormState extends State<AddEntryForm> {
                       Expanded(
                         child: Text(
                           S.of(context).cost_spare_part,
-                          style: Theme.of(context).textTheme.subtitle1,
+                          style: Theme.of(context).textTheme.subtitle,
                         ),
                       ),
                       IconButton(

@@ -61,22 +61,23 @@ class _EditEntryFormState extends State<EditEntryForm> {
                 ),
                 Text(
                   _model.entryName,
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headline,
                 ),
                 Row(children: <Widget>[
                   Expanded(
                       child: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: S.of(context).form_decorator_date,
-                    ),
-                    controller: _controller,
-                    keyboardType: TextInputType.datetime,
-                    validator: (val) => DateValidator().isValidDate(val)
-                        ? null
-                        : S.of(context).form_validator_date_format,
-                    onSaved: (val) =>
-                        entryDateTime = DateFormat('dd.MM.yyyy').parse(val),
-                  )),
+                          decoration: InputDecoration(
+                            labelText: S.of(context).form_decorator_date,
+                          ),
+                          controller: _controller,
+                          keyboardType: TextInputType.datetime,
+                          validator: (val) => DateValidator().isValidDate(val)
+                              ? null
+                              : S.of(context).form_validator_date_format,
+                          onSaved: (val) {
+                            entryDateTime = DateFormat('dd.MM.yyyy').parse(val);
+                            print(val);
+                          })),
                   IconButton(
                     icon: Icon(Icons.more_horiz),
                     tooltip: S.of(context).form_decorator_date_select,
@@ -137,7 +138,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                           Expanded(
                             child: Text(
                               S.of(context).cost_spare_part,
-                              style: Theme.of(context).textTheme.subtitle1,
+                              style: Theme.of(context).textTheme.subtitle,
                             ),
                           ),
                           IconButton(
