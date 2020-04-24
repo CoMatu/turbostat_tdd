@@ -76,7 +76,6 @@ class _EditEntryFormState extends State<EditEntryForm> {
                               : S.of(context).form_validator_date_format,
                           onSaved: (val) {
                             entryDateTime = DateFormat('dd.MM.yyyy').parse(val);
-                            print(val);
                           })),
                   IconButton(
                     icon: Icon(Icons.more_horiz),
