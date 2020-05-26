@@ -151,8 +151,8 @@ class _EditCarFormState extends State<EditCarForm> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
-                    width: 150,
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: 150.0),
                     child: RaisedButton(
                       child: Text(S.of(context).button_cancel),
                       onPressed: () {
@@ -165,8 +165,8 @@ class _EditCarFormState extends State<EditCarForm> {
                   SizedBox(
                     width: 12,
                   ),
-                  SizedBox(
-                    width: 150,
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: 150.0),
                     child: RaisedButton(
                       child: Text(S.of(context).button_save),
                       onPressed: _submitDetails,
@@ -200,8 +200,9 @@ class _EditCarFormState extends State<EditCarForm> {
           licencePlate: '',
           tankVolume: 38,
           fuelType: 'petrol');
-      
-      BlocProvider.of<LoadDataBloc>(context).add(DeleteConcreteCar(carKey: carId));
+
+      BlocProvider.of<LoadDataBloc>(context)
+          .add(DeleteConcreteCar(carKey: carId));
 
       BlocProvider.of<LoadDataBloc>(context).add(AddConcreteCar(car: newCar));
 

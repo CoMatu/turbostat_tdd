@@ -108,12 +108,12 @@ class _AddMaintenanceFormState extends State<AddMaintenanceForm> {
               builder: (context, car, child) => Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
-                    width: 150,
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: 150.0),
                     child: RaisedButton(
                       child: Text(S.of(context).button_cancel),
                       onPressed: () {
-                        Navigator.pop(context); 
+                        Navigator.pop(context);
                         //TODO при добавлении из списка отмена уводит на страницу настроек, а должна вернуть к списку
                       },
                       color: Colors.grey,
@@ -122,11 +122,12 @@ class _AddMaintenanceFormState extends State<AddMaintenanceForm> {
                   SizedBox(
                     width: 12,
                   ),
-                  SizedBox(
-                    width: 150,
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: 150.0),
                     child: RaisedButton(
                       child: Text(S.of(context).button_save),
-                      onPressed: () async => _submitDetails(car.currentCar.carId),
+                      onPressed: () async =>
+                          _submitDetails(car.currentCar.carId),
                       color: Colors.yellow,
                     ),
                   ),
@@ -153,7 +154,8 @@ class _AddMaintenanceFormState extends State<AddMaintenanceForm> {
         maintenanceMileageLimit: maintenanceMileageLimit,
         maintenanceMonthLimit: maintenanceMonthLimit,
       );
-      Provider.of<Maintenances>(context, listen: false).add(newMaintenance, carId);
+      Provider.of<Maintenances>(context, listen: false)
+          .add(newMaintenance, carId);
 
       Navigator.pushReplacementNamed(context, 'load_data_page');
     }

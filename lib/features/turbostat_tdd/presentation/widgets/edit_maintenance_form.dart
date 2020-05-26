@@ -108,8 +108,8 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
               builder: (context, car, child) => Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
-                    width: 150,
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: 150.0),
                     child: RaisedButton(
                       child: Text(S.of(context).button_cancel),
                       onPressed: () {
@@ -122,8 +122,8 @@ class _EditMaintenanceFormState extends State<EditMaintenanceForm> {
                   SizedBox(
                     width: 12,
                   ),
-                  SizedBox(
-                    width: 150,
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: 150.0),
                     child: RaisedButton(
                       child: Text(S.of(context).button_save),
                       onPressed: () async =>

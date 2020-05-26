@@ -149,8 +149,8 @@ class _AddCarFormState extends State<AddCarForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(
-                  width: 150,
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 150.0),
                   child: RaisedButton(
                     child: Text(S.of(context).button_cancel),
                     onPressed: () {
@@ -162,8 +162,8 @@ class _AddCarFormState extends State<AddCarForm> {
                 SizedBox(
                   width: 12,
                 ),
-                SizedBox(
-                  width: 150,
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 150.0),
                   child: RaisedButton(
                     child: Text(S.of(context).button_save),
                     onPressed: _submitDetails,
