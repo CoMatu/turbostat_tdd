@@ -132,11 +132,11 @@ class LoadDataPage extends StatelessWidget {
                       Navigator.popAndPushNamed(context, 'add_part');
                     },
                   ),
-                  ListTile(
+/*                   ListTile(
                     title: Text(S.of(context).button_cancel),
                     leading: Icon(Icons.subdirectory_arrow_left),
                     onTap: () => Navigator.pop(context),
-                  ),
+                  ), */
                   Container(
                     height: 10.0,
                   )
