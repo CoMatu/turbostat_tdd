@@ -59,9 +59,7 @@ class LoadDataPage extends StatelessWidget {
       child:
           BlocBuilder<LoadDataBloc, LoadDataState>(builder: (context, state) {
         if (state is Loading) {
-          return Container(
-            child: Center(child: CustomCircleProgressBar()),
-          );
+          return Center(child: CustomCircleProgressBar());
         }
         if (state is LoadedAllCars) {
           return state.listAll.isEmpty
@@ -81,7 +79,9 @@ class LoadDataPage extends StatelessWidget {
                   ],
                 );
         }
-        return Container();
+        return SizedBox(
+          height: MediaQuery.of(context).size.height,
+        );
       }),
     );
   }
@@ -120,7 +120,8 @@ class LoadDataPage extends StatelessWidget {
                               .carId;
                       Provider.of<MileageProvider>(context, listen: false)
                           .getLastMileage(carId);
-                      Provider.of<PartsCart>(context, listen: false).clearCart();
+                      Provider.of<PartsCart>(context, listen: false)
+                          .clearCart();
                       Provider.of<Parts>(context, listen: false).update(carId);
                       Navigator.popAndPushNamed(context, 'add_entry');
                     },
