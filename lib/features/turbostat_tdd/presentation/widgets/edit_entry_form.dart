@@ -19,7 +19,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _controller;
 
-  List<MaintenanceModel> _maintenances;
+  List<MaintenanceModel> maintenances;
 
   String maintenanceId;
   String entryName;
@@ -37,7 +37,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
     super.initState();
     var f = DateFormat('dd.MM.yyyy');
     _model = Provider.of<CurrentEntry>(context, listen: false).currentEntry;
-    _maintenances =
+    maintenances =
         Provider.of<Maintenances>(context, listen: false).maintenances;
     _controller = TextEditingController(text: f.format(_model.entryDateTime));
     isVisible = false;
@@ -61,7 +61,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                 ),
                 Text(
                   _model.entryName,
-                  style: Theme.of(context).textTheme.headline,
+                  style: Theme.of(context).textTheme.headline5,
                 ),
                 Row(children: <Widget>[
                   Expanded(
@@ -137,7 +137,7 @@ class _EditEntryFormState extends State<EditEntryForm> {
                           Expanded(
                             child: Text(
                               S.of(context).cost_spare_part,
-                              style: Theme.of(context).textTheme.subtitle,
+                              style: Theme.of(context).textTheme.subtitle2,
                             ),
                           ),
                           IconButton(

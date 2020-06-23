@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turbostat_tdd/core/error/exception.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_entry.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/entry_usecases/delete_entry.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/pages.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/entries.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';

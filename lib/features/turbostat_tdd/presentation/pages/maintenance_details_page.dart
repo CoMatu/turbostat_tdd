@@ -58,7 +58,7 @@ class _MaintenanceDetailsPageState extends State<MaintenanceDetailsPage> {
                       Expanded(
                         child: Text(
                           model.entryName,
-                          style: Theme.of(context).textTheme.headline,
+                          style: Theme.of(context).textTheme.headline5,
                         ),
                       ),
                     ],

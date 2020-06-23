@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/car_usecases/get_concrete_car_model.dart';
 
 class MockTurbostatRepository extends Mock implements TurbostatRepository {}
 

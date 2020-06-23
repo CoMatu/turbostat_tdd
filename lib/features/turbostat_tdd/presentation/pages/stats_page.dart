@@ -44,7 +44,7 @@ class _StatsPageState extends State<StatsPage> {
           children: <Widget>[
             Text(
               S.of(context).expense_statistics,
-              style: Theme.of(context).textTheme.headline,
+              style: Theme.of(context).textTheme.headline5,
             ),
             Wrap(
               children: <Widget>[
@@ -164,7 +164,7 @@ class _StatsPageState extends State<StatsPage> {
                                                 snapshot.data.data[1].amount),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline,
+                                            .headline5,
                                       ),
                                     ),
                                     DonutPieChart([snapshot.data])

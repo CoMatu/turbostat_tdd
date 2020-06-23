@@ -3,10 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_car_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_car_models.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_concrete_car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/car_usecases/add_car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/car_usecases/delete_car_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/car_usecases/get_all_car_models.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/car_usecases/get_concrete_car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 
 class MockGetConcreteCar extends Mock implements GetConcreteCarModel {}
