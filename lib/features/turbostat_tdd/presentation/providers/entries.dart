@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/entry_usecases/add_entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/entry_usecases/get_all_entries.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_entries.dart'
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/entry_usecases/get_entries.dart'
     as gE;
 import 'package:turbostat_tdd/injection_container.dart';
 

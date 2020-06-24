@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_maintenance_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_maintenances.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/maint_usecases/add_maintenance_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/maint_usecases/get_all_maintenances.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 
 class Maintenances extends ChangeNotifier {

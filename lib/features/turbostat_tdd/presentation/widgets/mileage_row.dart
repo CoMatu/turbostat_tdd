@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_mileage.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_car_mileage.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/mileage_usecases/add_car_mileage.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/mileage_usecases/get_car_mileage.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 

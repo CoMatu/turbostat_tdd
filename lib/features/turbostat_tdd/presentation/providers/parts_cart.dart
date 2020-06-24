@@ -2,8 +2,8 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_parts.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_entry_parts.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/part_usecases/add_entry_parts.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/part_usecases/get_entry_parts.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 
 class PartsCart extends ChangeNotifier {

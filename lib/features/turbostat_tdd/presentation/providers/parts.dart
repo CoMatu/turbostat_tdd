@@ -2,9 +2,9 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/part_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_part_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/delete_part_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_all_part_models.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/part_usecases/add_part_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/part_usecases/delete_part_model.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/part_usecases/get_all_part_models.dart';
 
 import '../../../../injection_container.dart';
 

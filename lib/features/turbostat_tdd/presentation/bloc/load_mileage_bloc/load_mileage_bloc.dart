@@ -5,8 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:turbostat_tdd/core/error/failures.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_car_mileage.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_car_mileage.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/mileage_usecases/add_car_mileage.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/mileage_usecases/get_car_mileage.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 
 part 'load_mileage_event.dart';

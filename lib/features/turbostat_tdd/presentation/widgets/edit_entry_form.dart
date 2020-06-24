@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/core/fixtures/date_validator.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/add_entry_parts.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/part_usecases/add_entry_parts.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/widgets.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';

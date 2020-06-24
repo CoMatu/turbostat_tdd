@@ -1,8 +1,8 @@
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_car_mileage.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/get_entries.dart'
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/mileage_usecases/get_car_mileage.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/entry_usecases/get_entries.dart'
     as gE;
 import 'package:turbostat_tdd/injection_container.dart';
 
