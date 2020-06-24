@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:nanoid/async/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/core/fixtures/date_validator.dart';
-import 'package:turbostat_tdd/core/fixtures/fixture_reader.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/entry_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/maintenance_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.dart';
@@ -40,17 +39,12 @@ class _AddEntryFormState extends State<AddEntryForm> {
   bool isVisible;
   double totalPrice;
 
+  var result;
+
   @override
   void initState() {
     _maintenances =
         Provider.of<Maintenances>(context, listen: false).maintenances;
-    if (_maintenances.isEmpty) {
-      var result = jsonDecode(fixture('maintenances_db.json'));
-      final List<MaintenanceModel> maintPreloaded = result
-          .map<MaintenanceModel>((m) => MaintenanceModel.fromJson(m))
-          .toList();
-      _maintenances.addAll(maintPreloaded);
-    }
     isVisible = false;
     totalPrice = Provider.of<PartsCart>(context, listen: false).totalPrice;
     _mileageModel =

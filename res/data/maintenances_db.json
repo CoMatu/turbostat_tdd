@@ -2,43 +2,43 @@
   {
     "maintenanceId": "001",
     "maintenanceName": "Замена моторного масла и фильтра",
-    "maintenanceMonthLimit": "12",
-    "maintenanceMileageLimit": "10000"
+    "maintenanceMonthLimit": 12,
+    "maintenanceMileageLimit": 10000
   },
   {
     "maintenanceId": "002",
     "maintenanceName": "Замена воздушного фильтра двигателя",
-    "maintenanceMonthLimit": "6",
-    "maintenanceMileageLimit": "5000"
+    "maintenanceMonthLimit": 6,
+    "maintenanceMileageLimit": 5000
   },
   {
     "maintenanceId": "003",
     "maintenanceName": "Замена свечей зажигания (обычного типа)",
-    "maintenanceMonthLimit": "12",
-    "maintenanceMileageLimit": "15000"
+    "maintenanceMonthLimit": 12,
+    "maintenanceMileageLimit": 15000
   },
   {
     "maintenanceId": "004",
     "maintenanceName": "Замена тормозной жидкости",
-    "maintenanceMonthLimit": "24",
-    "maintenanceMileageLimit": "30000"
+    "maintenanceMonthLimit": 24,
+    "maintenanceMileageLimit": 30000
   },
   {
     "maintenanceId": "005",
     "maintenanceName": "Замена воздушного фильтра салона",
-    "maintenanceMonthLimit": "24",
-    "maintenanceMileageLimit": "30000"
+    "maintenanceMonthLimit": 24,
+    "maintenanceMileageLimit": 30000
   },
   {
     "maintenanceId": "006",
     "maintenanceName": "Замена масла в АКПП",
-    "maintenanceMonthLimit": "48",
-    "maintenanceMileageLimit": "60000"
+    "maintenanceMonthLimit": 48,
+    "maintenanceMileageLimit": 60000
   },
   {
     "maintenanceId": "007",
     "maintenanceName": "Замена охлаждающей жидкости",
-    "maintenanceMonthLimit": "72",
-    "maintenanceMileageLimit": "90000"
+    "maintenanceMonthLimit": 72,
+    "maintenanceMileageLimit": 90000
   }
 ]
