@@ -8,6 +8,7 @@ import 'package:turbostat_tdd/core/auth/base_auth.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/add_part_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/load_data_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/logo_screen.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/new_design/home_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/pages.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/select_data_source_page.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/pages/start_page.dart';
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
           'add_part': (context) => AddPartPage(),
           'parts_page': (context) => PartsPage(),
           'maintenance_details': (context) => MaintenanceDetailsPage(),
+          'home_page': (context) => HomePage(),
         },
       ),
     );

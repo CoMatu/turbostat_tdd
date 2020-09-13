@@ -28,7 +28,7 @@ class LogoScreenState extends State<LogoScreen>
   void getSharedPreferences() async {
     prefs = await SharedPreferences.getInstance();
     dataSource = prefs.getString('data_source');
-//    prefs.clear(); // для тестирования разных режимов входа
+    prefs.clear(); // для тестирования разных режимов входа
   }
 
   startTime() async {
@@ -39,7 +39,8 @@ class LogoScreenState extends State<LogoScreen>
   void navigationPage() {
     switch (dataSource) {
       case 'device':
-        Navigator.of(context).pushReplacementNamed('load_data_page');
+//        Navigator.of(context).pushReplacementNamed('load_data_page');
+        Navigator.of(context).pushReplacementNamed('home_page');
         break;
       case 'cloud':
         Navigator.of(context).pushReplacementNamed('start_page');
