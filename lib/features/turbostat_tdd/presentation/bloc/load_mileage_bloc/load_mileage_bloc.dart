@@ -24,7 +24,8 @@ class LoadMileageBloc extends Bloc<LoadMileageEvent, LoadMileageState> {
   })  : assert(getMileage != null),
         assert(addMileage != null),
         getCarMileage = getMileage,
-        addCarMileage = addMileage;
+        addCarMileage = addMileage,
+        super(null);
 
   @override
   LoadMileageState get initialState => LoadMileageInitial();
