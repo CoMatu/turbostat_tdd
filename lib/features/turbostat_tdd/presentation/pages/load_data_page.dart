@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
@@ -14,8 +15,15 @@ class LoadDataPage extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        appBar: MainAppBar(),
-        //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'Контрольная панель',
+            style: GoogleFonts.jura(),
+          ),
+          elevation: 0,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Consumer<PageCounter>(
           builder: (context, page, child) {
             switch (page.pageIndex) {
@@ -66,13 +74,6 @@ class LoadDataPage extends StatelessWidget {
               ? AddCarForm()
               : Column(
                   children: <Widget>[
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColorLight),
-                      child: DropdownCarButton(),
-                    ),
                     Expanded(
                       child: PageViewController(),
                     ),
