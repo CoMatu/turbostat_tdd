@@ -14,7 +14,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int selectedIndex;
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
   }
 
@@ -35,7 +35,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return Consumer<PageCounter>(builder: (context, page, child) {
       return BottomNavigationBar(
-        backgroundColor: Theme.of(context).primaryColorLight,
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(

@@ -51,18 +51,20 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Color(0xFF0E202E),
-          canvasColor: Color(0xFF0E202E),
-          cardColor: Color(0xFF24323F),
-          textTheme: GoogleFonts.juraTextTheme(
-              Theme.of(context).textTheme.apply(bodyColor: Colors.white70)),
-          pageTransitionsTheme: PageTransitionsTheme(builders: {
-            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-          }),
-          bottomSheetTheme: BottomSheetThemeData(
-            backgroundColor: Color(0xFF24323F),
-          ),
-        ),
+            primaryColor: Color(0xFF0E202E),
+            canvasColor: Color(0xFF0E202E),
+            cardColor: Color(0xFF24323F),
+            textTheme: GoogleFonts.juraTextTheme(
+                Theme.of(context).textTheme.apply(bodyColor: Colors.white70)),
+            pageTransitionsTheme: PageTransitionsTheme(builders: {
+              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            }),
+            bottomSheetTheme: BottomSheetThemeData(
+              backgroundColor: Color(0xFF24323F),
+            ),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              backgroundColor: Color(0xFF24323F),
+            )),
         home: LogoScreen(),
         localizationsDelegates: [
           S.delegate,
