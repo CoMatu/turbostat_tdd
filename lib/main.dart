@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:provider/provider.dart';
@@ -50,10 +51,18 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primarySwatch: Colors.yellow,
-            pageTransitionsTheme: PageTransitionsTheme(builders: {
-              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-            })),
+          primaryColor: Color(0xFF0E202E),
+          canvasColor: Color(0xFF0E202E),
+          cardColor: Color(0xFF24323F),
+          textTheme: GoogleFonts.juraTextTheme(
+              Theme.of(context).textTheme.apply(bodyColor: Colors.white70)),
+          pageTransitionsTheme: PageTransitionsTheme(builders: {
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          }),
+          bottomSheetTheme: BottomSheetThemeData(
+            backgroundColor: Color(0xFF24323F),
+          ),
+        ),
         home: LogoScreen(),
         localizationsDelegates: [
           S.delegate,

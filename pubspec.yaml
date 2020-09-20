@@ -26,7 +26,8 @@ dependencies:
     # Service locator
   get_it: ^4.0.2
     # Bloc for state management
-  flutter_bloc: ^6.0.0
+  flutter_bloc: ^6.0.5
+  bloc: ^6.0.3
     # Value equality
   equatable: ^1.2.0
   # Functional programming thingies
@@ -57,6 +58,10 @@ dependencies:
   add_2_calendar: ^1.4.0
   charts_flutter: ^0.9.0
   flutter_launcher_icons: ^0.7.5
+  # UI fonts
+  google_fonts: ^1.1.0
+  # custom icons
+  font_awesome_flutter: ^8.8.1
   
 dev_dependencies:
   flutter_test:
@@ -92,6 +97,7 @@ flutter:
     - res/images/foreground.png
     - res/images/background.png
     - res/data/maintenances_db.json
+    - assets/images/start_logo.png
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

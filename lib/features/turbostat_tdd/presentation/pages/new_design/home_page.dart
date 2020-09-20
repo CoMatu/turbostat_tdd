@@ -6,7 +6,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(height: 100.0,
+    return Container(
+      height: 100.0,
       child: RainbowTableau(),
     );
   }
