@@ -107,6 +107,7 @@ flutter:
     - res/images/background.png
     - res/data/maintenances_db.json
     - assets/images/start_logo.png
+    - assets/google_fonts/
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
