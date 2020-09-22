@@ -26,7 +26,7 @@ class LogoScreenState extends State<LogoScreen>
 
   void getPermission() async {
     permissions = await PermissionHandler().requestPermissions([
-      PermissionGroup.camera,
+//      PermissionGroup.camera,
       PermissionGroup.storage,
     ]);
   }
@@ -119,92 +119,84 @@ class LogoScreenState extends State<LogoScreen>
                   style: textStyle,
                 ),
                 SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: GestureDetector(
-                    onTap: _selectDevice,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        CustomIconWidget(
-                          fontAwesomeIcons: FontAwesomeIcons.mobileAlt,
-                          iconColor: Color(0xFF27AE60),
-                          centerColor: Color(0xFF10AA78),
-                          borderColor: Color(0xFF6FCF97),
-                          iconSize: 19,
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              SizedBox(
-                                height: 36,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    'Ваше устройство',
-                                    style: textStyle,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                'Ваши данные будут храниться в памяти телефона. Доступно на одном устройстве. Регистрация не нужна.',
-                                style: textStyleDescription,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                selectDeviceItem(),
                 Padding(padding: const EdgeInsets.all(12)),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      CustomIconWidget(
-                        fontAwesomeIcons: FontAwesomeIcons.cloud,
-                        borderColor: Color(0xFF2D9CDB),
-                        centerColor: Color(0xFF2D9CDB),
-                        iconColor: Color(0xFF2D9CDB),
-                        iconSize: 14,
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            SizedBox(
-                              height: 36,
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Облачное хранилище',
-                                  style: textStyle,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              'Ваши данные будут храниться в облачном хранилище Google. Можно использовать на разных устройствах. Нужна регистрация или вход с помощью аккаунта Google.',
-                              style: textStyleDescription,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                selectCloudStorageItem(),
               ],
             ),
           );
         });
+  }
+
+  Widget selectCloudStorageItem() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CustomIconWidget(
+            fontAwesomeIcons: FontAwesomeIcons.cloud,
+            borderColor: Color(0xFF2D9CDB),
+            centerColor: Color(0xFF2D9CDB),
+            iconColor: Color(0xFF2D9CDB),
+            iconSize: 14,
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          itemTitleSubtitle(
+            'Облачное хранилище',
+            'Ваши данные будут храниться в облачном хранилище Google. Можно использовать на разных устройствах. Нужна регистрация или вход с помощью аккаунта Google.',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget selectDeviceItem() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: GestureDetector(
+        onTap: _selectDevice,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            CustomIconWidget(
+              fontAwesomeIcons: FontAwesomeIcons.mobileAlt,
+              iconColor: Color(0xFF27AE60),
+              centerColor: Color(0xFF10AA78),
+              borderColor: Color(0xFF6FCF97),
+              iconSize: 19,
+            ),
+            SizedBox(
+              width: 16,
+            ),
+            itemTitleSubtitle(
+              'Ваше устройство',
+              'Ваши данные будут храниться в памяти телефона. Доступно на одном устройстве. Регистрация не нужна.',
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget itemTitleSubtitle(String title, String subtitle) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(
+            height: 36,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(title, style: textStyle),
+            ),
+          ),
+          Text(subtitle, style: textStyleDescription),
+        ],
+      ),
+    );
   }
 
   void _selectDevice() {
