@@ -55,7 +55,10 @@ class MyApp extends StatelessWidget {
           canvasColor: Color(0xFF0E202E),
           cardColor: Color(0xFF24323F),
           textTheme: GoogleFonts.juraTextTheme(
-            Theme.of(context).textTheme.apply(bodyColor: Colors.white70),
+            Theme.of(context).textTheme.apply(
+                  bodyColor: Colors.white70,
+                  displayColor: Colors.white,
+                ),
           ),
           pageTransitionsTheme: PageTransitionsTheme(builders: {
             TargetPlatform.android: CupertinoPageTransitionsBuilder(),
@@ -69,6 +72,13 @@ class MyApp extends StatelessWidget {
           bottomAppBarColor: Color(0xFF24323F),
           floatingActionButtonTheme: FloatingActionButtonThemeData(
             backgroundColor: Color(0xFF27AE60),
+          ),
+          inputDecorationTheme: const InputDecorationTheme(
+            labelStyle: TextStyle(color: Colors.white),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white70)),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white)),
           ),
         ),
         home: LogoScreen(),
@@ -100,5 +110,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-//TODO на дашбод рекламу но начало показа только через 10 запусков чтобы не оттолкнуть

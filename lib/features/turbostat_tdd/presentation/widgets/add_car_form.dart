@@ -155,7 +155,6 @@ class _AddCarFormState extends State<AddCarForm> {
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, 'load_data_page');
                   },
-                  color: Colors.grey,
                 ),
               ),
               SizedBox(
@@ -166,7 +165,6 @@ class _AddCarFormState extends State<AddCarForm> {
                 child: RaisedButton(
                   child: Text(S.of(context).button_save),
                   onPressed: _submitDetails,
-                  color: Colors.yellow,
                 ),
               ),
             ],
