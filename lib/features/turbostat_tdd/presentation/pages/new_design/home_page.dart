@@ -27,49 +27,78 @@ class _HomePageState extends State<HomePage> {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          BlocProvider(
-            create: (context) => sl<LoadDataBloc>()..add(GetAllCar()),
-            child: BlocBuilder<LoadDataBloc, LoadDataState>(
-              builder: (context, state) {
-                if (state is Loading) {
-                  return Container(
-                      height: 70.0, child: CustomCircleProgressBar());
-                } else if (state is LoadedAllCars) {
-                  return Container(
-                    height: 70,
-                    child: PageView.builder(
-                      controller: controller,
-                      onPageChanged: (index) {
-                        // TODO implementation
-                      },
-                      itemBuilder: (BuildContext context, int position) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 16.0, right: 16),
-                          child: CarCardWidget(
-                            carModel: state.listAll[position],
-                            index: position,
-                            itemCount: state.listAll.length,
-                            onButtonPressedForward: onButtonPressedForward,
-                            onButtonPressedBack: onButtonPressedBack,
-                          ),
-                        );
-                      },
-                      itemCount: state.listAll.length,
-                    ),
-                  );
-                }
-                return Container(
-                  height: 70,
-                );
-              },
-            ),
-          ),
+          buildBlocProviderCarsCards(),
           Placeholder(
             fallbackHeight: 200,
           ),
+          buildTitleSeparator('Состояние систем'),
+          Placeholder(),
+          buildTitleSeparator('Календарь обслуживания'),
           Placeholder(),
         ],
       ),
+    );
+  }
+
+  Padding buildTitleSeparator(String title) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Container(
+          height: 22,
+          child: Text(
+            title,
+            style: TextStyle(fontSize: 16.0),
+          ),
+        ),
+      ),
+    );
+  }
+
+  BlocProvider<LoadDataBloc> buildBlocProviderCarsCards() {
+    return BlocProvider(
+      create: (context) => sl<LoadDataBloc>()..add(GetAllCar()),
+      child: BlocBuilder<LoadDataBloc, LoadDataState>(
+        builder: (context, state) {
+          if (state is Loading) {
+            return Container(height: 70.0, child: CustomCircleProgressBar());
+          } else if (state is LoadedAllCars) {
+            return Container(
+              height: 70,
+              child: buildPageView(state),
+            );
+          }
+          return Container(
+            height: 70,
+/*             child: Center(
+              child: CustomCircleProgressBar(),
+            ), */
+          );
+        },
+      ),
+    );
+  }
+
+  PageView buildPageView(LoadedAllCars state) {
+    return PageView.builder(
+      controller: controller,
+      onPageChanged: (index) {
+        // TODO implementation
+      },
+      itemBuilder: (BuildContext context, int position) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: CarCardWidget(
+            carModel: state.listAll[position],
+            index: position,
+            itemCount: state.listAll.length,
+            onButtonPressedForward: onButtonPressedForward,
+            onButtonPressedBack: onButtonPressedBack,
+          ),
+        );
+      },
+      itemCount: state.listAll.length,
     );
   }
 
