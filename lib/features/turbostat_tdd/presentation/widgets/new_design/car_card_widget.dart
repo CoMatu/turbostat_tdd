@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CarCardWidget extends StatelessWidget {
   final int index;
@@ -31,7 +32,40 @@ class CarCardWidget extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Text('PAGE $index'),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'CarMark + CarModel',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Icon(
+                          FontAwesomeIcons.edit,
+                          color: Colors.grey,
+                          size: 14.0,
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('VIN: SJNFCAE11U2215861'),
+                      Text('Год выпуска: 2013')
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
           GestureDetector(
             onTap: onButtonPressedForward,
