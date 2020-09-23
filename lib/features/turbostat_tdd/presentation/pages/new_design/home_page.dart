@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/custom_circle_progress_bar.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/car_card_widget.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/speedometer_painter.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,9 +29,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: <Widget>[
           buildBlocProviderCarsCards(),
-          Placeholder(
-            fallbackHeight: 200,
-          ),
+          SpeedometerPainter(),
           buildTitleSeparator('Состояние систем'),
           Placeholder(),
           buildTitleSeparator('Календарь обслуживания'),

@@ -108,6 +108,7 @@ flutter:
     - res/data/maintenances_db.json
     - assets/images/start_logo.png
     - assets/google_fonts/
+    - assets/images/rainbow_tableau.png
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
