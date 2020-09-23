@@ -1,10 +1,20 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class CarCardWidget extends StatelessWidget {
   final int index;
   final int itemCount;
-  const CarCardWidget({@required this.index, @required this.itemCount, Key key})
-      : super(key: key);
+  final VoidCallback onButtonPressedForward;
+  final VoidCallback onButtonPressedBack;
+
+  const CarCardWidget({
+    @required this.index,
+    @required this.itemCount,
+    @required this.onButtonPressedForward,
+    @required this.onButtonPressedBack,
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,20 +23,24 @@ class CarCardWidget extends StatelessWidget {
     return Card(
       child: Row(
         children: <Widget>[
-          Icon(
-            Icons.arrow_back_ios,
-            color: index == 0 ? inactiveColor.withOpacity(0.3) : activeColor,
-          ),
-          Expanded(
-            child: Placeholder(
-              color: Colors.red,
+          GestureDetector(
+            onTap: onButtonPressedBack,
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: index == 0 ? inactiveColor.withOpacity(0.3) : activeColor,
             ),
           ),
-          Icon(
-            Icons.arrow_forward_ios,
-            color: index == (itemCount - 1)
-                ? inactiveColor.withOpacity(0.3)
-                : activeColor,
+          Expanded(
+            child: Text('PAGE $index'),
+          ),
+          GestureDetector(
+            onTap: onButtonPressedForward,
+            child: Icon(
+              Icons.arrow_forward_ios,
+              color: index == (itemCount - 1)
+                  ? inactiveColor.withOpacity(0.3)
+                  : activeColor,
+            ),
           )
         ],
       ),
