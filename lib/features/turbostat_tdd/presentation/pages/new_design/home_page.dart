@@ -46,17 +46,21 @@ class _HomePageState extends State<HomePage> {
                         return Padding(
                           padding: const EdgeInsets.only(left: 16.0, right: 16),
                           child: CarCardWidget(
+                            carModel: state.listAll[position],
                             index: position,
-                            itemCount: carListLenght,
+                            itemCount: state.listAll.length,
                             onButtonPressedForward: onButtonPressedForward,
                             onButtonPressedBack: onButtonPressedBack,
                           ),
                         );
                       },
+                      itemCount: state.listAll.length,
                     ),
                   );
                 }
-                return Container();
+                return Container(
+                  height: 70,
+                );
               },
             ),
           ),

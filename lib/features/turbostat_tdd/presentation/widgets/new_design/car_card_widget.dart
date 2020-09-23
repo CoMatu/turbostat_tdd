@@ -2,20 +2,24 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 
 class CarCardWidget extends StatelessWidget {
+  final CarModel carModel;
   final int index;
   final int itemCount;
   final VoidCallback onButtonPressedForward;
   final VoidCallback onButtonPressedBack;
 
   const CarCardWidget({
+    @required this.carModel,
     @required this.index,
     @required this.itemCount,
     @required this.onButtonPressedForward,
     @required this.onButtonPressedBack,
     Key key,
-  }) : super(key: key);
+  })  : assert(carModel != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,7 @@ class CarCardWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'CarMark + CarModel',
+                        '${carModel.carMark} ${carModel.carModel}',
                         style: TextStyle(
                             fontSize: 16,
                             color: Colors.white,
@@ -59,8 +63,10 @@ class CarCardWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('VIN: SJNFCAE11U2215861'),
-                      Text('Год выпуска: 2013')
+                      carModel.carVin.isEmpty
+                          ? Text('VIN: -----')
+                          : Text('VIN: ${carModel.carVin}'),
+                      Text('Год выпуска: ${carModel.carYear}')
                     ],
                   ),
                 ],
