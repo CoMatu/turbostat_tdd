@@ -35,7 +35,6 @@ class LoadDataBloc extends Bloc<LoadDataEvent, LoadDataState> {
         deleteConcreteCar = deleteCar,
         super(null);
 
-  @override
   LoadDataState get initialState => Loading();
 
   @override
