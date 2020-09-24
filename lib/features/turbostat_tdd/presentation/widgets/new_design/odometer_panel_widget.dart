@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/load_mileage_bloc/load_mileage_bloc.dart';
+import 'package:turbostat_tdd/injection_container.dart';
 
 class OdometerPanelWidget extends StatelessWidget {
   const OdometerPanelWidget({Key key}) : super(key: key);
@@ -38,9 +41,19 @@ class OdometerPanelWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-              '85 678 km',
-              style: TextStyle(color: Colors.white),
+            BlocProvider(
+              create: (context) => sl<LoadMileageBloc>(),
+              child: BlocBuilder<LoadMileageBloc, LoadMileageState>(
+                builder: (context, state) {
+                  if (state is LoadedCarMileage) {
+                    return Text(
+                      state.mileage.mileage.toString(),
+                      style: TextStyle(color: Colors.white),
+                    );
+                  }
+                  return Text('.....');
+                },
+              ),
             ),
             Icon(
               FontAwesomeIcons.edit,

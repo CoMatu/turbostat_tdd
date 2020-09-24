@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage>
       child: Align(
         alignment: Alignment.centerLeft,
         child: Container(
-          height: 22,
+          height: 24,
           child: Text(
             title,
             style: TextStyle(fontSize: 16.0),
@@ -71,12 +71,12 @@ class _HomePageState extends State<HomePage>
             return Container(height: 70.0, child: CustomCircleProgressBar());
           } else if (state is LoadedAllCars) {
             return Container(
-              height: 70,
+              height: 100,
               child: buildPageView(state),
             );
           }
           return Container(
-            height: 70,
+            height: 100,
 /*             child: Center(
               child: CustomCircleProgressBar(),
             ), */

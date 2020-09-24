@@ -27,13 +27,13 @@ class LoadMileageBloc extends Bloc<LoadMileageEvent, LoadMileageState> {
         addCarMileage = addMileage,
         super(null);
 
-  @override
   LoadMileageState get initialState => LoadMileageInitial();
 
   @override
   Stream<LoadMileageState> mapEventToState(
     LoadMileageEvent event,
   ) async* {
+    print(' ************ ');
     if (event is GetMileage) {
       yield LoadMileageInitial();
       final failureOrGetMileage =

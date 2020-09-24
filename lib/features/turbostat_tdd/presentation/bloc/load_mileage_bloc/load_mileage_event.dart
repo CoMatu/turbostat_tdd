@@ -18,7 +18,5 @@ class AddMileage extends LoadMileageEvent {
 
   AddMileage({@required this.carId});
   @override
-
   List<Object> get props => [carId];
-  
 }

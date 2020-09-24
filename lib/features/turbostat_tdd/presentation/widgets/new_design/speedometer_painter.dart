@@ -26,7 +26,6 @@ class _SpeedometerPainterState extends State<SpeedometerPainter>
         Tween(begin: 0.0, end: widget.progress).animate(progressController);
 
     animation.addListener(() {
-      print(animation.value.toString());
       setState(() {});
     });
 
@@ -35,18 +34,20 @@ class _SpeedometerPainterState extends State<SpeedometerPainter>
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width * 0.8;
+    var height = MediaQuery.of(context).size.height * 0.22;
     return Stack(
       children: <Widget>[
         Center(
           child: CustomPaint(
             painter: IndicatorBackgroundPainter(),
-            size: Size(265.0, 150.0),
+            size: Size(width, height),
           ),
         ),
         Center(
           child: CustomPaint(
             painter: ShapePainter(progress: animation.value),
-            size: Size(265.0, 150.0),
+            size: Size(width, height),
           ),
         ),
         Positioned.fill(
@@ -143,7 +144,7 @@ class IndicatorBackgroundPainter extends CustomPainter {
     double startAngleScale2 = -math.pi;
     final sweepAngleScale2 = 0.02;
     final scale2 = Paint()
-      ..color = Colors.white70
+      ..color = Colors.white
       ..style = PaintingStyle.stroke
       ..strokeWidth = 10;
 
