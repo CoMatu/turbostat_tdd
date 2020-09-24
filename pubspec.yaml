@@ -71,6 +71,8 @@ dependencies:
   google_fonts: ^1.1.0
   # custom icons
   font_awesome_flutter: ^8.8.1
+  # path Drawer
+  path_drawing: ^0.4.1+1
   
 dev_dependencies:
   flutter_test:
