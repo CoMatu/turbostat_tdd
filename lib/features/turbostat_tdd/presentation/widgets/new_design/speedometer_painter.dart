@@ -1,10 +1,36 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'package:path_drawing/path_drawing.dart';
+class SpeedometerPainter extends StatefulWidget {
+  final double progress;
+  const SpeedometerPainter({@required this.progress, Key key})
+      : assert(progress != null),
+        super(key: key);
 
-class SpeedometerPainter extends StatelessWidget {
-  const SpeedometerPainter({Key key}) : super(key: key);
+  @override
+  _SpeedometerPainterState createState() => _SpeedometerPainterState();
+}
+
+class _SpeedometerPainterState extends State<SpeedometerPainter>
+    with SingleTickerProviderStateMixin {
+  AnimationController progressController;
+  Animation animation;
+
+  @override
+  void initState() {
+    super.initState();
+    progressController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1000));
+    animation =
+        Tween(begin: 0.0, end: widget.progress).animate(progressController);
+
+    animation.addListener(() {
+      print(animation.value.toString());
+      setState(() {});
+    });
+
+    progressController.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +44,7 @@ class SpeedometerPainter extends StatelessWidget {
         ),
         Center(
           child: CustomPaint(
-            painter: ShapePainter(),
+            painter: ShapePainter(progress: animation.value),
             size: Size(265.0, 150.0),
           ),
         ),
@@ -28,7 +54,17 @@ class SpeedometerPainter extends StatelessWidget {
 }
 
 class ShapePainter extends CustomPainter {
-  @override
+  final double progress; // 0.....1.0
+
+  ShapePainter({@required this.progress});
+
+  var _gradient = const <Color>[
+    Colors.red,
+    Colors.orange,
+    Color(0xFFBDFF00),
+    Colors.green
+  ];
+
   @override
   void paint(Canvas canvas, Size size) {
     // a fancy rainbow gradient
@@ -36,7 +72,7 @@ class ShapePainter extends CustomPainter {
       startAngle: -math.pi,
       endAngle: math.pi / 2,
       tileMode: TileMode.repeated,
-      colors: [Colors.red, Colors.orange, Color(0xFFBDFF00), Colors.green],
+      colors: _gradient,
       stops: const [0.25, 0.5, 0.75, 1.0],
     );
 
@@ -45,7 +81,7 @@ class ShapePainter extends CustomPainter {
         height: size.width,
         width: size.width);
     final startAngle = -math.pi;
-    final sweepAngle = math.pi / 1.8;
+    final sweepAngle = math.pi * progress;
     final useCenter = false;
     final paint = Paint()
       ..shader = gradient.createShader(rect)
@@ -70,7 +106,6 @@ class IndicatorBackgroundPainter extends CustomPainter {
         height: size.width,
         width: size.width);
     final startAngle = -math.pi;
-    print(startAngle);
     final sweepAngle = math.pi;
     final useCenter = false;
     final paint = Paint()

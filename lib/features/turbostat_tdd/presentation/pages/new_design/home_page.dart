@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
@@ -13,14 +15,17 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   PageController controller;
   int carListLenght;
+// тестовые значения уровня состояния систем авто
+  double _progress = 0.8;
+
   @override
   void initState() {
-    controller = PageController();
-    carListLenght = 3; // TODO add getter
     super.initState();
+    controller = PageController();
   }
 
   @override
@@ -29,7 +34,9 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: <Widget>[
           buildBlocProviderCarsCards(),
-          SpeedometerPainter(),
+          SpeedometerPainter(
+            progress: _progress,
+          ),
           buildTitleSeparator('Состояние систем'),
           Placeholder(),
           buildTitleSeparator('Календарь обслуживания'),
