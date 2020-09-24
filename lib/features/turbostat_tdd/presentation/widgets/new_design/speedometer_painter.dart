@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/odometer_panel_widget.dart';
 
 class SpeedometerPainter extends StatefulWidget {
   final double progress;
@@ -48,6 +49,10 @@ class _SpeedometerPainterState extends State<SpeedometerPainter>
             size: Size(265.0, 150.0),
           ),
         ),
+        Positioned.fill(
+            child: Align(
+                alignment: Alignment.bottomCenter,
+                child: OdometerPanelWidget()))
       ],
     );
   }
