@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
-import 'package:turbostat_tdd/generated/i18n.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({Key key}) : super(key: key);

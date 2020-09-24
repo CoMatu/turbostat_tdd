@@ -1,11 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/load_mileage_bloc/load_mileage_bloc.dart';
-import 'package:turbostat_tdd/injection_container.dart';
 
 class CarCardWidget extends StatelessWidget {
   final CarModel carModel;
@@ -28,12 +25,7 @@ class CarCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const inactiveColor = Color(0xFF27AE60);
     const activeColor = Color(0xFF219653);
-    return BlocProvider(
-      // этот провайдер получает пробег авто для показа в OdometerPanelWidget()
-      create: (context) =>
-          sl<LoadMileageBloc>()..add(GetMileage(carId: carModel.carId)),
-      child: buildCard(inactiveColor, activeColor),
-    );
+    return buildCard(inactiveColor, activeColor);
   }
 
   Card buildCard(Color inactiveColor, Color activeColor) {

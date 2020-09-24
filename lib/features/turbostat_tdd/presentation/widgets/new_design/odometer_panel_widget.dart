@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/load_mileage_bloc/load_mileage_bloc.dart';
-import 'package:turbostat_tdd/injection_container.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/load_mileage_bloc/cubit/mileage_cubit.dart';
 
 class OdometerPanelWidget extends StatelessWidget {
   const OdometerPanelWidget({Key key}) : super(key: key);
@@ -41,19 +40,19 @@ class OdometerPanelWidget extends StatelessWidget {
                 ),
               ),
             ),
-            BlocProvider(
-              create: (context) => sl<LoadMileageBloc>(),
-              child: BlocBuilder<LoadMileageBloc, LoadMileageState>(
-                builder: (context, state) {
-                  if (state is LoadedCarMileage) {
-                    return Text(
-                      state.mileage.mileage.toString(),
-                      style: TextStyle(color: Colors.white),
-                    );
-                  }
+            BlocBuilder<MileageCubit, MileageState>(
+              builder: (context, state) {
+                if (state is MileageInitial) {
                   return Text('.....');
-                },
-              ),
+                } else if (state is MileageLoading) {
+                  return Text('.....');
+                } else if (state is MileageLoaded) {
+                  return Text(
+                    '${state.mileageModel.mileage.toString()} km',
+                    style: TextStyle(color: Colors.white),
+                  );
+                }
+              },
             ),
             Icon(
               FontAwesomeIcons.edit,
