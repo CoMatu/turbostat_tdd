@@ -19,8 +19,8 @@ class _SpeedometerPainterState extends State<SpeedometerPainter>
   @override
   void initState() {
     super.initState();
-    progressController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1000));
+    progressController =
+        AnimationController(vsync: this, duration: Duration(seconds: 3));
     animation =
         Tween(begin: 0.0, end: widget.progress).animate(progressController);
 
