@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/current_car.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/custom_icon_widget.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 
@@ -41,9 +43,10 @@ class LogoScreenState extends State<LogoScreen>
     return Timer(_duration, navigationPage);
   }
 
-  void navigationPage() {
+  void navigationPage() async {
     switch (dataSource) {
       case 'device':
+        await Provider.of<CurrentCar>(context, listen: false).loadCarId();
         Navigator.of(context).pushReplacementNamed('load_data_page');
 //        Navigator.of(context).pushReplacementNamed('home_page');
         break;

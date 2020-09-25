@@ -90,6 +90,9 @@ class MyApp extends StatelessWidget {
             focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.white)),
           ),
+          dialogTheme: DialogTheme(
+            backgroundColor: Color(0xFF24323F),
+          ),
         ),
         home: LogoScreen(),
         localizationsDelegates: [

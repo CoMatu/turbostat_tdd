@@ -25,40 +25,43 @@ class LoadDataPage extends StatelessWidget {
           elevation: 0,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Consumer<PageCounter>(
-          builder: (context, page, child) {
-            switch (page.pageIndex) {
-              case 0: // history page
-                return FloatingActionButton(
-                  onPressed: () {
-                    final carId =
-                        Provider.of<CurrentCar>(context, listen: false)
-                            .currentCar
-                            .carId;
-                    Provider.of<Maintenances>(context, listen: false)
-                        .getAllMaintenances(carId);
-                    modalBottomSheet(context);
-                  },
-                  child: Icon(Icons.add),
-                );
-              case 2: // cars list page
-                return FloatingActionButton(
-                  onPressed: () {
-                    Navigator.popAndPushNamed(context, 'add_car');
-                  },
-                  child: Icon(Icons.add),
-                );
-            }
-            return Visibility(
-                visible: false,
-                child: FloatingActionButton(
-                  onPressed: () {},
-                ));
-          },
-        ),
+        floatingActionButton: buildFloatingActionButton(),
         bottomNavigationBar: BottomNavigation(),
         body: buildBody(context),
       ),
+    );
+  }
+
+  Widget buildFloatingActionButton() {
+    return Consumer<PageCounter>(
+      builder: (context, page, child) {
+        switch (page.pageIndex) {
+          case 0: // history page
+            return FloatingActionButton(
+              onPressed: () {
+                final carId = Provider.of<CurrentCar>(context, listen: false)
+                    .currentCar
+                    .carId;
+                Provider.of<Maintenances>(context, listen: false)
+                    .getAllMaintenances(carId);
+                modalBottomSheet(context);
+              },
+              child: Icon(Icons.add),
+            );
+          case 2: // cars list page
+            return FloatingActionButton(
+              onPressed: () {
+                Navigator.popAndPushNamed(context, 'add_car');
+              },
+              child: Icon(Icons.add),
+            );
+        }
+        return Visibility(
+            visible: false,
+            child: FloatingActionButton(
+              onPressed: () {},
+            ));
+      },
     );
   }
 

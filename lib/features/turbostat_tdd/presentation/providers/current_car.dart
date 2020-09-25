@@ -11,10 +11,6 @@ class CurrentCar extends ChangeNotifier {
 
   CarModel get currentCar => _car;
 
-  CurrentCar() {
-    loadCarId();
-  }
-
   void updateCurrentCar(CarModel car) {
     _car = car;
     notifyListeners();

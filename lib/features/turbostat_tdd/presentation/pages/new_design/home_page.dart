@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
+import 'package:provider/provider.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
-import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/load_mileage_bloc/cubit/mileage_cubit.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/current_car.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/custom_circle_progress_bar.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/car_card_widget.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/speedometer_painter.dart';
@@ -23,11 +23,13 @@ class _HomePageState extends State<HomePage>
   int carListLenght;
 // тестовые значения уровня состояния систем авто
   double _progress = 0.8;
+  CurrentCar currentCarProvider;
 
   @override
   void initState() {
     super.initState();
     controller = PageController();
+    currentCarProvider = Provider.of<CurrentCar>(context, listen: false);
   }
 
   @override
@@ -37,6 +39,7 @@ class _HomePageState extends State<HomePage>
         children: <Widget>[
           buildBlocProviderCarsCards(),
           SpeedometerPainter(
+            currentCar: currentCarProvider.currentCar,
             progress: _progress,
           ),
           buildTitleSeparator('Состояние систем'),
@@ -70,9 +73,6 @@ class _HomePageState extends State<HomePage>
         BlocProvider(
           create: (context) => sl<LoadDataBloc>()..add(GetAllCar()),
         ),
-        BlocProvider(
-          create: (context) => MileageCubit(sl<TurbostatRepository>()),
-        ),
       ],
       child: BlocBuilder<LoadDataBloc, LoadDataState>(
         builder: (context, state) {
@@ -86,9 +86,6 @@ class _HomePageState extends State<HomePage>
           }
           return Container(
             height: 100,
-/*             child: Center(
-              child: CustomCircleProgressBar(),
-            ), */
           );
         },
       ),

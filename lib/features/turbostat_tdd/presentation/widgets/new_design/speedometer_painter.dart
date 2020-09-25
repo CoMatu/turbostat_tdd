@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'dart:math' as math;
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/odometer_panel_widget.dart';
 
 class SpeedometerPainter extends StatefulWidget {
   final double progress;
-  const SpeedometerPainter({@required this.progress, Key key})
+  final CarModel currentCar;
+  const SpeedometerPainter(
+      {@required this.currentCar, @required this.progress, Key key})
       : assert(progress != null),
         super(key: key);
 
@@ -21,7 +24,7 @@ class _SpeedometerPainterState extends State<SpeedometerPainter>
   void initState() {
     super.initState();
     progressController =
-        AnimationController(vsync: this, duration: Duration(seconds: 3));
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
     animation =
         Tween(begin: 0.0, end: widget.progress).animate(progressController);
 
@@ -35,7 +38,7 @@ class _SpeedometerPainterState extends State<SpeedometerPainter>
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width * 0.8;
-    var height = MediaQuery.of(context).size.height * 0.22;
+    var height = width * 0.5 + 15.0;
     return Stack(
       children: <Widget>[
         Center(
@@ -53,7 +56,9 @@ class _SpeedometerPainterState extends State<SpeedometerPainter>
         Positioned.fill(
             child: Align(
                 alignment: Alignment.bottomCenter,
-                child: OdometerPanelWidget()))
+                child: OdometerPanelWidget(
+                  carId: widget.currentCar.carId,
+                )))
       ],
     );
   }

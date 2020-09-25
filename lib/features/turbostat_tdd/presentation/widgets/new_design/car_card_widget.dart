@@ -25,10 +25,10 @@ class CarCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const inactiveColor = Color(0xFF27AE60);
     const activeColor = Color(0xFF219653);
-    return buildCard(inactiveColor, activeColor);
+    return buildCard(context, inactiveColor, activeColor);
   }
 
-  Card buildCard(Color inactiveColor, Color activeColor) {
+  Card buildCard(BuildContext context, Color inactiveColor, Color activeColor) {
     return Card(
       child: Row(
         children: <Widget>[
@@ -54,12 +54,15 @@ class CarCardWidget extends StatelessWidget {
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Icon(
-                          FontAwesomeIcons.edit,
-                          color: Colors.grey,
-                          size: 14.0,
+                      GestureDetector(
+                        onTap: () => editCarInfo(context),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Icon(
+                            FontAwesomeIcons.edit,
+                            color: Colors.grey,
+                            size: 14.0,
+                          ),
                         ),
                       )
                     ],
@@ -92,5 +95,9 @@ class CarCardWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void editCarInfo(BuildContext context) {
+    Navigator.pushNamed(context, 'edit_car');
   }
 }
