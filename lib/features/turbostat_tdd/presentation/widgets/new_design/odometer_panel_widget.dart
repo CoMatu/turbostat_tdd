@@ -82,28 +82,41 @@ class OdometerPanelWidget extends StatelessWidget {
 
   void showMileageDialog(BuildContext context) async {
     final _textFieldController = TextEditingController();
-
+    final width = MediaQuery.of(context).size.width * 0.6;
     showDialog(
         context: context,
         builder: (context) {
-          return Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12.0)),
             ),
-            child: AlertDialog(
-              content: TextField(
-                controller: _textFieldController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                    hintText: S.of(context).car_card_enter_current_mileage),
+            contentPadding: const EdgeInsets.all(10),
+            content: Container(
+              width: width,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    controller: _textFieldController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        hintText: S.of(context).car_card_enter_current_mileage),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(child: CustomChancelButton()),
+                      SizedBox(width: 10.0),
+                      Expanded(
+                        child: CustomSaveButton(
+                          onSaveButtonPressed: () =>
+                              addMileage(context, _textFieldController.text),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
-              actions: <Widget>[
-                CustomChancelButton(),
-                CustomSaveButton(
-                  onSaveButtonPressed: () =>
-                      addMileage(context, _textFieldController.text),
-                ),
-              ],
             ),
           );
         });
