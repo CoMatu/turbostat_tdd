@@ -22,28 +22,31 @@ class OdometerPanelWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              height: 22,
-              width: 22,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  width: 2,
-                  color: Color(0xFFF2994A).withOpacity(0.3),
-                ),
-              ),
+            Padding(
+              padding: const EdgeInsets.all(2.0),
               child: Container(
-                height: 20,
-                width: 20,
-                child: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.flagCheckered,
-                    size: 11,
-                  ),
-                ),
+                height: 22,
+                width: 22,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFFF2994A),
+                  border: Border.all(
+                    width: 2,
+                    color: Color(0xFFF2994A).withOpacity(0.3),
+                  ),
+                ),
+                child: Container(
+                  height: 20,
+                  width: 20,
+                  child: Center(
+                    child: FaIcon(
+                      FontAwesomeIcons.flagCheckered,
+                      size: 11,
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFFF2994A),
+                  ),
                 ),
               ),
             ),

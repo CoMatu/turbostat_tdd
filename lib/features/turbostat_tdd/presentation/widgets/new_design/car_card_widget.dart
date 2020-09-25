@@ -30,6 +30,9 @@ class CarCardWidget extends StatelessWidget {
 
   Card buildCard(BuildContext context, Color inactiveColor, Color activeColor) {
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+      ),
       child: Row(
         children: <Widget>[
           GestureDetector(
