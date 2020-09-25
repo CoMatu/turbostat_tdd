@@ -7,7 +7,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/data/models/car_model.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/providers.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/buttons/custom_chancel_button.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/buttons/custom_save_button.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
+import 'package:turbostat_tdd/injection_container.dart';
 
 class EditCarForm extends StatefulWidget {
   const EditCarForm({Key key}) : super(key: key);
@@ -61,10 +64,8 @@ class _EditCarFormState extends State<EditCarForm> {
                     return null;
                   },
                   decoration: InputDecoration(
-                      labelText: S.of(context).form_decorator_car_name,
-                      labelStyle: TextStyle(
-                        decorationStyle: TextDecorationStyle.solid,
-                      )),
+                    labelText: S.of(context).form_decorator_car_name,
+                  ),
                 ),
               ),
               Padding(
@@ -151,28 +152,17 @@ class _EditCarFormState extends State<EditCarForm> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: 150.0),
-                    child: RaisedButton(
-                      child: Text(S.of(context).button_cancel),
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(
-                            context, 'load_data_page');
-                      },
-                      color: Colors.grey,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 12,
-                  ),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: 150.0),
-                    child: RaisedButton(
-                      child: Text(S.of(context).button_save),
-                      onPressed: _submitDetails,
-                      color: Colors.yellow,
-                    ),
-                  ),
+                  Expanded(
+                      child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: CustomChancelButton(),
+                  )),
+                  Expanded(
+                      child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child:
+                        CustomSaveButton(onSaveButtonPressed: _submitDetails),
+                  )),
                 ],
               ),
             ],
@@ -209,13 +199,13 @@ class _EditCarFormState extends State<EditCarForm> {
       setCurrentCar(newCar);
 
       Navigator.pushReplacementNamed(context, 'load_data_page');
+      //Navigator.pop(context);
     }
   }
 
   void setCurrentCar(CarModel newCar) async {
-    final pref = await SharedPreferences.getInstance();
     String currentCar = jsonEncode(newCar);
-    pref.setString('carId', currentCar);
+    sl<SharedPreferences>().setString('carId', currentCar);
     Provider.of<CurrentCar>(context, listen: false).updateCurrentCar(newCar);
   }
 }

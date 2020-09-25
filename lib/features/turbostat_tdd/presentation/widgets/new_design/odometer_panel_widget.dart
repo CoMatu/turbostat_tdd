@@ -5,6 +5,8 @@ import 'package:turbostat_tdd/features/turbostat_tdd/data/models/mileage_model.d
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/repositories/turbostat_repository.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/domain/usecases/mileage_usecases/add_car_mileage.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/load_mileage_bloc/cubit/mileage_cubit.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/buttons/custom_chancel_button.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/buttons/custom_save_button.dart';
 import 'package:turbostat_tdd/generated/i18n.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 
@@ -132,51 +134,5 @@ class OdometerPanelWidget extends StatelessWidget {
     );
     await sl<AddCarMileage>().addCarMileage(carId, _entry);
     Navigator.of(context).pop();
-  }
-}
-
-class CustomChancelButton extends StatelessWidget {
-  const CustomChancelButton({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return RaisedButton(
-      color: Color(0xFFFF000).withOpacity(0.1),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6.0),
-          side: BorderSide(color: Color(0xFFEB5757))),
-      child: Text(
-        S.of(context).button_cancel,
-        style: TextStyle(color: Colors.white),
-      ),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-  }
-}
-
-class CustomSaveButton extends StatelessWidget {
-  final VoidCallback onSaveButtonPressed;
-  const CustomSaveButton({
-    @required this.onSaveButtonPressed,
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return RaisedButton(
-      color: Color(0xFF6FCF97).withOpacity(0.1),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6.0),
-          side: BorderSide(color: Color(0xFF6FCF97))),
-      child: Text(
-        S.of(context).button_save,
-        style: TextStyle(color: Colors.white),
-      ),
-      onPressed: onSaveButtonPressed,
-    );
   }
 }
