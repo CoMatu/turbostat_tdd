@@ -7,6 +7,7 @@ import 'package:turbostat_tdd/features/turbostat_tdd/presentation/bloc/bloc.dart
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/providers/current_car.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/custom_circle_progress_bar.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/car_card_widget.dart';
+import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/car_system_item_widget.dart';
 import 'package:turbostat_tdd/features/turbostat_tdd/presentation/widgets/new_design/speedometer_painter.dart';
 import 'package:turbostat_tdd/injection_container.dart';
 
@@ -43,12 +44,39 @@ class _HomePageState extends State<HomePage>
             progress: _progress,
           ),
           buildTitleSeparator('Состояние систем'),
-          Placeholder(),
+          systemsReviewPanel(),
           buildTitleSeparator('Календарь обслуживания'),
           Placeholder(),
         ],
       ),
     );
+  }
+
+  Widget systemsReviewPanel() {
+    return Container(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        children: [
+          Column(
+            children: [
+              CarSystemItem(title: 'Двигатель'),
+              CarSystemItem(title: 'Тормозная система'),
+              CarSystemItem(title: 'Рулевой механизм'),
+              CarSystemItem(title: 'Кузов и салон'),
+            ],
+          ),
+          Column(
+            children: [
+              CarSystemItem(title: 'Ходовая часть'),
+              CarSystemItem(title: 'Трансмиссия'),
+              CarSystemItem(title: 'Электрооборудование'),
+              CarSystemItem(title: 'Дополнительное оборудование'),
+            ],
+          ),
+        ],
+      ),
+    ));
   }
 
   Padding buildTitleSeparator(String title) {
