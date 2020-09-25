@@ -7,39 +7,55 @@ class CarSystemItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height2 = MediaQuery.of(context).size.width * 0.44 * 0.33;
+    var width2 = MediaQuery.of(context).size.width * 0.44;
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: const BorderRadius.all(Radius.circular(8.0)),
       ),
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.44,
-        height: MediaQuery.of(context).size.width * 0.44 * 0.33,
+        width: width2,
+        height: height2,
         child: Row(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
-                height: 36.0,
-                width: 36.0,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color(0xFF0E202E),
-                ),
-                child: Center(
-                  child: Icon(
-                    FontAwesomeIcons.check,
-                    color: Color(0xFF10AA78),
-                    size: 14.0,
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-                child: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Text(title, style: TextStyle(color: Colors.white)),
-            )),
+            buildStatusIcon(),
+            buildTitle(),
           ],
+        ),
+      ),
+    );
+  }
+
+  Expanded buildTitle() {
+    return Expanded(
+        child: Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: Text(
+        title,
+        style: TextStyle(color: Colors.white),
+        overflow: TextOverflow.fade,
+      ),
+    ));
+  }
+
+  Widget buildStatusIcon() {
+    var color2 = Color(0xFF0E202E);
+    var iconColor = Color(0xFF10AA78);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Container(
+        height: 36.0,
+        width: 36.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: color2,
+        ),
+        child: Center(
+          child: Icon(
+            FontAwesomeIcons.check,
+            color: iconColor,
+            size: 14.0,
+          ),
         ),
       ),
     );
